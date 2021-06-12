@@ -1,28 +1,58 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <hss-modal
+      v-model="visible"
+      title="tip"
+      cancelText="no"
+      confirmText="ok"
+      :mask="true"
+      :maskClosable="true"
+      @on-cancel="cancelClick"
+      @on-confirm="confirmClick"
+      @on-close="closeClick"
+      @visible-change="visibleChange"
+    >
+      <!-- <div slot="foot" slot-scope="aaa">
+        <span>自定义foot</span>
+      </div> -->
+      hello world
+    </hss-modal>
+
+    <span @click="changeModal">点击显示modal</span>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HssModal from "./components/hss-ui-cpt/modal/index";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    HssModal,
+  },
+  data() {
+    return {
+      visible: false,
+    };
+  },
+  computed: {},
+  created() {},
+  mounted() {},
+  methods: {
+    changeModal() {
+      this.visible = true;
+    },
+    visibleChange(v) {
+      console.log("visibleChange", v);
+    },
+    cancelClick() {
+      console.log("cancelClick,app组件里modal的cancel回调");
+    },
+    confirmClick() {
+      console.log("cancelClick,app组件里modal的confirm回调");
+    },
+    closeClick() {
+      console.log("closeClick,app组件里modal的close回调");
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
