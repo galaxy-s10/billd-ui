@@ -1,4 +1,5 @@
-<template>
+{
+  /* <template>
   <div>
     <hss-switch
       v-model="switchVal"
@@ -14,9 +15,9 @@
       <span slot="closeSlot">关闭</span>
     </hss-switch>
   </div>
-</template>
+</template> */
+}
 
-<script>
 import HssSwitch from "./components/hss-ui-cpt/switch/index.jsx";
 
 export default {
@@ -27,6 +28,25 @@ export default {
     return {
       switchVal: true,
     };
+  },
+  render() {
+    return (
+      <div>
+        <hss-switch
+          vModel={this.switchVal}
+          openText="开"
+          closeText="关"
+          defaultChecked="true"
+          vOn:clickSwitch={this.clickSwitch}
+          on-changeSwitch={this.changeSwitch}
+        >
+          <span slot="openSlot">
+            <b>开启</b>
+          </span>
+          <span slot="closeSlot">关闭</span>
+        </hss-switch>
+      </div>
+    );
   },
   computed: {},
   created() {},
@@ -40,4 +60,3 @@ export default {
     },
   },
 };
-</script>
