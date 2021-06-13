@@ -1,4 +1,4 @@
-<script>
+import "./index.less";
 export default {
   inheritAttrs: false, //将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   components: {},
@@ -75,59 +75,3 @@ export default {
     },
   },
 };
-</script>
-
-<style lang="less" scoped>
-.hss-switch {
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-  min-width: 42px;
-  height: 22px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.25);
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 22px;
-  cursor: pointer;
-  &.hss-switch-checked {
-    background-color: #1890ff;
-    font-size: 10px;
-    &:after {
-      left: 100%;
-      margin-left: -2px;
-      transform: translate(-100%, -50%);
-    }
-    .hss-switch-inner {
-      margin-right: 24px;
-      margin-left: 6px;
-
-      user-select: none;
-    }
-  }
-  .hss-switch-inner {
-    display: block;
-    margin-right: 6px;
-    margin-left: 24px;
-    color: white;
-    font-size: 12px;
-    transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-
-    user-select: none;
-  }
-  &:after {
-    position: absolute;
-    top: 50%;
-    left: 2px;
-    width: 18px;
-    height: 18px;
-    border-radius: 18px;
-    background-color: #fff;
-    content: " ";
-    cursor: pointer;
-    box-shadow: 0 2px 4px 0 rgb(0 35 11 / 20%);
-    transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-    transform: translate(0, -50%);
-  }
-}
-</style>

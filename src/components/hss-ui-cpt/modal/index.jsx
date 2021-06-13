@@ -1,7 +1,6 @@
-
-<script>
 import { Fragment as HVueFragment } from "vue-fragment";
-import HFoot from "./foot";
+import "./index.less";
+import HFoot from "./foot.jsx";
 export default {
   inheritAttrs: false, //将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   props: {
@@ -98,40 +97,3 @@ export default {
     },
   },
 };
-</script>
-
-<style lang="less" scoped>
-.modal-mask {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  .modal-wrap {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 30%;
-    width: 500px;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-
-    box-sizing: border-box;
-
-    .modal-head {
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #e8e8e8;
-      .modal-close-btn {
-        cursor: pointer;
-      }
-    }
-    .modal-content {
-      padding: 30px 20px;
-      border-bottom: 1px solid #e8e8e8;
-    }
-  }
-}
-</style>
