@@ -25,7 +25,6 @@
 }
 
 import HssModal from "./components/hss-ui-cpt/modal/index.jsx";
-
 export default {
   components: {
     HssModal,
