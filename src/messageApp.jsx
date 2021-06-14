@@ -31,37 +31,38 @@ export default {
       HssMessage({
         content: "hello1111111111",
         closeAble: true,
+        duration:100000,
       });
-      // 不手动调用状态，通过参数设置
-      HssMessage({
-        type: "error", //手动设置状态
-        content: "errrorrrrr",
-      });
-      // 手动设置状态
-      HssMessage.success({
-        content: "hello world",
-        type: "error", //覆盖不了，不生效
-      });
-      // 设置icon可覆盖状态
-      HssMessage.success({
-        content: "hello world",
-        icon: <i>opp!</i>, //会覆盖原本的success
-      });
+      // // 不手动调用状态，通过参数设置
+      // HssMessage({
+      //   type: "error", //手动设置状态
+      //   content: "errrorrrrr",
+      // });
+      // // 手动设置状态
+      // HssMessage.success({
+      //   content: "hello world",
+      //   type: "error", //覆盖不了，不生效
+      // });
+      // // 设置icon可覆盖状态
+      // HssMessage.success({
+      //   content: "hello world",
+      //   icon: <i>opp!</i>, //会覆盖原本的success
+      // });
 
-      // 可关闭
-      HssMessage({
-        content: "可关闭可关闭",
-        closeAble: true,
-      });
-      // // 设置持续时间，默认2000毫秒
-      HssMessage.success({
-        content: <h3>hello2</h3>,
-        duration: 3000,
-      });
-      // 内容也可是VNode
-      HssMessage.success({
-        content: "<h2>hello1111</h2>",
-      });
+      // // 可关闭
+      // HssMessage({
+      //   content: "可关闭可关闭",
+      //   closeAble: true,
+      // });
+      // // // 设置持续时间，默认2000毫秒
+      // HssMessage.success({
+      //   content: <h3>hello2</h3>,
+      //   duration: 3000,
+      // });
+      // // 内容也可是VNode
+      // HssMessage.success({
+      //   content: "<h2>hello1111</h2>",
+      // });
     },
   },
 };

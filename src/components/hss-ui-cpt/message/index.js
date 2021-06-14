@@ -1,4 +1,4 @@
-import Main from './main.vue';
+import Main from './main';
 import Vue from 'vue';
 
 let baseConfig = {
