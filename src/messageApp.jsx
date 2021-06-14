@@ -31,7 +31,7 @@ export default {
       HssMessage({
         content: "hello1111111111",
         closeAble: true,
-        duration:100000,
+        duration:1000,
       });
       // // 不手动调用状态，通过参数设置
       // HssMessage({

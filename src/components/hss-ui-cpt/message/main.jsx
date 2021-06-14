@@ -1,4 +1,4 @@
-import HssIcon from "../icon";
+import HssIcon from "../icon/index";
 import "./index.less";
 export default {
   props: {
