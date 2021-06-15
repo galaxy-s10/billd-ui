@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "storybook": "start-storybook",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/vue": "^6.2.9",
+    "babel-loader": "^8.2.2",
+    "babel-preset-vue": "^2.0.2",
     "core-js": "^3.6.5",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.11",
-    "vue-fragment": "^1.5.2"
+    "vue-fragment": "^1.5.2",
+    "vue-loader": "^15.9.7",
+    "vue-template-compiler": "^2.6.14"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
