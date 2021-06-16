@@ -18,7 +18,7 @@ export default {
                   {this.$attrs.cancelText || "取消"}
                 </span>
                 <span class="confirm-btn" vOn:click={this.confirm}>
-                  {this.$attrs.okText || "确定"}
+                  {this.$attrs.confirmText || "确定"}
                 </span>
               </div>
             ) : (

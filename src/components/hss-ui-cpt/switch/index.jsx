@@ -20,15 +20,26 @@ export default {
   },
   data() {
     return {
-      isChecked: false,
+      isChecked: this.switchVal,
     };
   },
   mounted() {
-    // 如果defaultChecked和v-model绑定的值冲突，则v-model的优先级高，defaultChecked不生效。
+    /**
+     * 如果defaultChecked和v-model绑定的值冲突，则v-model的优先级高，defaultChecked不生效。
+     * 即switchVal是false，那么就是isChecked就是false。
+     * 其次，如果defaultChecked是true且swtichVal也是开或者没设置，最终结果就是开启
+     */
+    console.log(this.$attrs, this.switchVal);
+
+    if (this.switchVal != undefined) {
+      this.isChecked = this.switchVal;
+      return;
+    }
     if (
       this.$attrs["defaultChecked"] &&
       (this.switchVal == undefined || this.switchVal == true)
     ) {
+      console.log("开启");
       this.isChecked = true;
     }
   },

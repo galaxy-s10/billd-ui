@@ -14,7 +14,7 @@ export default {
   components: { HFoot, HVueFragment },
   data() {
     return {
-      modalvisible: false,
+      modalvisible: this.visible,
     };
   },
   watch: {
@@ -67,7 +67,9 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(this.$attrs,this.visible);
+  },
   methods: {
     footCancel() {
       this.$emit("input", false);
