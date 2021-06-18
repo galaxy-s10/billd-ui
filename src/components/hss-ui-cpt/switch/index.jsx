@@ -1,4 +1,6 @@
 import "./index.less";
+import "../assets/css/a.css";
+
 export default {
   inheritAttrs: false, //将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   components: {},
@@ -47,7 +49,11 @@ export default {
     // 如果有插槽，就使用插槽，如果没有插槽，就使用openText，如果openText没有，就代表没有文字
     return (
       <div
-        class={{ "hss-switch": true, "hss-switch-checked": this.isChecked }}
+        class={{
+          bar: true,
+          "hss-switch": true,
+          "hss-switch-checked": this.isChecked,
+        }}
         vOn:click={(e) => this.clickSwitch(e)}
       >
         <span class="hss-switch-inner">
