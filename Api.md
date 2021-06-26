@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import HssModal from "./components/hss-ui-cpt/modal/index";
+import { Modal } from "billd-ui";
 
 export default {
   components: {
-    HssModal,
+    HssModal: Modal,
   },
   data() {
     return {
@@ -61,7 +61,6 @@ export default {
   },
 };
 </script>
-
 ```
 
 ## API
@@ -110,8 +109,6 @@ export default {
 </hss-switch>
 ```
 
-
-
 ## API
 
 | 参数           | 说明                                            | 类型    | 默认值 |
@@ -123,10 +120,10 @@ export default {
 
 ## 事件
 
-| 参数         | 说明                                        | 返回值                                  |
-| ------------ | ------------------------------------------- | --------------------------------------- |
-| clickSwitch  | 点击时回调函数，此时的switchVal是点击时的   | function(switchVal:Boolean,event:Event) |
-| changeSwitch | 状态改变时回调函数，此时的switchVal是最新的 | function(switchVal:Boolean)             |
+| 参数         | 说明                                          | 返回值                                  |
+| ------------ | --------------------------------------------- | --------------------------------------- |
+| clickSwitch  | 点击时回调函数，此时的 switchVal 是点击时的   | function(switchVal:Boolean,event:Event) |
+| changeSwitch | 状态改变时回调函数，此时的 switchVal 是最新的 | function(switchVal:Boolean)             |
 
 ## 插槽
 
@@ -140,9 +137,11 @@ export default {
 ## 使用
 
 ```jsx
-import HssMessage from "./components/hss-ui-cpt/message/index";
+import { Message } from "billd-ui";
 export default {
-  components: {},
+  components: {
+    HssMessage: Message,
+  },
   data() {
     return {};
   },
@@ -207,7 +206,6 @@ export default {
     },
   },
 };
-
 ```
 
 ## API
@@ -228,11 +226,11 @@ export default {
 | duration  | 持续时间，单位毫秒 | Number          | 2000   |
 | closeAble | 是否显示关闭按钮   | Boolean         | fasle  |
 
-> 全局API
+> 全局 API
 
-- `message.closeAll()`	关闭所有message
+- `message.closeAll()` 关闭所有 message
 
-- `message.config(config)`    修改全局默认配置，默认全局配置如下：
+- `message.config(config)` 修改全局默认配置，默认全局配置如下：
 
   ```js
   {
@@ -250,10 +248,8 @@ export default {
     type: "warning",
     closeAble: true,
     duration: 3000,
-  })
+  });
   ```
-
-  
 
 ## 事件
 
@@ -263,9 +259,9 @@ export default {
 
 ## 插槽
 
-| 名称 | 说明                                  |
-| ---- | ------------------------------------- |
-| Icon | type位置的插槽，类型：String \| VNode |
+| 名称 | 说明                                   |
+| ---- | -------------------------------------- |
+| Icon | type 位置的插槽，类型：String \| VNode |
 
 # Icon
 
