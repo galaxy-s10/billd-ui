@@ -1,0 +1,63 @@
+.hss-table {
+  position: relative;
+
+  .table-scroll {
+    width: 100%;
+    overflow: scroll;
+    table {
+      // text-align: left;
+      // border-radius: 4px 4px 0 0;
+      // border-collapse: separate;
+      // border-spacing: 0;
+      thead > tr > th {
+        border-bottom: 1px solid #e8e8e8;
+        background: #fafafa;
+        color: rgba(0, 0, 0, 0.85);
+        text-align: left;
+        font-weight: 500;
+        transition: background 0.3s ease;
+      }
+    }
+  }
+
+  .hss-table-thead > tr > th {
+    padding: 16px;
+
+    overflow-wrap: break-word;
+  }
+
+  .fixed-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 6px 0 6px -4px rgb(0 0 0 / 15%);
+    & > div {
+      background: #fafafa;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      transition: background 0.3s ease;
+      overflow-wrap: break-word;
+    }
+
+    .hss-table-thead > tr > th {
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+  .fixed-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: -6px 0 6px -4px rgb(0 0 0 / 15%);
+    & > div {
+      background: #fafafa;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      transition: background 0.3s ease;
+      overflow-wrap: break-word;
+    }
+
+    .hss-table-thead > tr > th {
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+}

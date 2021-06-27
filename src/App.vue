@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h-table></h-table>
     hello billd-ui
     <vue-cpt></vue-cpt>
     <vue-render-cpt></vue-render-cpt>
@@ -22,12 +23,14 @@
     </h-modal>
     <br />
     <span @click="changeModal">点击显示modal1</span>
-    <br>
+    <br />
     <img src="./assets/img/author.jpg" style="width:200px" alt="" />
   </div>
 </template>
 
 <script>
+import HTable from "./components/table";
+
 import VueCpt from "./components/VueCpt";
 import VueRenderCpt from "./components/VueRenderCpt";
 import TsxCpt from "./components/TsxCpt/index";
@@ -44,6 +47,7 @@ import "../dist/modal/style/index.css";
 
 export default {
   components: {
+    HTable,
     VueCpt,
     VueRenderCpt,
     TsxCpt,

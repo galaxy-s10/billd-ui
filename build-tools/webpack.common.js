@@ -104,6 +104,19 @@ const commonConfig = function(isProduction) {
           sideEffects: true, // 告诉webpack是有副作用的，不对css进行删除
         },
         {
+          test: /\.less$/,
+          use: [
+            { loader: "style-loader" },
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 1, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
+              },
+            },
+            { loader: "less-loader" },
+          ],
+        },
+        {
           test: /\.(jpg|jpeg|png|gif)$/,
           // type: 'asset/resource', // 约等于实现file-loader
           // generator:{
@@ -135,7 +148,7 @@ const commonConfig = function(isProduction) {
       new HtmlWebpackPlugin({
         // 自动生成index.html文件(并引入打包的js)
         filename: "index.html",
-        title: "billd-ui1",
+        title: "billd-ui",
         template: "./public/index.html",
         hash: true,
         minify: isProduction
