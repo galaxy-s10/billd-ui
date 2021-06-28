@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div>
     <h-table></h-table>
     hello billd-ui
     <vue-cpt></vue-cpt>
@@ -57,6 +58,11 @@ export default {
   },
   data() {
     return {
+      obj: {
+        name: "hss",
+        age: 22,
+        sex: "男",
+      },
       visible: false,
     };
   },

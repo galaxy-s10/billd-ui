@@ -1,5 +1,5 @@
 <template>
-  <div class="hss-table" style="width:500px;">
+  <div class="hss-table" style="width:500px;height:100px">
     <div class="table-scroll">
       <div>
         <table>
@@ -139,6 +139,7 @@
     </div>
 
     <div class="fixed-right">
+      <!-- <div class="scroll-bar"></div> -->
       <div>
         <table>
           <colgroup>
@@ -195,15 +196,13 @@
                     : 'left',
                 }"
               >
-                {{ col.data[index][col.column.col.key] }}
+                <span> {{ col.data[index][col.column.col.key] }} </span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
-    <!-- <div class="fixed-right">2</div> -->
   </div>
 </template>
 
@@ -287,7 +286,7 @@ export default {
           scopedSlots: { customRender: "name" },
         },
         {
-          // fixed: "left",
+          fixed: "left",
           width: "100",
           title: "name",
           dataIndex: "name",
@@ -297,7 +296,7 @@ export default {
           scopedSlots: { customRender: "name" },
         },
         {
-          fixed: "left",
+          // fixed: "left",
           width: "100",
           title: "状态",
           dataIndex: "switch",
@@ -349,33 +348,43 @@ export default {
      * 然后把这三个数组放在一个对象保存起来。
      */
     var fixedLeftData = [];
-    let fixedRightData = [];
-    var allData = { left: [], right: [], normal: [] };
+    var fixedRightData = [];
+    var normalData = [];
+    var allData = { left: [], normal: [], right: [] };
+    var sortColumns = [];
     this.columns.map((item) => {
       // console.log(item);
       if (item.fixed == "left") {
         let fixedLeft = this.data.filter((v) => {
-          console.log(v, v[item.key], item);
+          // console.log(v, v[item.key], item);
           return item.key && v[item.key];
         });
+        fixedLeftData = fixedLeftData;
         allData["left"].push({
           column: { title: item.key, col: item },
           data: fixedLeft,
         });
       } else if (item.fixed == "right") {
         let fixedRight = this.data.filter((v) => {
-          console.log(v, v[item.key], item);
+          // console.log(v, v[item.key], item);
           return item.key && v[item.key];
         });
+        fixedRightData = fixedRight;
         allData["right"].push({
           column: { title: item.key, col: item },
           data: fixedRight,
         });
       } else {
-        let a = this.data.map((v) => {
-          // console.log(v, 39, item.key, item);
-          return v[item.key] && v;
+        let normal = this.data.filter((v) => {
+          console.log(v, 39, item.key, item);
+          return item.key && v[item.key];
         });
+        normalData = normal;
+        allData["normal"].push({
+          column: { title: item.key, col: item },
+          data: normalData,
+        });
+
         // console.log(a, 876);
         // allData["normal"] = [{ column: item, data: a }];
       }
@@ -385,6 +394,19 @@ export default {
     this.allData = allData;
     this.fixedLeftData = allData.left;
     this.fixedRightData = allData.right;
+    console.log("000000");
+    console.log(allData);
+    let arr1 = Object.values(allData);
+    console.log(arr1);
+    arr1.map((item) => {
+      console.log(item);
+      item.map((v) => {
+        console.log(v.column.title);
+        sortColumns.push(v.column.col);
+      });
+    });
+    console.log(sortColumns);
+    this.columns = sortColumns;
     // this.fixedLeftData = fixedLeftData;
     // let fixedRight = this.columns.filter((item) => {
     //   console.log(item);

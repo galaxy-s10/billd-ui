@@ -1,14 +1,16 @@
 .hss-table {
   position: relative;
-
+  height: 100px;
   .table-scroll {
     width: 100%;
+    // overflow-x: scroll;
+    // overflow-y: hidden;
     overflow: scroll;
     table {
       // text-align: left;
       // border-radius: 4px 4px 0 0;
-      // border-collapse: separate;
-      // border-spacing: 0;
+      border-collapse: separate;
+      border-spacing: 0;
       thead > tr > th {
         border-bottom: 1px solid #e8e8e8;
         background: #fafafa;
@@ -31,8 +33,14 @@
     top: 0;
     left: 0;
     box-shadow: 6px 0 6px -4px rgb(0 0 0 / 15%);
+    table {
+      // text-align: left;
+      // border-radius: 4px 4px 0 0;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
     & > div {
-      background: #fafafa;
+      // background: #fafafa;
       color: rgba(0, 0, 0, 0.85);
       font-weight: 500;
       transition: background 0.3s ease;
@@ -47,9 +55,17 @@
     position: absolute;
     top: 0;
     right: 0;
+    // margin-bottom: -17px;
+    // overflow: scroll;
     box-shadow: -6px 0 6px -4px rgb(0 0 0 / 15%);
+    table {
+      // text-align: left;
+      // border-radius: 4px 4px 0 0;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
     & > div {
-      background: #fafafa;
+      // background: #fafafa;
       color: rgba(0, 0, 0, 0.85);
       font-weight: 500;
       transition: background 0.3s ease;
@@ -58,6 +74,14 @@
 
     .hss-table-thead > tr > th {
       border-bottom: 1px solid #e8e8e8;
+    }
+  }
+
+  .scroll-bar {
+    min-width: unset;
+    &::-webkit-scrollbar {
+      min-width: inherit;
+      background-color: transparent;
     }
   }
 }

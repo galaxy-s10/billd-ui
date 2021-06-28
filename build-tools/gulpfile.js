@@ -10,6 +10,7 @@ const tsProject = require("../tsconfig.json");
 const tsDefaultReporter = ts.reporter.defaultReporter();
 
 gulp.task("clean-dist", function() {
+  console.log(process.cwd());
   return gulp.src("../dist", { allowEmpty: true }).pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
 });
 
