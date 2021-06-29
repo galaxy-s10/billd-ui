@@ -1,7 +1,7 @@
 <template>
-  <div class="hss-table" style="width:500px;height:100px">
+  <div class="hss-table" style="width:500px;">
     <div class="table-scroll">
-      <div>
+      <div style="overflow:scroll;">
         <table>
           <colgroup>
             <col
@@ -29,7 +29,7 @@
           </thead>
         </table>
       </div>
-      <div>
+      <div style="overflow:scroll;">
         <table>
           <colgroup>
             <col
@@ -103,7 +103,7 @@
           </thead>
         </table>
       </div>
-      <div>
+      <div style="max-height:100px;overflow-y:scroll;overflow-x:hidden">
         <table>
           <colgroup>
             <col
@@ -169,7 +169,7 @@
           </thead>
         </table>
       </div>
-      <div>
+      <div style="max-height:100px;overflow-y:scroll">
         <table>
           <colgroup>
             <col
@@ -226,7 +226,36 @@ export default {
           status: "1",
           age: 32,
           money: 3456,
-
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男",
+        },
+        {
+          key: "235",
+          name: "sfdsdf",
+          status: "1",
+          age: 32,
+          money: 3456,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男",
+        },
+        {
+          key: "235",
+          name: "sfdsdf",
+          status: "1",
+          age: 32,
+          money: 3456,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男",
+        },
+        {
+          key: "235",
+          name: "sfdsdf",
+          status: "1",
+          age: 32,
+          money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
           sex: "男",
@@ -286,7 +315,7 @@ export default {
           scopedSlots: { customRender: "name" },
         },
         {
-          fixed: "left",
+          // fixed: "left",
           width: "100",
           title: "name",
           dataIndex: "name",
@@ -296,7 +325,7 @@ export default {
           scopedSlots: { customRender: "name" },
         },
         {
-          // fixed: "left",
+          fixed: "left",
           width: "100",
           title: "状态",
           dataIndex: "switch",
@@ -308,7 +337,7 @@ export default {
           },
         },
         {
-          fixed: "right",
+          // fixed: "right",
           width: "100",
           title: "Age",
           dataIndex: "age",

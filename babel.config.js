@@ -1,3 +1,4 @@
+console.log("=======hi,babel.config.js=====");
 module.exports = {
   presets: [
     // ["@babel/env"],

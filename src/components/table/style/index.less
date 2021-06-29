@@ -1,11 +1,9 @@
 .hss-table {
   position: relative;
-  height: 100px;
   .table-scroll {
     width: 100%;
-    // overflow-x: scroll;
-    // overflow-y: hidden;
-    overflow: scroll;
+    overflow: auto;
+    overflow-x: hidden;
     table {
       // text-align: left;
       // border-radius: 4px 4px 0 0;
@@ -55,6 +53,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    overflow: hidden;
     // margin-bottom: -17px;
     // overflow: scroll;
     box-shadow: -6px 0 6px -4px rgb(0 0 0 / 15%);
