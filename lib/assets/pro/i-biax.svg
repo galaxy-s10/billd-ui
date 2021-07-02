@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>图标icon/柱状图备份 55</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图表类型状态" transform="translate(-884.000000, -279.000000)">
+            <g id="图标icon/方块图-copy备份-2" transform="translate(884.000000, 279.000000)">
+                <g id="边框/图表" stroke="#EDF2F7" stroke-width="1">
+                    <rect id="矩形" x="0.5" y="0.5" width="31" height="31" rx="4"></rect>
+                </g>
+                <polygon id="Rectangle-Copy-5" fill="#107FFF" fill-rule="evenodd" transform="translate(8.087273, 15.781036) rotate(90.000000) translate(-8.087273, -15.781036) " points="1.08043011 15.1604301 15.0941153 15.1604301 15.0941153 16.4016422 1.08043011 16.4016422"></polygon>
+                <rect id="Rectangle" fill="#107FFF" fill-rule="evenodd" x="7.46666667" y="21.7869013" width="17.0828283" height="1.20117302"></rect>
+                <g id="编组" stroke-width="1" fill-rule="evenodd" transform="translate(10.666667, 9.806452)">
+                    <rect id="Rectangle-Copy-2" fill="#107FFF" opacity="0.8" x="5.33333333" y="6.70967742" width="2.66666667" height="4.12903226"></rect>
+                    <rect id="Rectangle-Copy-4" fill="#107FFF" opacity="0.8" x="10.1333333" y="5.67741935" width="2.66666667" height="5.16129032"></rect>
+                    <rect id="Rectangle-Copy" fill="#107FFF" x="0.533333333" y="4.64516129" width="2.66666667" height="6.19354839"></rect>
+                    <polygon id="路径-2" fill="#87BFFF" fill-rule="nonzero" points="0.52291594 3.68268493 3.71030841 1.01855692 8.73518832 5.13385354 13.3031737 1.557423 12.2968263 0.353657421 8.75814501 3.12421097 3.69972199 -1.01855692 -0.52291594 2.51086346"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

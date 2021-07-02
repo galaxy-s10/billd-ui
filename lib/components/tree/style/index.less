@@ -1,0 +1,57 @@
+.h3-menu-tree {
+  &__list {
+    display: none;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s, opacity 0.3s;
+  }
+  &__list-open&__list--dragging{
+    // min-height: 2px;
+    opacity: 1;
+  }
+  &__list-open{
+    opacity: 1;
+    height: auto;
+    display: block;
+  }
+  & & > &-item{
+    padding-left: 20px;
+  }
+  & & > &__list{
+    padding-left: 20px;
+  }
+  &-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+
+    &--selected {
+      background: #F0F8FE;
+    }
+    &:hover {
+      background: #F0F8FE;
+    }
+    &__checkbox{
+      position: absolute;
+      top: 0;
+      right: 20px;
+    }
+    > i {
+      flex: 0 0 16px;
+    }
+    &__word {
+      flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    i + &__word {
+      margin-left: 8px;
+    }
+  }
+}

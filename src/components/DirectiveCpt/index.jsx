@@ -1,8 +1,7 @@
 // import Vue from "vue";
 // import auth from "../../plugins";
 // Vue.use(auth);
-import { CreateElement } from "vue";
-
+import "./index.less";
 const directives = [{ name: "auth", value: "b" }];
 console.log({ ...directives });
 console.log({ ...{ directives } });
@@ -15,26 +14,43 @@ export default {
         {/* <div {...{ directives }}>哈哈哈</div> */}
         {/* <div {...directives}>哈哈哈</div> */}
         {/* <div {...{ directives: directives }}>哈哈哈</div> */}
-        {/* <div directives={[{ name: "auth", value: "b1" }]}>哈哈哈</div> */}
-        {/* 通过vnode指令数据格式 */}
+        {/* 这个directives会被当成自定义属性。 */}
+        <div directives={[{ name: "auth", value: "a" }]}>
+          这个directives会被当成自定义属性。
+        </div>
+        {/* 这个directives会vnode数据 */}
+        <div {...{ directives: [{ name: "auth", value: "a" }] }}>
+          这个directives会vnode数据
+        </div>
+        {/* 通过vnode指令数据格式1 */}
         <div
           {...{
             directives: [
               {
                 name: "auth",
                 value: "a",
-                // expression: "1 + 1",
-                // arg: "foo",
-                // modifiers: {
-                //   bar: true,
-                // },
+                modifiers: {},
+              },
+              {
+                name: "auth",
+                value: "a",
+                modifiers: {
+                  bar: true,
+                },
+              },
+              {
+                name: "auth",
+                value: "a",
+                modifiers: {
+                  foo: true,
+                },
               },
             ],
-            staticClass:'sdgdsg',
+            staticClass: "sdgdsg",
             class: ["123", "2355"],
           }}
         >
-          通过vnode指令数据格式
+          通过vnode指令数据格式1
         </div>
         {/* v-auth="a"和v-auth={"a"}约等于就是把字符串a传给自定义指令 */}
         <div v-auth="a">自定义指令生效，而且显示</div>

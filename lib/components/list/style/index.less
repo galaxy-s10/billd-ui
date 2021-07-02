@@ -1,0 +1,286 @@
+@static-color: #304265;
+@secondary-color: #8893A7;
+
+@table-head-bgcolor: #ECF0F6;
+@table-border-color: #DADCE5;
+@table-odd-bgcolor: #ffffff;
+@table-even-bgcolor: #FBFCFE;
+
+@table-cell-height: 36px;
+@table-cell-line-height: 20px;
+.h3-report-list * {
+  vertical-align: middle;
+}
+.h3-report-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 16px 8px;
+  color: @static-color;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  user-select:none;
+  .column-resize-line {
+    z-index: 100;
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 1px;
+    display: none;
+    background-color: #abadb4;
+  }
+  .column-resize-line.dragged {
+   display: block;
+  }
+
+  &__loading {
+    position: absolute;
+    display: flex;
+    height: calc(100% - 32px);
+    width: 100%;
+    overflow: hidden;
+    z-index: 3;
+    background: rgba(232, 232, 232, 0.2);
+  }
+  &__content {
+    position: relative;
+    height: calc(~'100% - 32px');
+    overflow: hidden;
+    border: 1px solid @table-border-color;
+
+  }
+  &__static{
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    .h3-report-list-table-head {
+      position: relative;
+      z-index: 9;
+      color: inherit;
+    }
+  }
+  &__pane{
+    height: 100%;
+    /deep/.h3-scroll__axis--warp{
+      z-index: 9;
+    }
+    .h3-report-list-table-head thead tr:first-child th:last-child {
+      border-right: none;
+    }
+    .h3-report-list-table-body tbody th:last-child {
+      border-right: none;
+    }
+
+    &__body{
+
+    }
+  }
+  &__tool {
+    padding-top: 8px;
+    text-align: right;
+  }
+
+
+  &-table-head {
+    thead {
+      color: inherit;
+      font-weight: 500;
+      tr {
+        background:@table-head-bgcolor;
+      }
+      th{
+        color: inherit;
+        text-decoration: none !important;
+        min-width: 0;
+        max-width: 0;
+        border-right: 1px solid @table-border-color;
+        border-bottom: 1px solid @table-border-color;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        height: @table-cell-height;
+        padding: 0 8px;
+        font-weight: normal;
+        font-size: 12px !important;
+        position: relative;
+        text-align: left;
+      }
+      .column-resize-area{
+        position: absolute;
+        cursor: ew-resize;
+        width: 8px;
+        height: 100%;
+        top: 0;
+        right:0;
+        z-index: 1000;
+      }
+
+    }
+  }
+
+  &-table-body {
+    tbody {
+      tr:nth-child(2n) {
+        background:@table-even-bgcolor;
+      }
+      tr {
+        background: @table-odd-bgcolor;
+      }
+      th{
+        color: inherit;
+        text-decoration: none !important;
+        min-width: 0;
+        max-width: 0;
+        padding: 0;
+        border-right: 1px solid @table-border-color;
+        border-bottom: 1px solid @table-border-color;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        font-weight: normal;
+        font-size: 12px !important;
+        .h3-report-list-table-body__cell {
+          padding: 8px 12px;
+          line-height: @table-cell-line-height;
+          height: @table-cell-height;
+          box-sizing: border-box;
+          border-bottom: 1px solid @table-border-color;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          font-size: 12px !important;
+          text-align: left;
+          &:last-child{
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    &__totle {
+      margin-right: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &__page {
+      color: inherit;
+      margin-right: 8px;
+      white-space: nowrap;
+      &-num {
+        margin-left: 8px;
+        margin-right: 8px;
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #d9d9d9;
+        outline: none;
+        color: inherit;
+        padding: 8px;
+        width: 40px;
+        height: 24px;
+        text-align: center;
+        transition: border-color 0.3s;
+        &:hover{
+          border-color: #1890ff;
+        }
+        &::-webkit-inner-spin-button{
+          background-color: transparent
+        }
+      }
+      &-total {
+        margin: 0 8px;
+      }
+      .h3yun_All {
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .left-o {
+        // color: #C9CCD8
+      }
+      .forbid {
+         color: #C9CCD8;
+         cursor: no-drop;
+      }
+
+    }
+    &__changer {
+      position: relative;
+      &__input {
+        width:90px;
+        height:24px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+        background:rgba(255,255,255,1);
+        border-radius:4px;
+        border:1px solid rgba(212,215,224,1);
+        text-align: center;
+        transition: border-color 0.3s;
+        outline: none;
+        &:hover{
+          border-color: #1890ff;
+        }
+      }
+      &-item {
+        color: rgba(0, 0, 0, 0.65);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        box-sizing: border-box;
+        z-index: 1050;
+        position: absolute;
+        outline: none;
+        font-size: 14px;
+        bottom: calc(100% + 4px);
+        left: 2px;
+        li {
+          position: relative;
+          display: block;
+          padding: 5px 12px;
+          line-height: 22px;
+          font-weight: normal;
+          color: rgba(0, 0, 0, 0.65);
+          white-space: nowrap;
+          cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: background 0.3s ease;
+          &:first-child {
+            border-radius: 4px 4px 0 0 ;
+          }
+          &:last-child {
+            border-radius: 0 0 4px 4px;
+          }
+          &:hover {
+            background-color: #e6f7ff;
+          }
+        }
+        &--selected {
+          background-color: #fafafa;
+          font-weight: 600 !important;
+          color: rgba(0, 0, 0, 0.65) !important;
+        }
+      }
+    }
+
+
+  }
+}

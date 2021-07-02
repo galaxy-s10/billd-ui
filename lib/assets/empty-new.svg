@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180px" height="180px" viewBox="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>暂无内容</title>
+    <defs>
+        <linearGradient x1="-4.03619547%" y1="-46.9455784%" x2="38.9569573%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#6C9EFF" offset="0%"></stop>
+            <stop stop-color="#A8C5FF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="35.3770703%" y1="50%" x2="145.685863%" y2="60.9107685%" id="linearGradient-2">
+            <stop stop-color="#6C9EFF" offset="0%"></stop>
+            <stop stop-color="#A8C5FF" offset="100%"></stop>
+        </linearGradient>
+        <radialGradient cx="41.7239827%" cy="35.8593563%" fx="41.7239827%" fy="35.8593563%" r="114.74328%" gradientTransform="translate(0.417240,0.358594),scale(0.950495,1.000000),rotate(33.986157),scale(1.000000,2.233752),translate(-0.417240,-0.358594)" id="radialGradient-3">
+            <stop stop-color="#F1F7FF" offset="0%"></stop>
+            <stop stop-color="#CFE4FF" offset="100%"></stop>
+        </radialGradient>
+        <rect id="path-4" x="-5.68434189e-14" y="0" width="92.6674066" height="88.0799112" rx="7.3399926"></rect>
+        <filter x="-37.2%" y="-19.9%" width="152.9%" height="155.6%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="-10" dy="7" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.188235294   0 0 0 0 0.443137255   0 0 0 0 0.949019608  0 0 0 0.605250219 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="仪表盘" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="统计分析-图表配置-双轴图" transform="translate(-440.000000, -344.000000)">
+            <g id="编组-19" transform="translate(440.000000, 344.000000)">
+                <g id="暂无内容">
+                    <rect id="Rectangle" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="180" height="180"></rect>
+                    <g id="编组-17" transform="translate(10.000000, 20.000000)">
+                        <g id="Group-19-Copy-3备份-2" transform="translate(71.500000, 69.782279) scale(1, -1) translate(-71.500000, -69.782279) translate(0.000000, 0.282279)">
+                            <path d="M126.91084,0 C135.279905,-1.53737234e-15 142.064373,6.78446787 142.064373,15.1535331 L142.064373,130.699223 C142.064373,134.883756 138.672139,138.27599 134.487606,138.27599 L32.2012579,138.27599 C28.0167252,138.27599 24.6244913,134.883756 24.6244913,130.699223 L24.6242457,35.989 L12.3122457,35.9896411 L12.3122457,0 L126.91084,0 Z" id="形状结合" fill="url(#linearGradient-1)"></path>
+                            <g id="编组-2" transform="translate(41.672216, 21.968614)" fill="#FFFFFF">
+                                <path d="M4.59197973,42.0931475 L79.5943153,42.0931475 C82.1303957,42.0931475 84.1862951,43.8879803 84.1862951,46.1020187 C84.1862951,48.3160571 82.1303957,50.1108899 79.5943153,50.1108899 L4.59197973,50.1108899 C2.05589935,50.1108899 0,48.3160571 0,46.1020187 C0,43.8879803 2.05589935,42.0931475 4.59197973,42.0931475 Z" id="Rectangle-Copy-17" opacity="0.180826823"></path>
+                                <rect id="矩形" opacity="0.18" x="0" y="64.1419391" width="48.1064543" height="8.01774239" rx="3.78838328"></rect>
+                                <rect id="矩形备份-2" opacity="0.18" x="0" y="86.1907307" width="48.1064543" height="8.01774239" rx="3.78838328"></rect>
+                                <rect id="矩形" opacity="0.18" x="56.1241967" y="63.1397213" width="28.0620984" height="31.0687517" rx="1.89419164"></rect>
+                                <path d="M4.59197973,21.0465738 L79.5943153,21.0465738 C82.1303957,21.0465738 84.1862951,22.8414065 84.1862951,25.055445 C84.1862951,27.2694834 82.1303957,29.0643162 79.5943153,29.0643162 L4.59197973,29.0643162 C2.05589935,29.0643162 0,27.2694834 0,25.055445 C0,22.8414065 2.05589935,21.0465738 4.59197973,21.0465738 Z" id="Rectangle-Copy-17备份" opacity="0.180826823"></path>
+                                <path d="M4.59197973,0 L79.5943153,0 C82.1303957,0 84.1862951,1.79483277 84.1862951,4.00887119 C84.1862951,6.22290962 82.1303957,8.01774239 79.5943153,8.01774239 L4.59197973,8.01774239 C2.05589935,8.01774239 0,6.22290962 0,4.00887119 C0,1.79483277 2.05589935,0 4.59197973,0 Z" id="Rectangle-Copy-17备份-4" opacity="0.180826823"></path>
+                            </g>
+                            <path d="M12.5339863,0 C18.9789138,-1.18391397e-15 24.2035598,5.22464601 24.2035598,11.6695735 L24.2035598,35.9896411 L24.2035598,35.9896411 L3.88046667,35.9896411 C1.78820036,35.9896411 0.092083395,34.2935242 0.092083395,32.2012579 C0.092083395,32.1709331 0.0924475057,32.1406093 0.0931756485,32.1102933 L0.58420942,11.666209 C0.740038063,5.17831726 6.04422354,1.19215009e-15 12.5339863,0 Z" id="Rectangle" fill="url(#linearGradient-2)"></path>
+                        </g>
+                        <g id="Group-15" transform="translate(66.415094, 15.094340)">
+                            <g id="Group-18">
+                                <g id="Group-8">
+                                    <g id="Group-2">
+                                        <g id="Rectangle">
+                                            <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                                            <use fill="url(#radialGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                                        </g>
+                                        <path d="M85.327414,0 C89.38118,-7.44664729e-16 92.6674066,3.28622662 92.6674066,7.3399926 L92.6674066,18.8896868 L0,18.8896868 L0,7.3399926 C-4.96443153e-16,3.28622662 3.28622662,-2.80804895e-15 7.3399926,0 L85.327414,0 Z" id="Combined-Shape" fill="#D4E2FF"></path>
+                                    </g>
+                                </g>
+                                <line x1="0" y1="28.9012209" x2="92.6674066" y2="28.9012209" id="Path-5" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                                <line x1="0" y1="40.8287088" x2="92.6674066" y2="40.8287088" id="Path-5-Copy" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                                <line x1="0" y1="51.8386977" x2="92.6674066" y2="51.8386977" id="Path-5-Copy-2" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                                <line x1="0" y1="62.8486866" x2="92.6674066" y2="62.8486866" id="Path-5-Copy-3" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                                <line x1="0" y1="73.8586755" x2="92.6674066" y2="73.8586755" id="Path-5-Copy-4" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                                <line x1="31.6537181" y1="19.2674806" x2="31.6537181" y2="88.0799112" id="Path-6" stroke="#3071F2" stroke-width="0.917499075" opacity="0.1"></line>
+                            </g>
+                            <circle id="Oval" fill="#3071F2" opacity="0.256649926" cx="11.4687384" cy="11.4687384" r="3.21124676"></circle>
+                            <circle id="Oval-Copy" fill="#3071F2" opacity="0.530947731" cx="20.6437292" cy="11.4687384" r="3.21124676"></circle>
+                            <circle id="Oval-Copy-2" fill="#3071F2" opacity="0.353469122" cx="29.8187199" cy="11.4687384" r="3.21124676"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

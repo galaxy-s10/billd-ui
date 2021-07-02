@@ -34,6 +34,8 @@
 <script>
 // import HTable from "./components/table";
 
+import Dashboard from '../lib/dashboard'
+
 import VueCpt from "./components/VueCpt";
 import VueRenderCpt from "./components/VueRenderCpt";
 import TsxCpt from "./components/TsxCpt/index";
@@ -51,6 +53,7 @@ import DirectiveCpt from "./components/DirectiveCpt/index";
 
 export default {
   components: {
+    Dashboard,
     VueCpt,
     VueRenderCpt,
     TsxCpt,

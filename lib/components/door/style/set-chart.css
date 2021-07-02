@@ -1,0 +1,11 @@
+.h3-report-set-chart {
+  display: flex;
+  flex-direction: column;
+}
+.h3-report-set-chart__group {
+  display: flex;
+  flex-direction: column;
+}
+.h3-report-set-chart__group .ant-checkbox-wrapper {
+  margin: 5px 0 5px 12px;
+}

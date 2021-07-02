@@ -1,0 +1,62 @@
+.vue-grid-item.longText {
+    overflow: visible;
+}
+
+.h3-report-long-text-wrap {
+    height: 100%;
+
+    .editor {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ql-editor {
+        -webkit-user-select: text;
+    }
+
+    .ql-snow .ql-picker-options .ql-picker-item {
+        outline: none;
+    }
+
+    .ql-snow .ql-tooltip::before {
+        content: "请输入链接地址:";
+    }
+
+    .ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+        content: "保存";
+    }
+
+    .ql-snow .ql-tooltip a.ql-action::after {
+        content: "编辑";
+    }
+
+    .ql-snow .ql-tooltip a.ql-remove::before {
+        content: "删除";
+    }
+
+    .ql-snow .ql-picker.ql-size .ql-picker-label::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item::before {
+        content: "正常";
+    }
+
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
+        content: "小号";
+    }
+
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before {
+        content: "大号";
+    }
+
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="huge"]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="huge"]::before {
+        content: "巨号";
+    }
+}
+
+.h3-report-long-text-edit {
+    position: relative;
+    z-index: 2;
+}

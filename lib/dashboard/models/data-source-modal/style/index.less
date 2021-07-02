@@ -1,0 +1,42 @@
+@import "../../../../styles/components.less";
+@import '../../../../styles/theme.less';
+.h3-report-data-source-modal{
+  height: 378px;
+  color: @report-font-color-base;
+  &__search{
+    margin: 0 12px;
+  }
+  .ant-tabs-nav-wrap{
+    text-align: center;
+  }
+  .ant-tabs-nav .ant-tabs-tab{
+    padding: 8px 16px;
+  }
+  &__tree{
+    height: 296px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0 12px;
+    .ant-tree li .ant-tree-node-content-wrapper{
+      width: 100%;
+    }
+  }
+  &__empty{
+    height: 296px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    img{
+      height: 100px;
+    }
+    span{
+      font-size: 16px;
+      color: #777F8D;
+    }
+    .high-light{
+      color: @report-link-color;
+      cursor: pointer;
+    }
+  }
+}

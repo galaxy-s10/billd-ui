@@ -1,0 +1,53 @@
+.h3-menu-tree__list {
+  display: none;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s, opacity 0.3s;
+}
+.h3-menu-tree__list-open.h3-menu-tree__list--dragging {
+  opacity: 1;
+}
+.h3-menu-tree__list-open {
+  opacity: 1;
+  height: auto;
+  display: block;
+}
+.h3-menu-tree .h3-menu-tree > .h3-menu-tree-item {
+  padding-left: 20px;
+}
+.h3-menu-tree .h3-menu-tree > .h3-menu-tree__list {
+  padding-left: 20px;
+}
+.h3-menu-tree-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+}
+.h3-menu-tree-item--selected {
+  background: #F0F8FE;
+}
+.h3-menu-tree-item:hover {
+  background: #F0F8FE;
+}
+.h3-menu-tree-item__checkbox {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+.h3-menu-tree-item > i {
+  flex: 0 0 16px;
+}
+.h3-menu-tree-item__word {
+  flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+i + .h3-menu-tree-item__word {
+  margin-left: 8px;
+}

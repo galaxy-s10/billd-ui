@@ -1,0 +1,60 @@
+.h3-report-help-modal .ant-modal {
+  height: 100%;
+  padding: 50px 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.h3-report-help-modal .ant-modal .ant-modal-content {
+  height: 100%;
+  overflow: hidden;
+}
+.h3-report-help-modal .ant-modal .ant-modal-content .ant-modal-body {
+  height: calc(100% - 108px);
+  overflow: scroll;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.h3-report-help-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.h3-report-help-modal__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.h3-report-help-modal__content--multi {
+  margin-top: 40px;
+}
+.h3-report-help-modal__turn-left,
+.h3-report-help-modal__turn-right {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  width: 32px;
+  transform: translateY(-50%);
+  height: 32px;
+  background: #C9CCD8;
+  border-radius: 100%;
+}
+.h3-report-help-modal__turn-left:hover,
+.h3-report-help-modal__turn-right:hover {
+  background: #8893A7;
+  cursor: pointer;
+}
+.h3-report-help-modal__turn-left .h3yun_All,
+.h3-report-help-modal__turn-right .h3yun_All {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+.h3-report-help-modal__turn-right {
+  right: 24px;
+}

@@ -1,0 +1,67 @@
+.h3-yun-guide-step-1 {
+  height: 100%;
+  width: calc(100% - 420px);
+  position: relative;
+  &-chart {
+    height: 100%;
+    &-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100% - 54px) !important;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+  &-data {
+    width: 100%;
+    height: 100%;
+    padding: 8px 16px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .h3-report-container__empty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.h3-yun-guide-step-2 {
+  z-index: 10000000000;
+  .ant-modal-body {
+    height: 300px;
+  }
+  .ant-btn-primary {
+    z-index: 999999999;
+  }
+  .h3-menu-tree-item:hover {
+    background: none;
+  }
+}
+.h3-yun-guide-step-3 {
+  position: absolute;
+  display: flex;
+  right: 0;
+  width: 420px;
+  height: 100%;
+  top: 0;
+  background: #fff;
+
+  .report-modules {
+    background: #fff;
+  }
+  .h3-report-data-source__field:hover {
+    background: none;
+  }
+}
+.h3-yun-guide-step-4 {
+  .ant-modal {
+    z-index: 999999999 !important;
+  }
+}

@@ -1,0 +1,37 @@
+@import "../../../../styles/index.less";
+
+.h3-report-set-field {
+  display: flex;
+  flex-direction: column;
+  &__title {
+    color: @report-font-color-base;
+  }
+  &__name {
+    line-height: 32px;
+    color: #8893a7;
+  }
+  &__icon {
+    margin-right: 2px;
+  }
+  &__select {
+    width: 100%;
+  }
+  &__error-text {
+    color: #ff4384;
+    font-size: 12px;
+  }
+  &__select-error {
+    .ant-select-selection {
+      border: 1px solid #ff4384;
+    }
+  }
+  .ant-select-dropdown-menu-item-disabled {
+    color: #c9ccd8;
+    &:hover {
+      color: #c9ccd8;
+    }
+  }
+  .ant-select-selection__placeholder {
+    color: #c9ccd8;
+  }
+}

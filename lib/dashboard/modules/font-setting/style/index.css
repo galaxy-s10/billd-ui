@@ -1,0 +1,44 @@
+.h3-report-font-color {
+  border-bottom: none !important;
+}
+.h3-report-font-color__header label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 0;
+  color: #304265;
+}
+.h3-report-font-color__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 8px;
+}
+.h3-report-font-color__body label {
+  color: #304265;
+  font-size: 14px;
+  font-weight: 400;
+}
+.h3-report-font-color__color-wrap {
+  width: 118px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #d4d7e0;
+  padding: 4px;
+}
+.h3-report-font-color__color-wrap .m-colorPicker {
+  width: 100% !important;
+  height: 100% !important;
+}
+.h3-report-font-color__color-wrap .m-colorPicker .box {
+  width: 212px;
+  margin-top: 6px;
+}
+.h3-report-font-color__color-wrap .m-colorPicker .box.open {
+  z-index: 100;
+}
+.h3-report-font-color__color-wrap .m-colorPicker .colorBtn {
+  width: 100% !important;
+  height: 100% !important;
+}

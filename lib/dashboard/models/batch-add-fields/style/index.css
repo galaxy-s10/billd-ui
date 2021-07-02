@@ -1,0 +1,12 @@
+.h3-report-add-fields-modal__content {
+  margin-top: 12px;
+}
+.h3-report-add-fields-modal__content-list {
+  height: 160px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.h3-report-add-fields-modal__content-item {
+  height: 32px;
+  line-height: 32px;
+}

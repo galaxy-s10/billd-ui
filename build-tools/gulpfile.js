@@ -21,13 +21,11 @@ gulp.task("copy", function() {
 });
 
 gulp.task("less", function() {
-  return (
-    gulp
-      .src("../components/**/*.less")
-      // .pipe(less())
-      // .pipe(postcss())
-      .pipe(gulp.dest("../dist"))
-  );
+  return gulp
+    .src("../components/**/*.less")
+    .pipe(less())
+    .pipe(postcss())
+    .pipe(gulp.dest("../dist"));
 });
 
 const tsFiles = [
@@ -67,9 +65,12 @@ gulp.task("compile", function() {
     .pipe(
       through2.obj(function(file, encoding, next) {
         this.push(file.clone());
-        if (file.path.match(/\/style\/index\.(js|ts)$/)) {
+        if (file.path.match(/[\\/]style[\\/]index\.(js|ts)$/)) {
           //匹配所有组件下的style目录下面的文件。
+          console.log("匹配到", file.path);
           const content = file.contents.toString(encoding);
+          console.log(typeof content);
+          console.log(content);
           file.contents = Buffer.from(
             content
               // .replace(/\/style\/?'/g, "/style/css'")
@@ -77,6 +78,19 @@ gulp.task("compile", function() {
               .replace(/\.less/g, ".css")
           );
           file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
+          this.push(file);
+        }else{
+          console.log('匹配到了',file.path);
+          const content = file.contents.toString(encoding);
+          // console.log(typeof content);
+          // console.log(content);
+          file.contents = Buffer.from(
+            content
+              // .replace(/\/style\/?'/g, "/style/css'")
+              // .replace(/\/style\/?"/g, '/style/css"')
+              .replace(/\.less/g, ".css")
+          );
+          // file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
           this.push(file);
         }
         next();

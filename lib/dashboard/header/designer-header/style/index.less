@@ -1,0 +1,150 @@
+.h3-report-designer-header {
+  position: relative;
+  padding-left: 22px;
+  .icon {
+    width: 26px;
+    height: 26px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+  &__btns {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      width: 32px;
+      height: 32px;
+      cursor: move;
+      border-radius: 4px;
+      border: 1px solid rgba(237, 242, 247, 1);
+      i {
+        font-size: x-large;
+      }
+    }
+    a:last-child {
+      margin: 0;
+    }
+  }
+  &__borderLeft {
+    width: 1px;
+    height: 24px;
+    background: rgba(237, 242, 247, 1);
+    margin: 0 16px;
+  }
+  &__middleToolbar {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    .h3-report-i-btn {
+      color: #107fff !important;
+    }
+    .filterPicker {
+      width: 86px;
+      border: 1px solid rgba(237, 242, 247, 1);
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+    .longText {
+      width: 70px;
+      border: 1px solid rgba(237, 242, 247, 1);
+      border-radius: 4px;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      line-height: 32px;
+      cursor: move;
+      > i {
+        padding-right: 4px;
+      }
+    }
+  }
+  &__icon {
+    display: inline-block;
+  }
+  &__btn {
+    height: 100% !important;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0 !important;
+    i {
+      font-size: 12px;
+      margin-right: 6px;
+    }
+  }
+  &__save {
+    width: 132px;
+    border-radius: 0;
+  }
+  &__preview {
+    line-height: 40px;
+    color: #107fff;
+    margin-right: 32px;
+  }
+  &__exit-preview {
+    position: absolute;
+    right: 0;
+    line-height: 40px;
+    margin-right: 29px;
+    i {
+      font-size: 15px;
+      color: #8893a7;
+      margin-right: 0;
+    }
+  }
+  /** ant-design tooltip样式 **/
+  .ant-tooltip-placement-bottom,
+  .ant-tooltip-placement-bottomLeft,
+  .ant-tooltip-arrow {
+    border-bottom-color: #304265;
+  }
+  .ant-tooltip-placement-top,
+  .ant-tooltip-arrow {
+    border-top-color: #304265;
+  }
+  .ant-tooltip {
+    .ant-tooltip-content {
+      .ant-tooltip-inner {
+        background-color: #304265;
+      }
+    }
+  }
+}
+.h3-report__drag {
+  position: absolute;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width: 124px;
+  height: 40px;
+  background: rgba(240, 248, 254, 1);
+  box-shadow: 0 0 14px 0 rgba(76, 107, 173, 0.2);
+  border-radius: 4px;
+  border: 1px dashed rgba(16, 127, 255, 1);
+  z-index: 100;
+  color: #107fff;
+  cursor: move;
+  .h3-report-designer-header__icon {
+    border: 0;
+    margin: 0 5px;
+    font-size: 26px;
+  }
+  .text {
+    line-height: 40px;
+  }
+}

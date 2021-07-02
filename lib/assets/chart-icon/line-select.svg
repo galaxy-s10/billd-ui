@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="0709" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标0725" transform="translate(-1072.000000, -206.000000)">
+            <g id="编组" transform="translate(1072.000000, 206.000000)">
+                <g id="Rectangle-Copy-23" fill="#FFFFFF" stroke="#107FFF" stroke-width="2">
+                    <rect id="Rectangle-Copy-13" x="1" y="1" width="58" height="58"></rect>
+                </g>
+                <g id="Group-12-Copy-2" transform="translate(14.000000, 16.190476)" fill="#107FFF">
+                    <g id="Group-13">
+                        <rect id="Rectangle" x="0" y="24.8690992" width="32.030303" height="2.29560915"></rect>
+                        <polygon id="Rectangle-Copy-5" transform="translate(1.163636, 13.391053) rotate(90.000000) translate(-1.163636, -13.391053) " points="-12.227417 12.227417 14.5546898 12.227417 14.5546898 14.5546898 -12.227417 14.5546898"></polygon>
+                        <polygon id="Path-3" fill-rule="nonzero" opacity="0.8" points="4.98541064 20.883063 3.87878788 19.3120504 13.2725529 12.8739021 20.4451702 18.6171519 30.1299337 10.521542 31.3837804 11.9809784 20.471796 21.1024371 13.1820375 15.2653901"></polygon>
+                        <path d="M4.98541064,12.2855013 L3.87878788,10.7144888 L13.2635623,4.28250235 L20.3598734,9.79814457 L30.1433015,1.91300763 L31.3704125,3.39438946 L20.3818876,12.2507968 L13.1910282,6.66166652 L4.98541064,12.2855013 Z M20.9710445,10.2731803 L19.757325,10.2837798 L20.3598734,9.79814457 L20.9710445,10.2731803 Z" id="Path-3-Copy" fill-rule="nonzero" opacity="0.5"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

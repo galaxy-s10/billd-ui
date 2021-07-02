@@ -1,0 +1,63 @@
+.h3-report-help-modal {
+    .ant-modal {
+        height: 100%;
+        padding: 50px 0;
+        user-select: none;
+
+        .ant-modal-content {
+            height: 100%;
+            overflow: hidden;
+
+            .ant-modal-body {
+                height: calc(100% - 108px);
+                overflow: scroll;
+                user-select: none;
+            }
+        }
+    }
+
+    &__head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--multi {
+            margin-top: 40px;
+        }
+    }
+
+    &__turn-left,
+    &__turn-right {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        width: 32px;
+        transform: translateY(-50%);
+        height: 32px;
+        background: #C9CCD8;
+        border-radius: 100%;
+
+        &:hover {
+            background: #8893A7;
+            cursor: pointer;
+        }
+
+        .h3yun_All {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+
+    &__turn-right {
+        right: 24px;
+    }
+}

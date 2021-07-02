@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>饼状图灰</title>
+    <desc>Created with Sketch.</desc>
+    <g id="0709" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标0725" transform="translate(-220.000000, -111.000000)">
+            <g id="编组-5" transform="translate(136.000000, 79.000000)">
+                <g id="饼状图灰" transform="translate(84.000000, 32.000000)">
+                    <rect id="Rectangle-Copy-14" stroke="#C9CCD8" fill="#FFFFFF" opacity="0.01" x="0.5" y="0.5" width="59" height="59"></rect>
+                    <g id="Group-8" transform="translate(15.000000, 15.483871)" fill="#C9CCD8">
+                        <path d="M14,2.90322581 L14,16.4516129 L28,16.4516129 C28,23.9341805 21.7319865,30 14,30 C6.2680135,30 0,23.9341805 0,16.4516129 C0,8.96904533 6.2680135,2.90322581 14,2.90322581 Z" id="Combined-Shape" fill-opacity="0.5"></path>
+                        <path d="M17,0 C24.7319865,0 31,6.06581952 31,13.5483871 L17,13.5483871 L17,1.77635684e-15 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

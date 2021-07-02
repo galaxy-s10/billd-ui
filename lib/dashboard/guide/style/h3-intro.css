@@ -1,0 +1,199 @@
+.h3-report-intro {
+  z-index: 9999999 !important;
+}
+.introjs-tooltip {
+  padding: 16px 24px;
+}
+.introjs-tooltipReferenceLayer {
+  z-index: 100000000000;
+}
+.introjs-donebutton {
+  width: 56px;
+  height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #107fff;
+  line-height: 22px;
+  border: none;
+  background: none;
+  padding-right: 0px;
+}
+.introjs-button:hover {
+  box-shadow: none !important;
+  background: none !important;
+  border: none !important;
+}
+.intro-helper-report-content {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 0px;
+  padding: 0px;
+}
+.intro-helper-report-content .intro-helper-step {
+  color: #8893A7;
+  padding-right: 12px;
+}
+.intro-helper-report-content .intro-helper-title {
+  color: #304265;
+}
+.intro-helper-report-content .intro-helper-main {
+  width: 100%;
+  white-space: initial;
+  font-size: 14px;
+  font-weight: 400;
+  color: #304265;
+  margin-top: 16px;
+}
+.intro-helper-report-content .introjs-helper-highlight {
+  width: 100%;
+  height: 100%;
+  background: #fff8f4;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  padding: 8px 12px;
+  margin-top: 16px;
+}
+.intro-helper-report-content .introjs-helper-highlight__title {
+  font-weight: 600;
+}
+.intro-helper-report-content .introjs-helper-highlight__content {
+  white-space: pre-wrap;
+}
+.h3-report-intro-bubble {
+  box-shadow: 0px 0px 10px 0px rgba(27, 43, 76, 0.27);
+  border-radius: 3px;
+}
+.h3-report-intro-bubble .bubble-box .bubble-content {
+  font-size: 14px;
+  font-weight: 400;
+  color: #304265;
+  line-height: 20px;
+  min-height: 40px;
+  margin: 0;
+  overflow: hidden;
+}
+.h3-report-intro-bubble .introjs-tooltipbuttons {
+  height: 34px;
+  line-height: 34px;
+}
+.h3-report-intro-bubble .h3-intro-button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  height: 34px;
+  font-weight: 400;
+  line-height: 34px;
+  font-size: 14px;
+}
+.h3-report-intro-bubble .h3-intro-button.introjs-skipbutton {
+  width: 62px;
+  color: #8893A7;
+}
+.h3-report-intro-bubble .h3-intro-button.introjs-donebutton.introjs-skipbutton,
+.h3-report-intro-bubble .h3-intro-button.introjs-nextbutton {
+  width: 74px;
+  touch-action: manipulation;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  color: #fff;
+  background-color: #107fff;
+  border-color: #107fff;
+  outline: none;
+}
+.h3-report-intro-bubble .h3-intro-button.introjs-donebutton.introjs-skipbutton:hover,
+.h3-report-intro-bubble .h3-intro-button.introjs-nextbutton:hover {
+  color: #fff;
+  background-color: #389cff;
+  border-color: #389cff;
+}
+.h3-report-intro-bubble .stepNumber {
+  color: #8893A7;
+  float: left;
+}
+.introjs-rippleLayer {
+  position: absolute;
+  z-index: 9999999999;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #3cfcc3;
+  border-radius: 100%;
+  pointer-events: none;
+  -webkit-animation: ball-scale-ripple 1s 0s infinite cubic-bezier(0.21, 0.53, 0.56, 0.8);
+          animation: ball-scale-ripple 1s 0s infinite cubic-bezier(0.21, 0.53, 0.56, 0.8);
+}
+@-webkit-keyframes ball-scale-ripple {
+  0% {
+    opacity: 1;
+    transform: scale(0.1);
+  }
+  70% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ball-scale-ripple {
+  0% {
+    opacity: 1;
+    transform: scale(0.1);
+  }
+  70% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.introjs-showElement {
+  border-radius: 4px;
+}
+.introjs-fixParent .h3-search-tree__list {
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.introjs-fixParent .h3-search-tree__list .h3-menu-tree {
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+.introjs-fixParent .h3-search-tree__list .introjs-relativePosition .h3-menu-tree__list {
+  opacity: 1;
+  height: auto;
+  display: block;
+}
+.introjs-fixParent .h3-report-data-source__fields--content {
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.h3-report-designer .introjs-fixParent:not(.h3-yun-guide-step-4-body):not(.h3-report-form-confirm):not(.h3-report-container):not(.h3-report-models):not(.h3-report-data-source):not(.h3-report-designer-header) {
+  z-index: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+  position: absolute !important;
+}
+.h3-report-guide.introjs-fixParent,
+.h3-yun-guide-step-2.introjs-fixParent,
+.h3-yun-guide-step-4.introjs-fixParent {
+  position: absolute;
+}
+.h3-report-intro-bubble .introjs-tooltipbuttons {
+  margin-top: 0 !important;
+}
+.h3-report-intro-bubble .introjs-tooltipbuttons .introjs-button {
+  margin-top: 0 !important;
+}

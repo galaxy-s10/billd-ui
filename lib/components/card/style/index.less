@@ -1,0 +1,66 @@
+.h3-report-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    &__metric {
+      display: inline-block;
+      label {
+        display: block;
+        color: #304265;
+        font-size: 18px;
+        margin-bottom: 0;
+        font-weight: inherit;
+      }
+      span {
+        font-size: 56px;
+        font-weight: 400;
+        color: rgba(16, 127, 255, 1);
+        line-height: 78px;
+      }
+    }
+    &__metric--list {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      .h3-scroll {
+        flex: 1;
+      }
+    }
+    &__header {
+      flex: 0 0 48px;
+      label {
+        color: #107fff;
+      }
+      span {
+        color: #ffffff !important;
+        background: rgba(16, 127, 255, 0.8) !important;
+      }
+    }
+    &__item {
+      margin-left: 16px;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      border-bottom: 1px solid #ebedf2;
+      label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+      }
+      span {
+        margin-left: 10px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 7px;
+        color: #107fff;
+        background: rgba(16, 127, 255, 0.1);
+        border-radius: 12px;
+      }
+    }
+  }
+  

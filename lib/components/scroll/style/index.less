@@ -1,0 +1,54 @@
+.h3-scroll {
+    display: flex;
+    position: relative;
+    overflow: hidden !important;
+    &__content {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    &__axis,
+    &__axis--warp {
+      position: absolute;
+      background-color: #eee;
+      opacity: 0.7;
+      border-radius: 4px;
+    }
+    &__axis--y,
+    &__axis--warp-y {
+      top: 0;
+      width: 8px;
+      min-height: 20px;
+    }
+    &__axis--warp-y {
+      right: 0;
+      height: 100%;
+      display: none;
+    }
+    &__axis--x,
+    &__axis--warp-x {
+      height: 8px;
+      left: 0;
+    }
+    &__axis--warp-x {
+      bottom: 0;
+      width: 100%;
+      display: none;
+    }
+    &:hover &__axis--warp-leave {
+      opacity: 1;
+    }
+    &__axis--warp-leave {
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    &__axis--warp-t-x {
+      top: 3px;
+      bottom: auto;
+    }
+    &__axis--warp-l-y {
+      left: 3px;
+      right: auto;
+    }
+  }

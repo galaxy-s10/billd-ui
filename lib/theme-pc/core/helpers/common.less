@@ -1,0 +1,22 @@
+@animation-time: 200ms;
+@ease-in-out: linear;
+.motion-common() {
+  animation-duration: @animation-time;
+  animation-fill-mode: both;
+}
+
+.make-motion(@className, @keyframeName) {
+  .@{className}-enter-active, .@{className}-appear {
+      .motion-common();
+      // animation-play-state: paused;
+      animation-name: ~"@{keyframeName}In";
+      animation-play-state: running;
+  }
+  .@{className}-leave-active {
+      .motion-common();
+      // animation-play-state: paused;
+      animation-name: ~"@{keyframeName}Out";
+      animation-play-state: running;
+  }
+}
+

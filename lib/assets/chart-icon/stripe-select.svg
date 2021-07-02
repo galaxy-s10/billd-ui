@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>条形图 copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="0709" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标0725" transform="translate(-1184.000000, -206.000000)">
+            <g id="条形图-copy" transform="translate(1184.000000, 206.000000)">
+                <rect id="Rectangle-Copy-15" stroke="#107FFF" stroke-width="2" fill="#FFFFFF" x="1" y="1" width="58" height="58"></rect>
+                <g id="Group-10" transform="translate(29.600000, 31.548387) rotate(90.000000) translate(-29.600000, -31.548387) translate(13.600000, 18.000000)" fill="#107FFF">
+                    <rect id="Rectangle" x="0" y="24" width="32" height="2.32258065"></rect>
+                    <g id="Group-9" transform="translate(1.600000, 0.000000)">
+                        <rect id="Rectangle" opacity="0.5" x="0" y="10.8387097" width="4.8" height="10.8387097"></rect>
+                        <rect id="Rectangle-Copy-2" opacity="0.8" x="16.8" y="3.87096774" width="4.8" height="17.8064516"></rect>
+                        <rect id="Rectangle-Copy-4" opacity="0.8" x="24.8" y="13.9354839" width="4.8" height="7.74193548"></rect>
+                        <rect id="Rectangle-Copy" x="8" y="0" width="4.8" height="21.6774194"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

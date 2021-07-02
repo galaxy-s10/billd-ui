@@ -1,0 +1,101 @@
+@import '../theme/index.less';
+@import '../mixins/index.less';
+
+// 标准色用作背景
+// .@{prefix}-bg-primary {
+//   background-color: @h3-primary-color;
+// }
+
+// .@{prefix}-bg-success {
+//   background-color: @h3-success-color;
+// }
+
+// .@{prefix}-bg-warning {
+//   background-color: @h3-warning-color;
+// }
+
+// .@{prefix}-bg-error {
+//   background-color: @h3-error-color;
+// }
+
+// .@{prefix}-bg-default {
+//   background-color: @h3-normal-color;
+// }
+
+// .@{prefix}-bg-line {
+//   background-color: @h3-line-color;
+// }
+
+// .@{prefix}-bg-option-hover {
+//   background-color: @h3-option-hover-color;
+// }
+
+// .@{prefix}-bg-option-active {
+//   background-color: @h3-option-active-color;
+// }
+
+.@{prefix}-scroll-x {
+  .h3-scroll-x();
+}
+
+.@{prefix}-scroll-y {
+  .h3-scroll-y();
+}
+
+.@{prefix}-scroll-both {
+  .h3-scroll-both();
+}
+
+.@{prefix}-shadow-normal {
+  box-shadow: @h3-shadow-normal;
+}
+
+.@{prefix}-shadow-large {
+  box-shadow: @h3-shadow-large;
+}
+
+.@{prefix}-shadow-card {
+  box-shadow: @h3-shadow-card;
+}
+
+@direction: top, left, bottom, right;
+@list: xs, sm, md, lg, xl;
+
+each(@list, {
+  .@{prefix}-padding-top-@{value} {
+    @var: 'h3-padding-@{value}';
+    padding-top: @@var;
+  }
+
+  .@{prefix}-margin-top-@{value} {
+    @var: 'h3-margin-@{value}';
+    margin-top: @@var;
+  }
+  .@{prefix}-padding-left-@{value} {
+    @var: 'h3-padding-@{value}';
+    padding-left: @@var;
+  }
+
+  .@{prefix}-margin-left-@{value} {
+    @var: 'h3-margin-@{value}';
+    margin-left: @@var;
+  }
+  .@{prefix}-padding-right-@{value} {
+    @var: 'h3-padding-@{value}';
+    padding-right: @@var;
+  }
+
+  .@{prefix}-margin-right-@{value} {
+    @var: 'h3-margin-@{value}';
+    margin-right: @@var;
+  }
+  .@{prefix}-padding-bottom-@{value} {
+    @var: 'h3-padding-@{value}';
+    padding-bottom: @@var;
+  }
+
+  .@{prefix}-margin-bottom-@{value} {
+    @var: 'h3-margin-@{value}';
+    margin-bottom: @@var;
+  }
+});

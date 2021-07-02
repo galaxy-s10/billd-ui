@@ -1,0 +1,71 @@
+/**
+链接主题
+ */
+/**
+  字体
+ */
+/*
+  辅助位置
+ */
+/**
+ border
+ */
+/**
+icon
+ */
+/**
+  背景颜色
+ */
+/**
+阴影颜色
+ */
+.h3-report-paint-coat__header {
+  padding-top: 16px;
+}
+.h3-report-paint-coat__header label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #304265;
+}
+.h3-report-paint-coat__body {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 16px 0;
+  border-bottom: 1px solid #F3F5F8;
+}
+.h3-report-paint-coat__body .left-wrap .linshi {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8893a7;
+  margin-right: 10px;
+}
+.h3-report-paint-coat__body .left-wrap .ant-radio-group label {
+  font-size: 14px;
+  color: #8893a7;
+  font-weight: 400;
+}
+.h3-report-paint-coat__color-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #d4d7e0;
+  padding: 4px;
+  /** 颜色选择器 **/
+}
+.h3-report-paint-coat__color-wrap .m-colorPicker {
+  width: 100% !important;
+  height: 100% !important;
+}
+.h3-report-paint-coat__color-wrap .m-colorPicker .box {
+  width: 212px;
+  margin-top: 6px;
+  left: -5px;
+}
+.h3-report-paint-coat__color-wrap .m-colorPicker .box.open {
+  z-index: 100;
+}
+.h3-report-paint-coat__color-wrap .m-colorPicker .colorBtn {
+  width: 100% !important;
+  height: 100% !important;
+}

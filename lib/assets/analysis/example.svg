@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="558px" height="248px" viewBox="0 0 558 248" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="仪表盘" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="统计分析_公共_管理员_无图表" transform="translate(-850.000000, -200.000000)">
+            <g id="Group-9" transform="translate(834.000000, 88.000000)">
+                <g id="数据表-copy-4备份-7" transform="translate(16.000000, 64.000000)">
+                    <g id="line" transform="translate(0.000000, 48.000000)">
+                        <g id="Group">
+                            <g>
+                                <polygon id="Path" fill-opacity="0" fill="#FFFFFF" fill-rule="nonzero" points="0 0 558 0 558 248 0 248"></polygon>
+                                <g transform="translate(16.000000, 18.000000)">
+                                    <g transform="translate(42.000000, 174.000000)">
+                                        <line x1="0" y1="1" x2="484" y2="1" id="Path" stroke-opacity="0.45" stroke="#000000"></line>
+                                        <g transform="translate(12.000000, 11.000000)" fill="#0F1C35" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal">
+                                            <text id="家具家电">
+                                                <tspan x="0.53780692" y="13">家具家电</tspan>
+                                            </text>
+                                            <text id="粮油副食">
+                                                <tspan x="68.070452" y="13">粮油副食</tspan>
+                                            </text>
+                                            <text id="美容洗护">
+                                                <tspan x="135.603097" y="13">美容洗护</tspan>
+                                            </text>
+                                            <text id="母婴用品">
+                                                <tspan x="203.135742" y="13">母婴用品</tspan>
+                                            </text>
+                                            <text id="进口食品">
+                                                <tspan x="270.668387" y="13">进口食品</tspan>
+                                            </text>
+                                            <text id="食品饮料">
+                                                <tspan x="338.201032" y="13">食品饮料</tspan>
+                                            </text>
+                                            <text id="家庭清洁">
+                                                <tspan x="405.733677" y="13">家庭清洁</tspan>
+                                            </text>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g transform="translate(43.000000, 7.000000)" id="Path" stroke="#000000" stroke-dasharray="0,0" stroke-opacity="0.15">
+                                            <path d="M0,168 L34.5,168 L103.5,168 L172.5,168 L241.5,168 L310.5,168 L379.5,168 L448.5,168 L483,168"></path>
+                                            <path d="M0,126.25 L34.5,126.25 L103.5,126.25 L172.5,126.25 L241.5,126.25 L310.5,126.25 L379.5,126.25 L448.5,126.25 L483,126.25"></path>
+                                            <path d="M0,84.5 L34.5,84.5 L103.5,84.5 L172.5,84.5 L241.5,84.5 L310.5,84.5 L379.5,84.5 L448.5,84.5 L483,84.5"></path>
+                                            <path d="M0,42.75 L34.5,42.75 L103.5,42.75 L172.5,42.75 L241.5,42.75 L310.5,42.75 L379.5,42.75 L448.5,42.75 L483,42.75"></path>
+                                            <path d="M0,1 L34.5,1 L103.5,1 L172.5,1 L241.5,1 L310.5,1 L379.5,1 L448.5,1 L483,1"></path>
+                                        </g>
+                                        <g fill="#0F1C35" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20">
+                                            <text id="0">
+                                                <tspan x="19.7714844" y="177">0</tspan>
+                                            </text>
+                                            <text id="250">
+                                                <tspan x="5.77148438" y="136">250</tspan>
+                                            </text>
+                                            <text id="500">
+                                                <tspan x="5.77148438" y="95">500</tspan>
+                                            </text>
+                                            <text id="750">
+                                                <tspan x="5.77148438" y="54">750</tspan>
+                                            </text>
+                                            <text id="1000">
+                                                <tspan x="0" y="13">1000</tspan>
+                                            </text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                            <g transform="translate(57.000000, 25.000000)" fill-rule="nonzero" id="Path">
+                                <polygon fill-opacity="0" fill="#FFFFFF" points="0 0.478125 483 0.478125 483 168.521875 0 168.521875"></polygon>
+                                <g transform="translate(16.000000, 1.000000)" fill-opacity="0.85">
+                                    <g>
+                                        <polygon fill="#5B8FF9" points="0.265023717 167 0.265023717 97.862 20.5248172 97.862 20.5248172 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="67.7976688 167 67.7976688 26.553 88.0574623 26.553 88.0574623 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="135.330314 167 135.330314 167 155.590107 167 155.590107 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="202.862959 167 202.862959 0.668 223.122753 0.668 223.122753 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="270.395604 167 270.395604 135.103 290.655398 135.103 290.655398 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="337.928249 167 337.928249 126.419 358.188043 126.419 358.188043 167"></polygon>
+                                        <polygon fill="#5B8FF9" points="405.460894 167 405.460894 150.3 425.720688 150.3 425.720688 167"></polygon>
+                                        <polygon fill="#B37FEB" points="22.5507966 167 22.5507966 122.411 42.8105901 122.411 42.8105901 167"></polygon>
+                                        <polygon fill="#B37FEB" points="90.0834417 167 90.0834417 158.817 110.343235 158.817 110.343235 167"></polygon>
+                                        <polygon fill="#B37FEB" points="157.616087 167 157.616087 61.623 177.87588 61.623 177.87588 167"></polygon>
+                                        <polygon fill="#B37FEB" points="225.148732 167 225.148732 45.758 245.408525 45.758 245.408525 167"></polygon>
+                                        <polygon fill="#B37FEB" points="292.681377 167 292.681377 26.553 312.94117 26.553 312.94117 167"></polygon>
+                                        <polygon fill="#B37FEB" points="360.214022 167 360.214022 125.584 380.473816 125.584 380.473816 167"></polygon>
+                                        <polygon fill="#B37FEB" points="427.746667 167 427.746667 90.681 448.006461 90.681 448.006461 167"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                            <g transform="translate(219.000000, 229.000000)">
+                                <g transform="translate(0.744003, 0.500000)">
+                                    <g>
+                                        <g>
+                                            <polygon id="Path" fill-opacity="0.85" fill="#5B8FF9" fill-rule="nonzero" points="0 5 8 5 8 13 0 13"></polygon>
+                                            <text id="门店一" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#0F1C35">
+                                                <tspan x="16" y="13.5">门店一</tspan>
+                                            </text>
+                                            <polygon id="Path" fill-opacity="0" fill="#FFFFFF" fill-rule="nonzero" points="0 2.5 53.2559967 2.5 53.2559967 15.5 0 15.5"></polygon>
+                                        </g>
+                                        <g transform="translate(64.000000, 0.000000)">
+                                            <polygon id="Path" fill-opacity="0.85" fill="#B37FEB" fill-rule="nonzero" points="0.255996704 5 8.2559967 5 8.2559967 13 0.255996704 13"></polygon>
+                                            <text id="门店二" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#0F1C35">
+                                                <tspan x="16.2559967" y="13.5">门店二</tspan>
+                                            </text>
+                                            <polygon id="Path" fill-opacity="0" fill="#FFFFFF" fill-rule="nonzero" points="0.255996704 2.5 53.5119934 2.5 53.5119934 15.5 0.255996704 15.5"></polygon>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

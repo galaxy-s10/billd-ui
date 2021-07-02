@@ -1,0 +1,234 @@
+@import '@h3/theme-pc/core/index.less';
+// -------- 预设十一种业务颜色 -----------
+@h3-blue: #2565F1; // 蓝色
+@h3-red: #FF3640; // 红色
+@h3-purple: #722ed1; // 紫色
+@h3-orange: #FA541C; // 橘色
+@h3-volcano-orange: #FADB14; // 火山黄
+@h3-green: #0DD1A2; // 绿色
+@h3-yellow: #FFAF06; // 黄色
+@h3-daybreak-blue: #23B7FF; // 拂晓蓝
+@h3-cyan: #52C41A; // 青色
+@h3-gray: @h3-black-6; // 二级黑色(灰色)
+@h3-pink: #EB2F96; // 粉色
+
+
+
+@h3-blue-1: color(~`colorPalette('@{h3-blue-6}', 1) `);
+@h3-blue-2: color(~`colorPalette('@{h3-blue-6}', 2) `);
+@h3-blue-3: color(~`colorPalette('@{h3-blue-6}', 3) `);
+@h3-blue-4: color(~`colorPalette('@{h3-blue-6}', 4) `);
+@h3-blue-5: color(~`colorPalette('@{h3-blue-6}', 5) `);
+@h3-blue-6: @h3-blue;
+@h3-blue-7: color(~`colorPalette('@{h3-blue-6}', 7) `);
+@h3-blue-8: color(~`colorPalette('@{h3-blue-6}', 8) `);
+@h3-blue-9: color(~`colorPalette('@{h3-blue-6}', 9) `);
+@h3-blue-10: color(~`colorPalette('@{h3-blue-6}', 10) `);
+
+@h3-green-1: color(~`colorPalette('@{h3-green-6}', 1) `);
+@h3-green-2: color(~`colorPalette('@{h3-green-6}', 2) `);
+@h3-green-3: color(~`colorPalette('@{h3-green-6}', 3) `);
+@h3-green-4: color(~`colorPalette('@{h3-green-6}', 4) `);
+@h3-green-5: color(~`colorPalette('@{h3-green-6}', 5) `);
+@h3-green-6: @h3-green;
+@h3-green-7: color(~`colorPalette('@{h3-green-6}', 7) `);
+@h3-green-8: color(~`colorPalette('@{h3-green-6}', 8) `);
+@h3-green-9: color(~`colorPalette('@{h3-green-6}', 9) `);
+@h3-green-10: color(~`colorPalette('@{h3-green-6}', 10) `);
+
+@h3-red-1: color(~`colorPalette('@{h3-red-6}', 1) `);
+@h3-red-2: color(~`colorPalette('@{h3-red-6}', 2) `);
+@h3-red-3: color(~`colorPalette('@{h3-red-6}', 3) `);
+@h3-red-4: color(~`colorPalette('@{h3-red-6}', 4) `);
+@h3-red-5: color(~`colorPalette('@{h3-red-6}', 5) `);
+@h3-red-6: @h3-red;
+@h3-red-7: color(~`colorPalette('@{h3-red-6}', 7) `);
+@h3-red-8: color(~`colorPalette('@{h3-red-6}', 8) `);
+@h3-red-9: color(~`colorPalette('@{h3-red-6}', 9) `);
+@h3-red-10: color(~`colorPalette('@{h3-red-6}', 10) `);
+
+@h3-yellow-1: color(~`colorPalette('@{h3-yellow-6}', 1) `);
+@h3-yellow-2: color(~`colorPalette('@{h3-yellow-6}', 2) `);
+@h3-yellow-3: color(~`colorPalette('@{h3-yellow-6}', 3) `);
+@h3-yellow-4: color(~`colorPalette('@{h3-yellow-6}', 4) `);
+@h3-yellow-5: color(~`colorPalette('@{h3-yellow-6}', 5) `);
+@h3-yellow-6: @h3-yellow;
+@h3-yellow-7: color(~`colorPalette('@{h3-yellow-6}', 7) `);
+@h3-yellow-8: color(~`colorPalette('@{h3-yellow-6}', 8) `);
+@h3-yellow-9: color(~`colorPalette('@{h3-yellow-6}', 9) `);
+@h3-yellow-10: color(~`colorPalette('@{h3-yellow-6}', 10) `);
+
+@h3-purple-1: color(~`colorPalette('@{h3-purple-6}', 1) `);
+@h3-purple-2: color(~`colorPalette('@{h3-purple-6}', 2) `);
+@h3-purple-3: color(~`colorPalette('@{h3-purple-6}', 3) `);
+@h3-purple-4: color(~`colorPalette('@{h3-purple-6}', 4) `);
+@h3-purple-5: color(~`colorPalette('@{h3-purple-6}', 5) `);
+@h3-purple-6: @h3-purple;
+@h3-purple-7: color(~`colorPalette('@{h3-purple-6}', 7) `);
+@h3-purple-8: color(~`colorPalette('@{h3-purple-6}', 8) `);
+@h3-purple-9: color(~`colorPalette('@{h3-purple-6}', 9) `);
+@h3-purple-10: color(~`colorPalette('@{h3-purple-6}', 10) `);
+
+@h3-orange-1: color(~`colorPalette('@{h3-orange-6}', 1) `);
+@h3-orange-2: color(~`colorPalette('@{h3-orange-6}', 2) `);
+@h3-orange-3: color(~`colorPalette('@{h3-orange-6}', 3) `);
+@h3-orange-4: color(~`colorPalette('@{h3-orange-6}', 4) `);
+@h3-orange-5: color(~`colorPalette('@{h3-orange-6}', 5) `);
+@h3-orange-6: @h3-orange;
+@h3-orange-7: color(~`colorPalette('@{h3-orange-6}', 7) `);
+@h3-orange-8: color(~`colorPalette('@{h3-orange-6}', 8) `);
+@h3-orange-9: color(~`colorPalette('@{h3-orange-6}', 9) `);
+@h3-orange-10: color(~`colorPalette('@{h3-orange-6}', 10) `);
+
+@h3-volcano-orange-1: color(~`colorPalette('@{h3-volcano-orange-6}', 1) `);
+@h3-volcano-orange-2: color(~`colorPalette('@{h3-volcano-orange-6}', 2) `);
+@h3-volcano-orange-3: color(~`colorPalette('@{h3-volcano-orange-6}', 3) `);
+@h3-volcano-orange-4: color(~`colorPalette('@{h3-volcano-orange-6}', 4) `);
+@h3-volcano-orange-5: color(~`colorPalette('@{h3-volcano-orange-6}', 5) `);
+@h3-volcano-orange-6: @h3-volcano-orange;
+@h3-volcano-orange-7: color(~`colorPalette('@{h3-volcano-orange-6}', 7) `);
+@h3-volcano-orange-8: color(~`colorPalette('@{h3-volcano-orange-6}', 8) `);
+@h3-volcano-orange-9: color(~`colorPalette('@{h3-volcano-orange-6}', 9) `);
+@h3-volcano-orange-10: color(~`colorPalette('@{h3-volcano-orange-6}', 10) `);
+
+@h3-daybreak-blue-1: color(~`colorPalette('@{h3-daybreak-blue-6}', 1) `);
+@h3-daybreak-blue-2: color(~`colorPalette('@{h3-daybreak-blue-6}', 2) `);
+@h3-daybreak-blue-3: color(~`colorPalette('@{h3-daybreak-blue-6}', 3) `);
+@h3-daybreak-blue-4: color(~`colorPalette('@{h3-daybreak-blue-6}', 4) `);
+@h3-daybreak-blue-5: color(~`colorPalette('@{h3-daybreak-blue-6}', 5) `);
+@h3-daybreak-blue-6: @h3-daybreak-blue;
+@h3-daybreak-blue-7: color(~`colorPalette('@{h3-daybreak-blue-6}', 7) `);
+@h3-daybreak-blue-8: color(~`colorPalette('@{h3-daybreak-blue-6}', 8) `);
+@h3-daybreak-blue-9: color(~`colorPalette('@{h3-daybreak-blue-6}', 9) `);
+@h3-daybreak-blue-10: color(~`colorPalette('@{h3-daybreak-blue-6}', 10) `);
+
+@h3-cyan-1: color(~`colorPalette('@{h3-cyan-6}', 1) `);
+@h3-cyan-2: color(~`colorPalette('@{h3-cyan-6}', 2) `);
+@h3-cyan-3: color(~`colorPalette('@{h3-cyan-6}', 3) `);
+@h3-cyan-4: color(~`colorPalette('@{h3-cyan-6}', 4) `);
+@h3-cyan-5: color(~`colorPalette('@{h3-cyan-6}', 5) `);
+@h3-cyan-6: @h3-cyan;
+@h3-cyan-7: color(~`colorPalette('@{h3-cyan-6}', 7) `);
+@h3-cyan-8: color(~`colorPalette('@{h3-cyan-6}', 8) `);
+@h3-cyan-9: color(~`colorPalette('@{h3-cyan-6}', 9) `);
+@h3-cyan-10: color(~`colorPalette('@{h3-cyan-6}', 10) `);
+
+@h3-pink-1: color(~`colorPalette('@{h3-pink-6}', 1) `);
+@h3-pink-2: color(~`colorPalette('@{h3-pink-6}', 2) `);
+@h3-pink-3: color(~`colorPalette('@{h3-pink-6}', 3) `);
+@h3-pink-4: color(~`colorPalette('@{h3-pink-6}', 4) `);
+@h3-pink-5: color(~`colorPalette('@{h3-pink-6}', 5) `);
+@h3-pink-6: @h3-pink;
+@h3-pink-7: color(~`colorPalette('@{h3-pink-6}', 7) `);
+@h3-pink-8: color(~`colorPalette('@{h3-pink-6}', 8) `);
+@h3-pink-9: color(~`colorPalette('@{h3-pink-6}', 9) `);
+@h3-pink-10: color(~`colorPalette('@{h3-pink-6}', 10) `);
+
+// -------- 黑色 -----------
+@h3-black-1: #ecf0f6; // hover 色
+@h3-black-2: #e3e6ec; // 分割线颜色
+@h3-black-3: #ced4dd;
+@h3-black-4: #b6bcc6; // 蓝湖自定义三级黑
+@h3-black-5: #8e96a4;
+@h3-black-6: #777f8d; // 蓝湖自定义二级黑
+@h3-black-7: #0f1c35; // 蓝湖自定义一级黑色
+@h3-black-8: #000; // 极致黑
+@h3-black-9: #000; // 极致黑
+@h3-black-10: #000; // 极致黑
+
+// -------- 十一种渐变色 -----------
+@h3-gradual-blue: linear-gradient( 45deg, @h3-blue 0%, @h3-blue-4 100% ); // 渐变蓝色
+@h3-gradual-red: linear-gradient(45deg, @h3-red 0%, @h3-red-4 100%); // 渐变红色
+@h3-gradual-green: linear-gradient( 45deg, @h3-green 0%, @h3-green-4 100% ); // 渐变绿色
+@h3-gradual-orange: linear-gradient( 45deg, @h3-orange 0%, @h3-orange-4 100% ); // 渐变橘色
+@h3-gradual-yellow: linear-gradient( 45deg, @h3-yellow 0%, @h3-yellow-4 100% ); // 渐变黄色
+@h3-gradual-purple: linear-gradient( 45deg, @h3-purple 0%, @h3-purple-4 100% ); // 渐变紫色
+@h3-gradual-pink: linear-gradient( 45deg, @h3-pink 0%, @h3-pink-4 100% ); // 渐变粉色
+@h3-gradual-volcano-orange: linear-gradient( 45deg, @h3-volcano-orange 0%, @h3-volcano-orange-4 100% ); // 渐变火山黄
+@h3-gradual-black: linear-gradient( 45deg, @h3-black-7 0%, @h3-black-4 100% ); // 渐变黑色
+@h3-gradual-cyan: linear-gradient( 45deg, @h3-cyan 0%, @h3-cyan-4 100% ); // 渐变青色
+@h3-gradual-daybreak-blue: linear-gradient( 45deg, @h3-daybreak-blue 0%, @h3-daybreak-blue-4 100% ); // 渐变拂晓蓝
+
+// -------- 功能色 -----------
+@h3-primary-color: @h3-blue; // 主色
+@h3-info-color: @h3-primary-color; // 提示色
+@h3-error-color: @h3-red; // 错误色
+@h3-success-color: @h3-green; // 成功色
+@h3-warning-color: @h3-yellow; // 警告色
+@h3-normal-color: #ecf0f6; // 默认背景色
+@h3-option-hover-color: #ECF0F6; // 下拉选项的hover颜色
+@h3-option-active-color: #F0F7FF; // 下拉选项的active颜色
+@h3-line-color: #e3e6ec; // 默认线条颜色
+@h3-zebra-crossing-color: #fbfcfe; // 斑马线
+// -------- 功能辅助色 -----------
+// --- 提示 ---
+@h3-info-bg-color: @h3-blue-1;
+@h3-info-hover-color: @h3-blue-5;
+@h3-info-active-color: @h3-blue-7;
+// --- 错误 ---
+@h3-error-bg-color: @h3-red-1;
+@h3-error-hover-color: @h3-red-5;
+@h3-error-active-color: @h3-red-7;
+// --- 成功 ---
+@h3-success-bg-color: @h3-green-1;
+@h3-success-hover-color: @h3-green-5;
+@h3-success-active-color: @h3-green-7;
+// --- 警告 ---
+@h3-warning-bg-color: @h3-orange-1;
+@h3-warning-hover-color: @h3-orange-5;
+@h3-warning-active-color: @h3-orange-7;
+
+
+// -------- 应用图标颜色 -----------
+@h3-app-color-1: @h3-red;
+@h3-app-color-2: @h3-purple;
+@h3-app-color-3: @h3-orange;
+@h3-app-color-4: @h3-green;
+@h3-app-color-5: @h3-yellow;
+@h3-app-color-6: @h3-volcano-orange;
+@h3-app-color-7: @h3-daybreak-blue;
+@h3-app-color-8: @h3-cyan;
+@h3-app-color-9: @h3-blue;
+@h3-app-color-10: @h3-gray;
+@h3-app-color-11: @h3-pink;
+
+// -------- 文字颜色 -----------
+@h3-text-color-dark: #000;  // 黑色模式
+@h3-text-color: @h3-black-7; // 蓝湖自定义一级黑
+@h3-text-color-light: @h3-black-6; // 蓝湖自定义二级黑
+@h3-text-color-light-2: @h3-black-4; // 蓝湖自定义三级黑
+@h3-text-color-primary: @h3-primary-color; // 主色调
+@h3-text-color-disabled: #bbb; // 禁用色
+@h3-heading-text-color: @h3-text-color; // 文本色
+
+
+// --------- 阴影颜色 ---------------
+@h3-shadow-color: #d5e8ff;
+@h3-dark-shadow-color: rgba(51, 93, 182, 0.2);
+// --------- 拖拽 ---------------
+@h3-drag-ghost-color: @h3-shadow-color;
+
+
+// --------- 覆盖Antd ---------------
+// --------- tooltip ---------------
+@h3-tooltip-bg: fade(@h3-black-7, 85%);
+
+// --------- input ---------------
+@h3-input-placeholder-color: @h3-text-color-light-2;
+@h3-input-border-color:#D4D7E0;
+
+// ------ select ---
+@h3-select-border-color: #D4D7E0;
+
+// --------- modal ---------------
+@h3-modal-header-padding: @h3-padding-sm @h3-padding-lg;
+@h3-modal-header-height: 48px;
+@h3-modal-header-border-bottom: none;
+@h3-modal-header-line-height:24px;
+@h3-modal-body-padding: @h3-padding-md @h3-padding-lg;
+@h3-modal-body-line-height:22px;
+@h3-modal-footer-padding: @h3-padding-md @h3-padding-lg;
+@h3-modal-footer-border-top: none;
+@h3-modal-close-x-height: 48px;
+@h3-modal-close-x-width: 48px;
+@h3-modal-close-x-line-height: 48px;
