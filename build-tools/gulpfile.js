@@ -21,11 +21,13 @@ gulp.task("copy", function() {
 });
 
 gulp.task("less", function() {
-  return gulp
-    .src("../components/**/*.less")
-    .pipe(less())
-    .pipe(postcss())
-    .pipe(gulp.dest("../dist"));
+  return (
+    gulp
+      .src("../components/**/*.less")
+      // .pipe(less())
+      // .pipe(postcss())
+      .pipe(gulp.dest("../dist"))
+  );
 });
 
 const tsFiles = [

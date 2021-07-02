@@ -1,13 +1,15 @@
 <template>
   <div>
+    <directive-cpt></directive-cpt>
+    <!-- <div v-auth="'a'">sdg</div> -->
     <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div>
-    <h-table></h-table>
+    <!-- <h-table></h-table> -->
     hello billd-ui
     <vue-cpt></vue-cpt>
     <vue-render-cpt></vue-render-cpt>
     <tsx-cpt></tsx-cpt>
     <jsx-cpt></jsx-cpt>
-    <h-switch></h-switch>
+    <!-- <h-switch></h-switch>
     <h-modal
       v-model="visible"
       title="tip"
@@ -21,7 +23,7 @@
       @visible-change="visibleChange"
     >
       hello world
-    </h-modal>
+    </h-modal> -->
     <br />
     <span @click="changeModal">点击显示modal1</span>
     <br />
@@ -30,31 +32,33 @@
 </template>
 
 <script>
-import HTable from "./components/table";
+// import HTable from "./components/table";
 
 import VueCpt from "./components/VueCpt";
 import VueRenderCpt from "./components/VueRenderCpt";
 import TsxCpt from "./components/TsxCpt/index";
 import JsxCpt from "./components/JsxCpt/index";
+import DirectiveCpt from "./components/DirectiveCpt/index";
 
-import { Switch } from "../dist";
-import "../dist/switch/style/index.css";
+// import { Switch } from "../dist";
+// import "../dist/switch/style/index.css";
 
-import { Message } from "../dist";
-import "../dist/message/style/index.css";
+// import { Message } from "../dist";
+// import "../dist/message/style/index.css";
 
-import { Modal } from "../dist";
-import "../dist/modal/style/index.css";
+// import { Modal } from "../dist";
+// import "../dist/modal/style/index.css";
 
 export default {
   components: {
-    HTable,
     VueCpt,
     VueRenderCpt,
     TsxCpt,
     JsxCpt,
-    HSwitch: Switch,
-    HModal: Modal,
+    DirectiveCpt,
+    // HTable,
+    // HSwitch: Switch,
+    // HModal: Modal,
   },
   data() {
     return {
@@ -69,11 +73,11 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    Message({
-      content: "hello1111111111",
-      closeAble: true,
-      duration: 1000,
-    });
+    // Message({
+    //   content: "hello1111111111",
+    //   closeAble: true,
+    //   duration: 1000,
+    // });
   },
   methods: {
     changeModal() {
