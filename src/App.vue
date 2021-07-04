@@ -1,9 +1,10 @@
 <template>
   <div>
-    <directive-cpt></directive-cpt>
+    <!-- <directive-cpt></directive-cpt> -->
     <!-- <div v-auth="'a'">sdg</div> -->
-    <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div>
-    <!-- <h-table></h-table> -->
+    <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->
+    <h-checkbox></h-checkbox>
+    <h-table></h-table>
     hello billd-ui
     <vue-cpt></vue-cpt>
     <vue-render-cpt></vue-render-cpt>
@@ -32,9 +33,10 @@
 </template>
 
 <script>
-// import HTable from "./components/table";
+import HTable from "./components/table";
+import HCheckbox from "./components/checkbox";
 
-import Dashboard from '../lib/dashboard'
+// import Dashboard from '../lib/dashboard'
 
 import VueCpt from "./components/VueCpt";
 import VueRenderCpt from "./components/VueRenderCpt";
@@ -53,13 +55,14 @@ import DirectiveCpt from "./components/DirectiveCpt/index";
 
 export default {
   components: {
-    Dashboard,
+    // Dashboard,
     VueCpt,
     VueRenderCpt,
     TsxCpt,
     JsxCpt,
     DirectiveCpt,
-    // HTable,
+    HTable,
+    HCheckbox,
     // HSwitch: Switch,
     // HModal: Modal,
   },
