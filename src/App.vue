@@ -33,6 +33,7 @@
 </template>
 
 <script>
+
 import HTable from "./components/table";
 import HCheckbox from "./components/checkbox";
 

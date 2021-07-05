@@ -3,7 +3,7 @@
     <div class="table-scroll">
       <div
         class="h-hide-scrollbar"
-        style="overflow:scroll;margin-bottom:-15px"
+        :style="{ overflow: 'scroll', marginBottom: `-${scrollBarWidth}px` }"
         ref="h-table-scroll-head"
         @scroll="scrollHead"
       >
@@ -22,7 +22,6 @@
           <thead class="hss-table-thead">
             <tr>
               <th>
-                11
                 <span class="hss-checkbox" @click="changeSelectAll">
                   <input
                     type="checkbox"
@@ -165,7 +164,12 @@
           </thead>
         </table>
       </div>
-      <div style="margin-bottom:-15px;margin-right:-15px">
+      <div
+        :style="{
+          marginRight: `-${scrollBarWidth}px`,
+          marginBottom: `-${scrollBarWidth}px`,
+        }"
+      >
         <div
           :style="{
             maxHeight: scroll.y + 'px',
@@ -265,7 +269,7 @@
         :style="{
           maxHeight: scroll.y + 'px',
           overflow: 'scroll',
-          marginBottom: '-15px',
+          marginBottom: `-${scrollBarWidth}px`,
         }"
         ref="h-table-fixed-right-body"
         @scroll="fixedLeftScrollTop"
@@ -330,12 +334,13 @@
 import "./style/index.js";
 import Switch from "../../../dist/switch";
 import "../../../dist/switch/style/index.css";
-import { throttle, debounce } from "../utils/common";
+import { throttle, debounce, getScrollBarWidth } from "../utils/common";
 console.log(throttle);
 export default {
   components: { HSwitch: Switch },
   data() {
     return {
+      scrollBarWidth: 15,
       selectedIndex: [],
       selectedList: [], //已选中的数据
       tableIsSelectAll: false,
@@ -631,6 +636,8 @@ export default {
   },
   mounted() {
     this.asyncRowHeight();
+    console.log(getScrollBarWidth(), 234324);
+    this.scrollBarWidth = getScrollBarWidth()
   },
   methods: {
     // 选择/取消某列
