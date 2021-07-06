@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --config ./build-tools/webpack.common.js --env development",
     "build": "webpack --config ./build-tools/webpack.common.js --env development",
+    "build1": "webpack --config ./build-tools/webpack.build.js --env development",
     "compile": "gulp -f ./build-tools/gulpfile.js"
   },
   "author": "galaxy-s10",
@@ -34,6 +35,7 @@
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
     "gulp-less": "^5.0.0",
     "gulp-postcss": "^9.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",

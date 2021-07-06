@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-for="(item,index) in theme" :key="index">{{item}}222</div>
     <!-- <directive-cpt></directive-cpt> -->
     <!-- <div v-auth="'a'">sdg</div> -->
     <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->
@@ -33,7 +34,6 @@
 </template>
 
 <script>
-
 import HTable from "./components/table";
 import HCheckbox from "./components/checkbox";
 
@@ -69,6 +69,16 @@ export default {
   },
   data() {
     return {
+      theme: {
+        default: {
+          sss: 123,
+          sgg: 3425,
+        },
+        default1: {
+          sss: 3545,
+          sgg: 9789,
+        },
+      },
       obj: {
         name: "hss",
         age: 22,
@@ -85,6 +95,11 @@ export default {
     //   closeAble: true,
     //   duration: 1000,
     // });
+    console.log('fsfsdfsf');
+    console.log(Object.keys(this.theme))
+    Object.keys(this.theme).map(item=>{
+      console.log(this.theme[item])
+    })
   },
   methods: {
     changeModal() {

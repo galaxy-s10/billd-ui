@@ -3,6 +3,7 @@ const ts = require("gulp-typescript");
 const clean = require("gulp-clean");
 const babel = require("gulp-babel");
 const less = require("gulp-less");
+const concat = require("gulp-concat");
 const postcss = require("gulp-postcss");
 const through2 = require("through2");
 const babelConfig = require("../babel.config.js");
@@ -25,8 +26,18 @@ gulp.task("less", function() {
     .src("../components/**/*.less")
     .pipe(less())
     .pipe(postcss())
+    // .pipe(concat('all.css'))
     .pipe(gulp.dest("../dist"));
 });
+
+gulp.task("css123", function() {
+  console.log("ssss");
+  return gulp
+    .src("../dist/**/*.css")
+    .pipe(concat("all.css"))
+    .pipe(gulp.dest("../dist"));
+});
+
 
 const tsFiles = [
   "../components/**/*.js",
@@ -106,6 +117,7 @@ gulp.task(
   gulp.series(
     "clean-dist",
     gulp.parallel("copy", "less", "compile"),
+    "css123",
     (done) => {
       done();
     }
