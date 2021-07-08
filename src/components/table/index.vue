@@ -61,7 +61,7 @@
         class="h-table-scroll-body"
         :style="{ overflow: 'scroll', maxHeight: scroll.y + 'px' }"
         ref="h-table-scroll-body"
-        @scroll="scrollLeft"
+        @scroll.self="normalScroll"
       >
         <table :style="{ width: scroll.x ? scroll.x + 'px' : '100%' }">
           <colgroup>
@@ -175,7 +175,6 @@
             maxHeight: scroll.y + 'px',
             overflow: 'scroll',
           }"
-          @scroll="fixedLeftScrollTop"
           ref="h-table-fixed-left-body"
         >
           <table style="background:white">
@@ -272,7 +271,7 @@
           marginBottom: `-${scrollBarWidth}px`,
         }"
         ref="h-table-fixed-right-body"
-        @scroll="fixedLeftScrollTop"
+        @scroll.self="fixedLeftScrollTop"
       >
         <table style="background:white">
           <colgroup>
@@ -340,6 +339,9 @@ export default {
   components: { HSwitch: Switch },
   data() {
     return {
+      lastScrollTop: 0,
+      fixedScrolling: false,
+      normalScrolling: false,
       scrollBarWidth: 15,
       selectedIndex: [],
       selectedList: [], //已选中的数据
@@ -637,7 +639,7 @@ export default {
   mounted() {
     this.asyncRowHeight();
     console.log(getScrollBarWidth(), 234324);
-    this.scrollBarWidth = getScrollBarWidth()
+    this.scrollBarWidth = getScrollBarWidth();
   },
   methods: {
     // 选择/取消某列
@@ -704,22 +706,70 @@ export default {
       console.log("moudrEnter");
       // this.nowTr = v;
     },
-    fixedLeftScrollTop(e, index) {
-      console.log("fixedLeftScrollTopfixedLeftScrollTop");
-      let t = e.target.scrollTop;
-      console.log(t);
-      this.$refs["h-table-scroll-body"].scrollTop = t;
+    allScroll(e) {
+      console.log(e.target, e);
+      // console.log('ref',this.$refs['h-table-scroll-body'])
+      // let l = e.target.scrollLeft;
+      // let t = e.target.scrollTop;
+      // if (e.target === this.$refs["h-table-scroll-body"]) {
+      //   console.log("--------");
+      //   this.$refs["h-table-fixed-left-body"] &&
+      //     (this.$refs["h-table-fixed-left-body"].scrollTop = t);
+      //   this.$refs["h-table-fixed-right-body"] &&
+      //     (this.$refs["h-table-fixed-right-body"].scrollTop = t);
+      // } else if (e.target === this.$refs["h-table-fixed-right-body"]) {
+      //   console.log("++++++++");
+      //   this.$refs["h-table-scroll-body"].scrollTop = t;
+      // }
     },
-    scrollLeft(e, index) {
-      console.log("scrollLeft", e.target.scrollLeft);
+    fixedLeftScrollTop(e, index) {
+      console.log("fixedLeftScrollTop", e.target, e.currentTarget);
+      // if (this.normalScrolling) {
+      //   this.fixedScrolling = false;
+      //   console.log("normalScroll在滚动，fixedLeftScrollTop不能滚");
+      //   return;
+      // }
+      // console.log(
+      //   "fixedLeftScrollTopfixedLeftScrollTop",
+      //   e.target.scrollTop,
+      //   e.target
+      // );
+      let t = e.target.scrollTop;
+      // this.fixedScrolling = true;
+      if (this.lastScrollTop != t) {
+        console.log("3323");
+        this.$refs["h-table-scroll-body"].scrollTop = t;
+      }
+      //
+      // this.fixedScrolling = false;
+    },
+    normalScroll(e, index) {
+      console.log("normalScroll", e.target, e.currentTarget);
+      // this.normalScrolling = true;
+      // if (this.fixedScrolling) {
+      //   this.normalScrolling = false;
+      //   return;
+      // }
+      // return
+      // console.log("normalScrollnormalScroll", e.target.scrollTop, e.target);
       let l = e.target.scrollLeft;
       let t = e.target.scrollTop;
-      this.$refs["h-table-scroll-head"] &&
-        (this.$refs["h-table-scroll-head"].scrollLeft = l);
-      this.$refs["h-table-fixed-left-body"] &&
-        (this.$refs["h-table-fixed-left-body"].scrollTop = t);
-      this.$refs["h-table-fixed-right-body"] &&
-        (this.$refs["h-table-fixed-right-body"].scrollTop = t);
+      console.log("lastScrollTop", this.lastScrollTop, t);
+      if (this.lastScrollTop != t) {
+        this.$refs["h-table-scroll-head"] &&
+          (this.$refs["h-table-scroll-head"].scrollLeft = l);
+        // if (!this.fixedScrolling) {
+        this.$refs["h-table-fixed-left-body"] &&
+          (this.$refs["h-table-fixed-left-body"].scrollTop = t);
+        this.$refs["h-table-fixed-right-body"] &&
+          (this.$refs["h-table-fixed-right-body"].scrollTop = t);
+      }
+
+      // }
+      this.lastScrollTop = t;
+      console.log("tttttttttttt", t);
+
+      // this.normalScrolling = false;
     },
     // fixedLeftScrollTop: throttle(function(e, index) {
     //   console.log("fixedLeftScrollTopfixedLeftScrollTop");
