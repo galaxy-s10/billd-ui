@@ -1,6 +1,7 @@
 <template>
   <div class="hss-table" style="width:800px;">
     <div class="table-scroll">
+      <!-- {{ lastScrollLeft }} -->
       <div
         class="h-hide-scrollbar"
         :style="{ overflow: 'scroll', marginBottom: `-${scrollBarWidth}px` }"
@@ -15,7 +16,7 @@
               :key="index"
               :style="{
                 minWidth: item.width + 'px',
-                width: item.width + 'px',
+                width: item.width + 'px'
               }"
             />
           </colgroup>
@@ -27,8 +28,7 @@
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
-                      'hss-checkbox-checked':
-                        selectedList.length == data.length,
+                      'hss-checkbox-checked': selectedList.length == data.length
                     }"
                     v-model="tableIsSelectAll"
                   />
@@ -38,7 +38,7 @@
                       'none-selected': selectedList.length == 0,
                       'no-all':
                         selectedList.length != 0 &&
-                        selectedList.length < data.length,
+                        selectedList.length < data.length
                     }"
                   ></span>
                 </span>
@@ -47,7 +47,7 @@
                 v-for="(item, index) in columns"
                 :key="index"
                 :style="{
-                  'text-align': item.align ? item.align : 'left',
+                  'text-align': item.align ? item.align : 'left'
                 }"
               >
                 {{ item.fixed && renderFixed(item) }}
@@ -71,7 +71,7 @@
               :key="index"
               :style="{
                 minWidth: item.width + 'px',
-                width: item.width + 'px',
+                width: item.width + 'px'
               }"
             />
           </colgroup>
@@ -92,14 +92,14 @@
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
-                      'hss-checkbox-checked': isSelected(rowItem.key),
+                      'hss-checkbox-checked': isSelected(rowItem.key)
                     }"
                     :value="rowItem"
                     v-model="selectedList"
                   />
                   <span
                     :class="{
-                      'hss-checkbox-inner': true,
+                      'hss-checkbox-inner': true
                     }"
                   ></span>
                 </span>
@@ -109,7 +109,7 @@
                 :key="columnsIndex"
                 :class="{ ellipsis: columnsItem.ellipsis }"
                 :style="{
-                  'text-align': columnsItem.align ? columnsItem.align : 'left',
+                  'text-align': columnsItem.align ? columnsItem.align : 'left'
                 }"
               >
                 <!-- {{ tempRender(`${columnsItem.key}-${rowIndex}`, columnsItem.render) }} -->
@@ -143,7 +143,7 @@
               :key="index"
               :style="{
                 minWidth: item.column.col.width + 'px',
-                width: item.column.col.width + 'px',
+                width: item.column.col.width + 'px'
               }"
             />
           </colgroup>
@@ -155,7 +155,7 @@
                 :style="{
                   'text-align': item.column.col.align
                     ? item.column.col.align
-                    : 'left',
+                    : 'left'
                 }"
               >
                 {{ item.column.col.title }}
@@ -167,13 +167,13 @@
       <div
         :style="{
           marginRight: `-${scrollBarWidth}px`,
-          marginBottom: `-${scrollBarWidth}px`,
+          marginBottom: `-${scrollBarWidth}px`
         }"
       >
         <div
           :style="{
             maxHeight: scroll.y + 'px',
-            overflow: 'scroll',
+            overflow: 'scroll'
           }"
           ref="h-table-fixed-left-body"
         >
@@ -184,7 +184,7 @@
                 :key="index"
                 :style="{
                   minWidth: item.column.col.width + 'px',
-                  width: item.column.col.width + 'px',
+                  width: item.column.col.width + 'px'
                 }"
                 :aaa="item.column.col.width"
               />
@@ -204,7 +204,7 @@
                   :style="{
                     'text-align': col.column.col.align
                       ? col.column.col.align
-                      : 'left',
+                      : 'left'
                   }"
                 >
                   {{
@@ -243,7 +243,7 @@
               :key="index"
               :style="{
                 minWidth: item.column.col.width + 'px',
-                width: item.column.col.width + 'px',
+                width: item.column.col.width + 'px'
               }"
             />
           </colgroup>
@@ -255,7 +255,7 @@
                 :style="{
                   'text-align': item.column.col.align
                     ? item.column.col.align
-                    : 'left',
+                    : 'left'
                 }"
               >
                 {{ item.column.col.title }}
@@ -268,10 +268,10 @@
         :style="{
           maxHeight: scroll.y + 'px',
           overflow: 'scroll',
-          marginBottom: `-${scrollBarWidth}px`,
+          marginBottom: `-${scrollBarWidth}px`
         }"
         ref="h-table-fixed-right-body"
-        @scroll.self="fixedLeftScrollTop"
+        @scroll.self="normalScroll"
       >
         <table style="background:white">
           <colgroup>
@@ -280,7 +280,7 @@
               :key="index"
               :style="{
                 minWidth: item.column.col.width + 'px',
-                width: item.column.col.width + 'px',
+                width: item.column.col.width + 'px'
               }"
             />
           </colgroup>
@@ -299,7 +299,7 @@
                 :style="{
                   'text-align': col.column.col.align
                     ? col.column.col.align
-                    : 'left',
+                    : 'left'
                 }"
               >
                 {{
@@ -340,6 +340,7 @@ export default {
   data() {
     return {
       lastScrollTop: 0,
+      lastScrollLeft: 0,
       fixedScrolling: false,
       normalScrolling: false,
       scrollBarWidth: 15,
@@ -365,7 +366,7 @@ export default {
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男",
+          sex: "男"
         },
         {
           key: "2",
@@ -375,7 +376,7 @@ export default {
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男",
+          sex: "男"
         },
         {
           key: "3",
@@ -385,7 +386,7 @@ export default {
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男",
+          sex: "男"
         },
         {
           key: "4",
@@ -395,7 +396,7 @@ export default {
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男",
+          sex: "男"
         },
         {
           key: "5",
@@ -406,7 +407,7 @@ export default {
           sex: "男",
           money: 12,
 
-          tags: ["nice", "developer"],
+          tags: ["nice", "developer"]
         },
         {
           key: "6",
@@ -417,7 +418,7 @@ export default {
           money: 234,
 
           address: "London No. 1 Lake Park",
-          tags: ["loser"],
+          tags: ["loser"]
         },
         {
           key: "7",
@@ -427,12 +428,12 @@ export default {
           address: "Sidney No. 1 Lake Park",
           sex: "男",
           money: 345,
-          tags: ["cool", "teacher"],
-        },
+          tags: ["cool", "teacher"]
+        }
       ],
 
       rowSelection: {
-        type: "checkbox",
+        type: "checkbox"
       },
 
       columns: [
@@ -443,7 +444,7 @@ export default {
           align: "center",
           key: "key",
           slots: { title: "customTitle" },
-          scopedSlots: { customRender: "name" },
+          scopedSlots: { customRender: "name" }
         },
         {
           fixed: "right",
@@ -453,7 +454,7 @@ export default {
           align: "center",
           key: "money",
           slots: { title: "customTitle" },
-          scopedSlots: { customRender: "name" },
+          scopedSlots: { customRender: "name" }
         },
         {
           // width: "100",
@@ -463,11 +464,11 @@ export default {
           key: "sex",
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
-          // render: (h, row) => {
-          //   // console.log(row, 9132999);
-          //   // return <span>{row.status}</span>;
-          //   return <h-switch></h-switch>;
-          // },
+          render: (h, row) => {
+            // console.log(row, 9132999);
+            // return <span>{row.status}</span>;
+            return <h-switch></h-switch>;
+          }
         },
         {
           // fixed: "left",
@@ -478,7 +479,7 @@ export default {
           align: "center",
           key: "name",
           slots: { title: "customTitle" },
-          scopedSlots: { customRender: "name" },
+          scopedSlots: { customRender: "name" }
         },
         {
           fixed: "right",
@@ -486,7 +487,7 @@ export default {
           title: "状态",
           dataIndex: "switch",
           // align: "right",
-          key: "status",
+          key: "status"
           // render: (h, row) => {
           //   // console.log(row, 9132999);
           //   // return <div style="">{row.status}</div>;
@@ -499,13 +500,13 @@ export default {
           width: "100",
           title: "Age",
           dataIndex: "age",
-          key: "age",
+          key: "age"
         },
         {
           width: "200",
           title: "Address",
           dataIndex: "address",
-          key: "address",
+          key: "address"
         },
         {
           // fixed: "left",
@@ -519,28 +520,28 @@ export default {
             // return h("div", {}, row.name);
             // return <div>{row.name}</div>;
             return <span>234</span>;
-          },
-        },
+          }
+        }
         // {
         //   title: "Action",
         //   key: "action",
         //   scopedSlots: { customRender: "action" },
         // },
-      ],
+      ]
     };
   },
   watch: {
     selectedList(newVal, oldVal) {
       // console.log(newVal, oldVal);
       newVal.length == this.data.length && (this.tableIsSelectAll = true);
-    },
+    }
   },
   computed: {
     isSelected() {
-      return (v) => {
+      return v => {
         console.log("isSelectedisSelected", this.selectedList, v);
-        console.log(this.selectedList.filter((item) => item.key == v).length);
-        return this.selectedList.filter((item) => item.key == v).length == 1;
+        console.log(this.selectedList.filter(item => item.key == v).length);
+        return this.selectedList.filter(item => item.key == v).length == 1;
       };
     },
     // nowHoverTr() {
@@ -551,14 +552,14 @@ export default {
     //   };
     // },
     getHeight() {
-      return (v) => {
+      return v => {
         console.log(v);
         console.log(this.$refs);
         console.log(Object.keys(this.$refs).length, 9999);
         // console.log(this.$refs['hss-table-tbody']);
         return 100 + "px";
       };
-    },
+    }
   },
   created() {
     /**
@@ -571,37 +572,37 @@ export default {
     var normalData = [];
     var allData = { left: [], normal: [], right: [] };
     var sortColumns = [];
-    this.columns.map((item) => {
+    this.columns.map(item => {
       // console.log(item);
       if (item.fixed == "left") {
-        let fixedLeft = this.data.filter((v) => {
+        let fixedLeft = this.data.filter(v => {
           // console.log(v, v[item.key], item);
           return item.key && v[item.key];
         });
         fixedLeftData = fixedLeftData;
         allData["left"].push({
           column: { title: item.key, col: item },
-          data: fixedLeft,
+          data: fixedLeft
         });
       } else if (item.fixed == "right") {
-        let fixedRight = this.data.filter((v) => {
+        let fixedRight = this.data.filter(v => {
           // console.log(v, v[item.key], item);
           return item.key && v[item.key];
         });
         fixedRightData = fixedRight;
         allData["right"].push({
           column: { title: item.key, col: item },
-          data: fixedRight,
+          data: fixedRight
         });
       } else {
-        let normal = this.data.filter((v) => {
+        let normal = this.data.filter(v => {
           // console.log(v, 39, item.key, item);
           return item.key && v[item.key];
         });
         normalData = normal;
         allData["normal"].push({
           column: { title: item.key, col: item },
-          data: normalData,
+          data: normalData
         });
 
         // console.log(a, 876);
@@ -617,9 +618,9 @@ export default {
     console.log(allData);
     let arr1 = Object.values(allData);
     console.log(arr1);
-    arr1.map((item) => {
+    arr1.map(item => {
       console.log(item);
-      item.map((v) => {
+      item.map(v => {
         console.log(v.column.title);
         sortColumns.push(v.column.col);
       });
@@ -660,9 +661,9 @@ export default {
       if (this.selectedList.length == this.data.length) {
         // 当前是全选了，则取消全选
         isAll = false;
-        let selectKey = this.selectedList.map((v) => v.key);
+        let selectKey = this.selectedList.map(v => v.key);
         // console.log(selectKey);
-        let changeData = this.data.filter((item) => {
+        let changeData = this.data.filter(item => {
           return selectKey.indexOf(item.key) == -1;
         });
         console.log("取消全选", isAll, this.selectedList, changeData);
@@ -671,9 +672,9 @@ export default {
         // 当前不是全选，需要全选
         // console.log(changeData);
         isAll = true;
-        let selectKey = this.selectedList.map((v) => v.key);
+        let selectKey = this.selectedList.map(v => v.key);
         // console.log(selectKey);
-        let changeData = this.data.filter((item) => {
+        let changeData = this.data.filter(item => {
           return selectKey.indexOf(item.key) == -1;
         });
         console.log("点击全选", isAll, this.selectedList, changeData);
@@ -744,7 +745,12 @@ export default {
       // this.fixedScrolling = false;
     },
     normalScroll(e, index) {
-      console.log("normalScroll", e.target, e.currentTarget);
+      console.log(
+        "normalScroll",
+        e.target,
+        this.$refs["h-table-scroll-body"],
+        e.currentTarget
+      );
       // this.normalScrolling = true;
       // if (this.fixedScrolling) {
       //   this.normalScrolling = false;
@@ -754,20 +760,36 @@ export default {
       // console.log("normalScrollnormalScroll", e.target.scrollTop, e.target);
       let l = e.target.scrollLeft;
       let t = e.target.scrollTop;
-      console.log("lastScrollTop", this.lastScrollTop, t);
+      console.log(
+        "lastScrollTop:",
+        this.lastScrollTop,
+        "nowScroll:",
+        t,
+        "left:",
+        l
+      );
+      // this.$refs["h-table-scroll-head"] &&
+      //   (this.$refs["h-table-scroll-head"].scrollLeft = l);
       if (this.lastScrollTop != t) {
-        this.$refs["h-table-scroll-head"] &&
-          (this.$refs["h-table-scroll-head"].scrollLeft = l);
+        console.log("上下滚动");
+        this.$refs["h-table-scroll-body"] &&
+          (this.$refs["h-table-scroll-body"].scrollTop = t);
         // if (!this.fixedScrolling) {
         this.$refs["h-table-fixed-left-body"] &&
           (this.$refs["h-table-fixed-left-body"].scrollTop = t);
         this.$refs["h-table-fixed-right-body"] &&
           (this.$refs["h-table-fixed-right-body"].scrollTop = t);
       }
-
-      // }
-      this.lastScrollTop = t;
-      console.log("tttttttttttt", t);
+      if (this.lastScrollTop != l) {
+        if (e.target == this.$refs["h-table-scroll-body"]) {
+          console.log("左右滚动");
+          this.$refs["h-table-scroll-head"] &&
+            (this.$refs["h-table-scroll-head"].scrollLeft = l);
+        }
+      }
+      this.lastScrollTop = t; //记录最后的上下滚动距离
+      this.lastScrollLeft = l; //记录最后的左右滚动距离
+      // console.log("tttttttttttt", t);
 
       // this.normalScrolling = false;
     },
@@ -806,7 +828,7 @@ export default {
     },
     renderDom() {
       // console.log(arguments);
-    },
-  },
+    }
+  }
 };
 </script>

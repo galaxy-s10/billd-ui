@@ -1,9 +1,25 @@
 <template>
   <div>
+    <h-switch
+      openText="开"
+      closeText="关"
+      :defaultChecked="true"
+      @clickSwitch="clickSwitch"
+    >
+      <template slot="openSlot">
+        <b>开启</b>
+      </template>
+    </h-switch>
+
     <!-- <div style="height:300px;width:400px;overflow:scroll;background:red" @scroll="xxx">
       <div style="height:600px;width:200px;background:yellow"></div>
     </div> -->
-    <div v-for="(item,index) in theme" :key="index">{{item}},{{index}}222</div>
+    <div v-for="(item, index) of theme" :key="index">
+      {{ item }},{{ index }}222
+    </div>
+    <div v-for="(item, index) in theme" :key="index">
+      {{ item }},{{ index }}222
+    </div>
     <!-- <directive-cpt></directive-cpt> -->
     <!-- <div v-auth="'a'">sdg</div> -->
     <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->
@@ -48,11 +64,11 @@ import TsxCpt from "./components/TsxCpt/index";
 import JsxCpt from "./components/JsxCpt/index";
 import DirectiveCpt from "./components/DirectiveCpt/index";
 
-// import { Switch } from "../dist";
-// import "../dist/switch/style/index.css";
+import { Switch } from "../dist";
+import "../dist/switch/style/css";
 
-// import { Message } from "../dist";
-// import "../dist/message/style/index.css";
+import { Message } from "../dist";
+import "../dist/message/style/index.css";
 
 // import { Modal } from "../dist";
 // import "../dist/modal/style/index.css";
@@ -67,7 +83,7 @@ export default {
     DirectiveCpt,
     HTable,
     HCheckbox,
-    // HSwitch: Switch,
+    HSwitch: Switch
     // HModal: Modal,
   },
   data() {
@@ -75,38 +91,41 @@ export default {
       theme: {
         default: {
           sss: 123,
-          sgg: 3425,
+          sgg: 3425
         },
         default1: {
           sss: 3545,
-          sgg: 9789,
-        },
+          sgg: 9789
+        }
       },
       obj: {
         name: "hss",
         age: 22,
-        sex: "男",
+        sex: "男"
       },
-      visible: false,
+      visible: false
     };
   },
   computed: {},
   created() {},
   mounted() {
-    // Message({
-    //   content: "hello1111111111",
-    //   closeAble: true,
-    //   duration: 1000,
-    // });
-    console.log('fsfsdfsf');
-    console.log(Object.keys(this.theme))
-    Object.keys(this.theme).map(item=>{
-      console.log(this.theme[item])
-    })
+    Message({
+      content: "hello1111111111",
+      closeAble: true,
+      duration: 1000,
+    });
+    console.log("fsfsdfsf");
+    console.log(Object.keys(this.theme));
+    Object.keys(this.theme).map(item => {
+      console.log(this.theme[item]);
+    });
   },
   methods: {
-    xxx(){
-      console.log('234324')
+    clickSwitch(v) {
+      console.log(v);
+    },
+    xxx() {
+      console.log("234324");
     },
     changeModal() {
       this.visible = true;
@@ -122,8 +141,8 @@ export default {
     },
     closeClick() {
       console.log("closeClick,app组件里modal的close回调");
-    },
-  },
+    }
+  }
 };
 </script>
 
