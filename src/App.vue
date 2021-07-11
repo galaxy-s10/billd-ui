@@ -14,12 +14,12 @@
     <!-- <div style="height:300px;width:400px;overflow:scroll;background:red" @scroll="xxx">
       <div style="height:600px;width:200px;background:yellow"></div>
     </div> -->
-    <div v-for="(item, index) of theme" :key="index">
+    <!-- <div v-for="(item, index) of theme" :key="index">
       {{ item }},{{ index }}222
     </div>
     <div v-for="(item, index) in theme" :key="index">
       {{ item }},{{ index }}222
-    </div>
+    </div> -->
     <!-- <directive-cpt></directive-cpt> -->
     <!-- <div v-auth="'a'">sdg</div> -->
     <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->

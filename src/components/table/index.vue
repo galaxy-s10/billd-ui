@@ -85,18 +85,28 @@
             >
               <td>
                 <span
-                  class="hss-checkbox"
+                  :class="{
+                    'hss-checkbox': true,
+                    'hss-checkbox-disabled': rowSelection.getCheckboxProps(
+                      rowItem
+                    ).disabled
+                  }"
                   @click="onSelect(rowItem, isSelected(rowItem.key))"
                 >
                   <input
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
-                      'hss-checkbox-checked': isSelected(rowItem.key)
+                      'hss-checkbox-checked': isSelected(rowItem.key),
+                      'hss-checkbox-disabled': rowSelection.getCheckboxProps(
+                        rowItem
+                      ).disabled
                     }"
+                    :disabled="rowSelection.getCheckboxProps(rowItem).disabled"
                     :value="rowItem"
                     v-model="selectedList"
                   />
+                  <!-- <input type="checkbox" disabled> -->
                   <span
                     :class="{
                       'hss-checkbox-inner': true
@@ -357,6 +367,8 @@ export default {
       fixedLeftData: [],
       fixedRightData: [],
       allData: {},
+      defaultCheckedList: ["1"],
+      defaultDisabledList: ["2"],
       data: [
         {
           key: "1",
@@ -433,7 +445,16 @@ export default {
       ],
 
       rowSelection: {
-        type: "checkbox"
+        type: "checkbox",
+        getCheckboxProps: row => {
+          console.log(row.key, "getCheckboxProps");
+          let prop = {
+            defaultChecked: this.defaultCheckedList.indexOf(row.key) != -1,
+            disabled: this.defaultDisabledList.indexOf(row.key) != -1
+          };
+          console.log(prop);
+          return prop;
+        }
       },
 
       columns: [
@@ -627,6 +648,12 @@ export default {
     });
     console.log(sortColumns);
     this.columns = sortColumns;
+
+    // 处理默认选中数据
+    this.selectedList = this.data.filter(item => {
+      console.log('处理默认选中数据',item);
+      return this.defaultCheckedList.indexOf(item.key) != -1;
+    });
     // this.fixedLeftData = fixedLeftData;
     // let fixedRight = this.columns.filter((item) => {
     //   console.log(item);
@@ -677,7 +704,15 @@ export default {
         let changeData = this.data.filter(item => {
           return selectKey.indexOf(item.key) == -1;
         });
-        console.log("点击全选", isAll, this.selectedList, changeData);
+        console.log(
+          "点击全选",
+          "是否全选：",
+          isAll,
+          "原选择数据：",
+          this.selectedList,
+          "改变的数据：",
+          changeData
+        );
         this.selectedList = this.data;
       }
     },
