@@ -79,7 +79,7 @@
             <tr
               v-for="(rowItem, rowIndex) in data"
               :key="rowIndex"
-              @mouseenter="moudrEnter($event, rowIndex)"
+              @mouseenter="mouseEnter($event, rowIndex)"
               @mouseleave="nowTr = -1"
               :class="{ hovertr: rowIndex == nowTr }"
             >
@@ -195,7 +195,7 @@
                 :key="index"
                 :style="{ height: trList[index] + 'px' || 'auto' }"
                 :class="{ hovertr: index == nowTr }"
-                @mouseenter="moudrEnter($event, index)"
+                @mouseenter="mouseEnter($event, index)"
                 @mouseleave="nowTr = -1"
               >
                 <td
@@ -290,7 +290,7 @@
               :key="index"
               :style="{ height: trList[index] + 'px' || 'auto' }"
               :class="{ hovertr: index == nowTr }"
-              @mouseenter="moudrEnter($event, index)"
+              @mouseenter="mouseEnter($event, index)"
               @mouseleave="nowTr = -1"
             >
               <td
@@ -699,12 +699,12 @@ export default {
       this.$refs["h-table-fixed-left-body"].scrollTop = t;
       this.$refs["h-table-scroll-body"].scrollTop = t;
     },
-    // moudrEnter: throttle(function(e, v) {
+    // mouseEnter: throttle(function(e, v) {
     //   // console.log(e, v);
     //   this.nowTr = v;
     // }, 100),
-    moudrEnter(e, v) {
-      console.log("moudrEnter");
+    mouseEnter(e, v) {
+      console.log("mouseEnter");
       // this.nowTr = v;
     },
     allScroll(e) {
@@ -770,16 +770,16 @@ export default {
       );
       // this.$refs["h-table-scroll-head"] &&
       //   (this.$refs["h-table-scroll-head"].scrollLeft = l);
-      if (this.lastScrollTop != t) {
-        console.log("上下滚动");
-        this.$refs["h-table-scroll-body"] &&
-          (this.$refs["h-table-scroll-body"].scrollTop = t);
-        // if (!this.fixedScrolling) {
-        this.$refs["h-table-fixed-left-body"] &&
-          (this.$refs["h-table-fixed-left-body"].scrollTop = t);
-        this.$refs["h-table-fixed-right-body"] &&
-          (this.$refs["h-table-fixed-right-body"].scrollTop = t);
-      }
+      // if (this.lastScrollTop != t) {
+      console.log("this.lastScrollTop", this.lastScrollTop, "t", t, "上下滚动");
+      this.$refs["h-table-scroll-body"] &&
+        (this.$refs["h-table-scroll-body"].scrollTop = t);
+      // if (!this.fixedScrolling) {
+      this.$refs["h-table-fixed-left-body"] &&
+        (this.$refs["h-table-fixed-left-body"].scrollTop = t);
+      this.$refs["h-table-fixed-right-body"] &&
+        (this.$refs["h-table-fixed-right-body"].scrollTop = t);
+      // }
       if (this.lastScrollTop != l) {
         if (e.target == this.$refs["h-table-scroll-body"]) {
           console.log("左右滚动");
