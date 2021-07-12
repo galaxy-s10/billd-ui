@@ -28,7 +28,9 @@
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
-                      'hss-checkbox-checked': selectedList.length == data.length
+                      'hss-checkbox-checked':
+                        selectedList.length ==
+                        data.length - defaultDisabledList.length
                     }"
                     v-model="tableIsSelectAll"
                   />
@@ -651,7 +653,7 @@ export default {
 
     // 处理默认选中数据
     this.selectedList = this.data.filter(item => {
-      console.log('处理默认选中数据',item);
+      console.log("处理默认选中数据", item);
       return this.defaultCheckedList.indexOf(item.key) != -1;
     });
     // this.fixedLeftData = fixedLeftData;
@@ -685,7 +687,10 @@ export default {
       // console.log(v);
       console.log("更改全选");
       let isAll = null;
-      if (this.selectedList.length == this.data.length) {
+      if (
+        this.selectedList.length ==
+        this.data.length - this.defaultDisabledList.length
+      ) {
         // 当前是全选了，则取消全选
         isAll = false;
         let selectKey = this.selectedList.map(v => v.key);
@@ -702,7 +707,10 @@ export default {
         let selectKey = this.selectedList.map(v => v.key);
         // console.log(selectKey);
         let changeData = this.data.filter(item => {
-          return selectKey.indexOf(item.key) == -1;
+          return (
+            selectKey.indexOf(item.key) == -1 &&
+            this.defaultDisabledList.indexOf(item.key) == -1
+          );
         });
         console.log(
           "点击全选",
@@ -710,10 +718,14 @@ export default {
           isAll,
           "原选择数据：",
           this.selectedList,
+          '现选择的数据：',
+          nowSelectedList,
           "改变的数据：",
           changeData
         );
-        this.selectedList = this.data;
+        this.selectedList = this.data.filter(
+          item => this.defaultDisabledList.indexOf(item.key) == -1
+        );
       }
     },
     renderFixed(v) {
@@ -805,16 +817,22 @@ export default {
       );
       // this.$refs["h-table-scroll-head"] &&
       //   (this.$refs["h-table-scroll-head"].scrollLeft = l);
-      // if (this.lastScrollTop != t) {
-      console.log("this.lastScrollTop", this.lastScrollTop, "t", t, "上下滚动");
-      this.$refs["h-table-scroll-body"] &&
-        (this.$refs["h-table-scroll-body"].scrollTop = t);
-      // if (!this.fixedScrolling) {
-      this.$refs["h-table-fixed-left-body"] &&
-        (this.$refs["h-table-fixed-left-body"].scrollTop = t);
-      this.$refs["h-table-fixed-right-body"] &&
-        (this.$refs["h-table-fixed-right-body"].scrollTop = t);
-      // }
+      if (this.lastScrollTop != t) {
+        console.log(
+          "this.lastScrollTop",
+          this.lastScrollTop,
+          "t",
+          t,
+          "上下滚动"
+        );
+        this.$refs["h-table-scroll-body"] &&
+          (this.$refs["h-table-scroll-body"].scrollTop = t);
+        // if (!this.fixedScrolling) {
+        this.$refs["h-table-fixed-left-body"] &&
+          (this.$refs["h-table-fixed-left-body"].scrollTop = t);
+        this.$refs["h-table-fixed-right-body"] &&
+          (this.$refs["h-table-fixed-right-body"].scrollTop = t);
+      }
       if (this.lastScrollTop != l) {
         if (e.target == this.$refs["h-table-scroll-body"]) {
           console.log("左右滚动");
