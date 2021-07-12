@@ -28,17 +28,18 @@
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
-                      'hss-checkbox-checked':
-                        selectedList.length ==
-                        data.length - defaultDisabledList.length
+                      'hss-checkbox-checked': tableIsSelectAll
                     }"
                     v-model="tableIsSelectAll"
                   />
+                  <!-- 当已选择的数据数组长度等于所有数据减去交集数组长度，即代表全选 -->
                   <span
                     :class="{
                       'hss-checkbox-inner': true,
-                      'none-selected': selectedList.length == 0,
+                      'none-selected':
+                        selectedList.length - intersection.length == 0,
                       'no-all':
+                        !(selectedList.length - intersection.length == 0) &&
                         selectedList.length != 0 &&
                         selectedList.length < data.length
                     }"
@@ -358,7 +359,8 @@ export default {
       scrollBarWidth: 15,
       selectedIndex: [],
       selectedList: [], //已选中的数据
-      tableIsSelectAll: false,
+      canSelected: [],
+      // tableIsSelectAll: false,
       nowTr: -1,
       trList: [],
       scroll: { x: 1000, y: 200 }, //建议指定 scroll.x 为大于表格宽度的固定值或百分比。注意，且非固定列宽度之和不要超过 scroll.x
@@ -369,8 +371,11 @@ export default {
       fixedLeftData: [],
       fixedRightData: [],
       allData: {},
-      defaultCheckedList: ["1"],
-      defaultDisabledList: ["2"],
+      defaultCheckedList: ["2"],
+      defaultDisabledList: ["1", "2"],
+      intersection: [], //交集
+      union: [], //并集
+      difference: [], //差集
       data: [
         {
           key: "1",
@@ -560,6 +565,33 @@ export default {
     }
   },
   computed: {
+    tableIsSelectAll: {
+      get: function() {
+        let res =
+          this.data.length - this.intersection.length ==
+          this.selectedList.length;
+        let res1 =
+          this.data.length - this.difference.length == this.selectedList.length;
+        // this.data.length - this.defaultDisabledList.length;
+        console.log(res, res1, 3443433);
+        // if (this.defaultCheckedList.length) {
+        //   console.log("有默认选中的数据。");
+        //   res =
+        //     this.selectedList.length - this.defaultCheckedList.length ==
+        //     this.data.length - this.defaultDisabledList.length;
+        //   console.log(res);
+        //   return res;
+        // } else {
+        //   console.log("没有默认选中的数据。");
+        //   return res;
+        // }
+        console.log(res);
+        return res || res1;
+      },
+      set: function(v) {
+        return v;
+      }
+    },
     isSelected() {
       return v => {
         console.log("isSelectedisSelected", this.selectedList, v);
@@ -651,6 +683,31 @@ export default {
     console.log(sortColumns);
     this.columns = sortColumns;
 
+    // 求出默认选中和默认禁用的交集
+    var intersection = this.defaultCheckedList.filter(v => {
+      return this.defaultDisabledList.indexOf(v) > -1;
+    });
+    this.intersection = intersection;
+    console.log("求出默认选中和默认禁用的交集", intersection);
+
+    // 求出默认选中和默认禁用的并集
+    this.union = Array.from(
+      new Set(this.defaultCheckedList.concat(this.defaultDisabledList))
+    );
+    console.log("求出默认选中和默认禁用的并集", this.union);
+
+    // 求出默认选中和默认禁用的差集
+    this.difference = this.defaultDisabledList.filter(v => {
+      return this.defaultCheckedList.indexOf(v) === -1;
+    });
+    console.log("求出默认选中和默认禁用的差集", this.union);
+
+    // 查找所有非disabled的数据
+    let canSelected = this.data.filter(v => {
+      return this.defaultDisabledList.indexOf(v.key) == -1;
+    });
+    this.canSelected = canSelected;
+
     // 处理默认选中数据
     this.selectedList = this.data.filter(item => {
       console.log("处理默认选中数据", item);
@@ -687,10 +744,7 @@ export default {
       // console.log(v);
       console.log("更改全选");
       let isAll = null;
-      if (
-        this.selectedList.length ==
-        this.data.length - this.defaultDisabledList.length
-      ) {
+      if (this.tableIsSelectAll) {
         // 当前是全选了，则取消全选
         isAll = false;
         let selectKey = this.selectedList.map(v => v.key);
@@ -698,27 +752,50 @@ export default {
         let changeData = this.data.filter(item => {
           return selectKey.indexOf(item.key) == -1;
         });
-        console.log("取消全选", isAll, this.selectedList, changeData);
-        this.selectedList = [];
+        console.log(
+          "取消全选",
+          "是否全选：",
+          isAll,
+          "原选择的数据：",
+          this.selectedList,
+          "现选择的数据：",
+          // nowSelectedList,
+          "改变的数据：",
+          changeData
+        );
+        this.selectedList = this.data.filter(v => {
+          return this.intersection.indexOf(v.key) != -1;
+        });
       } else {
         // 当前不是全选，需要全选
         // console.log(changeData);
         isAll = true;
+        // 查找当前选中的数据的key
         let selectKey = this.selectedList.map(v => v.key);
+        // // 查找所有非disabled的数据
+        // let canSelected = this.data.filter(v => {
+        //   return this.defaultDisabledList.indexOf(v.key) != -1;
+        // });
+        // this.canSelected = canSelected;
+
         // console.log(selectKey);
-        let changeData = this.data.filter(item => {
+        // 过滤出修改的数据
+        let changeData = this.canSelected.filter(item => {
           return (
             selectKey.indexOf(item.key) == -1 &&
             this.defaultDisabledList.indexOf(item.key) == -1
           );
         });
+        let nowSelectedList = this.data.filter(
+          item => this.defaultDisabledList.indexOf(item.key) == -1
+        );
         console.log(
           "点击全选",
           "是否全选：",
           isAll,
-          "原选择数据：",
+          "原选择的数据：",
           this.selectedList,
-          '现选择的数据：',
+          "现选择的数据：",
           nowSelectedList,
           "改变的数据：",
           changeData
