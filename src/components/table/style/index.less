@@ -1,4 +1,5 @@
 .hss-table {
+  position: relative;
   ::-webkit-scrollbar {
     // width: 8px;
     // height: 15px;
@@ -10,27 +11,32 @@
       border-right: 1px solid #e8e8e8;
     }
   }
-  position: relative;
+  .h-table-header {
+    background-color: #fafafa;
+  }
+  .h-table-body {
+    background-color: #fff;
+  }
   table {
-    table-layout: fixed;
     min-width: 100%;
+    table-layout: fixed;
     // width: 100%;
   }
   .hss-checkbox {
     position: relative;
     display: block;
     .hss-checkbox-input {
-      margin: 0;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
       z-index: 1;
+      margin: 0;
       width: 18px;
       height: 18px;
-      cursor: pointer;
       opacity: 0;
+      cursor: pointer;
       &.hss-checkbox-checked {
         opacity: 1;
       }
@@ -43,8 +49,8 @@
 
       .hss-checkbox-inner,
       .hss-checkbox-input {
-        background-color: #f5f5f5;
         border-color: #d9d9d9 !important;
+        background-color: #f5f5f5;
         cursor: not-allowed;
       }
     }
@@ -55,10 +61,10 @@
       display: block;
       width: 16px;
       height: 16px;
-      background-color: #fff;
       border: 1px solid #d9d9d9;
-      border-radius: 2px;
       border-collapse: separate;
+      border-radius: 2px;
+      background-color: #fff;
       transition: all 0.3s;
       &.no-all::after {
         opacity: 1 !important;
@@ -69,11 +75,11 @@
         left: 50%;
         width: 8px;
         height: 8px;
-        background-color: #1890ff;
         border: 0;
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0;
+        background-color: #1890ff;
         content: " ";
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
       }
     }
   }
@@ -81,9 +87,9 @@
     width: 60px;
   }
   .table-scroll {
-    width: 100%;
     overflow: auto;
     overflow-x: hidden;
+    width: 100%;
     .h-hide-scrollbar::-webkit-scrollbar {
       background-color: transparent;
     }
@@ -93,10 +99,10 @@
       background-color: #e9f6fe;
     }
     table {
+      border-spacing: 0;
       // text-align: left;
       // border-radius: 4px 4px 0 0;
       border-collapse: separate;
-      border-spacing: 0;
       thead > tr > th {
         border-bottom: 1px solid #e8e8e8;
         background: #fafafa;
@@ -113,21 +119,23 @@
   }
   .hss-table-tbody {
     td {
-      overflow-wrap: break-word;
       // word-wrap: break-word;
       word-break: break-word;
+
+      overflow-wrap: break-word;
     }
   }
   .ellipsis {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .hss-table-tbody > tr.hovertr {
     background-color: #e9f6fe;
   }
   .hss-table-thead > tr > th {
     padding: 16px;
+
     overflow-wrap: break-word;
   }
 
@@ -135,13 +143,14 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 100;
     overflow: hidden;
     box-shadow: 6px 0 6px -4px rgb(0 0 0 / 15%);
     table {
+      border-spacing: 0;
       // text-align: left;
       // border-radius: 4px 4px 0 0;
       border-collapse: separate;
-      border-spacing: 0;
     }
     .hss-table-thead {
       background-color: #fafafa;
@@ -154,6 +163,7 @@
       color: rgba(0, 0, 0, 0.85);
       font-weight: 500;
       transition: background 0.3s ease;
+
       overflow-wrap: break-word;
     }
 
@@ -171,15 +181,14 @@
     right: 0;
     overflow: hidden;
     background-color: #fafafa;
-
     // margin-bottom: -17px;
     // overflow: scroll;
     box-shadow: -6px 0 6px -4px rgb(0 0 0 / 15%);
     table {
+      border-spacing: 0;
       // text-align: left;
       // border-radius: 4px 4px 0 0;
       border-collapse: separate;
-      border-spacing: 0;
     }
     .hss-table-thead {
       background-color: #fafafa;
@@ -192,6 +201,7 @@
       color: rgba(0, 0, 0, 0.85);
       font-weight: 500;
       transition: background 0.3s ease;
+
       overflow-wrap: break-word;
     }
 

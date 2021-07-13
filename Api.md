@@ -8,32 +8,35 @@
 
 | 参数         | 说明                                                   | 类型                            | 默认值 |
 | ------------ | ------------------------------------------------------ | ------------------------------- | ------ |
-| scroll       | 设置横向或纵向滚动                                     | { x: number \|true, y: number } | -      |
-| rowSelection | 列表项是否可选择                                       | object                          | null   |
+| bordered     | 是否展示外边框和列边框                                 | boolean                         | false  |
+| columns      | 表格列的配置描述                                       | array                           | -      |
+| dataSource   | 数据数组                                               | any[]                           | -      |
 | fixed        | 列是否固定,可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string                 | false  |
-
-### 
+| scroll       | 设置横向或纵向滚动                                     | { x: number \|true, y: number } | -      |
+| rowKey       | 表格行 key 的取值                                      | string                          | 'key'  |
+| rowSelection | 列表项是否可选择                                       | object                          | null   |
 
 ### columns
 
-| 参数     | 说明                                                   | 类型                        | 默认值 |
-| -------- | ------------------------------------------------------ | --------------------------- | ------ |
-| align    | 设置列内容的对齐方式                                   | 'left' \|'right' \|'center' | 'left' |
-| ellipsis | 超过宽度将自动省略                                     | boolean                     | false  |
-| fixed    | 列是否固定,可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string             | false  |
-| key      |                                                        | string                      | -      |
-| render   | 通过ender函数设置列内容                                | Function                    | -      |
-| title    | 列头显示文字                                           | string                      | -      |
-| width    | 列宽度                                                 | number                      | -      |
+| 参数      | 说明                                                         | 类型                        | 默认值 |
+| --------- | ------------------------------------------------------------ | --------------------------- | ------ |
+| align     | 设置列内容的对齐方式                                         | 'left' \|'right' \|'center' | 'left' |
+| dataIndex | 列数据在数据项中对应的 key                                   | String                      |        |
+| ellipsis  | 超过宽度将自动省略                                           | boolean                     | false  |
+| fixed     | 列是否固定,可选 `true`(等效于 left) `'left'` `'right'`       | boolean\|string             | false  |
+| key       | Vue 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string                      | -      |
+| render    | 通过render函数设置列内容                                     | *Function(h,row) {}*        | -      |
+| title     | 列头显示文字                                                 | string                      | -      |
+| width     | 列宽度                                                       | number                      | -      |
 
 ### rowSelection
 
-| 参数             | 说明                                               | 类型                                                         | 默认值 |
-| ---------------- | -------------------------------------------------- | ------------------------------------------------------------ | ------ |
-| getCheckboxProps | 选择框的默认属性配置，可配置默认选中以*及默认禁用* | *Function(row)*                                              | -      |
-| onChange         | 选中项发生变化时的回调                             | *Function(newSelectedRowKeys, newSelectedRows,oldSelectedRowKeys,oldSelectedRows) {}* | -      |
-| onSelect         | 用户手动选择/取消选择某列的回调                    | *Function(row, isSelected, selectedRows, event) {}*          | -      |
-| onSelectAll      | 用户手动选择/取消选择所有列的回调                  | *Function(isAll,oldSelectRows,nowSelectedRows,changeRows) {}* | -      |
+| 参数             | 说明                                             | 类型                                                         | 默认值 |
+| ---------------- | ------------------------------------------------ | ------------------------------------------------------------ | ------ |
+| getCheckboxProps | 选择框的默认属性配置，可配置默认选中以及默认禁用 | *Function(row)*                                              | -      |
+| onChange         | 选中项发生变化时的回调                           | *Function(newSelectedRowKeys, newSelectedRows,oldSelectedRowKeys,oldSelectedRows) {}* | -      |
+| onSelect         | 用户手动选择/取消选择某列的回调                  | *Function(row, isSelected, selectedRows, event) {}*          | -      |
+| onSelectAll      | 用户手动选择/取消选择所有列的回调                | *Function(isAll,oldSelectRows,nowSelectedRows,changeRows) {}* | -      |
 
 ## 事件
 

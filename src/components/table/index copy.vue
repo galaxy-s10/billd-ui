@@ -19,7 +19,7 @@
             <col v-if="rowSelection.type" class="hss-table-selection-col" />
             <col
               v-for="(item, index) in columns"
-              :key="item.key"
+              :key="index"
               :style="{
                 minWidth: item.width + 'px',
                 width: item.width + 'px'
@@ -100,9 +100,7 @@
                       rowItem
                     ).disabled
                   }"
-                  @click="
-                    e => onSelect(rowItem, isSelected(rowItem.dataIndex), e)
-                  "
+                  @click="e => onSelect(rowItem, isSelected(rowItem.dataIndex), e)"
                 >
                   <input
                     type="checkbox"
@@ -137,7 +135,7 @@
                 {{
                   typeof columnsItem.render == "function"
                     ? tempRender(
-                        `${columnsItem.dataIndex}-${rowIndex}`,
+                        `${columnsItem.key}-${rowIndex}`,
                         rowItem,
                         columnsItem.render
                       )
@@ -145,9 +143,9 @@
                 }}
                 <slot
                   v-if="typeof columnsItem.render == 'function'"
-                  :name="`${columnsItem.dataIndex}-${rowIndex}`"
+                  :name="`${columnsItem.key}-${rowIndex}`"
                 ></slot>
-                <template v-else>{{ rowItem[columnsItem.dataIndex] }}</template>
+                <template v-else>{{ rowItem[columnsItem.key] }}</template>
               </td>
             </tr>
           </tbody>
@@ -229,7 +227,7 @@
               <col v-if="rowSelection.type" class="hss-table-selection-col" />
               <col
                 v-for="(item, index) in fixedLeftData"
-                :key="item.key"
+                :key="index"
                 :style="{
                   minWidth: item.column.col.width + 'px',
                   width: item.column.col.width + 'px'
@@ -257,35 +255,23 @@
                         fixedLeftData[0].data[index]
                       ).disabled
                     }"
-                    @click="
-                      e =>
-                        onSelect(
-                          fixedLeftData[0].data[index],
-                          isSelected(fixedLeftData[0].data[index].dataIndex),
-                          e
-                        )
-                    "
+                    @click="e => onSelect(fixedLeftData[0].data[index], isSelected(fixedLeftData[0].data[index].key), e)"
                   >
                     <input
                       type="checkbox"
                       :class="{
                         'hss-checkbox-input': true,
-                        'hss-checkbox-checked': isSelected(
-                          fixedLeftData[0].data[index].key
-                        ),
+                        'hss-checkbox-checked': isSelected(fixedLeftData[0].data[index].key),
                         'hss-checkbox-disabled': rowSelection.getCheckboxProps(
                           fixedLeftData[0].data[index]
                         ).disabled
                       }"
                       :disabled="
-                        rowSelection.getCheckboxProps(
-                          fixedLeftData[0].data[index]
-                        ).disabled
+                        rowSelection.getCheckboxProps(fixedLeftData[0].data[index]).disabled
                       "
                       :value="fixedLeftData[0].data[index]"
                       v-model="selectedList"
                     />
-                    {{fixedLeftData[0].data[index].dataIndex}}
                     <!-- <input type="checkbox" disabled> -->
                     <span
                       :class="{
@@ -306,7 +292,7 @@
                   {{
                     typeof col.column.col.render == "function"
                       ? tempRender(
-                          `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`,
+                          `fixed-left-${col.column.col.key}-${colIndex}-${index}`,
                           col,
                           col.column.col.render
                         )
@@ -315,11 +301,11 @@
                   <slot
                     v-if="typeof col.column.col.render == 'function'"
                     :name="
-                      `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`
+                      `fixed-left-${col.column.col.key}-${colIndex}-${index}`
                     "
                   ></slot>
                   <template v-else
-                    >{{ col.data[index][col.column.col.dataIndex] }}
+                    >{{ col.data[index][col.column.col.key] }}
                   </template>
                 </td>
               </tr>
@@ -554,9 +540,9 @@ export default {
           fixed: "left",
           width: "100",
           title: "key",
-          dataIndex: "key",//列数据在数据项中对应的key
+          dataIndex: "key",
           align: "center",
-          key: "key", //v-for遍历columns时的key
+          key: "key",
           slots: { title: "customTitle" },
           scopedSlots: { customRender: "name" }
         },
@@ -613,7 +599,7 @@ export default {
           // fixed: "right",
           width: "100",
           title: "Age",
-          dataIndex: "age",
+          dataIndex1: "age",
           key: "age2"
         },
         {
