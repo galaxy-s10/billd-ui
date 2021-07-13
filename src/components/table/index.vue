@@ -1,5 +1,5 @@
 <template>
-  <div class="hss-table" style="width:800px;">
+  <div class="hss-table border" style="width:800px;">
     <div class="table-scroll">
       <!-- {{ lastScrollLeft }} -->
       <div
@@ -23,7 +23,7 @@
           <thead class="hss-table-thead">
             <tr>
               <th>
-                <span class="hss-checkbox" @click="changeSelectAll">
+                <div class="hss-checkbox" @click="onSelectAll">
                   <input
                     type="checkbox"
                     :class="{
@@ -44,7 +44,7 @@
                         selectedList.length < data.length
                     }"
                   ></span>
-                </span>
+                </div>
               </th>
               <th
                 v-for="(item, index) in columns"
@@ -87,14 +87,14 @@
               :class="{ hovertr: rowIndex == nowTr }"
             >
               <td>
-                <span
+                <div
                   :class="{
                     'hss-checkbox': true,
                     'hss-checkbox-disabled': rowSelection.getCheckboxProps(
                       rowItem
                     ).disabled
                   }"
-                  @click="onSelect(rowItem, isSelected(rowItem.key))"
+                  @click="e => onSelect(rowItem, isSelected(rowItem.key), e)"
                 >
                   <input
                     type="checkbox"
@@ -115,7 +115,7 @@
                       'hss-checkbox-inner': true
                     }"
                   ></span>
-                </span>
+                </div>
               </td>
               <td
                 v-for="(columnsItem, columnsIndex) in columns"
@@ -454,12 +454,12 @@ export default {
       rowSelection: {
         type: "checkbox",
         getCheckboxProps: row => {
-          console.log(row.key, "getCheckboxProps");
+          // console.log(row.key, "getCheckboxProps");
           let prop = {
             defaultChecked: this.defaultCheckedList.indexOf(row.key) != -1,
             disabled: this.defaultDisabledList.indexOf(row.key) != -1
           };
-          console.log(prop);
+          // console.log(prop);
           return prop;
         }
       },
@@ -562,6 +562,18 @@ export default {
     selectedList(newVal, oldVal) {
       // console.log(newVal, oldVal);
       newVal.length == this.data.length && (this.tableIsSelectAll = true);
+      let newSelectedRowKeys = newVal.map(v => v.key);
+      let newSelectedRows = newVal;
+      let oldSelectedRowKeys = oldVal.map(v => v.key);
+      let oldSelectedRows = oldVal;
+      console.log(
+        "选中项发生变化时的回调onChange:",
+        newSelectedRowKeys,
+        newSelectedRows,
+        oldSelectedRowKeys,
+        oldSelectedRows
+      );
+      // function(newSelectedRowKeys, newSelectedRows,oldSelectedRowKeys,oldSelectedRows) {}
     }
   },
   computed: {
@@ -573,7 +585,7 @@ export default {
         let res1 =
           this.data.length - this.difference.length == this.selectedList.length;
         // this.data.length - this.defaultDisabledList.length;
-        console.log(res, res1, 3443433);
+        // console.log(res, res1, 3443433);
         // if (this.defaultCheckedList.length) {
         //   console.log("有默认选中的数据。");
         //   res =
@@ -585,7 +597,7 @@ export default {
         //   console.log("没有默认选中的数据。");
         //   return res;
         // }
-        console.log(res);
+        // console.log(res);
         return res || res1;
       },
       set: function(v) {
@@ -594,8 +606,8 @@ export default {
     },
     isSelected() {
       return v => {
-        console.log("isSelectedisSelected", this.selectedList, v);
-        console.log(this.selectedList.filter(item => item.key == v).length);
+        // console.log("isSelectedisSelected", this.selectedList, v);
+        // console.log(this.selectedList.filter(item => item.key == v).length);
         return this.selectedList.filter(item => item.key == v).length == 1;
       };
     },
@@ -729,20 +741,32 @@ export default {
     this.scrollBarWidth = getScrollBarWidth();
   },
   methods: {
-    // 选择/取消某列
-    onSelect(row, bool) {
+    // 用户手动选择/取消选择某列的回调
+    onSelect(row, isSelected, event) {
       setTimeout(() => {
-        console.log("onSelectonSelect", row, !bool, this.selectedList);
+        console.log(
+          "用户手动选择/取消选择某列的回调onSelect",
+          "当前列数据：",
+          row,
+          "当前列是否选中：",
+          !isSelected,
+          "当前已选择数据：",
+          this.selectedList,
+          "event：",
+          event
+        );
       }, 0);
+      // Function(row, isSelected, selectedRows, event){}
     },
+
     // selectedItem(v) {
     //   console.log(v);
     //   this.selectedIndex.push(v);
     // },
     // 更改全选
-    changeSelectAll(v) {
+    onSelectAll(v) {
       // console.log(v);
-      console.log("更改全选");
+      console.log("更改全选onSelectAll");
       let isAll = null;
       if (this.tableIsSelectAll) {
         // 当前是全选了，则取消全选
@@ -780,15 +804,17 @@ export default {
 
         // console.log(selectKey);
         // 过滤出修改的数据
-        let changeData = this.canSelected.filter(item => {
-          return (
-            selectKey.indexOf(item.key) == -1 &&
-            this.defaultDisabledList.indexOf(item.key) == -1
-          );
+        let changeRows = this.canSelected.filter(item => {
+          return selectKey.indexOf(item.key) == -1;
         });
-        let nowSelectedList = this.data.filter(
-          item => this.defaultDisabledList.indexOf(item.key) == -1
+        // 当前选中的数据(默认不可修改和默认选中这两数据的交集+所有可选中的数据)
+        let nowSelectedRows = this.canSelected.concat(
+          this.data.filter(v => v.key == this.intersection)
         );
+        // let nowSelectedRows = this.data.filter(
+        //   item => this.defaultDisabledList.indexOf(item.key) == -1
+        // );
+        // function(isAll,oldSelectRows,nowSelectedRows,changeRows){}
         console.log(
           "点击全选",
           "是否全选：",
@@ -796,13 +822,11 @@ export default {
           "原选择的数据：",
           this.selectedList,
           "现选择的数据：",
-          nowSelectedList,
+          nowSelectedRows,
           "改变的数据：",
-          changeData
+          changeRows
         );
-        this.selectedList = this.data.filter(
-          item => this.defaultDisabledList.indexOf(item.key) == -1
-        );
+        this.selectedList = nowSelectedList;
       }
     },
     renderFixed(v) {
@@ -818,34 +842,13 @@ export default {
       }
       this.trList = trList;
     },
-    scrollTo(ref, { l, t }) {
-      this.$refs["h-table-fixed-right-body"].scrollTop = t;
-      this.$refs["h-table-fixed-left-body"].scrollTop = t;
-      this.$refs["h-table-scroll-body"].scrollTop = t;
-    },
     // mouseEnter: throttle(function(e, v) {
     //   // console.log(e, v);
     //   this.nowTr = v;
     // }, 100),
     mouseEnter(e, v) {
       console.log("mouseEnter");
-      // this.nowTr = v;
-    },
-    allScroll(e) {
-      console.log(e.target, e);
-      // console.log('ref',this.$refs['h-table-scroll-body'])
-      // let l = e.target.scrollLeft;
-      // let t = e.target.scrollTop;
-      // if (e.target === this.$refs["h-table-scroll-body"]) {
-      //   console.log("--------");
-      //   this.$refs["h-table-fixed-left-body"] &&
-      //     (this.$refs["h-table-fixed-left-body"].scrollTop = t);
-      //   this.$refs["h-table-fixed-right-body"] &&
-      //     (this.$refs["h-table-fixed-right-body"].scrollTop = t);
-      // } else if (e.target === this.$refs["h-table-fixed-right-body"]) {
-      //   console.log("++++++++");
-      //   this.$refs["h-table-scroll-body"].scrollTop = t;
-      // }
+      this.nowTr = v;
     },
     fixedLeftScrollTop(e, index) {
       console.log("fixedLeftScrollTop", e.target, e.currentTarget);
@@ -869,12 +872,12 @@ export default {
       // this.fixedScrolling = false;
     },
     normalScroll(e, index) {
-      console.log(
-        "normalScroll",
-        e.target,
-        this.$refs["h-table-scroll-body"],
-        e.currentTarget
-      );
+      // console.log(
+      //   "normalScroll",
+      //   e.target,
+      //   this.$refs["h-table-scroll-body"],
+      //   e.currentTarget
+      // );
       // this.normalScrolling = true;
       // if (this.fixedScrolling) {
       //   this.normalScrolling = false;
@@ -884,24 +887,24 @@ export default {
       // console.log("normalScrollnormalScroll", e.target.scrollTop, e.target);
       let l = e.target.scrollLeft;
       let t = e.target.scrollTop;
-      console.log(
-        "lastScrollTop:",
-        this.lastScrollTop,
-        "nowScroll:",
-        t,
-        "left:",
-        l
-      );
+      // console.log(
+      //   "lastScrollTop:",
+      //   this.lastScrollTop,
+      //   "nowScroll:",
+      //   t,
+      //   "left:",
+      //   l
+      // );
       // this.$refs["h-table-scroll-head"] &&
       //   (this.$refs["h-table-scroll-head"].scrollLeft = l);
       if (this.lastScrollTop != t) {
-        console.log(
-          "this.lastScrollTop",
-          this.lastScrollTop,
-          "t",
-          t,
-          "上下滚动"
-        );
+        // console.log(
+        //   "this.lastScrollTop",
+        //   this.lastScrollTop,
+        //   "t",
+        //   t,
+        //   "上下滚动"
+        // );
         this.$refs["h-table-scroll-body"] &&
           (this.$refs["h-table-scroll-body"].scrollTop = t);
         // if (!this.fixedScrolling) {
@@ -912,7 +915,7 @@ export default {
       }
       if (this.lastScrollTop != l) {
         if (e.target == this.$refs["h-table-scroll-body"]) {
-          console.log("左右滚动");
+          // console.log("左右滚动");
           this.$refs["h-table-scroll-head"] &&
             (this.$refs["h-table-scroll-head"].scrollLeft = l);
         }

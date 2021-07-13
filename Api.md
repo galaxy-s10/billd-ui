@@ -1,3 +1,50 @@
+# Table
+
+## 使用
+
+## API
+
+### table
+
+| 参数         | 说明                                                   | 类型                            | 默认值 |
+| ------------ | ------------------------------------------------------ | ------------------------------- | ------ |
+| scroll       | 设置横向或纵向滚动                                     | { x: number \|true, y: number } | -      |
+| rowSelection | 列表项是否可选择                                       | object                          | null   |
+| fixed        | 列是否固定,可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string                 | false  |
+
+### 
+
+### columns
+
+| 参数     | 说明                                                   | 类型                        | 默认值 |
+| -------- | ------------------------------------------------------ | --------------------------- | ------ |
+| align    | 设置列内容的对齐方式                                   | 'left' \|'right' \|'center' | 'left' |
+| ellipsis | 超过宽度将自动省略                                     | boolean                     | false  |
+| fixed    | 列是否固定,可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string             | false  |
+| key      |                                                        | string                      | -      |
+| render   | 通过ender函数设置列内容                                | Function                    | -      |
+| title    | 列头显示文字                                           | string                      | -      |
+| width    | 列宽度                                                 | number                      | -      |
+
+### rowSelection
+
+| 参数             | 说明                                               | 类型                                                         | 默认值 |
+| ---------------- | -------------------------------------------------- | ------------------------------------------------------------ | ------ |
+| getCheckboxProps | 选择框的默认属性配置，可配置默认选中以*及默认禁用* | *Function(row)*                                              | -      |
+| onChange         | 选中项发生变化时的回调                             | *Function(newSelectedRowKeys, newSelectedRows,oldSelectedRowKeys,oldSelectedRows) {}* | -      |
+| onSelect         | 用户手动选择/取消选择某列的回调                    | *Function(row, isSelected, selectedRows, event) {}*          | -      |
+| onSelectAll      | 用户手动选择/取消选择所有列的回调                  | *Function(isAll,oldSelectRows,nowSelectedRows,changeRows) {}* | -      |
+
+## 事件
+
+| 参数 | 说明 | 返回值 |
+| ---- | ---- | ------ |
+|      |      |        |
+|      |      |        |
+|      |      |        |
+
+
+
 # Modal
 
 ## 使用

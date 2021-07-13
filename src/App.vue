@@ -112,7 +112,7 @@ export default {
     Message({
       content: "hello1111111111",
       closeAble: true,
-      duration: 1000,
+      duration: 1000
     });
     console.log("fsfsdfsf");
     console.log(Object.keys(this.theme));
@@ -146,4 +146,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+// 下面的less样式会有作用域
+@import "./index.less";
+</style>
+
+<style scoped>
+/* 下面的css样式不会有作用域 */
+@import "./index.css";
+</style>
