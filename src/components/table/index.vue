@@ -12,7 +12,7 @@
         class="h-table-header h-hide-scrollbar"
         :style="{ overflow: 'scroll', marginBottom: `-${scrollBarWidth}px` }"
         ref="h-table-scroll-head"
-        @scroll="scrollHead"
+        @scroll.self="normalScroll"
       >
         <table :style="{ width: scroll.x ? scroll.x + 'px' : '100%' }">
           <colgroup>
@@ -88,6 +88,7 @@
             <tr
               v-for="(rowItem, rowIndex) in data"
               :key="rowItem.key"
+              :index="rowItem[dataIndexRes]"
               @mouseenter="mouseEnter($event, rowIndex)"
               @mouseleave="nowTr = -1"
               :class="{ hovertr: rowIndex == nowTr }"
@@ -147,7 +148,9 @@
                   v-if="typeof columnsItem.render == 'function'"
                   :name="`${columnsItem.dataIndex}-${rowIndex}`"
                 ></slot>
-                <template v-else>{{ rowItem[columnsItem.dataIndex] }}</template>
+                <template v-else>{{
+                  getDataIndexRes(columnsItem, rowItem)
+                }}</template>
               </td>
             </tr>
           </tbody>
@@ -229,7 +232,8 @@
               <col v-if="rowSelection.type" class="hss-table-selection-col" />
               <col
                 v-for="(item, index) in fixedLeftData"
-                :key="item.key"
+                :key="item.column.title"
+                :index="JSON.stringify(item.column.title)"
                 :style="{
                   minWidth: item.column.col.width + 'px',
                   width: item.column.col.width + 'px'
@@ -285,7 +289,7 @@
                       :value="fixedLeftData[0].data[index]"
                       v-model="selectedList"
                     />
-                    {{fixedLeftData[0].data[index].dataIndex}}
+                    <!-- {{ fixedLeftData[0].data[index].dataIndex }} -->
                     <!-- <input type="checkbox" disabled> -->
                     <span
                       :class="{
@@ -306,7 +310,7 @@
                   {{
                     typeof col.column.col.render == "function"
                       ? tempRender(
-                          `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`,
+                          `fixed-left-${col.column.col[dataIndexRes]}-${colIndex}-${index}`,
                           col,
                           col.column.col.render
                         )
@@ -315,11 +319,12 @@
                   <slot
                     v-if="typeof col.column.col.render == 'function'"
                     :name="
-                      `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`
+                      `fixed-left-${col.column.col[dataIndexRes]}-${colIndex}-${index}`
                     "
                   ></slot>
-                  <template v-else
-                    >{{ col.data[index][col.column.col.dataIndex] }}
+                  <template v-else>
+                    <!-- {{ col.data[index][col.column.col[dataIndexRes]] }} -->
+                    {{ getDataIndexRes(col.column.col, col.data[index]) }}
                   </template>
                 </td>
               </tr>
@@ -436,7 +441,8 @@ export default {
   components: { HSwitch: Switch },
   data() {
     return {
-      rowKey:'name',
+      dataIndexRes: null,
+      // rowKey:'name',
       bordered: true,
       lastScrollTop: 0,
       lastScrollLeft: 0,
@@ -552,17 +558,17 @@ export default {
 
       columns: [
         {
-          fixed: "left",
+          // fixed: "left",
           width: "100",
           title: "key",
-          dataIndex: "key",//列数据在数据项中对应的key
+          dataIndex: "key", //列数据在数据项中对应的key
           align: "center",
           key: "key", //v-for遍历columns时的key,如果设置了唯一的dataIndex可忽略该属性
           slots: { title: "customTitle" },
           scopedSlots: { customRender: "name" }
         },
         {
-          fixed: "right",
+          // fixed: "right",
           width: "100",
           title: "钱",
           dataIndex: "money",
@@ -572,7 +578,8 @@ export default {
           scopedSlots: { customRender: "name" }
         },
         {
-          // width: "100",
+          // fixed: "left",
+          width: "120",
           title: "性别",
           dataIndex: "sex",
           align: "center",
@@ -597,7 +604,7 @@ export default {
           scopedSlots: { customRender: "name" }
         },
         {
-          fixed: "right",
+          // fixed: "right",
           width: "100",
           title: "状态",
           dataIndex: "switch",
@@ -615,10 +622,10 @@ export default {
           width: "100",
           title: "Age",
           dataIndex: "age",
-          key: "age2"
+          key: "age"
         },
         {
-          width: "200",
+          // width: "200",
           title: "Address",
           dataIndex: "address",
           key: "address"
@@ -731,11 +738,31 @@ export default {
       if (item.fixed == "left") {
         let fixedLeft = this.data.filter(v => {
           // console.log(v, v[item.key], item);
-          return item.key && v[item.key];
+          console.log(item, v);
+          let dataIndex = item.dataIndex || this.rowKey || (v.key && "key");
+          console.log(dataIndex, 3343433434);
+          this.dataIndexRes = dataIndex;
+          if (!dataIndex) {
+            console.log("-----");
+            console.error(
+              "Warning-dataSource: Each record in table should have a unique `key` prop,or set `rowKey` to an unique primary key"
+            );
+          } else {
+            console.log(dataIndex, 8889);
+          }
+          return dataIndex && v[dataIndex];
         });
-        fixedLeftData = fixedLeftData;
+        console.log(fixedLeft, 32323);
+        // fixedLeftData = fixedLeftData;
+        // columns的v-for时的key
+        let columnKey = item.key || item.dataIndex || this.rowKey;
+        if (!columnKey) {
+          console.error(
+            "Warning-columns: Each record in table should have a unique `key` prop,or set `rowKey` to an unique primary key"
+          );
+        }
         allData["left"].push({
-          column: { title: item.key, col: item },
+          column: { title: columnKey, col: item },
           data: fixedLeft
         });
       } else if (item.fixed == "right") {
@@ -828,6 +855,11 @@ export default {
     this.scrollBarWidth = getScrollBarWidth();
   },
   methods: {
+    // 获取dataIndex,item:当前column的dataIndex,v:当前data的某项
+    getDataIndexRes(item, v) {
+      let dataIndex = item.dataIndex || this.rowKey || (v.key && "key");
+      return v[dataIndex];
+    },
     // 用户手动选择/取消选择某列的回调
     onSelect(row, isSelected, event) {
       setTimeout(() => {
@@ -959,6 +991,7 @@ export default {
       // this.fixedScrolling = false;
     },
     normalScroll(e, index) {
+      console.log('ss');
       // console.log(
       //   "normalScroll",
       //   e.target,
@@ -1000,13 +1033,15 @@ export default {
         this.$refs["h-table-fixed-right-body"] &&
           (this.$refs["h-table-fixed-right-body"].scrollTop = t);
       }
-      // if (this.lastScrollLeft != l) {
-      if (e.target == this.$refs["h-table-scroll-body"]) {
+      if (this.lastScrollLeft != l) {
+      // if (e.target == this.$refs["h-table-scroll-body"]) {
         console.log("左右滚动");
         this.$refs["h-table-scroll-head"] &&
           (this.$refs["h-table-scroll-head"].scrollLeft = l);
-      }
+        this.$refs["h-table-scroll-body"] &&
+          (this.$refs["h-table-scroll-body"].scrollLeft = l);
       // }
+      }
       this.lastScrollTop = t; //记录最后的上下滚动距离
       this.lastScrollLeft = l; //记录最后的左右滚动距离
       // console.log("tttttttttttt", t);
@@ -1031,15 +1066,15 @@ export default {
       console.log("scrollHead");
       let l = e.target.scrollLeft;
 
-      // if (this.lastScrollLeft != l) {
-      //   // if (e.target == this.$refs["h-table-scroll-body"]) {
-      //     console.log("左右滚动");
-      //     this.$refs["h-table-scroll-head"] &&
-      //       (this.$refs["h-table-scroll-head"].scrollLeft = l);
-      //   // }
-      // }
+      if (this.lastScrollLeft != l) {
+        // if (e.target == this.$refs["h-table-scroll-body"]) {
+        console.log("左右滚动111");
+        this.$refs["h-table-scroll-body"] &&
+          (this.$refs["h-table-scroll-body"].scrollLeft = l);
+        // }
+      }
       // this.lastScrollTop = t; //记录最后的上下滚动距离
-      // this.lastScrollLeft = l; //记录最后的左右滚动距离
+      this.lastScrollLeft = l; //记录最后的左右滚动距离
     },
     changeStatus(v) {
       console.log(v);
