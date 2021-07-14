@@ -436,6 +436,7 @@ export default {
   components: { HSwitch: Switch },
   data() {
     return {
+      rowKey:'name',
       bordered: true,
       lastScrollTop: 0,
       lastScrollLeft: 0,
@@ -556,7 +557,7 @@ export default {
           title: "key",
           dataIndex: "key",//列数据在数据项中对应的key
           align: "center",
-          key: "key", //v-for遍历columns时的key
+          key: "key", //v-for遍历columns时的key,如果设置了唯一的dataIndex可忽略该属性
           slots: { title: "customTitle" },
           scopedSlots: { customRender: "name" }
         },
@@ -648,9 +649,9 @@ export default {
     selectedList(newVal, oldVal) {
       // console.log(newVal, oldVal);
       newVal.length == this.data.length && (this.tableIsSelectAll = true);
-      let newSelectedRowKeys = newVal.map(v => v.key);
+      let newSelectedRowKeys = newVal.map(v => v[this.rowKey]);
       let newSelectedRows = newVal;
-      let oldSelectedRowKeys = oldVal.map(v => v.key);
+      let oldSelectedRowKeys = oldVal.map(v => v[this.rowKey]);
       let oldSelectedRows = oldVal;
       console.log(
         "选中项发生变化时的回调onChange:",
