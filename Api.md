@@ -38,14 +38,6 @@
 | onSelect         | 用户手动选择/取消选择某列的回调                  | *Function(row, isSelected, selectedRows, event) {}*          | -      |
 | onSelectAll      | 用户手动选择/取消选择所有列的回调                | *Function(isAll,oldSelectRows,nowSelectedRows,changeRows) {}* | -      |
 
-## 事件
-
-| 参数 | 说明 | 返回值 |
-| ---- | ---- | ------ |
-|      |      |        |
-|      |      |        |
-|      |      |        |
-
 ## 注意
 
 1. 在 Table 中，`dataSource` 和 `columns` 里的数据值都需要指定 `key` 值。对于 `dataSource` 默认将每列数据的 `key` 属性作为唯一的标识，如果你的数据没有这个属性，务必使用 `rowKey` 来指定数据列的主键。若没有指定，控制台会出现缺少 key 的提示，表格组件也会出现各类奇怪的错误。

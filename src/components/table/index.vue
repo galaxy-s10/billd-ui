@@ -12,7 +12,7 @@
         class="h-table-header h-hide-scrollbar"
         :style="{ overflow: 'scroll', marginBottom: `-${scrollBarWidth}px` }"
         ref="h-table-scroll-head"
-        @scroll.self="normalScroll"
+        @scroll.self="scrollHead"
       >
         <table :style="{ width: scroll.x ? scroll.x + 'px' : '100%' }">
           <colgroup>
@@ -20,6 +20,7 @@
             <col
               v-for="(item, index) in columns"
               :key="item.key"
+              :column-key="JSON.stringify(getColumnKey(item))"
               :style="{
                 minWidth: item.width + 'px',
                 width: item.width + 'px'
@@ -55,6 +56,7 @@
               <th
                 v-for="(item, index) in columns"
                 :key="index"
+                :column-key="JSON.stringify(getColumnKey(item))"
                 :style="{
                   'text-align': item.align ? item.align : 'left'
                 }"
@@ -78,6 +80,7 @@
             <col
               v-for="(item, index) in columns"
               :key="index"
+              :column-key="JSON.stringify(getColumnKey(item))"
               :style="{
                 minWidth: item.width + 'px',
                 width: item.width + 'px'
@@ -87,10 +90,10 @@
           <tbody class="hss-table-tbody" ref="hss-table-tbody">
             <tr
               v-for="(rowItem, rowIndex) in data"
-              :key="rowItem.key"
-              :index="rowItem[dataIndexRes]"
+              :key="getRowKey(rowItem)"
+              :row-key="getRowKey(rowItem)"
               @mouseenter="mouseEnter($event, rowIndex)"
-              @mouseleave="nowTr = -1"
+              @mouseleave="mouseLeave"
               :class="{ hovertr: rowIndex == nowTr }"
             >
               <td>
@@ -166,6 +169,7 @@
             <col
               v-for="(item, index) in fixedLeftData"
               :key="index"
+              :index="item.column.key"
               :style="{
                 minWidth: item.column.col.width + 'px',
                 width: item.column.col.width + 'px'
@@ -201,13 +205,14 @@
               <th
                 v-for="(item, index) in fixedLeftData"
                 :key="index"
+                :column-key="item.column.key"
                 :style="{
                   'text-align': item.column.col.align
                     ? item.column.col.align
                     : 'left'
                 }"
               >
-                {{ item.column.col.title }}
+                {{ item.column.col.key }}
               </th>
             </tr>
           </thead>
@@ -232,8 +237,8 @@
               <col v-if="rowSelection.type" class="hss-table-selection-col" />
               <col
                 v-for="(item, index) in fixedLeftData"
-                :key="item.column.title"
-                :index="JSON.stringify(item.column.title)"
+                :key="item.column.key"
+                :column-key="item.column.key"
                 :style="{
                   minWidth: item.column.col.width + 'px',
                   width: item.column.col.width + 'px'
@@ -244,10 +249,11 @@
               <tr
                 v-for="(item, index) in fixedLeftData[0].data.length"
                 :key="index"
+                :row-key="JSON.stringify(item)"
                 :style="{ height: trList[index] + 'px' || 'auto' }"
                 :class="{ hovertr: index == nowTr }"
                 @mouseenter="mouseEnter($event, index)"
-                @mouseleave="nowTr = -1"
+                @mouseleave="mouseLeave"
               >
                 <!-- <td>
                   2
@@ -301,6 +307,7 @@
                 <td
                   v-for="(col, colIndex) in fixedLeftData"
                   :key="colIndex"
+                  :row-key="JSON.stringify(col.column.key)"
                   :style="{
                     'text-align': col.column.col.align
                       ? col.column.col.align
@@ -341,7 +348,8 @@
           <colgroup>
             <col
               v-for="(item, index) in fixedRightData"
-              :key="index"
+              :key="item.column.key"
+              :index="item.column.key"
               :style="{
                 minWidth: item.column.col.width + 'px',
                 width: item.column.col.width + 'px',
@@ -393,7 +401,7 @@
               :style="{ height: trList[index] + 'px' || 'auto' }"
               :class="{ hovertr: index == nowTr }"
               @mouseenter="mouseEnter($event, index)"
-              @mouseleave="nowTr = -1"
+              @mouseleave="mouseLeave"
             >
               <td
                 v-for="(col, colIndex) in fixedRightData"
@@ -558,7 +566,7 @@ export default {
 
       columns: [
         {
-          // fixed: "left",
+          fixed: "left",
           width: "100",
           title: "key",
           dataIndex: "key", //列数据在数据项中对应的key
@@ -578,7 +586,7 @@ export default {
           scopedSlots: { customRender: "name" }
         },
         {
-          // fixed: "left",
+          fixed: "left",
           width: "120",
           title: "性别",
           dataIndex: "sex",
@@ -607,15 +615,15 @@ export default {
           // fixed: "right",
           width: "100",
           title: "状态",
-          dataIndex: "switch",
+          dataIndex: "status",
           // align: "right",
-          key: "status"
-          // render: (h, row) => {
-          //   // console.log(row, 9132999);
-          //   // return <div style="">{row.status}</div>;
-          //   // return <div style="height:100px">{row.status}</div>;
-          //   return <h-switch></h-switch>;
-          // },
+          key: "status",
+          render: (h, row) => {
+            // console.log(row, 9132999);
+            // return <div style="">{row.status}</div>;
+            // return <div style="height:100px">{row.status}</div>;
+            return <h-switch></h-switch>;
+          }
         },
         {
           // fixed: "right",
@@ -762,7 +770,7 @@ export default {
           );
         }
         allData["left"].push({
-          column: { title: columnKey, col: item },
+          column: { key: columnKey, col: item },
           data: fixedLeft
         });
       } else if (item.fixed == "right") {
@@ -772,7 +780,7 @@ export default {
         });
         fixedRightData = fixedRight;
         allData["right"].push({
-          column: { title: item.key, col: item },
+          column: { key: item.key, col: item },
           data: fixedRight
         });
       } else {
@@ -855,9 +863,22 @@ export default {
     this.scrollBarWidth = getScrollBarWidth();
   },
   methods: {
+    // 获取对column的v-for时的key
+    getColumnKey(item) {
+      // columns的v-for时的key
+      let columnKey = item.key || item.dataIndex || this.rowKey;
+      return columnKey;
+    },
+    // 获取对data-source的v-for时的key
+    getRowKey(row) {
+      // columns的v-for时的key
+      let rowKey = row.key || this.rowKey;
+      return rowKey;
+    },
     // 获取dataIndex,item:当前column的dataIndex,v:当前data的某项
     getDataIndexRes(item, v) {
       let dataIndex = item.dataIndex || this.rowKey || (v.key && "key");
+      console.log(item, v, dataIndex, "433333333333");
       return v[dataIndex];
     },
     // 用户手动选择/取消选择某列的回调
@@ -967,7 +988,15 @@ export default {
     // }, 100),
     mouseEnter(e, v) {
       console.log("mouseEnter");
-      this.nowTr = v;
+      if (this.fixedLeftData.length || this.fixedRightData.length) {
+        this.nowTr = v;
+      }
+    },
+    mouseLeave() {
+      console.log("mouseLeave");
+      if (this.fixedLeftData.length || this.fixedRightData.length) {
+        this.nowTr = -1;
+      }
     },
     fixedLeftScrollTop(e, index) {
       console.log("fixedLeftScrollTop", e.target, e.currentTarget);
@@ -991,7 +1020,7 @@ export default {
       // this.fixedScrolling = false;
     },
     normalScroll(e, index) {
-      console.log('ss');
+      console.log("ss");
       // console.log(
       //   "normalScroll",
       //   e.target,
@@ -1034,13 +1063,13 @@ export default {
           (this.$refs["h-table-fixed-right-body"].scrollTop = t);
       }
       if (this.lastScrollLeft != l) {
-      // if (e.target == this.$refs["h-table-scroll-body"]) {
-        console.log("左右滚动");
-        this.$refs["h-table-scroll-head"] &&
-          (this.$refs["h-table-scroll-head"].scrollLeft = l);
-        this.$refs["h-table-scroll-body"] &&
-          (this.$refs["h-table-scroll-body"].scrollLeft = l);
-      // }
+        if (e.target == this.$refs["h-table-scroll-body"]) {
+          console.log("左右滚动");
+          this.$refs["h-table-scroll-head"] &&
+            (this.$refs["h-table-scroll-head"].scrollLeft = l);
+          this.$refs["h-table-scroll-body"] &&
+            (this.$refs["h-table-scroll-body"].scrollLeft = l);
+        }
       }
       this.lastScrollTop = t; //记录最后的上下滚动距离
       this.lastScrollLeft = l; //记录最后的左右滚动距离
@@ -1066,15 +1095,15 @@ export default {
       console.log("scrollHead");
       let l = e.target.scrollLeft;
 
-      if (this.lastScrollLeft != l) {
-        // if (e.target == this.$refs["h-table-scroll-body"]) {
-        console.log("左右滚动111");
-        this.$refs["h-table-scroll-body"] &&
-          (this.$refs["h-table-scroll-body"].scrollLeft = l);
-        // }
-      }
+      // if (this.lastScrollLeft != l) {
+      //   // if (e.target == this.$refs["h-table-scroll-body"]) {
+      //   console.log("左右滚动111");
+      //   this.$refs["h-table-scroll-body"] &&
+      //     (this.$refs["h-table-scroll-body"].scrollLeft = l);
+      //   // }
+      // }
       // this.lastScrollTop = t; //记录最后的上下滚动距离
-      this.lastScrollLeft = l; //记录最后的左右滚动距离
+      // this.lastScrollLeft = l; //记录最后的左右滚动距离
     },
     changeStatus(v) {
       console.log(v);
