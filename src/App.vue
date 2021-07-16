@@ -20,7 +20,7 @@
     <div v-for="(item, index) in theme" :key="index">
       {{ item }},{{ index }}222
     </div> -->
-    <!-- <directive-cpt></directive-cpt> -->
+    <directive-cpt></directive-cpt>
     <!-- <div v-auth="'a'">sdg</div> -->
     <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->
     <h-checkbox></h-checkbox>

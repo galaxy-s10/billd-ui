@@ -5,6 +5,10 @@
       border: bordered
     }"
     style="width:800px;"
+    key1="234"
+    key='344343'
+    :domProps="{key:3242232323}"
+    :attrs="{...{key:43422223}}"
   >
     <div class="table-scroll">
       <!-- {{ lastScrollLeft }} -->
@@ -731,6 +735,7 @@ export default {
     }
   },
   created() {
+    console.log('created了')
     /**
      * 首先对数据进行处理，
      * 对columns进行遍历，把左固定，右固定，不固定的col分别保存在一个单独的数组里，
@@ -858,6 +863,7 @@ export default {
     // console.log(2, fixedRight);
   },
   mounted() {
+    console.log('mounted了')
     this.asyncRowHeight();
     console.log(getScrollBarWidth(), 234324);
     this.scrollBarWidth = getScrollBarWidth();
@@ -989,13 +995,13 @@ export default {
     mouseEnter(e, v) {
       console.log("mouseEnter");
       if (this.fixedLeftData.length || this.fixedRightData.length) {
-        this.nowTr = v;
+        // this.nowTr = v;
       }
     },
     mouseLeave() {
       console.log("mouseLeave");
       if (this.fixedLeftData.length || this.fixedRightData.length) {
-        this.nowTr = -1;
+        // this.nowTr = -1;
       }
     },
     fixedLeftScrollTop(e, index) {
@@ -1062,6 +1068,7 @@ export default {
         this.$refs["h-table-fixed-right-body"] &&
           (this.$refs["h-table-fixed-right-body"].scrollTop = t);
       }
+      // 虽然table-head不可见，鼠标滚动不了，但笔记本的触控板可以滚动table-head，可能有bug
       if (this.lastScrollLeft != l) {
         if (e.target == this.$refs["h-table-scroll-body"]) {
           console.log("左右滚动");

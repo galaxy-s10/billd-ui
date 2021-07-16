@@ -5,6 +5,8 @@ import "./index.less";
 const directives = [{ name: "auth", value: "b" }];
 console.log({ ...directives });
 console.log({ ...{ directives } });
+console.log({ ...{ domProps: { key1: 234, xga: 342 } } });
+console.log({...{ key1: 234, xga: 342 }});
 export default {
   render() {
     return (
@@ -22,6 +24,9 @@ export default {
         <div {...{ directives: [{ name: "auth", value: "a" }] }}>
           这个directives会vnode数据
         </div>
+        <div {...{attrs:{ key: 234333333333333, xga: 34111112 }}}>domProps11</div>
+        <div key1="2342">domProps22</div>
+        <div key="333">domProps333</div>
         {/* 通过vnode指令数据格式1 */}
         <div
           {...{
@@ -29,25 +34,25 @@ export default {
               {
                 name: "auth",
                 value: "a",
-                modifiers: {},
+                modifiers: {}
               },
               {
                 name: "auth",
                 value: "a",
                 modifiers: {
-                  bar: true,
-                },
+                  bar: true
+                }
               },
               {
                 name: "auth",
                 value: "a",
                 modifiers: {
-                  foo: true,
-                },
-              },
+                  foo: true
+                }
+              }
             ],
             staticClass: "sdgdsg",
-            class: ["123", "2355"],
+            class: ["123", "2355"]
           }}
         >
           通过vnode指令数据格式1
@@ -64,5 +69,5 @@ export default {
         <div v-auth={{ age: 1, name: 2 }}>age:1,name:2</div>
       </div>
     );
-  },
+  }
 };
