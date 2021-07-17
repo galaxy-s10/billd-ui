@@ -5,10 +5,6 @@
       border: bordered
     }"
     style="width:800px;"
-    key1="234"
-    key='344343'
-    :domProps="{key:3242232323}"
-    :attrs="{...{key:43422223}}"
   >
     <div class="table-scroll">
       <!-- {{ lastScrollLeft }} -->
@@ -24,7 +20,7 @@
             <col
               v-for="(item, index) in columns"
               :key="item.key"
-              :column-key="JSON.stringify(getColumnKey(item))"
+              :column-key="getColumnKey(item)"
               :style="{
                 minWidth: item.width + 'px',
                 width: item.width + 'px'
@@ -84,7 +80,7 @@
             <col
               v-for="(item, index) in columns"
               :key="index"
-              :column-key="JSON.stringify(getColumnKey(item))"
+              :column-key="getColumnKey(item)"
               :style="{
                 minWidth: item.width + 'px',
                 width: item.width + 'px'
@@ -173,7 +169,7 @@
             <col
               v-for="(item, index) in fixedLeftData"
               :key="index"
-              :index="item.column.key"
+              :column-key="item.column.key"
               :style="{
                 minWidth: item.column.col.width + 'px',
                 width: item.column.col.width + 'px'
@@ -353,7 +349,7 @@
             <col
               v-for="(item, index) in fixedRightData"
               :key="item.column.key"
-              :index="item.column.key"
+              :column-key="item.column.key"
               :style="{
                 minWidth: item.column.col.width + 'px',
                 width: item.column.col.width + 'px',
@@ -453,6 +449,8 @@ export default {
   components: { HSwitch: Switch },
   data() {
     return {
+      hilll1: "key",
+      // hilll1:{a:1,key:334},
       dataIndexRes: null,
       // rowKey:'name',
       bordered: true,
@@ -683,6 +681,9 @@ export default {
     }
   },
   computed: {
+    hilll() {
+      return { a: 443, key: 54 };
+    },
     tableIsSelectAll: {
       get: function() {
         let res =
@@ -735,7 +736,7 @@ export default {
     }
   },
   created() {
-    console.log('created了')
+    console.log("created了");
     /**
      * 首先对数据进行处理，
      * 对columns进行遍历，把左固定，右固定，不固定的col分别保存在一个单独的数组里，
@@ -863,7 +864,7 @@ export default {
     // console.log(2, fixedRight);
   },
   mounted() {
-    console.log('mounted了')
+    console.log("mounted了");
     this.asyncRowHeight();
     console.log(getScrollBarWidth(), 234324);
     this.scrollBarWidth = getScrollBarWidth();

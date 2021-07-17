@@ -24,8 +24,11 @@ export default {
         <div {...{ directives: [{ name: "auth", value: "a" }] }}>
           这个directives会vnode数据
         </div>
+        {/* 通过attrs设置dom的自定义属性 */}
         <div {...{attrs:{ key: 234333333333333, xga: 34111112 }}}>domProps11</div>
+        <div attrs={{key:3434}}>attrsattrs</div>
         <div key1="2342">domProps22</div>
+        {/* 这样写key也会被vue当做是特殊attr */}
         <div key="333">domProps333</div>
         {/* 通过vnode指令数据格式1 */}
         <div

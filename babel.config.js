@@ -5,9 +5,9 @@ module.exports = {
     "@babel/preset-env",
     [
       "@vue/babel-preset-jsx",
-      {
-        injectH: false,
-      },
+      // {
+      //   injectH: false,
+      // },
     ],
   ],
   plugins: [
@@ -21,6 +21,6 @@ module.exports = {
     //   },
     //   "billd-ui",
     // ],
-    "transform-vue-jsx",
+    // "transform-vue-jsx",
   ],
 };
