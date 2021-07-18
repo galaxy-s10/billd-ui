@@ -8,6 +8,7 @@ module.exports = {
    * 删掉.browserlistrc文件即可解决。但是我没有删，将webpack-dev-server升级到了4.x解决了，但也需要修改devServe属性的部分东西。
    */
   mode: "development",
+  devtool: "source-map",
   devServer: {
     hot: true, // hrm，开启模块热替换
     // hotOnly: true, // 默认情况下（hotOnly:false），如果编译失败会刷新页面。设置了true后就不会刷新整个页面(!!!webpack-dev-server@4.x已改!!!)

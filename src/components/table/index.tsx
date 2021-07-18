@@ -299,7 +299,7 @@ export default {
                             typeof col.column.col.render == "function"
                               ? this.tempRender(
                                 `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`,
-                                col,
+                                col.data[index],
                                 col.column.col.render
                               )
                               : ""
@@ -395,7 +395,7 @@ export default {
                           typeof col.column.col.render == "function"
                             ? this.tempRender(
                               `fixed-right-${col.column.col.key}-${colIndex}-${index}`,
-                              col,
+                              col.data[index],
                               col.column.col.render
                             )
                             : ""
@@ -1018,8 +1018,8 @@ export default {
     },
     // 第一个参数是插槽名，第二个参数是当前行数据，第三个参数是render函数。
     tempRender(name, row, dom) {
-      console.log(name,row,dom,'000-0--00');
-      let VNode = dom(this.$createElement, row);
+      let VNode = dom.call(this, this.$createElement, row);
+      console.log(VNode,'VNodeVNodeVNode');
       this.$slots[name] = VNode;
     }
   }

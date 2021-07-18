@@ -1,5 +1,9 @@
 <template>
   <div>
+    <jsx-cpt></jsx-cpt>
+    <create-elementCpt></create-elementCpt>
+    <hr />
+    {{ objabc }}
     <h-table
       rowKey="idd"
       :bordered="true"
@@ -15,6 +19,8 @@
 </template>
 
 <script>
+import createElementCpt from "./components/createElementCpt";
+import JsxCpt from "./components/JsxCpt";
 import HTable from "./components/table/index.tsx";
 
 // import Dashboard from '../lib/dashboard'
@@ -28,12 +34,16 @@ import HTable from "./components/table/index.tsx";
 export default {
   components: {
     // Dashboard,
-    HTable,
+    JsxCpt,
+    createElementCpt,
+    HTable
     // HModal: Modal,
     // HSwitch:Switch,
   },
   data() {
     return {
+      row: { b: 32 },
+      objabc: { a: 1 },
       defaultCheckedList: [200],
       defaultDisabledList: [100, 200],
       sourceData: [
@@ -161,11 +171,22 @@ export default {
           // key: "sex",
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
-          render: (h, row) => {
-            console.log(row,223, 9132999);
+          render: function(h, row) {
             // return <span>{row.status}</span>;
             // return <h-switch></h-switch>;
-            return <div>{row.sex}</div>
+            /**
+             * 下面的代码会解析成：h("div", [h("span", [row, "3454"])])
+             * 即h函数的第二个参数是数组，里面又嵌套了一个h函数，这个h函数的第二个参数是数组，
+             * 数组里面的第一个参数row是对象，是不能通过h函数转成vnode的，会渲染成undefined，
+             * 数组里面的第二个参数是数字，可以通过h函数转成vnode。
+             */
+            console.log(this.$createElement===h,3444334);
+            var obja = {ad:323,obj:{dsg:31}}
+            return (
+              <div>
+                <span>{obja}3454</span>
+              </div>
+            );
           }
         },
         {
@@ -183,16 +204,16 @@ export default {
           // fixed: "right",
           width: "100",
           title: "状态",
-          dataIndex: "status",
+          dataIndex: "status"
           // align: "right",
           // key: "status",
-          render: (h, row) => {
-            // console.log(row, 9132999);
-            // return <div style="">{row.status}</div>;
-            // return <div style="height:100px">{row.status}</div>;
-            // return <h-switch></h-switch>;
-            return <div>{row}54</div>
-          }
+          // render: (h, row) => {
+          //   console.log(row, "3434", 9132999);
+          //   // return <div style="">{row.status}</div>;
+          //   // return <div style="height:100px">{row.status}</div>;
+          //   // return <h-switch></h-switch>;
+          //   return <div>{row.status}</div>;
+          // }
         },
         {
           // fixed: "right",
@@ -254,7 +275,7 @@ export default {
     });
   },
   methods: {
-        getColumnKey(column) {
+    getColumnKey(column) {
       // columns的v-for时的key
       let columnKey = column.key || column.dataIndex;
       return columnKey;

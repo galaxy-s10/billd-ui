@@ -140,7 +140,7 @@
                   typeof columnsItem.render == "function"
                     ? tempRender(
                         `${columnsItem.dataIndex}-${rowIndex}`,
-                        rowItem,
+                        JSON.stringify(rowItem),
                         columnsItem.render
                       )
                     : ""
@@ -315,7 +315,7 @@
                     typeof col.column.col.render == "function"
                       ? tempRender(
                           `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`,
-                          col,
+                          col.data[index],
                           col.column.col.render
                         )
                       : ""
@@ -416,7 +416,7 @@
                   typeof col.column.col.render == "function"
                     ? tempRender(
                         `fixed-right-${col.column.col.key}-${colIndex}-${index}`,
-                        col,
+                        col.data[index],
                         col.column.col.render
                       )
                     : ""
@@ -1064,7 +1064,8 @@ export default {
     },
     // 第一个参数是插槽名，第二个参数是当前行数据，第三个参数是render函数。
     tempRender(name, row, dom) {
-      let VNode = dom(this.$createElement, row);
+      console.log(dom, "dommmm");
+      let VNode = dom.call(this, this.$createElement, row);
       this.$slots[name] = VNode;
     }
   }
