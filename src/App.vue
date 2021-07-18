@@ -1,50 +1,12 @@
 <template>
   <div>
-    <h-switch
-      openText="开"
-      closeText="关"
-      :defaultChecked="true"
-      @clickSwitch="clickSwitch"
-    >
-      <template slot="openSlot">
-        <b>开启</b>
-      </template>
-    </h-switch>
-
-    <!-- <div style="height:300px;width:400px;overflow:scroll;background:red" @scroll="xxx">
-      <div style="height:600px;width:200px;background:yellow"></div>
-    </div> -->
-    <!-- <div v-for="(item, index) of theme" :key="index">
-      {{ item }},{{ index }}222
-    </div>
-    <div v-for="(item, index) in theme" :key="index">
-      {{ item }},{{ index }}222
-    </div> -->
-    <directive-cpt></directive-cpt>
-    <!-- <div v-auth="'a'">sdg</div> -->
-    <!-- <div v-for="(item, index) in obj" :key="index">{{ item }},{{ index }}</div> -->
-    <h-checkbox></h-checkbox>
-    <h-table></h-table>
-    hello billd-ui
-    <vue-cpt></vue-cpt>
-    <vue-render-cpt></vue-render-cpt>
-    <tsx-cpt></tsx-cpt>
-    <jsx-cpt></jsx-cpt>
-    <!-- <h-switch></h-switch>
-    <h-modal
-      v-model="visible"
-      title="tip"
-      cancelText="no"
-      confirmText="ok"
-      :mask="true"
-      :maskClosable="false"
-      @on-cancel="cancelClick"
-      @on-confirm="confirmClick"
-      @on-close="closeClick"
-      @visible-change="visibleChange"
-    >
-      hello world
-    </h-modal> -->
+    <h-table
+      rowKey="idd"
+      :bordered="true"
+      :sourceData="sourceData"
+      :columns="columns"
+      :rowSelection="rowSelection"
+    ></h-table>
     <br />
     <span @click="changeModal">点击显示modal1</span>
     <br />
@@ -53,41 +15,217 @@
 </template>
 
 <script>
-import HTable from "./components/table";
-import HCheckbox from "./components/checkbox";
+import HTable from "./components/table/index.tsx";
 
 // import Dashboard from '../lib/dashboard'
-
-import VueCpt from "./components/VueCpt";
-import VueRenderCpt from "./components/VueRenderCpt";
-import TsxCpt from "./components/TsxCpt/index";
-import JsxCpt from "./components/JsxCpt/index";
-import DirectiveCpt from "./components/DirectiveCpt/index";
-
-import { Switch } from "../dist";
-import "../dist/switch/style/css";
-
-import { Message } from "../dist";
-import "../dist/message/style/index.css";
 
 // import { Modal } from "../dist";
 // import "../dist/modal/style/index.css";
 
+// import Switch from "../dist";
+// import "../dist/switch/style/index.css";
+
 export default {
   components: {
     // Dashboard,
-    VueCpt,
-    VueRenderCpt,
-    TsxCpt,
-    JsxCpt,
-    DirectiveCpt,
     HTable,
-    HCheckbox,
-    HSwitch: Switch
     // HModal: Modal,
+    // HSwitch:Switch,
   },
   data() {
     return {
+      defaultCheckedList: [200],
+      defaultDisabledList: [100, 200],
+      sourceData: [
+        {
+          key: 100,
+          idd: 100,
+          name: "sddsdsdsdsdsdssd",
+          status: "1",
+          age: 323233223323,
+          money: 34,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男"
+        },
+        {
+          key: 200,
+          idd: 200,
+          name: "wwe",
+          status: "1",
+          age: 32,
+          money: 67,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男"
+        },
+        {
+          key: 300,
+          idd: 300,
+          name: "wew",
+          status: "1",
+          age: 32,
+          money: 23,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男"
+        },
+        {
+          key: 400,
+          idd: 400,
+          name: "dff",
+          status: "1",
+          age: 32,
+          money: 3456,
+          address: "New No. 1 Lake Park",
+          tags: ["nice", "developer"],
+          sex: "男"
+        },
+        {
+          key: 500,
+          idd: 500,
+          name: "John",
+          status: "1",
+          age: 32,
+          address: "New No. 1 Lake Park",
+          sex: "男",
+          money: 12,
+
+          tags: ["nice", "developer"]
+        },
+        {
+          key: 600,
+          idd: 600,
+          name: "Jim",
+          status: "1",
+          age: 42,
+          sex: "女",
+          money: 234,
+
+          address: "London No. 1 Lake Park",
+          tags: ["loser"]
+        },
+        {
+          key: 700,
+          idd: 700,
+          age: 32,
+          status: "0",
+          name: "Joe",
+          address: "Sidney No. 1 Lake Park",
+          sex: "男",
+          money: 345,
+          tags: ["cool", "teacher"]
+        }
+      ],
+
+      rowSelection: {
+        type: "checkbox",
+        getCheckboxProps: row => {
+          // console.log(row.key, "getCheckboxProps");
+          // console.log(row,this.getRowKey(row));
+          let key = row[this.getRowKey(row)];
+          // console.log(row, key, "0000000");
+          let prop = {
+            defaultChecked: this.defaultCheckedList.indexOf(key) != -1,
+            disabled: this.defaultDisabledList.indexOf(key) != -1
+          };
+          // console.log("proppropprop", prop);
+          return prop;
+        }
+      },
+
+      columns: [
+        {
+          // fixed: "left",
+          width: "100",
+          title: "key",
+          dataIndex: "idd", //列数据在数据项中对应的key
+          align: "center"
+          // key: "key", //v-for遍历columns时的key,如果设置了唯一的dataIndex可忽略该属性
+        },
+        {
+          fixed: "right",
+          width: "100",
+          title: "钱",
+          dataIndex: "money",
+          align: "center"
+          // key: "money",
+        },
+        {
+          // fixed: "left",
+          // fixed: "right",
+          width: "120",
+          title: "性别",
+          dataIndex: "sex",
+          align: "center",
+          // key: "sex",
+          // slots: { title: "customTitle" },
+          // scopedSlots: { customRender: "name" },
+          render: (h, row) => {
+            console.log(row,223, 9132999);
+            // return <span>{row.status}</span>;
+            // return <h-switch></h-switch>;
+            return <div>{row.sex}</div>
+          }
+        },
+        {
+          fixed: true,
+          // fixed: "left",
+          ellipsis: true,
+          width: "200",
+          title: "name",
+          dataIndex: "name",
+          align: "center"
+          // key: "name",
+        },
+        {
+          fixed: true,
+          // fixed: "right",
+          width: "100",
+          title: "状态",
+          dataIndex: "status",
+          // align: "right",
+          // key: "status",
+          render: (h, row) => {
+            // console.log(row, 9132999);
+            // return <div style="">{row.status}</div>;
+            // return <div style="height:100px">{row.status}</div>;
+            // return <h-switch></h-switch>;
+            return <div>{row}54</div>
+          }
+        },
+        {
+          // fixed: "right",
+          width: "100",
+          title: "Age",
+          dataIndex: "age"
+          // key: "age",
+        },
+        {
+          // width: "200",
+          title: "Address",
+          dataIndex: "address"
+          // key: "address",
+        },
+        {
+          // fixed: "left",
+          width: "100",
+          title: "Tags",
+          // key: "tags",
+          dataIndex: "tags"
+          // render: (h, row) => {
+          //   // console.log(row.name);
+          //   // return h("div", {}, row.name);
+          //   // return <div>{row.name}</div>;
+          //   return <span>234</span>;
+          // }
+        }
+        // {
+        //   title: "Action",
+        //   key: "action",
+        //   scopedSlots: { customRender: "action" },
+        // },
+      ],
       theme: {
         default: {
           sss: 123,
@@ -109,11 +247,6 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    Message({
-      content: "hello1111111111",
-      closeAble: true,
-      duration: 1000
-    });
     console.log("fsfsdfsf");
     console.log(Object.keys(this.theme));
     Object.keys(this.theme).map(item => {
@@ -121,6 +254,18 @@ export default {
     });
   },
   methods: {
+        getColumnKey(column) {
+      // columns的v-for时的key
+      let columnKey = column.key || column.dataIndex;
+      return columnKey;
+    },
+    // 获取对data-source的v-for时的key
+    getRowKey(row) {
+      // data-source的v-for时的key
+      // console.log("columns的v-for时的key", row);
+      let rowKey = this.rowKey || (row.key && "key");
+      return rowKey;
+    },
     clickSwitch(v) {
       console.log(v);
     },

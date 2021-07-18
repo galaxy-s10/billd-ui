@@ -404,7 +404,7 @@
             >
               <td
                 v-for="(col, colIndex) in fixedRightData"
-                :key="col.column.key || colIndex"
+                :key="colIndex"
                 :column-key="col.column.key || colIndex"
                 :style="{
                   'text-align': col.column.col.align
@@ -853,6 +853,15 @@ export default {
       console.log("处理默认选中数据", item);
       return this.defaultCheckedList.indexOf(item.key) != -1;
     });
+    // this.fixedLeftData = fixedLeftData;
+    // let fixedRight = this.columns.filter((item) => {
+    //   console.log(item);
+    //   return item.fixed == "right";
+    // });
+    // this.fixedLeft = fixedLeft;
+    // this.fixedRight = fixedRight;
+    // console.log(1, fixedLeft);
+    // console.log(2, fixedRight);
   },
   mounted() {
     console.log("mounted了");
