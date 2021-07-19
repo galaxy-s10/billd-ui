@@ -1,6 +1,7 @@
 <template>
   <div>
-    <jsx-cpt></jsx-cpt>
+    <!-- <jsx-cpt></jsx-cpt> -->
+    <vue-render-cpt></vue-render-cpt>
     <create-elementCpt></create-elementCpt>
     <hr />
     {{ objabc }}
@@ -14,14 +15,16 @@
     <br />
     <span @click="changeModal">点击显示modal1</span>
     <br />
-    <img src="./assets/img/author.jpg" style="width:200px" alt="" />
+    <!-- <img src="./assets/img/author.jpg" style="width:200px" alt="" /> -->
   </div>
 </template>
 
 <script>
-import createElementCpt from "./components/createElementCpt";
+import createElementCpt from "./components/createElementCpt/index1";
 import JsxCpt from "./components/JsxCpt";
-import HTable from "./components/table/index.tsx";
+import {HTable} from '../lib';
+import vueRenderCpt from "./components/vueRenderCpt";
+// import HTable from "./components/table/index";
 
 // import Dashboard from '../lib/dashboard'
 
@@ -34,6 +37,7 @@ import HTable from "./components/table/index.tsx";
 export default {
   components: {
     // Dashboard,
+    vueRenderCpt,
     JsxCpt,
     createElementCpt,
     HTable
@@ -52,7 +56,7 @@ export default {
           idd: 100,
           name: "sddsdsdsdsdsdssd",
           status: "1",
-          age: 323233223323,
+          age: 18,
           money: 34,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
@@ -74,7 +78,7 @@ export default {
           idd: 300,
           name: "wew",
           status: "1",
-          age: 32,
+          age: 22,
           money: 23,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
@@ -85,7 +89,7 @@ export default {
           idd: 400,
           name: "dff",
           status: "1",
-          age: 32,
+          age: 17,
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
@@ -96,7 +100,7 @@ export default {
           idd: 500,
           name: "John",
           status: "1",
-          age: 32,
+          age: 25,
           address: "New No. 1 Lake Park",
           sex: "男",
           money: 12,
@@ -108,17 +112,16 @@ export default {
           idd: 600,
           name: "Jim",
           status: "1",
-          age: 42,
+          age: 30,
           sex: "女",
           money: 234,
-
           address: "London No. 1 Lake Park",
           tags: ["loser"]
         },
         {
           key: 700,
           idd: 700,
-          age: 32,
+          age: 21,
           status: "0",
           name: "Joe",
           address: "Sidney No. 1 Lake Park",
@@ -132,12 +135,13 @@ export default {
         type: "checkbox",
         getCheckboxProps: row => {
           // console.log(row.key, "getCheckboxProps");
-          // console.log(row,this.getRowKey(row));
-          let key = row[this.getRowKey(row)];
+          // console.log(row, "sfsfsdf");
+          // let key = row[this.getRowKey(row)];
           // console.log(row, key, "0000000");
           let prop = {
-            defaultChecked: this.defaultCheckedList.indexOf(key) != -1,
-            disabled: this.defaultDisabledList.indexOf(key) != -1
+            defaultChecked: this.defaultCheckedList.indexOf(row.key) != -1,
+            // disabled: this.defaultDisabledList.indexOf(row.key) != -1 ,
+            disabled: row.age < 20
           };
           // console.log("proppropprop", prop);
           return prop;
@@ -180,11 +184,11 @@ export default {
              * 数组里面的第一个参数row是对象，是不能通过h函数转成vnode的，会渲染成undefined，
              * 数组里面的第二个参数是数字，可以通过h函数转成vnode。
              */
-            console.log(this.$createElement===h,3444334);
-            var obja = {ad:323,obj:{dsg:31}}
+            // console.log(this.$createElement === h, 3444334);
+            var obja = { ad: 323, obj: { dsg: 31 } };
             return (
               <div>
-                <span>{obja}3454</span>
+                <div style="height:">3454</div>
               </div>
             );
           }
@@ -268,6 +272,13 @@ export default {
   computed: {},
   created() {},
   mounted() {
+    fetch("/api/type/pageList")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+      });
     console.log("fsfsdfsf");
     console.log(Object.keys(this.theme));
     Object.keys(this.theme).map(item => {

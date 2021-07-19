@@ -12,13 +12,13 @@ const tsDefaultReporter = ts.reporter.defaultReporter();
 
 gulp.task("clean-dist", function() {
   console.log(process.cwd());
-  return gulp.src("../dist", { allowEmpty: true }).pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
+  return gulp.src("../lib", { allowEmpty: true }).pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
 });
 
 gulp.task("copy", function() {
   return gulp
     .src("../components/assets/**/*", { allowEmpty: true })
-    .pipe(gulp.dest("../dist/assets"));
+    .pipe(gulp.dest("../lib/assets"));
 });
 
 gulp.task("less", function() {
@@ -27,15 +27,15 @@ gulp.task("less", function() {
     .pipe(less())
     .pipe(postcss())
     // .pipe(concat('all.css'))
-    .pipe(gulp.dest("../dist"));
+    .pipe(gulp.dest("../lib"));
 });
 
 gulp.task("css123", function() {
   console.log("ssss");
   return gulp
-    .src("../dist/**/*.css")
+    .src("../lib/**/*.css")
     .pipe(concat("all.css"))
-    .pipe(gulp.dest("../dist"));
+    .pipe(gulp.dest("../lib"));
 });
 
 
@@ -77,8 +77,8 @@ gulp.task("compile", function() {
       through2.obj(function(file, encoding, next) {
         this.push(file.clone());
         if (file.path.match(/[\\/]style[\\/]index\.(js|ts)$/)) {
-          //匹配所有组件下的style目录下面的文件。
-          console.log("匹配到", file.path);
+          //匹配所有组件(文件夹)下的style目录下面的文件。
+          console.log("匹配到样式文件", file.path);
           const content = file.contents.toString(encoding);
           console.log(typeof content);
           console.log(content);
@@ -107,9 +107,9 @@ gulp.task("compile", function() {
         next();
       })
     );
-  tsResult.dts.pipe(gulp.dest("../dist"));
+  tsResult.dts.pipe(gulp.dest("../lib"));
 
-  return stream.pipe(gulp.dest("../dist"));
+  return stream.pipe(gulp.dest("../lib"));
 });
 
 gulp.task(
