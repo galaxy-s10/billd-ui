@@ -5,13 +5,13 @@
     <create-elementCpt></create-elementCpt>
     <hr />
     {{ objabc }}
-    <h-table
+    <!-- <h-table
       rowKey="idd"
       :bordered="true"
       :sourceData="sourceData"
       :columns="columns"
       :rowSelection="rowSelection"
-    ></h-table>
+    ></h-table> -->
     <br />
     <span @click="changeModal">点击显示modal1</span>
     <br />
@@ -21,8 +21,19 @@
 
 <script>
 import createElementCpt from "./components/createElementCpt/index1";
+import Vue from "vue";
 import JsxCpt from "./components/JsxCpt";
-import {HTable} from '../lib';
+import  Switch  from "../dist/js/main-bundle";
+import("../dist/js/main-bundle").then(res=>{
+  console.log(res);
+  console.log('/js/main-bundle/js/main-bundle');
+})
+import("../lib/index").then(res=>{
+  console.log(res);
+  console.log('../lib/index../lib/index');
+})
+// import {Switch} from "../lib/index";
+console.log(Switch, 33);
 import vueRenderCpt from "./components/vueRenderCpt";
 // import HTable from "./components/table/index";
 
@@ -39,8 +50,8 @@ export default {
     // Dashboard,
     vueRenderCpt,
     JsxCpt,
-    createElementCpt,
-    HTable
+    createElementCpt
+    // HTable:Table,
     // HModal: Modal,
     // HSwitch:Switch,
   },

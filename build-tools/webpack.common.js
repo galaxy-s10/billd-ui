@@ -5,7 +5,8 @@ const devConfig = require("./webpack.dev");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const resolveApp = require("./paths");
 const path = require("path");
@@ -20,9 +21,27 @@ const commonConfig = function(isProduction) {
     // target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
+        // import: "./lib/index.js",
         import: "./src/index.js"
+        // import: "./components/index.js"
         // filename: 'output-[name]-bundle.js'
       }
+    },
+
+    externals: {
+      // vue: {
+      //   root: "Vue",
+      //   commonjs2: "vue",
+      //   commonjs: "vue",
+      //   amd: "vue"
+      // }
+      // vue: "Vue",
+      // vuex: 'Vuex',
+      // 'vue-router': 'VueRouter',
+      // axios: 'axios',
+      // less: 'less',
+      // echarts: 'echarts',
+      // iview: 'iview',
     },
     output: {
       filename: "js/[name]-bundle.js", //入口文件打包生成后的文件的文件名
@@ -43,26 +62,26 @@ const commonConfig = function(isProduction) {
       modules: ["node_modules"]
     },
     optimization: {
-      splitChunks: {
-        cacheGroups: {
-          defaultVendors: {
-            //重写默认的defaultVendors
-            chunks: "initial",
-            // minSize: 50 * 1024,
-            // maxSize: 50 * 1024,
-            test: /[\\/]node_modules[\\/]/,
-            filename: "js/[name]-defaultVendors.js",
-            priority: -10
-          },
-          default: {
-            //重写默认的default
-            chunks: "all",
-            filename: "js/[name]-default.js",
-            minChunks: 2, //至少被minChunks个入口文件引入了minChunks次。
-            priority: -20
-          }
-        }
-      }
+      // splitChunks: {
+      //   cacheGroups: {
+      //     defaultVendors: {
+      //       //重写默认的defaultVendors
+      //       chunks: "initial",
+      //       // minSize: 50 * 1024,
+      //       // maxSize: 50 * 1024,
+      //       test: /[\\/]node_modules[\\/]/,
+      //       filename: "js/[name]-defaultVendors.js",
+      //       priority: -10
+      //     },
+      //     default: {
+      //       //重写默认的default
+      //       chunks: "all",
+      //       filename: "js/[name]-default.js",
+      //       minChunks: 2, //至少被minChunks个入口文件引入了minChunks次。
+      //       priority: -20
+      //     }
+      //   }
+      // }
     },
     module: {
       // loader执行顺序：从下往上，从右往左
@@ -173,7 +192,23 @@ const commonConfig = function(isProduction) {
       ]
     },
     plugins: [
-      new CleanWebpackPlugin({}),
+      // new HtmlWebpackTagsPlugin({
+      //   append: false,
+      //   publicPath:"",
+      //   // links: [
+      //   //   'https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/styles/iview.css',
+      //   // ],
+      //   scripts: [
+      //     { path: 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/less@4.1.1/dist/less.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js' },
+      //     // { path: 'https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/iview.min.js' },
+      //   ]
+      // }),
+      // new CleanWebpackPlugin({}),
       new WebpackBar(), // 构建进度条
       new HtmlWebpackPlugin({
         // 自动生成index.html文件(并引入打包的js)
