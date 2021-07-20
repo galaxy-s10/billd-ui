@@ -16,18 +16,18 @@ const path = require("path");
 
 console.log("++++++++++");
 module.exports = {
-  // mode: "development",
+  mode: "development",
   // mode: "none",
-  mode: "production",
-  // devtool: "source-map",
-  output: {
-    path: path.resolve(__dirname, '../lib2'),
-    publicPath: '/lib2/',
-    filename: 'lime-ui.min.js',
-    library: 'lime-ui',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  },
+  // mode: "production",
+  devtool: "source-map",
+  // output: {
+  //   path: path.resolve(__dirname, '../lib2'),
+  //   publicPath: '/lib2/',
+  //   filename: 'lime-ui.min.js',
+  //   library: 'lime-ui',
+  //   libraryTarget: 'umd',
+  //   umdNamedDefine: true
+  // },
   // externals: {
   //   vue: "Vue",
   //   vuex: 'Vuex',

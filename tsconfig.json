@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "rootDir": "../"
   },
   "include": [
     "./src/**/*.ts",

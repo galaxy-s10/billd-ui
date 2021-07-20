@@ -21,19 +21,25 @@
 
 <script>
 import createElementCpt from "./components/createElementCpt/index1";
-import Vue from "vue";
+// import Vue from "vue";
 import JsxCpt from "./components/JsxCpt";
-import  Switch  from "../dist/js/main-bundle";
-import("../dist/js/main-bundle").then(res=>{
-  console.log(res);
-  console.log('/js/main-bundle/js/main-bundle');
-})
+// import {sum} from '../lib/index';
+// console.log(sum);
+
+// import {sum} from '../dist/js/main-bundle';
+// console.log(sum);
+// import  Switch  from "../dist/js/main-bundle";
+// import("../dist/js/main-bundle").then(res=>{
+//   console.log(res);
+//   console.log('/js/main-bundle/js/main-bundle');
+// })
 import("../lib/index").then(res=>{
   console.log(res);
+  console.log(sum);
   console.log('../lib/index../lib/index');
 })
 // import {Switch} from "../lib/index";
-console.log(Switch, 33);
+// console.log(Switch, 33);
 import vueRenderCpt from "./components/vueRenderCpt";
 // import HTable from "./components/table/index";
 
