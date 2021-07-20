@@ -1,4 +1,4 @@
-declare const _default: {
+export default class TsxClassCpt {
     render(): any;
-};
-export default _default;
+    enterClick(e: any): void;
+}

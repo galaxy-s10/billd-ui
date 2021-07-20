@@ -1,12 +1,11 @@
 const { DefinePlugin } = require("webpack");
 const { merge } = require("webpack-merge");
 const WebpackBar = require("webpackbar");
+const prodConfig = require("./webpack.prod.js");
 const devConfig = require("./webpack.dev");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const resolveApp = require("./paths");
 const path = require("path");
@@ -22,8 +21,8 @@ const commonConfig = function(isProduction) {
     entry: {
       main: {
         // import: "./lib/index.js",
-        import: "./src/index.js"
-        // import: "./components/index.js"
+        // import: "./src/index.js"
+        import: "./components/index.js"
         // filename: 'output-[name]-bundle.js'
       }
     },
@@ -192,23 +191,6 @@ const commonConfig = function(isProduction) {
       ]
     },
     plugins: [
-      // new HtmlWebpackTagsPlugin({
-      //   append: false,
-      //   publicPath:"",
-      //   // links: [
-      //   //   'https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/styles/iview.css',
-      //   // ],
-      //   scripts: [
-      //     { path: 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/less@4.1.1/dist/less.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js' },
-      //     // { path: 'https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/iview.min.js' },
-      //   ]
-      // }),
-      // new CleanWebpackPlugin({}),
       new WebpackBar(), // 构建进度条
       new HtmlWebpackPlugin({
         // 自动生成index.html文件(并引入打包的js)
@@ -257,7 +239,10 @@ const commonConfig = function(isProduction) {
 module.exports = function(env) {
   const isProduction = env.production;
   process.env.NODE_ENV = isProduction ? "production" : "development";
-  const config = devConfig;
+  // const config = devConfig;
+  // const config = prodConfig;
+  const config = isProduction ? prodConfig : devConfig;
   const mergeConfig = merge(commonConfig(isProduction), config); //根据当前环境，合并配置文件
+  console.log(mergeConfig);
   return mergeConfig;
 };

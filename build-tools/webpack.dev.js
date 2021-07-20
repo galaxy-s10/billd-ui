@@ -2,6 +2,7 @@
 const isProduction = false;
 const resolveApp = require("./paths");
 
+console.log('--------');
 module.exports = {
   /**
    * .browserlistrc文件导致的热更新不生效。https://github.com/webpack/webpack-dev-server/pull/2761
