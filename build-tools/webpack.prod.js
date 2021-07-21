@@ -18,12 +18,12 @@ module.exports = {
   mode: "production",
   // devtool: "source-map",
   output: {
-    path: resolveApp("./library"),
-    publicPath: "/library/",
-    filename: "billd-ui.js",
-    library: "billd-ui.js",
-    libraryTarget: "umd",
-    umdNamedDefine: true,
+    // path: resolveApp("./library"),
+    // publicPath: "/library/",
+    // filename: "billd-ui.js",
+    // library: "billd-ui.js",
+    // libraryTarget: "umd",
+    // umdNamedDefine: true,
   },
   // externals: {
   //   vue: "Vue",

@@ -20,9 +20,9 @@ module.exports = {
      * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
      * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
      */
-    // contentBase: resolveApp("./hss"), //(!!!webpack-dev-server@4.x已改!!!)
+    // contentBase: resolveApp("./"), //(!!!webpack-dev-server@4.x已改!!!)
     // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
-    static: [resolveApp("./public")],//模拟vuecli的public
+    // static: [resolveApp("./public")], //模拟vuecli的public
     historyApiFallback: true, //默认值：false，设置true后可解决spa页面刷新404
     // historyApiFallback: {
     //   rewrites: [
@@ -31,27 +31,27 @@ module.exports = {
     //     { from: /abc/, to: "/abc" }
     //   ]
     // },
-    devMiddleware: {
-      // webpack-dev-server4+写法。https://github.com/webpack/webpack-dev-server/blob/master/CHANGELOG.md
-      publicPath: "/"
-    },
-    // publicPath: "/", //devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
-    proxy: {
-      "/api": {
-        // target: 'https://www.zhengbeining.com/api/',  //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
-        target: "http://42.193.157.44/api/", //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
-        secure: false, //默认情况下（secure: true），不接受在HTTPS上运行的带有无效证书的后端服务器。设置secure: false后，后端服务器的HTTPS有无效证书也可运行
-        /**
-         * changeOrigin，是否修改请求地址的源
-         * 默认changeOrigin: false，即发请求即使用devServer的localhost:port发起的，如果后端服务器有校验源，就会有问题
-         * 设置changeOrigin: true，就会修改发起请求的源，将原本的localhost:port修改为target，这样就可以通过后端服务器对源的校验
-         */
-        changeOrigin: true,
-        pathRewrite: {
-          "^/api": "" //重写后：/api/type/pageList ===>https://www.zhengbeining.com/api/type/pageList
-        }
-      }
-    }
+    // devMiddleware: {
+    //   // webpack-dev-server4+写法。https://github.com/webpack/webpack-dev-server/blob/master/CHANGELOG.md
+    //   publicPath: "./"
+    // },
+    publicPath: "/", //devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
+    // proxy: {
+    //   "/api": {
+    //     // target: 'https://www.zhengbeining.com/api/',  //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
+    //     target: "http://42.193.157.44/api/", //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
+    //     secure: false, //默认情况下（secure: true），不接受在HTTPS上运行的带有无效证书的后端服务器。设置secure: false后，后端服务器的HTTPS有无效证书也可运行
+    //     /**
+    //      * changeOrigin，是否修改请求地址的源
+    //      * 默认changeOrigin: false，即发请求即使用devServer的localhost:port发起的，如果后端服务器有校验源，就会有问题
+    //      * 设置changeOrigin: true，就会修改发起请求的源，将原本的localhost:port修改为target，这样就可以通过后端服务器对源的校验
+    //      */
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/api": "", //重写后：/api/type/pageList ===>https://www.zhengbeining.com/api/type/pageList
+    //     },
+    //   },
+    // },
   },
-  plugins: []
+  plugins: [],
 };

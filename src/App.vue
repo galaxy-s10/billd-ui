@@ -1,5 +1,7 @@
 <template>
   <div>
+    <imgcpt></imgcpt>
+    <imgcpt1></imgcpt1>
     <!-- <jsx-cpt></jsx-cpt> -->
     <vue-render-cpt></vue-render-cpt>
     <create-elementCpt></create-elementCpt>
@@ -15,6 +17,33 @@
     <br />
     <span @click="changeModal">点击显示modal1</span>
     <br />
+    <svg
+      t="1626885895065"
+      class="icon"
+      viewBox="0 0 1024 1024"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      p-id="871"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="200"
+      height="200"
+    >
+      <path
+        d="M512 512m-448 0a448 448 0 1 0 896 0 448 448 0 1 0-896 0Z"
+        fill="#FFC300"
+        p-id="872"
+      ></path>
+      <path
+        d="M512 620c-17.7 0-32-14.3-32-32V300c0-17.7 14.3-32 32-32s32 14.3 32 32v288c0 17.7-14.3 32-32 32z"
+        fill="#FFFFFF"
+        p-id="873"
+      ></path>
+      <path
+        d="M512 718m-38 0a38 38 0 1 0 76 0 38 38 0 1 0-76 0Z"
+        fill="#FFFFFF"
+        p-id="874"
+      ></path>
+    </svg>
     <!-- <img src="./assets/img/author.jpg" style="width:200px" alt="" /> -->
   </div>
 </template>
@@ -25,7 +54,6 @@ import createElementCpt from "./components/createElementCpt/index1";
 import JsxCpt from "./components/JsxCpt";
 // import {sum} from '../lib/index';
 // console.log(sum);
-
 // import {sum} from '../dist/js/main-bundle';
 // console.log(sum);
 // import  Switch  from "../dist/js/main-bundle";
@@ -41,6 +69,12 @@ import JsxCpt from "./components/JsxCpt";
 // import {Switch} from "../lib/index";
 // console.log(Switch, 33);
 import vueRenderCpt from "./components/vueRenderCpt";
+// import("../library/billd-ui").then((res) => {
+//   console.log("fsdffsd");
+//   console.log(res);
+// });
+import { imgcpt } from "axxx";
+import { imgcpt as imgcpt1 } from "../library/billd-ui";
 // import HTable from "./components/table/index";
 
 // import Dashboard from '../lib/dashboard'
@@ -54,9 +88,11 @@ import vueRenderCpt from "./components/vueRenderCpt";
 export default {
   components: {
     // Dashboard,
+    imgcpt,
+    imgcpt1,
     vueRenderCpt,
     JsxCpt,
-    createElementCpt
+    createElementCpt,
     // HTable:Table,
     // HModal: Modal,
     // HSwitch:Switch,
@@ -77,7 +113,7 @@ export default {
           money: 34,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男"
+          sex: "男",
         },
         {
           key: 200,
@@ -88,7 +124,7 @@ export default {
           money: 67,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男"
+          sex: "男",
         },
         {
           key: 300,
@@ -99,7 +135,7 @@ export default {
           money: 23,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男"
+          sex: "男",
         },
         {
           key: 400,
@@ -110,7 +146,7 @@ export default {
           money: 3456,
           address: "New No. 1 Lake Park",
           tags: ["nice", "developer"],
-          sex: "男"
+          sex: "男",
         },
         {
           key: 500,
@@ -122,7 +158,7 @@ export default {
           sex: "男",
           money: 12,
 
-          tags: ["nice", "developer"]
+          tags: ["nice", "developer"],
         },
         {
           key: 600,
@@ -133,7 +169,7 @@ export default {
           sex: "女",
           money: 234,
           address: "London No. 1 Lake Park",
-          tags: ["loser"]
+          tags: ["loser"],
         },
         {
           key: 700,
@@ -144,13 +180,13 @@ export default {
           address: "Sidney No. 1 Lake Park",
           sex: "男",
           money: 345,
-          tags: ["cool", "teacher"]
-        }
+          tags: ["cool", "teacher"],
+        },
       ],
 
       rowSelection: {
         type: "checkbox",
-        getCheckboxProps: row => {
+        getCheckboxProps: (row) => {
           // console.log(row.key, "getCheckboxProps");
           // console.log(row, "sfsfsdf");
           // let key = row[this.getRowKey(row)];
@@ -158,11 +194,11 @@ export default {
           let prop = {
             defaultChecked: this.defaultCheckedList.indexOf(row.key) != -1,
             // disabled: this.defaultDisabledList.indexOf(row.key) != -1 ,
-            disabled: row.age < 20
+            disabled: row.age < 20,
           };
           // console.log("proppropprop", prop);
           return prop;
-        }
+        },
       },
 
       columns: [
@@ -171,7 +207,7 @@ export default {
           width: "100",
           title: "key",
           dataIndex: "idd", //列数据在数据项中对应的key
-          align: "center"
+          align: "center",
           // key: "key", //v-for遍历columns时的key,如果设置了唯一的dataIndex可忽略该属性
         },
         {
@@ -179,7 +215,7 @@ export default {
           width: "100",
           title: "钱",
           dataIndex: "money",
-          align: "center"
+          align: "center",
           // key: "money",
         },
         {
@@ -208,7 +244,7 @@ export default {
                 <div style="height:">3454</div>
               </div>
             );
-          }
+          },
         },
         {
           fixed: true,
@@ -217,7 +253,7 @@ export default {
           width: "200",
           title: "name",
           dataIndex: "name",
-          align: "center"
+          align: "center",
           // key: "name",
         },
         {
@@ -225,7 +261,7 @@ export default {
           // fixed: "right",
           width: "100",
           title: "状态",
-          dataIndex: "status"
+          dataIndex: "status",
           // align: "right",
           // key: "status",
           // render: (h, row) => {
@@ -240,13 +276,13 @@ export default {
           // fixed: "right",
           width: "100",
           title: "Age",
-          dataIndex: "age"
+          dataIndex: "age",
           // key: "age",
         },
         {
           // width: "200",
           title: "Address",
-          dataIndex: "address"
+          dataIndex: "address",
           // key: "address",
         },
         {
@@ -254,14 +290,14 @@ export default {
           width: "100",
           title: "Tags",
           // key: "tags",
-          dataIndex: "tags"
+          dataIndex: "tags",
           // render: (h, row) => {
           //   // console.log(row.name);
           //   // return h("div", {}, row.name);
           //   // return <div>{row.name}</div>;
           //   return <span>234</span>;
           // }
-        }
+        },
         // {
         //   title: "Action",
         //   key: "action",
@@ -271,34 +307,34 @@ export default {
       theme: {
         default: {
           sss: 123,
-          sgg: 3425
+          sgg: 3425,
         },
         default1: {
           sss: 3545,
-          sgg: 9789
-        }
+          sgg: 9789,
+        },
       },
       obj: {
         name: "hss",
         age: 22,
-        sex: "男"
+        sex: "男",
       },
-      visible: false
+      visible: false,
     };
   },
   computed: {},
   created() {},
   mounted() {
-    fetch("/api/type/pageList")
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(myJson) {
-        console.log(myJson);
-      });
+    // fetch("/api/type/pageList")
+    //   .then(function(response) {
+    //     return response.json();
+    //   })
+    //   .then(function(myJson) {
+    //     console.log(myJson);
+    //   });
     console.log("fsfsdfsf");
     console.log(Object.keys(this.theme));
-    Object.keys(this.theme).map(item => {
+    Object.keys(this.theme).map((item) => {
       console.log(this.theme[item]);
     });
   },
@@ -335,8 +371,8 @@ export default {
     },
     closeClick() {
       console.log("closeClick,app组件里modal的close回调");
-    }
-  }
+    },
+  },
 };
 </script>
 

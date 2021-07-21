@@ -9,15 +9,16 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const resolveApp = require("./paths");
 const path = require("path");
-
 const commonConfig = function(isProduction) {
+  console.log("isProduction", isProduction);
+
   return {
     /**
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
      * https://webpack.js.org/configuration/target/#string
      * 升级webpack-dev-serve@4.x后就可以去掉了这个属性了。
      */
-    // target: isProduction ? "browserslist" : "web",
+    target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
         import: isProduction ? "./components/index.js" : "./src/index.js",
@@ -45,7 +46,7 @@ const commonConfig = function(isProduction) {
       chunkFilename: "js/[name]-[hash:6]-bundle-chunk.js",
       path: path.resolve(__dirname, "../dist"),
       assetModuleFilename: "assets/[name]-[hash:6].[ext]", //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: "./", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      publicPath: "/", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
       //解析路径
@@ -148,7 +149,7 @@ const commonConfig = function(isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    publicPath: "../",
+                    publicPath: "./",
                   },
                 }
               : { loader: "style-loader" }, // Do not use style-loader and mini-css-extract-plugin together.
@@ -249,11 +250,13 @@ const commonConfig = function(isProduction) {
 };
 
 module.exports = function(env) {
+  console.log(env);
   const isProduction = env.production;
   process.env.NODE_ENV = isProduction ? "production" : "development";
   // const config = devConfig;
   // const config = prodConfig;
   const config = isProduction ? prodConfig : devConfig;
+  console.log('isProduction',isProduction);
   const mergeConfig = merge(commonConfig(isProduction), config); //根据当前环境，合并配置文件
   return mergeConfig;
 };
