@@ -70,23 +70,35 @@ import 'billd-ui/dist/switch/style/index.css'
 
 > 基于 webpack5 搭建开发环境
 
-目前开发环境支持解析：js，jsx，ts，tsx，vue，less 文件。对于 vue，目前支持解析 vue 的 jsx 语法，可使用 vue 自带的指令，具体请看： https://github.com/vuejs/jsx。支持vue文件的热更新（tsx等不支持。）。
+目前开发环境支持解析：js，jsx，ts，tsx，vue，less 等资源文件。支持vue文件的热更新，支持 vue 的 jsx 语法，具体请看： https://github.com/vuejs/jsx。
 
-执行npm run dev即可在本地localhost:8080端口进行开发，你可在src目录下的components里面编写jsx，tsx或者vue格式的代码，然后调试完了就将代码迁移到src目录外面的components目录里面，稍微做一些修改，即可将刚开发的代码进行下一步的编译打包~
+执行npm run dev，即可在本地localhost:8080端口进行开发，可在src目录下的components里面编写jsx，tsx或者vue格式的代码，然后调试完了就将代码迁移到src目录外面的components目录里面，稍微做一些修改，即可将开发的代码进行下一步的编译打包~
+
+```bash
+npm run dev
+```
 
 # 构建环境
 
-> 基于 gulp 进行构建
+> 基于 gulp 以及 webpack5 进行构建
 
-开发环境支持的构建环境都支持。
+## build-tools
 
-执行npm run compile即可将当前项目根目录下的components（注意，不是src下面的components）下的所有组件进行编译打包。
+### 按需加载
+
+使用 gulp 编译项目根目录下的components目录里的文件，打包出es和lib。es版是es6版本，lib版是es5版本
 
 ```bash
 npm run compile
 ```
 
+### 全局引入
 
+使用 webpack 编译项目根目录下的components目录里的所以内容，打包出dist。
+
+```bash
+npm run dist
+```
 
 # 兼容性
 
@@ -103,3 +115,6 @@ npm run compile
 last 2 version
 not dead
 ```
+
+
+

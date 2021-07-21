@@ -33,11 +33,11 @@ import JsxCpt from "./components/JsxCpt";
 //   console.log(res);
 //   console.log('/js/main-bundle/js/main-bundle');
 // })
-import("../lib/index").then(res=>{
-  console.log(res);
-  console.log(sum);
-  console.log('../lib/index../lib/index');
-})
+// import("../lib/index").then(res=>{
+//   console.log(res);
+//   console.log(sum);
+//   console.log('../lib/index../lib/index');
+// })
 // import {Switch} from "../lib/index";
 // console.log(Switch, 33);
 import vueRenderCpt from "./components/vueRenderCpt";

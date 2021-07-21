@@ -5,6 +5,7 @@ module.exports = function(modules) {
       [
         "@babel/preset-env",
         {
+          // https://www.babeljs.cn/docs/babel-preset-env#modules
           modules
         }
       ],

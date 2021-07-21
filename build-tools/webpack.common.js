@@ -20,11 +20,9 @@ const commonConfig = function(isProduction) {
     // target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
-        // import: "./lib/index.js",
-        // import: "./src/index.js"
-        import: "./components/index.js"
-        // filename: 'output-[name]-bundle.js'
-      }
+        import: isProduction ? "./components/index.js" : "./src/index.js",
+        // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
+      },
     },
 
     externals: {
@@ -47,18 +45,18 @@ const commonConfig = function(isProduction) {
       chunkFilename: "js/[name]-[hash:6]-bundle-chunk.js",
       path: path.resolve(__dirname, "../dist"),
       assetModuleFilename: "assets/[name]-[hash:6].[ext]", //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: "./" //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      publicPath: "./", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
       //解析路径
       extensions: [".js", ".json", ".jsx", ".ts", ".tsx", ".vue"], //解析扩展名
       alias: {
-        "@": resolveApp("./src") //设置路径别名
-      }
+        "@": resolveApp("./src"), //设置路径别名
+      },
     },
     resolveLoader: {
       // 用于解析webpack的loader
-      modules: ["node_modules"]
+      modules: ["node_modules"],
     },
     optimization: {
       // splitChunks: {
@@ -89,8 +87,8 @@ const commonConfig = function(isProduction) {
           test: /\.tsx?$/,
           use: [
             { loader: "babel-loader" },
-            { loader: "ts-loader", options: { appendTsxSuffixTo: [/\.vue$/] } }
-          ]
+            { loader: "ts-loader", options: { appendTsxSuffixTo: [/\.vue$/] } },
+          ],
         },
         // {
         //   test: /\.tsx$/,
@@ -103,12 +101,12 @@ const commonConfig = function(isProduction) {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
+            loader: "babel-loader",
+          },
         },
         {
           test: /\.vue$/,
-          use: [{ loader: "vue-loader" }]
+          use: [{ loader: "vue-loader" }],
         },
         {
           test: /\.css$/,
@@ -124,18 +122,18 @@ const commonConfig = function(isProduction) {
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
                     // publicPath: "../"
-                  }
+                  },
                 }
               : { loader: "style-loader" }, // Do not use style-loader and mini-css-extract-plugin together.
             {
               loader: "css-loader", //将引入的css文件解析成js模块
               options: {
-                importLoaders: 1 // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
-              }
-            }
+                importLoaders: 1, // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
+              },
+            },
           ],
           // loader: 'style-loader!css-loader', //旧版本webpack写法，也是从右到左执行。
-          sideEffects: true // 告诉webpack是有副作用的，不对css进行删除
+          sideEffects: true, // 告诉webpack是有副作用的，不对css进行删除
         },
         {
           test: /\.less$/,
@@ -150,18 +148,32 @@ const commonConfig = function(isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    publicPath: "../"
-                  }
+                    publicPath: "../",
+                  },
                 }
               : { loader: "style-loader" }, // Do not use style-loader and mini-css-extract-plugin together.
             {
               loader: "css-loader",
               options: {
-                importLoaders: 1 // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
-              }
+                importLoaders: 1, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
+              },
             },
-            { loader: "less-loader" }
-          ]
+            {
+              /**
+               * antd当前的版本不支持less4.x版本，会报类似：Operation on an invalid type错误，
+               * 因此这里用less的3.x版本。less-loader貌似都可以，但最新的8.x也会有兼容性问题，
+               * 这里的less-loader用的7.x版本
+               * https://github.com/ant-design/ant-design/issues/23125#issuecomment-757678485
+               * https://lesscss.org/usage/#less-options-math
+               */
+              loader: "less-loader",
+              options: {
+                lessOptions: {
+                  javascriptEnabled: true,
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.(jpg|jpeg|png|gif)$/,
@@ -172,23 +184,23 @@ const commonConfig = function(isProduction) {
           // type: 'asset/inline', // 全部都使用url-loader
           type: "asset",
           generator: {
-            filename: "img/[name]-[hash:6][ext]"
+            filename: "img/[name]-[hash:6][ext]",
           },
           parser: {
             dataUrlCondition: {
-              maxSize: 4 * 1024 // 如果一个模块源码大小小于 maxSize，那么模块会被作为一个 Base64 编码的字符串注入到包中， 否则模块文件会被生成到输出的目标目录中
-            }
-          }
+              maxSize: 4 * 1024, // 如果一个模块源码大小小于 maxSize，那么模块会被作为一个 Base64 编码的字符串注入到包中， 否则模块文件会被生成到输出的目标目录中
+            },
+          },
         },
         {
           // test: /\.(svg|eot|ttf|woff2?)\??.*$/,
           test: /\.(svg|eot|ttf|woff2?)$/,
           type: "asset/resource",
           generator: {
-            filename: "font/[name]-[hash:6][ext]"
-          }
-        }
-      ]
+            filename: "font/[name]-[hash:6][ext]",
+          },
+        },
+      ],
     },
     plugins: [
       new WebpackBar(), // 构建进度条
@@ -211,10 +223,10 @@ const commonConfig = function(isProduction) {
               removeEmptyAttributes: true, // 移除一些空属性，如空的id,classs,style等等，但不是空的就全删，比如<img alt />中的alt不会删。
 
               minifyCSS: true, // 使用clean-css插件删除 CSS 中一些无用的空格、注释等。
-              minifyJS: true // 使用Terser插件优化
+              minifyJS: true, // 使用Terser插件优化
             }
           : false,
-        chunks: ["main"]
+        chunks: ["main"],
       }),
       new VueLoaderPlugin(), //解析vue
       new MiniCssExtractPlugin({
@@ -223,16 +235,16 @@ const commonConfig = function(isProduction) {
         // all options are optional
         filename: "css/[name]-[hash:6].css",
         chunkFilename: "css/[id].css",
-        ignoreOrder: false // Enable to remove warnings about conflicting order
+        ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
       new DefinePlugin({
         //定义全局变量
         BASE_URL: "'./'", //public下的index.html里面的icon的路径
         "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development")
-        }
-      })
-    ]
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        },
+      }),
+    ],
   };
 };
 
@@ -243,6 +255,5 @@ module.exports = function(env) {
   // const config = prodConfig;
   const config = isProduction ? prodConfig : devConfig;
   const mergeConfig = merge(commonConfig(isProduction), config); //根据当前环境，合并配置文件
-  console.log(mergeConfig);
   return mergeConfig;
 };

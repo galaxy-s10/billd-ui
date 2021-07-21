@@ -13,19 +13,28 @@ const tsProject = require("../tsconfig.json");
 const transformLess = require("./transformLess.js");
 const tsDefaultReporter = ts.reporter.defaultReporter();
 
-gulp.task("clean-dist", function() {
-  return gulp.src("../lib", { allowEmpty: true }).pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
+gulp.task("clean-all", function() {
+  return gulp
+    .src(["../lib", "../es", "../dist"], { allowEmpty: true })
+    .pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
 });
 
-gulp.task("copyAssets", function() {
+gulp.task("copy-assets", function() {
   return gulp
     .src("../components/assets/**/*", { allowEmpty: true })
     .pipe(gulp.dest("../lib/assets"));
 });
 
-gulp.task("compileLess", function() {
+gulp.task("compile-less", function() {
+  /**
+   * 由于在package.json设置了gulpfile配置文件在build-tools，所以工作目录也会改成了build-tools,
+   * 在执行gulp命令的时候可以看到控制台有打印：[13:54:09] Working directory changed to D:\hss\billd-ui\build-tools
+   */
+  // 编译less的时候，我需要编译components目录下的所有文件，如果当前工作目录在build-tools，就得../返回上层找
+  // components，这样没问题。但如果我又想排除components目录下的某个文件或者文件夹，就得用到!（这是glob语法）,
+  // 但如果用'!../components/xxx/**/*'的话，glob语法就有问题了，所以gulp.src的时候指定工作目录为components的外层。
   return gulp
-    .src("../components/**/*.less")
+    .src(["components/**/*.less"], { cwd: "../" })
     .pipe(
       through2.obj(function(file, encoding, next) {
         // 将源文件复制一份放流里面
@@ -33,7 +42,7 @@ gulp.task("compileLess", function() {
         // 匹配所有less文件
         if (file.path.match(/\.less$/)) {
           transformLess(file.path)
-            .then(css => {
+            .then((css) => {
               // File.contents can only be a Buffer, a Stream, or null.
               file.contents = Buffer.from(css);
               // 将转换后的less文件路径修改文件成css
@@ -42,7 +51,7 @@ gulp.task("compileLess", function() {
               this.push(file);
               next();
             })
-            .catch(e => {
+            .catch((e) => {
               console.error(e);
             });
         } else {
@@ -59,7 +68,7 @@ gulp.task("compileLess", function() {
   //   .pipe(gulp.dest("../lib"));
 });
 
-gulp.task("concatCss", function() {
+gulp.task("concat-css", function() {
   return gulp
     .src("../lib/**/*.css")
     .pipe(concat("all.css"))
@@ -70,7 +79,7 @@ const tsFiles = [
   "../components/**/*.js",
   "../components/**/*.jsx",
   "../components/**/*.ts",
-  "../components/**/*.tsx"
+  "../components/**/*.tsx",
 ];
 
 function compile(modules) {
@@ -81,7 +90,7 @@ function compile(modules) {
         tsDefaultReporter.error(e);
         error = 1;
       },
-      finish: tsDefaultReporter.finish
+      finish: tsDefaultReporter.finish,
     })
   );
   function check() {
@@ -102,7 +111,7 @@ function compile(modules) {
       through2.obj(function(file, encoding, next) {
         this.push(file.clone());
         // mac环境下的正则没问题，windows的有问题。
-        if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
+        if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
           // if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
           // if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
           //匹配所有组件(文件夹)下的style目录下面的文件。
@@ -132,98 +141,35 @@ function compile(modules) {
         next();
       })
     );
+  gulp
+    .src(["../components/**/*.@(jpg|png|svg)"])
+    .pipe(gulp.dest(modules === false ? "../es" : "../lib"));
   tsResult.dts.pipe(gulp.dest(modules === false ? "../es" : "../lib"));
   tsResult.on("finish", check);
   tsResult.on("end", check);
   return stream.pipe(gulp.dest(modules === false ? "../es" : "../lib"));
 }
 
-gulp.task("compileJs", function() {
-  let error;
-  const tsResult = gulp.src(tsFiles).pipe(
-    ts(tsProject.compilerOptions, {
-      error(e) {
-        tsDefaultReporter.error(e);
-        error = 1;
-      },
-      finish: tsDefaultReporter.finish
-    })
-  );
-  function check() {
-    if (error && !argv["ignore-error"]) {
-      process.exit(1);
-    }
-  }
-  tsResult.on("finish", check);
-  tsResult.on("end", check);
-
-  console.log(babelConfig);
-  let stream = tsResult.js
-    .pipe(
-      babel(babelConfig)
-      // babel({
-      //   presets: ["@babel/env"],
-      //   plugins: ["transform-vue-jsx"],
-      // })
-    )
-    .pipe(
-      through2.obj(function(file, encoding, next) {
-        this.push(file.clone());
-        // mac环境下的正则没问题，windows的有问题。
-        if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
-          // if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
-          // if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
-          //匹配所有组件(文件夹)下的style目录下面的文件。
-          const content = file.contents.toString(encoding);
-          file.contents = Buffer.from(
-            content
-              // .replace(/\/style\/?'/g, "/style/css'")
-              // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, ".css")
-          );
-          file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
-          this.push(file);
-        } else {
-          // console.log("匹配到了", file.path);
-          const content = file.contents.toString(encoding);
-          // console.log(typeof content);
-          // console.log(content);
-          file.contents = Buffer.from(
-            content
-              // .replace(/\/style\/?'/g, "/style/css'")
-              // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, ".css")
-          );
-          // file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
-          this.push(file);
-        }
-        next();
-      })
-    );
-  tsResult.dts.pipe(gulp.dest("../lib"));
-
-  return stream.pipe(gulp.dest("../lib"));
-});
-
 // es modules
-gulp.task("compile-es", done => {
-  console.log("compile es modules");
+gulp.task("compile-es", (done) => {
+  // console.log("compile es modules");
   compile(false).on("finish", done);
 });
 
 // commonjs
-gulp.task("compile-lib", done => {
-  console.log("compile es commonjs");
+gulp.task("compile-lib", (done) => {
+  // console.log("compile es commonjs");
   compile().on("finish", done);
 });
 
 gulp.task(
   "default",
   gulp.series(
-    "clean-dist",
-    gulp.parallel("copyAssets", "compileLess", "compile-es", "compile-lib"),
-    "concatCss",
-    done => {
+    "clean-all",
+    gulp.parallel("copy-assets", "compile-less", "compile-es", "compile-lib"),
+    "concat-css",
+    function compileDone(done) {
+      console.log("all task is done");
       done();
     }
   )

@@ -11,23 +11,20 @@ const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
 // const glob = require('glob')
 // const webpack = require('webpack');
 // const path = require("path");
-const isProduction = true;
-const path = require("path");
-
-console.log("++++++++++");
+const resolveApp = require("./paths");
 module.exports = {
-  mode: "development",
+  // mode: "development",
   // mode: "none",
-  // mode: "production",
-  devtool: "source-map",
-  // output: {
-  //   path: path.resolve(__dirname, '../lib2'),
-  //   publicPath: '/lib2/',
-  //   filename: 'lime-ui.min.js',
-  //   library: 'lime-ui',
-  //   libraryTarget: 'umd',
-  //   umdNamedDefine: true
-  // },
+  mode: "production",
+  // devtool: "source-map",
+  output: {
+    path: resolveApp("./library"),
+    publicPath: "/library/",
+    filename: "billd-ui.js",
+    library: "billd-ui.js",
+    libraryTarget: "umd",
+    umdNamedDefine: true,
+  },
   // externals: {
   //   vue: "Vue",
   //   vuex: 'Vuex',
@@ -155,10 +152,10 @@ module.exports = {
       test: /\.(css|js)$/i,
       threshold: 10 * 1024, //大于10k的文件才进行压缩
       minRatio: 0.8, //只有压缩比这个比率更好的资产才会被处理(minRatio =压缩大小/原始大小),即压缩如果达不到0.8就不会进行压缩
-      algorithm: "gzip" //压缩算法
+      algorithm: "gzip", //压缩算法
       // exclude
       // include
-    })
+    }),
     // new PreloadWebpackPlugin( //预加载
     //   {
     //     rel: 'preload',
@@ -175,5 +172,5 @@ module.exports = {
     //     include: 'asyncChunks'
     //   }
     // ),
-  ]
+  ],
 };

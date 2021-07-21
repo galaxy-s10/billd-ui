@@ -5,7 +5,8 @@ import Switch from "./switch/index";
 import Loading from "./loading/index";
 // import '../test.js'
 import sum from "./sum/index";
-
+import imgcpt from './VueRenderCpt'
+// import './a.less'
 console.log(sum(12, 3));
 
 // export const components = {
@@ -24,4 +25,4 @@ console.log(sum(12, 3));
 // };
 // export default install;
 
-export { sum, Loading,Switch };
+export { sum, Loading,Switch,imgcpt };
