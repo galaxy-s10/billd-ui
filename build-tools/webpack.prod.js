@@ -13,18 +13,18 @@ const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
 // const path = require("path");
 const resolveApp = require("./paths");
 module.exports = {
-  // mode: "development",
+  mode: "development",
   // mode: "none",
-  mode: "production",
+  // mode: "production",
   devtool: "source-map",
   output: {
     // path: resolveApp("./library"),
     // publicPath: "/library/",
     // filename: "billd-ui.js",
-    // library:{
-    //   name:'billd_ui',
-    //   type:'umd'
-    // },
+    library: {
+      name: "billd_ui",
+      type: "commonjs",
+    },
     // library: "billd_ui",
     // libraryTarget: "umd",//module,commonjs,umd
     // umdNamedDefine: true,

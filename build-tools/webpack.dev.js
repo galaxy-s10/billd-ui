@@ -20,7 +20,7 @@ module.exports = {
      * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
      * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
      */
-    // contentBase: resolveApp("./"), //(!!!webpack-dev-server@4.x已改!!!)
+    contentBase: resolveApp("public"), //(!!!webpack-dev-server@4.x已改!!!)
     // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
     // static: [resolveApp("./public")], //模拟vuecli的public
     historyApiFallback: true, //默认值：false，设置true后可解决spa页面刷新404

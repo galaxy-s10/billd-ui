@@ -15,7 +15,6 @@ export default {
         </div>
         <div {...{ attrs: { key: 234333333333333, xga: 34111112 } }}>key22</div>
         <img src={require("./wechat.jpg")} style="width:120px;" />
-        <img src="./wechat.jpg" />
       </div>
     );
   },

@@ -16,6 +16,7 @@
     ></h-table> -->
     <br />
     <span @click="changeModal">点击显示modal1</span>
+    <img src="../public/img/wechat-2953ba.jpg" alt="">
     <br />
     <!-- <img src="./assets/img/author.jpg" style="width:200px" alt="" /> -->
   </div>
@@ -50,11 +51,17 @@ import JsxCpt from "./components/JsxCpt";
 //   console.log(res);
 // });
 
-// esmodule导入
-import billd_ui from '../dist/js/main-bundle'
-console.log('==========',billd_ui)
-// import billd_ui,{imgcpt} from '../dist/js/main-bundle'
+// cjs导入
+// const billd_ui = require('../dist/js/main-bundle')
 
+// esmodule导入
+// import billd_ui from "../dist/js/main-bundle";
+
+console.log("==========", billd_ui);
+
+import {billd_ui} from '../dist/js/main-bundle'
+
+console.log(billd_ui.imgcpt);
 // commonjs导入
 // const { imgcpt } = require("../dist/js/main-bundle");
 
@@ -62,6 +69,7 @@ console.log('==========',billd_ui)
 // import { abcccc, imgcpt } from "aaax/library/billd-ui";
 // import imgcpt, { abcccc } from "aaax/dist/js/main-bundle";
 // console.log(billd_ui,billd_ui.imgcpt ===imgcpt, 67668);
+
 import("../dist/js/main-bundle").then((res) => {
   console.log("=========");
   console.log(res);
@@ -84,7 +92,7 @@ import("../dist/js/main-bundle").then((res) => {
 export default {
   components: {
     // Dashboard,
-    // imgcpt,
+    imgcpt:billd_ui.imgcpt,
     // imgcpt1,
     // vueRenderCpt,
     JsxCpt,

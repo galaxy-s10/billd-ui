@@ -18,7 +18,8 @@ const commonConfig = function(isProduction) {
      * https://webpack.js.org/configuration/target/#string
      * 升级webpack-dev-serve@4.x后就可以去掉了这个属性了。
      */
-    target: isProduction ? "browserslist" : "web",
+    target: "web",
+    // target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
         import: isProduction ? "./components/index.js" : "./src/index.js",
@@ -108,6 +109,16 @@ const commonConfig = function(isProduction) {
           // exclude: /node_modules/,
           use: {
             loader: "babel-loader",
+            options: {
+              // exclude: [
+              //   // 测试了不生效。
+              //   // \\ for Windows, \/ for Mac OS and Linux
+              //   /node_modules/,
+              // ],
+              // 显式禁用目录内文件的 Babel 编译。
+              // ignore: [/node_modules[\\\/]aaaa/],
+              // presets: ["@babel/preset-env"],
+            },
           },
         },
         {
