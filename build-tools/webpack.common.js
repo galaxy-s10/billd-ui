@@ -46,7 +46,7 @@ const commonConfig = function(isProduction) {
       chunkFilename: "js/[name]-[hash:6]-bundle-chunk.js",
       path: path.resolve(__dirname, "../dist"),
       assetModuleFilename: "assets/[name]-[hash:6].[ext]", //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: "/", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      publicPath: "./", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
       //解析路径
@@ -100,14 +100,19 @@ const commonConfig = function(isProduction) {
         // },
         {
           test: /\.jsx?$/,
-          exclude: /node_modules/,
+          /**
+           * vue文件如果写jsx,则.vue文件最终会转化为.jsx,如果项目里面引用了node_modules里
+           * 的vue文件，而这个vue文件写了jsx，则它最终也会解析成jsx。如果使用了exclude:/node_modules/，
+           * 则不会编译node_modules里面的jsx，也就是说不会编译vue转换后的jsx！
+           */
+          // exclude: /node_modules/,
           use: {
             loader: "babel-loader",
           },
         },
         {
           test: /\.vue$/,
-          use: [{ loader: "vue-loader" }],
+          use: [{ loader: "vue-loader", options: {} }],
         },
         {
           test: /\.css$/,
@@ -256,7 +261,7 @@ module.exports = function(env) {
   // const config = devConfig;
   // const config = prodConfig;
   const config = isProduction ? prodConfig : devConfig;
-  console.log('isProduction',isProduction);
+  console.log("isProduction", isProduction);
   const mergeConfig = merge(commonConfig(isProduction), config); //根据当前环境，合并配置文件
   return mergeConfig;
 };

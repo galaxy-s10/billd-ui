@@ -2,7 +2,14 @@ console.log("=======hi,babel.config.js=====");
 module.exports = {
   presets: [
     // ["@babel/env"],
-    "@babel/preset-env",
+    // "@babel/preset-env",
+    [
+      "@babel/preset-env",
+      {
+        // modules: "cjs",
+        // target: {},
+      },
+    ],
     [
       "@vue/babel-preset-jsx",
       // {

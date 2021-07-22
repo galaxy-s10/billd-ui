@@ -1,14 +1,16 @@
-import Switch from "./switch/index";
+// import Switch from "./switch/index";
 // import Message from "./message";
 // import Modal from "./modal";
 // import Table from "./table";
-import Loading from "./loading/index";
+// import Loading from "./loading/index";
 // import '../test.js'
-import sum from "./sum/index";
-import imgcpt from './VueRenderCpt'
+// import sum from "./sum/index";
+// import imgcpt from "./VueRenderCpt";
+const imgcpt  = require("./VueRenderCpt")
 // import './a.less'
-console.log(sum(12, 3));
+// console.log(sum(12, 3));
 
+// console.log(imgcpt);
 // export const components = {
 //   Switch,
 //   Loading
@@ -25,4 +27,14 @@ console.log(sum(12, 3));
 // };
 // export default install;
 
-export { sum, Loading,Switch,imgcpt };
+// export { sum, Loading,Switch,imgcpt };
+// export { imgcpt };
+// console.log(imgcpt);
+// exports.hi = 'imgcpt'
+console.log('+++++++++++++');
+exports.imgcpt1 = 'imgcpt'
+// exports.imgcpt1 = imgcpt
+
+// export let addp = function() {
+//   console.log("addd", 3333333);
+// };

@@ -16,13 +16,17 @@ module.exports = {
   // mode: "development",
   // mode: "none",
   mode: "production",
-  // devtool: "source-map",
+  devtool: "source-map",
   output: {
     // path: resolveApp("./library"),
     // publicPath: "/library/",
     // filename: "billd-ui.js",
-    // library: "billd-ui.js",
-    // libraryTarget: "umd",
+    // library:{
+    //   name:'billd_ui',
+    //   type:'umd'
+    // },
+    // library: "billd_ui",
+    // libraryTarget: "umd",//module,commonjs,umd
     // umdNamedDefine: true,
   },
   // externals: {
@@ -39,8 +43,8 @@ module.exports = {
     //   chunks: "all"
     // },
     // concatenateModules: true,  // production模式下默认true。告知 webpack 去寻找模块图形中的片段，哪些是可以安全地被合并到单一模块中。
-    // usedExports: false, // production模式或者不设置usedExports，它默认就是true。usedExports的目的是标注出来哪些函数是没有被使用 unused，会结合Terser进行处理
-    // sideEffects: false,
+    usedExports: false, // production模式或者不设置usedExports，它默认就是true。usedExports的目的是标注出来哪些函数是没有被使用 unused，会结合Terser进行处理
+    sideEffects: false,
     // minimize: true, //是否开启Terser,默认就是true，设置false后，不会压缩和转化
     // minimizer: [
     //   new TerserPlugin({
