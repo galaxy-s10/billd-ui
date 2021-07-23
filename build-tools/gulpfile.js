@@ -59,6 +59,7 @@ gulp.task("compile-less", function() {
         }
       })
     )
+    .pipe(postcss())
     .pipe(gulp.dest("../lib"));
   // 旧版使用gulp-less解析less,源文件会被解析成css文件，即原less文件会变成css文件。
   // return gulp

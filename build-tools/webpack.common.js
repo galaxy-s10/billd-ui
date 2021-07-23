@@ -6,20 +6,19 @@ const devConfig = require("./webpack.dev");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const chalk = require("chalk");
 const resolveApp = require("./paths");
-const path = require("path");
-const commonConfig = function(isProduction) {
-  console.log("isProduction", isProduction);
 
+const commonConfig = function(isProduction) {
   return {
     /**
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
      * https://webpack.js.org/configuration/target/#string
      * 升级webpack-dev-serve@4.x后就可以去掉了这个属性了。
+     * 因为在开发环境使用.browserslistrc文件，热更新会失效，所以开发环境设置为web
      */
-    target: "web",
-    // target: isProduction ? "browserslist" : "web",
+    // target: "web",
+    target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
         import: isProduction ? "./components/index.js" : "./src/index.js",
@@ -45,7 +44,8 @@ const commonConfig = function(isProduction) {
     output: {
       filename: "js/[name]-bundle.js", //入口文件打包生成后的文件的文件名
       chunkFilename: "js/[name]-[hash:6]-bundle-chunk.js",
-      path: path.resolve(__dirname, "../dist"),
+      path: resolveApp("./dist"),
+      path: resolveApp("./dist"),
       assetModuleFilename: "assets/[name]-[hash:6].[ext]", //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
       publicPath: "./", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
@@ -199,6 +199,7 @@ const commonConfig = function(isProduction) {
           //     filename:'img/[name]-[hash:6].[ext]'
           // }
           // type: 'asset/inline', // 全部都使用url-loader
+          // include: /node_modules/,
           type: "asset",
           generator: {
             filename: "img/[name]-[hash:6][ext]",
@@ -266,13 +267,14 @@ const commonConfig = function(isProduction) {
 };
 
 module.exports = function(env) {
-  console.log(env);
-  const isProduction = env.production;
-  process.env.NODE_ENV = isProduction ? "production" : "development";
-  // const config = devConfig;
-  // const config = prodConfig;
-  const config = isProduction ? prodConfig : devConfig;
-  console.log("isProduction", isProduction);
-  const mergeConfig = merge(commonConfig(isProduction), config); //根据当前环境，合并配置文件
-  return mergeConfig;
+  return new Promise((resolve, reject) => {
+    const isProduction = env.production;
+    process.env.NODE_ENV = isProduction ? "production" : "development";
+    const config = isProduction ? prodConfig : devConfig;
+    config.then((config) => {
+      // 根据当前环境，合并配置文件
+      const mergeConfig = merge(commonConfig(isProduction), config);
+      resolve(mergeConfig);
+    });
+  });
 };

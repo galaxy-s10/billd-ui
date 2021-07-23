@@ -1,0 +1,6 @@
+{
+  "name": "billd-ui",
+  "version": "0.0.2",
+  "description": "基于vue2.x构建的billd-ui组件库~",
+  "main": "./js/main-bundle.js"
+}

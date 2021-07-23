@@ -13,7 +13,7 @@ export default {
           attrskey
         </div>
         <div {...{ attrs: { key: 234333333333333, xga: 34111112 } }}>key22</div>
-        <img src={require("./wechat.jpg")} style="width:100px;" />
+        <img src={require("./wechat123.jpg")} style="width:100px;" />
       </div>
     );
   },

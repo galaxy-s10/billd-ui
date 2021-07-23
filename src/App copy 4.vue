@@ -1,27 +1,31 @@
 <template>
   <div>
-    <!-- <img src="aaax/dist/img/wechat123-2953ba.jpg" alt=""> -->
-    <div v-for="(item,index) in row">{{item}}{{index}}</div>
+    <imgcpt></imgcpt>
+    <!-- <imgcpt1></imgcpt1> -->
+    <!-- <jsx-cpt></jsx-cpt> -->
     <!-- <vue-render-cpt></vue-render-cpt> -->
+    <!-- <create-elementCpt></create-elementCpt> -->
+    <hr />
+    {{ objabc }}
+    <!-- <h-table
+      rowKey="idd"
+      :bordered="true"
+      :sourceData="sourceData"
+      :columns="columns"
+      :rowSelection="rowSelection"
+    ></h-table> -->
+    <br />
+    <span @click="changeModal">点击显示modal1</span>
+    <img src="../public/img/wechat-2953ba.jpg" alt="">
+    <br />
+    <!-- <img src="./assets/img/author.jpg" style="width:200px" alt="" /> -->
   </div>
 </template>
 
 <script>
-// let vueRenderCpt = '423'
-// 直接引node_modules的文件路径加载图片没问题
-// import vueRenderCpt,{imgcpt} from 'billd-ui'
-// import("billd-ui").then(res=>{
-//   console.log(res,'vue')
-// })
-
-
-// import vueRenderCpt from 'billd_ui'
-// console.log(vueRenderCpt,imgcpt)
-// const billd_ui = require('../dist/js/main-bundle')
-// const billd_ui = require('aaax/dist/js/main-bundle')
-
-// console.log(billd_ui)
+import createElementCpt from "./components/createElementCpt/index1";
 // import Vue from "vue";
+import JsxCpt from "./components/JsxCpt";
 // import {sum} from '../lib/index';
 // console.log(sum);
 // import {sum} from '../dist/js/main-bundle';
@@ -53,6 +57,25 @@
 // esmodule导入
 // import billd_ui from "../dist/js/main-bundle";
 
+console.log("==========", billd_ui);
+
+import {billd_ui} from '../dist/js/main-bundle'
+
+console.log(billd_ui.imgcpt);
+// commonjs导入
+// const { imgcpt } = require("../dist/js/main-bundle");
+
+// import  imgcpt  from "aaax/lib/vueRenderCpt/index1";
+// import { abcccc, imgcpt } from "aaax/library/billd-ui";
+// import imgcpt, { abcccc } from "aaax/dist/js/main-bundle";
+// console.log(billd_ui,billd_ui.imgcpt ===imgcpt, 67668);
+
+import("../dist/js/main-bundle").then((res) => {
+  console.log("=========");
+  console.log(res);
+  console.log(res.default);
+  console.log("=============");
+});
 // import  imgcpt  from "aaax/lib/vueRenderCpt";
 // import { imgcpt } from "../library/billd-ui";
 // import { imgcpt as imgcpt1 } from "../library/billd-ui";
@@ -69,16 +92,14 @@
 export default {
   components: {
     // Dashboard,
-    // imgcpt:billd_ui.imgcpt,
-    // // imgcpt1,
+    imgcpt:billd_ui.imgcpt,
+    // imgcpt1,
     // vueRenderCpt,
-    // vueRenderCpt:vueRenderCpt.imgcpt,
-    // vueRenderCpt:imgcpt,
-    // JsxCpt,
-    // createElementCpt,
-    // // HTable:Table,
-    // // HModal: Modal,
-    // // HSwitch:Switch,
+    JsxCpt,
+    createElementCpt,
+    // HTable:Table,
+    // HModal: Modal,
+    // HSwitch:Switch,
   },
   data() {
     return {

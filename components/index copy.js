@@ -5,17 +5,17 @@
 // import Loading from "./loading/index";
 // import '../test.js'
 // import sum from "./sum/index";
-// import imgcpt from "./VueRenderCpt";
+import imgcpt from "./VueRenderCpt";
 // const imgcpt  = require("./VueRenderCpt")
 // import './a.less'
 // console.log(sum(12, 3));
 
 // import { esm } from "./export";
-const { esm } = require("./export");
-console.log(esm);
+// const { esm } = require("./export");
+// console.log(esm);
 
 // export { esm };
-exports.esm1 = esm
+// exports.esm1 = esm
 
 // console.log(imgcpt);
 // export const components = {
@@ -35,7 +35,7 @@ exports.esm1 = esm
 // export default install;
 
 // export { sum, Loading,Switch,imgcpt };
-// export { imgcpt };
+export { imgcpt };
 // console.log(imgcpt);
 // exports.hi = 'imgcpt'
 // exports.imgcpt1 = imgcpt

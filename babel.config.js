@@ -1,4 +1,5 @@
-console.log("=======hi,babel.config.js=====");
+const chalk = require("chalk");
+console.log(chalk.red("读取babel.config.js"));
 module.exports = {
   presets: [
     // ["@babel/env"],
@@ -27,6 +28,16 @@ module.exports = {
     //     style: "css",
     //   },
     //   "billd-ui",
+    // ],
+    // [
+    //   "import",
+    //   {
+    //     libraryName: "aaax",
+    //     libraryDirectory: "lib",
+    //     camel2DashComponentName: false,
+    //     style: "css",
+    //   },
+    //   "aaax",
     // ],
     // "transform-vue-jsx",
   ],

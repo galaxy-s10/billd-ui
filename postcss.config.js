@@ -1,4 +1,5 @@
-console.log("========hi,postcss.config.js=====");
+const chalk = require("chalk");
+console.log(chalk.red("读取postcss.config.js"));
 module.exports = {
   plugins: [
     // 'autoprefixer',  // postcss-preset-env包含了autoprefixer的功能

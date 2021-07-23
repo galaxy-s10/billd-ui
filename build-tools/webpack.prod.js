@@ -22,8 +22,11 @@ module.exports = {
     // publicPath: "/library/",
     // filename: "billd-ui.js",
     library: {
-      name: "billd_ui",
-      type: "commonjs",
+      name: "aaax",
+      // root: 'MyLibrary',
+      // amd: 'my-library',
+      // commonjs: 'my-common-library',
+      type: "umd",
     },
     // library: "billd_ui",
     // libraryTarget: "umd",//module,commonjs,umd
