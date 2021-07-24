@@ -12,20 +12,33 @@ const babelConfig = require("./getBabelCommonConfig");
 const tsProject = require("../tsconfig.json");
 const transformLess = require("./transformLess.js");
 const tsDefaultReporter = ts.reporter.defaultReporter();
+const { _ERROR, _INFO, _SUCCESS } = require("./chalkTip");
 
-gulp.task("clean-all", function() {
+gulp.task("cleanall", function(cb) {
+  // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
   return gulp
     .src(["../lib", "../es", "../dist"], { allowEmpty: true })
     .pipe(clean({ force: true })); //不添加force:true属性不能删除上层目录，因此加上。
+  // cb(); // 使用cb不管用，因为gulp-clean是异步的。
 });
 
-gulp.task("copy-assets", function() {
-  return gulp
+gulp.task(
+  "clean-all",
+  gulp.series("cleanall", (done) => {
+    console.log(_SUCCESS("清除旧构建文件成功！"));
+    done();
+  })
+);
+
+gulp.task("copy-assets", function(cb) {
+  gulp
     .src("../components/assets/**/*", { allowEmpty: true })
     .pipe(gulp.dest("../lib/assets"));
+  console.log(_SUCCESS("复制静态资源目录成功！"));
+  cb();
 });
 
-gulp.task("compile-less", function() {
+gulp.task("compile-less", function(cb) {
   /**
    * 由于在package.json设置了gulpfile配置文件在build-tools，所以工作目录也会改成了build-tools,
    * 在执行gulp命令的时候可以看到控制台有打印：[13:54:09] Working directory changed to D:\hss\billd-ui\build-tools
@@ -33,7 +46,7 @@ gulp.task("compile-less", function() {
   // 编译less的时候，我需要编译components目录下的所有文件，如果当前工作目录在build-tools，就得../返回上层找
   // components，这样没问题。但如果我又想排除components目录下的某个文件或者文件夹，就得用到!（这是glob语法）,
   // 但如果用'!../components/xxx/**/*'的话，glob语法就有问题了，所以gulp.src的时候指定工作目录为components的外层。
-  return gulp
+  gulp
     .src(["components/**/*.less"], { cwd: "../" })
     .pipe(
       through2.obj(function(file, encoding, next) {
@@ -67,6 +80,8 @@ gulp.task("compile-less", function() {
   //   .pipe(gulpLess())
   //   .pipe(postcss())
   //   .pipe(gulp.dest("../lib"));
+  console.log(_SUCCESS("编译less成功！"));
+  cb();
 });
 
 gulp.task("concat-css", function() {
@@ -96,6 +111,7 @@ function compile(modules) {
   );
   function check() {
     if (error && !argv["ignore-error"]) {
+      console.log("退出");
       process.exit(1);
     }
   }
@@ -154,24 +170,34 @@ function compile(modules) {
 // es modules
 gulp.task("compile-es", (done) => {
   // console.log("compile es modules");
-  compile(false).on("finish", done);
+  compile(false).on("finish", function() {
+    console.log(_SUCCESS("构建es完成！"));
+    done();
+  });
 });
 
 // commonjs
 gulp.task("compile-lib", (done) => {
   // console.log("compile es commonjs");
-  compile().on("finish", done);
+  compile().on("finish", function() {
+    console.log(_SUCCESS("构建lib完成！"));
+    done();
+  });
 });
 
 gulp.task(
-  "default",
+  "all-task",
   gulp.series(
     "clean-all",
     gulp.parallel("copy-assets", "compile-less", "compile-es", "compile-lib"),
-    "concat-css",
-    function compileDone(done) {
-      console.log("all task is done");
-      done();
-    }
+    // "concat-css",
+    // function allTasksDone(done) {
+    //   console.log(_SUCCESS("所有任务执行完成！"));
+    //   done();
+    // }
   )
 );
+
+gulp.task("default", gulp.series("all-task"),function() {
+  console.log('dddd');
+});

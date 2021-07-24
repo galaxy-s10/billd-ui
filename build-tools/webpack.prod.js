@@ -20,7 +20,7 @@ module.exports = {
   output: {
     // path: resolveApp("./library"),
     // publicPath: "/library/",
-    // filename: "billd-ui.js",
+    filename: "billd-ui.js",
     library: {
       name: "aaax",
       // root: 'MyLibrary',

@@ -6,7 +6,8 @@ const devConfig = require("./webpack.dev");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const chalk = require("chalk");
+// import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
+
 const resolveApp = require("./paths");
 
 const commonConfig = function(isProduction) {
@@ -15,9 +16,10 @@ const commonConfig = function(isProduction) {
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
      * https://webpack.js.org/configuration/target/#string
      * 升级webpack-dev-serve@4.x后就可以去掉了这个属性了。
-     * 因为在开发环境使用.browserslistrc文件，热更新会失效，所以开发环境设置为web
+     * 因为webpack5环境下，根目录有.browserslistrc文件，会导致热更新失效，
+     * 因此设置target属性，在开发环境不使用.browserslistrc文件，设置为web
      */
-    // target: "web",
+    // target: "browserslist",//设置成browserslist的话，热更新会失效！
     target: isProduction ? "browserslist" : "web",
     entry: {
       main: {
@@ -148,6 +150,7 @@ const commonConfig = function(isProduction) {
                 importLoaders: 1, // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
               },
             },
+            "postcss-loader", // 默认会自动找postcss.config.js
           ],
           // loader: 'style-loader!css-loader', //旧版本webpack写法，也是从右到左执行。
           sideEffects: true, // 告诉webpack是有副作用的，不对css进行删除
@@ -172,9 +175,10 @@ const commonConfig = function(isProduction) {
             {
               loader: "css-loader",
               options: {
-                importLoaders: 1, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
+                importLoaders: 2, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
               },
             },
+            "postcss-loader", // 默认会自动找postcss.config.js
             {
               /**
                * antd当前的版本不支持less4.x版本，会报类似：Operation on an invalid type错误，
@@ -221,42 +225,56 @@ const commonConfig = function(isProduction) {
       ],
     },
     plugins: [
-      new WebpackBar(), // 构建进度条
-      new HtmlWebpackPlugin({
-        // 自动生成index.html文件(并引入打包的js)
-        filename: "index.html",
-        title: "billd-ui",
-        template: "./public/index.html",
-        hash: true,
-        minify: isProduction
-          ? {
-              collapseWhitespace: true, // 折叠空白
-              keepClosingSlash: true, // 在单标签上保留末尾斜杠
-              removeComments: true, // 移除注释
-              removeRedundantAttributes: true, // 移除多余的属性（如：input的type默认就是text，如果写了type="text"，就移除它，因为不写它默认也是type="text"）
-              removeScriptTypeAttributes: true, //删除script标签中type="text/javascript"
-              removeStyleLinkTypeAttributes: true, //删除style和link标签中type="text/css"
-              useShortDoctype: true, //使用html5的<!doctype html>替换掉之前的html老版本声明方式<!doctype>
-              // 上面的都是production模式下默认值。
-              removeEmptyAttributes: true, // 移除一些空属性，如空的id,classs,style等等，但不是空的就全删，比如<img alt />中的alt不会删。
-
-              minifyCSS: true, // 使用clean-css插件删除 CSS 中一些无用的空格、注释等。
-              minifyJS: true, // 使用Terser插件优化
-            }
-          : false,
-        chunks: ["main"],
+      // 构建进度条
+      new WebpackBar({
+        name: "billd-ui 🍵",
+        color: "yellow",
       }),
-      new VueLoaderPlugin(), //解析vue
+      /**
+       * 默认webpack-dev-server会把devServer.contentBase目录做开发服务器，
+       * 因此默认会找devServer.contentBase目录下的index.html
+       * 在打包组件库的时候，我们不需要html-webpack-plugin这个插件。
+       */
+      /**
+       * html-webpack-plugin插件将为你生成一个 HTML5 文件， 在 body 中使用 script 标签引入你所有 webpack 生成的 bundle
+       */
+      !isProduction
+        ? new HtmlWebpackPlugin({
+            filename: "index.html",
+            title: "billd-ui",
+            template: "./public/index.html",
+            hash: true,
+            minify: isProduction
+              ? {
+                  collapseWhitespace: true, // 折叠空白
+                  keepClosingSlash: true, // 在单标签上保留末尾斜杠
+                  removeComments: true, // 移除注释
+                  removeRedundantAttributes: true, // 移除多余的属性（如：input的type默认就是text，如果写了type="text"，就移除它，因为不写它默认也是type="text"）
+                  removeScriptTypeAttributes: true, //删除script标签中type="text/javascript"
+                  removeStyleLinkTypeAttributes: true, //删除style和link标签中type="text/css"
+                  useShortDoctype: true, //使用html5的<!doctype html>替换掉之前的html老版本声明方式<!doctype>
+                  // 上面的都是production模式下默认值。
+                  removeEmptyAttributes: true, // 移除一些空属性，如空的id,classs,style等等，但不是空的就全删，比如<img alt />中的alt不会删。
+                  minifyCSS: true, // 使用clean-css插件删除 CSS 中一些无用的空格、注释等。
+                  minifyJS: true, // 使用Terser插件优化
+                }
+              : false,
+            chunks: ["main"], //包含的入口块
+          })
+        : { apply: function() {} }, //plugins数组类似是对象，且要有apply方法。
+      // 解析vue
+      new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         //将 CSS 提取到单独的文件中
         // Options similar to the same options in webpackOptions.output
         // all options are optional
-        filename: "css/[name]-[hash:6].css",
+        // filename: "css/[name]-[hash:6].css",
+        filename: "/billd.css",
         chunkFilename: "css/[id].css",
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
+      // 定义全局变量
       new DefinePlugin({
-        //定义全局变量
         BASE_URL: "'./'", //public下的index.html里面的icon的路径
         "process.env": {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
@@ -270,7 +288,8 @@ module.exports = function(env) {
   return new Promise((resolve, reject) => {
     const isProduction = env.production;
     process.env.NODE_ENV = isProduction ? "production" : "development";
-    const config = isProduction ? prodConfig : devConfig;
+    // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
+    const config = Promise.resolve(isProduction ? prodConfig : devConfig);
     config.then((config) => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);

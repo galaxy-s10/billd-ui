@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <img src="aaax/dist/img/wechat123-2953ba.jpg" alt=""> -->
-    <div v-for="(item,index) in row">{{item}}{{index}}</div>
+    <div v-for="(item, index) in row">{{ item }}{{ index }}</div>
     <!-- <vue-render-cpt></vue-render-cpt> -->
   </div>
 </template>
@@ -13,7 +13,6 @@
 // import("billd-ui").then(res=>{
 //   console.log(res,'vue')
 // })
-
 
 // import vueRenderCpt from 'billd_ui'
 // console.log(vueRenderCpt,imgcpt)
@@ -90,86 +89,86 @@ export default {
         {
           key: 100,
           idd: 100,
-          name: "sddsdsdsdsdsdssd",
-          status: "1",
+          name: 'sddsdsdsdsdsdssd',
+          status: '1',
           age: 18,
           money: 34,
-          address: "New No. 1 Lake Park",
-          tags: ["nice", "developer"],
-          sex: "男",
+          address: 'New No. 1 Lake Park',
+          tags: ['nice', 'developer'],
+          sex: '男',
         },
         {
           key: 200,
           idd: 200,
-          name: "wwe",
-          status: "1",
+          name: 'wwe',
+          status: '1',
           age: 32,
           money: 67,
-          address: "New No. 1 Lake Park",
-          tags: ["nice", "developer"],
-          sex: "男",
+          address: 'New No. 1 Lake Park',
+          tags: ['nice', 'developer'],
+          sex: '男',
         },
         {
           key: 300,
           idd: 300,
-          name: "wew",
-          status: "1",
+          name: 'wew',
+          status: '1',
           age: 22,
           money: 23,
-          address: "New No. 1 Lake Park",
-          tags: ["nice", "developer"],
-          sex: "男",
+          address: 'New No. 1 Lake Park',
+          tags: ['nice', 'developer'],
+          sex: '男',
         },
         {
           key: 400,
           idd: 400,
-          name: "dff",
-          status: "1",
+          name: 'dff',
+          status: '1',
           age: 17,
           money: 3456,
-          address: "New No. 1 Lake Park",
-          tags: ["nice", "developer"],
-          sex: "男",
+          address: 'New No. 1 Lake Park',
+          tags: ['nice', 'developer'],
+          sex: '男',
         },
         {
           key: 500,
           idd: 500,
-          name: "John",
-          status: "1",
+          name: 'John',
+          status: '1',
           age: 25,
-          address: "New No. 1 Lake Park",
-          sex: "男",
+          address: 'New No. 1 Lake Park',
+          sex: '男',
           money: 12,
 
-          tags: ["nice", "developer"],
+          tags: ['nice', 'developer'],
         },
         {
           key: 600,
           idd: 600,
-          name: "Jim",
-          status: "1",
+          name: 'Jim',
+          status: '1',
           age: 30,
-          sex: "女",
+          sex: '女',
           money: 234,
-          address: "London No. 1 Lake Park",
-          tags: ["loser"],
+          address: 'London No. 1 Lake Park',
+          tags: ['loser'],
         },
         {
           key: 700,
           idd: 700,
           age: 21,
-          status: "0",
-          name: "Joe",
-          address: "Sidney No. 1 Lake Park",
-          sex: "男",
+          status: '0',
+          name: 'Joe',
+          address: 'Sidney No. 1 Lake Park',
+          sex: '男',
           money: 345,
-          tags: ["cool", "teacher"],
+          tags: ['cool', 'teacher'],
         },
       ],
 
       rowSelection: {
-        type: "checkbox",
-        getCheckboxProps: (row) => {
+        type: 'checkbox',
+        getCheckboxProps: row => {
           // console.log(row.key, "getCheckboxProps");
           // console.log(row, "sfsfsdf");
           // let key = row[this.getRowKey(row)];
@@ -187,27 +186,27 @@ export default {
       columns: [
         {
           // fixed: "left",
-          width: "100",
-          title: "key",
-          dataIndex: "idd", //列数据在数据项中对应的key
-          align: "center",
+          width: '100',
+          title: 'key',
+          dataIndex: 'idd', //列数据在数据项中对应的key
+          align: 'center',
           // key: "key", //v-for遍历columns时的key,如果设置了唯一的dataIndex可忽略该属性
         },
         {
-          fixed: "right",
-          width: "100",
-          title: "钱",
-          dataIndex: "money",
-          align: "center",
+          fixed: 'right',
+          width: '100',
+          title: '钱',
+          dataIndex: 'money',
+          align: 'center',
           // key: "money",
         },
         {
           // fixed: "left",
           // fixed: "right",
-          width: "120",
-          title: "性别",
-          dataIndex: "sex",
-          align: "center",
+          width: '120',
+          title: '性别',
+          dataIndex: 'sex',
+          align: 'center',
           // key: "sex",
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
@@ -233,18 +232,18 @@ export default {
           fixed: true,
           // fixed: "left",
           ellipsis: true,
-          width: "200",
-          title: "name",
-          dataIndex: "name",
-          align: "center",
+          width: '200',
+          title: 'name',
+          dataIndex: 'name',
+          align: 'center',
           // key: "name",
         },
         {
           fixed: true,
           // fixed: "right",
-          width: "100",
-          title: "状态",
-          dataIndex: "status",
+          width: '100',
+          title: '状态',
+          dataIndex: 'status',
           // align: "right",
           // key: "status",
           // render: (h, row) => {
@@ -257,23 +256,23 @@ export default {
         },
         {
           // fixed: "right",
-          width: "100",
-          title: "Age",
-          dataIndex: "age",
+          width: '100',
+          title: 'Age',
+          dataIndex: 'age',
           // key: "age",
         },
         {
           // width: "200",
-          title: "Address",
-          dataIndex: "address",
+          title: 'Address',
+          dataIndex: 'address',
           // key: "address",
         },
         {
           // fixed: "left",
-          width: "100",
-          title: "Tags",
+          width: '100',
+          title: 'Tags',
           // key: "tags",
-          dataIndex: "tags",
+          dataIndex: 'tags',
           // render: (h, row) => {
           //   // console.log(row.name);
           //   // return h("div", {}, row.name);
@@ -298,9 +297,9 @@ export default {
         },
       },
       obj: {
-        name: "hss",
+        name: 'hss',
         age: 22,
-        sex: "男",
+        sex: '男',
       },
       visible: false,
     };
@@ -315,9 +314,9 @@ export default {
     //   .then(function(myJson) {
     //     console.log(myJson);
     //   });
-    console.log("fsfsdfsf");
+    console.log('fsfsdfsf');
     console.log(Object.keys(this.theme));
-    Object.keys(this.theme).map((item) => {
+    Object.keys(this.theme).map(item => {
       console.log(this.theme[item]);
     });
   },
@@ -331,29 +330,29 @@ export default {
     getRowKey(row) {
       // data-source的v-for时的key
       // console.log("columns的v-for时的key", row);
-      let rowKey = this.rowKey || (row.key && "key");
+      let rowKey = this.rowKey || (row.key && 'key');
       return rowKey;
     },
     clickSwitch(v) {
       console.log(v);
     },
     xxx() {
-      console.log("234324");
+      console.log('234324');
     },
     changeModal() {
       this.visible = true;
     },
     visibleChange(v) {
-      console.log("visibleChange", v);
+      console.log('visibleChange', v);
     },
     cancelClick() {
-      console.log("cancelClick,app组件里modal的cancel回调");
+      console.log('cancelClick,app组件里modal的cancel回调');
     },
     confirmClick() {
-      console.log("cancelClick,app组件里modal的confirm回调");
+      console.log('cancelClick,app组件里modal的confirm回调');
     },
     closeClick() {
-      console.log("closeClick,app组件里modal的close回调");
+      console.log('closeClick,app组件里modal的close回调');
     },
   },
 };
@@ -361,10 +360,10 @@ export default {
 
 <style lang="less" scoped>
 // 下面的less样式会有作用域
-@import "./index.less";
+@import './index.less';
 </style>
 
 <style scoped>
-/* 下面的css样式不会有作用域 */
-@import "./index.css";
+/* 下面的css样式不会有作用域，也不会经过postcss */
+@import './index.css';
 </style>

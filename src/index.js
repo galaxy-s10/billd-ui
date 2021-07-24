@@ -1,12 +1,14 @@
-import Vue from "vue";
-import App from "./App.vue";
+import Vue from 'vue';
+import App from './App.vue';
 // import App from "./Appx";
-import auth from "./plugins";
-Vue.use(auth)
+import auth from './plugins';
+Vue.use(auth);
 
+import './index.css';
+console.log('sdfdsg');
 new Vue({
-  render: (h) => h(App),
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app');
 // console.log(1);
 // import { hi } from "aaaa/a";
 // console.log(hi);

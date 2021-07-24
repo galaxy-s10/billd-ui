@@ -1,6 +1,7 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const resolveApp = require("./paths");
 let portfinder = require("portfinder");
+const { _ERROR, _INFO, _SUCCESS } = require("./chalkTip");
 
 // portfinder.getPort(
 //   {
@@ -22,7 +23,9 @@ module.exports = new Promise((resolve, reject) => {
       stopPort: 9000,
     })
     .then((port) => {
+      console.log(_INFO("当前webpack-dev-server使用的端口："), port);
       resolve({
+        /**
         /**
          * .browserlistrc文件导致的热更新不生效。https://github.com/webpack/webpack-dev-server/pull/2761
          * 删掉.browserlistrc文件即可解决。但是我没有删，将webpack-dev-server升级到了4.x解决了，但也需要修改devServe属性的部分东西。
@@ -42,7 +45,7 @@ module.exports = new Promise((resolve, reject) => {
            * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
            * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
            */
-          contentBase: resolveApp("public"), //(!!!webpack-dev-server@4.x已改!!!)
+          contentBase: resolveApp("public1"), //模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
           // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
           // static: [resolveApp("./public")], //模拟vuecli的public
           historyApiFallback: true, //默认值：false，设置true后可解决spa页面刷新404

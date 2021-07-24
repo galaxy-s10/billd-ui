@@ -1,5 +1,5 @@
 export let esm = "hi,esm";
-let say = function() {
+let say = () => {
   console.log("sayyy");
 };
 export default say;

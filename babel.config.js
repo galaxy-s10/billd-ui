@@ -1,5 +1,6 @@
-const chalk = require("chalk");
-console.log(chalk.red("读取babel.config.js"));
+// const chalk = require("chalk");
+const { _ERROR, _INFO, _SUCCESS } = require("./build-tools/chalkTip");
+console.log(_INFO("读取babel.config.js 🎉"));
 module.exports = {
   presets: [
     // ["@babel/env"],

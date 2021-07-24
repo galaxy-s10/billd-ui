@@ -6,6 +6,8 @@
 // import '../test.js'
 // import sum from "./sum/index";
 import imgcpt from "./VueRenderCpt";
+import './index.css'
+import './index.less'
 // const imgcpt  = require("./VueRenderCpt")
 // import './a.less'
 // console.log(sum(12, 3));
