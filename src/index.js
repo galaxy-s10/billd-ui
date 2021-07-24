@@ -4,8 +4,13 @@ import App from './App.vue';
 import auth from './plugins';
 Vue.use(auth);
 
-import './index.css';
-console.log('sdfdsg');
+// import './index.css';
+const a = {
+  a: 1,
+  b: 333333333333333333333,
+  c: 235,
+};
+console.log('sdf');
 new Vue({
   render: h => h(App),
 }).$mount('#app');

@@ -1,14 +1,14 @@
-const { DefinePlugin } = require("webpack");
-const { merge } = require("webpack-merge");
-const WebpackBar = require("webpackbar");
-const prodConfig = require("./webpack.prod.js");
-const devConfig = require("./webpack.dev");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { DefinePlugin } = require('webpack');
+const { merge } = require('webpack-merge');
+const WebpackBar = require('webpackbar');
+const prodConfig = require('./webpack.prod.js');
+const devConfig = require('./webpack.dev');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
 
-const resolveApp = require("./paths");
+const resolveApp = require('./paths');
 
 const commonConfig = function(isProduction) {
   return {
@@ -20,10 +20,10 @@ const commonConfig = function(isProduction) {
      * 因此设置target属性，在开发环境不使用.browserslistrc文件，设置为web
      */
     // target: "browserslist",//设置成browserslist的话，热更新会失效！
-    target: isProduction ? "browserslist" : "web",
+    target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction ? "./components/index.js" : "./src/index.js",
+        import: isProduction ? './components/index.js' : './src/index.js',
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
       },
     },
@@ -44,23 +44,23 @@ const commonConfig = function(isProduction) {
       // iview: 'iview',
     },
     output: {
-      filename: "js/[name]-bundle.js", //入口文件打包生成后的文件的文件名
-      chunkFilename: "js/[name]-[hash:6]-bundle-chunk.js",
-      path: resolveApp("./dist"),
-      path: resolveApp("./dist"),
-      assetModuleFilename: "assets/[name]-[hash:6].[ext]", //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: "./", //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      filename: 'js/[name]-bundle.js', //入口文件打包生成后的文件的文件名
+      chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
+      path: resolveApp('./dist'),
+      path: resolveApp('./dist'),
+      assetModuleFilename: 'assets/[name]-[hash:6].[ext]', //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
+      publicPath: './', //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
       //解析路径
-      extensions: [".js", ".json", ".jsx", ".ts", ".tsx", ".vue"], //解析扩展名
+      extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], //解析扩展名
       alias: {
-        "@": resolveApp("./src"), //设置路径别名
+        '@': resolveApp('./src'), //设置路径别名
       },
     },
     resolveLoader: {
       // 用于解析webpack的loader
-      modules: ["node_modules"],
+      modules: ['node_modules'],
     },
     optimization: {
       // splitChunks: {
@@ -90,8 +90,8 @@ const commonConfig = function(isProduction) {
         {
           test: /\.tsx?$/,
           use: [
-            { loader: "babel-loader" },
-            { loader: "ts-loader", options: { appendTsxSuffixTo: [/\.vue$/] } },
+            { loader: 'babel-loader' },
+            { loader: 'ts-loader', options: { appendTsxSuffixTo: [/\.vue$/] } },
           ],
         },
         // {
@@ -104,28 +104,31 @@ const commonConfig = function(isProduction) {
         {
           test: /\.jsx?$/,
           /**
-           * vue文件如果写jsx,则.vue文件最终会转化为.jsx,如果项目里面引用了node_modules里
+           * 如果在vue使用jsx,则.vue文件最终会转化为.jsx,如果项目里面引用了node_modules里
            * 的vue文件，而这个vue文件写了jsx，则它最终也会解析成jsx。如果使用了exclude:/node_modules/，
            * 则不会编译node_modules里面的jsx，也就是说不会编译vue转换后的jsx！
            */
-          // exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              // exclude: [
-              //   // 测试了不生效。
-              //   // \\ for Windows, \/ for Mac OS and Linux
-              //   /node_modules/,
-              // ],
-              // 显式禁用目录内文件的 Babel 编译。
-              // ignore: [/node_modules[\\\/]aaaa/],
-              // presets: ["@babel/preset-env"],
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                // exclude: [
+                //   // 测试了不生效。
+                //   // \\ for Windows, \/ for Mac OS and Linux
+                //   /node_modules/,
+                // ],
+                // 显式禁用目录内文件的 Babel 编译。
+                // ignore: [/node_modules[\\\/]aaaa/],
+                // presets: ["@babel/preset-env"],
+              },
             },
-          },
+            'eslint-loader',
+          ],
         },
         {
           test: /\.vue$/,
-          use: [{ loader: "vue-loader", options: {} }],
+          use: [{ loader: 'vue-loader', options: {} }],
         },
         {
           test: /\.css$/,
@@ -143,14 +146,14 @@ const commonConfig = function(isProduction) {
                     // publicPath: "../"
                   },
                 }
-              : { loader: "style-loader" }, // Do not use style-loader and mini-css-extract-plugin together.
+              : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
             {
-              loader: "css-loader", //将引入的css文件解析成js模块
+              loader: 'css-loader', //将引入的css文件解析成js模块
               options: {
                 importLoaders: 1, // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
               },
             },
-            "postcss-loader", // 默认会自动找postcss.config.js
+            'postcss-loader', // 默认会自动找postcss.config.js
           ],
           // loader: 'style-loader!css-loader', //旧版本webpack写法，也是从右到左执行。
           sideEffects: true, // 告诉webpack是有副作用的，不对css进行删除
@@ -168,17 +171,17 @@ const commonConfig = function(isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    publicPath: "./",
+                    publicPath: './',
                   },
                 }
-              : { loader: "style-loader" }, // Do not use style-loader and mini-css-extract-plugin together.
+              : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
             {
-              loader: "css-loader",
+              loader: 'css-loader',
               options: {
                 importLoaders: 2, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
               },
             },
-            "postcss-loader", // 默认会自动找postcss.config.js
+            'postcss-loader', // 默认会自动找postcss.config.js
             {
               /**
                * antd当前的版本不支持less4.x版本，会报类似：Operation on an invalid type错误，
@@ -187,7 +190,7 @@ const commonConfig = function(isProduction) {
                * https://github.com/ant-design/ant-design/issues/23125#issuecomment-757678485
                * https://lesscss.org/usage/#less-options-math
                */
-              loader: "less-loader",
+              loader: 'less-loader',
               options: {
                 lessOptions: {
                   javascriptEnabled: true,
@@ -204,9 +207,9 @@ const commonConfig = function(isProduction) {
           // }
           // type: 'asset/inline', // 全部都使用url-loader
           // include: /node_modules/,
-          type: "asset",
+          type: 'asset',
           generator: {
-            filename: "img/[name]-[hash:6][ext]",
+            filename: 'img/[name]-[hash:6][ext]',
           },
           parser: {
             dataUrlCondition: {
@@ -217,9 +220,9 @@ const commonConfig = function(isProduction) {
         {
           // test: /\.(svg|eot|ttf|woff2?)\??.*$/,
           test: /\.(svg|eot|ttf|woff2?)$/,
-          type: "asset/resource",
+          type: 'asset/resource',
           generator: {
-            filename: "font/[name]-[hash:6][ext]",
+            filename: 'font/[name]-[hash:6][ext]',
           },
         },
       ],
@@ -227,8 +230,8 @@ const commonConfig = function(isProduction) {
     plugins: [
       // 构建进度条
       new WebpackBar({
-        name: "billd-ui 🍵",
-        color: "yellow",
+        name: 'billd-ui 🍵',
+        color: 'yellow',
       }),
       /**
        * 默认webpack-dev-server会把devServer.contentBase目录做开发服务器，
@@ -240,9 +243,9 @@ const commonConfig = function(isProduction) {
        */
       !isProduction
         ? new HtmlWebpackPlugin({
-            filename: "index.html",
-            title: "billd-ui",
-            template: "./public/index.html",
+            filename: 'index.html',
+            title: 'billd-ui',
+            template: './public/index.html',
             hash: true,
             minify: isProduction
               ? {
@@ -259,7 +262,7 @@ const commonConfig = function(isProduction) {
                   minifyJS: true, // 使用Terser插件优化
                 }
               : false,
-            chunks: ["main"], //包含的入口块
+            chunks: ['main'], //包含的入口块
           })
         : { apply: function() {} }, //plugins数组类似是对象，且要有apply方法。
       // 解析vue
@@ -269,15 +272,15 @@ const commonConfig = function(isProduction) {
         // Options similar to the same options in webpackOptions.output
         // all options are optional
         // filename: "css/[name]-[hash:6].css",
-        filename: "/billd.css",
-        chunkFilename: "css/[id].css",
+        filename: '/billd.css',
+        chunkFilename: 'css/[id].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
       // 定义全局变量
       new DefinePlugin({
         BASE_URL: "'./'", //public下的index.html里面的icon的路径
-        "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
       }),
     ],
@@ -287,10 +290,10 @@ const commonConfig = function(isProduction) {
 module.exports = function(env) {
   return new Promise((resolve, reject) => {
     const isProduction = env.production;
-    process.env.NODE_ENV = isProduction ? "production" : "development";
+    process.env.NODE_ENV = isProduction ? 'production' : 'development';
     // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
     const config = Promise.resolve(isProduction ? prodConfig : devConfig);
-    config.then((config) => {
+    config.then(config => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
       resolve(mergeConfig);

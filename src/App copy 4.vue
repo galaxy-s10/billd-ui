@@ -90,7 +90,7 @@ import("../dist/js/main-bundle").then((res) => {
 // import "../dist/switch/style/index.css";
 
 export default {
-  components: {
+   components: {
     // Dashboard,
     imgcpt:billd_ui.imgcpt,
     // imgcpt1,
