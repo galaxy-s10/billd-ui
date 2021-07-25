@@ -1,11 +1,11 @@
 const { DefinePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const WebpackBar = require('webpackbar');
-const prodConfig = require('./webpack.prod.js');
-const devConfig = require('./webpack.dev');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devConfig = require('./webpack.dev');
+const prodConfig = require('./webpack.prod.js');
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
 
 const resolveApp = require('./paths');
@@ -44,18 +44,17 @@ const commonConfig = function(isProduction) {
       // iview: 'iview',
     },
     output: {
-      filename: 'js/[name]-bundle.js', //入口文件打包生成后的文件的文件名
+      filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
       chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
       path: resolveApp('./dist'),
-      path: resolveApp('./dist'),
-      assetModuleFilename: 'assets/[name]-[hash:6].[ext]', //静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: './', //打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
+      publicPath: './', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
-      //解析路径
-      extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], //解析扩展名
+      // 解析路径
+      extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
-        '@': resolveApp('./src'), //设置路径别名
+        '@': resolveApp('./src'), // 设置路径别名
       },
     },
     resolveLoader: {
@@ -91,6 +90,7 @@ const commonConfig = function(isProduction) {
           test: /\.tsx?$/,
           use: [
             { loader: 'babel-loader' },
+            'eslint-loader',
             { loader: 'ts-loader', options: { appendTsxSuffixTo: [/\.vue$/] } },
           ],
         },
@@ -127,6 +127,22 @@ const commonConfig = function(isProduction) {
           ],
         },
         {
+          enforce: 'pre',
+          test: /\.vue$/,
+          exclude: [/node_modules/],
+          use: [
+            {
+              loader: 'eslint-loader',
+              options: {
+                cache: true,
+                emitWarning: false,
+                emitError: false,
+                // failOnError: true, // 如果有任何错误，将导致模块构建失败
+              },
+            },
+          ],
+        },
+        {
           test: /\.vue$/,
           use: [{ loader: 'vue-loader', options: {} }],
         },
@@ -148,7 +164,7 @@ const commonConfig = function(isProduction) {
                 }
               : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
             {
-              loader: 'css-loader', //将引入的css文件解析成js模块
+              loader: 'css-loader', // 将引入的css文件解析成js模块
               options: {
                 importLoaders: 1, // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
               },
@@ -253,22 +269,22 @@ const commonConfig = function(isProduction) {
                   keepClosingSlash: true, // 在单标签上保留末尾斜杠
                   removeComments: true, // 移除注释
                   removeRedundantAttributes: true, // 移除多余的属性（如：input的type默认就是text，如果写了type="text"，就移除它，因为不写它默认也是type="text"）
-                  removeScriptTypeAttributes: true, //删除script标签中type="text/javascript"
-                  removeStyleLinkTypeAttributes: true, //删除style和link标签中type="text/css"
-                  useShortDoctype: true, //使用html5的<!doctype html>替换掉之前的html老版本声明方式<!doctype>
+                  removeScriptTypeAttributes: true, // 删除script标签中type="text/javascript"
+                  removeStyleLinkTypeAttributes: true, // 删除style和link标签中type="text/css"
+                  useShortDoctype: true, // 使用html5的<!doctype html>替换掉之前的html老版本声明方式<!doctype>
                   // 上面的都是production模式下默认值。
                   removeEmptyAttributes: true, // 移除一些空属性，如空的id,classs,style等等，但不是空的就全删，比如<img alt />中的alt不会删。
                   minifyCSS: true, // 使用clean-css插件删除 CSS 中一些无用的空格、注释等。
                   minifyJS: true, // 使用Terser插件优化
                 }
               : false,
-            chunks: ['main'], //包含的入口块
+            chunks: ['main'], // 包含的入口块
           })
-        : { apply: function() {} }, //plugins数组类似是对象，且要有apply方法。
+        : { apply() {} }, // plugins数组类似是对象，且要有apply方法。
       // 解析vue
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
-        //将 CSS 提取到单独的文件中
+        // 将 CSS 提取到单独的文件中
         // Options similar to the same options in webpackOptions.output
         // all options are optional
         // filename: "css/[name]-[hash:6].css",
@@ -278,7 +294,7 @@ const commonConfig = function(isProduction) {
       }),
       // 定义全局变量
       new DefinePlugin({
-        BASE_URL: "'./'", //public下的index.html里面的icon的路径
+        BASE_URL: "'./'", // public下的index.html里面的icon的路径
         'process.env': {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },

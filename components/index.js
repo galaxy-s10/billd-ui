@@ -5,9 +5,9 @@
 // import Loading from "./loading/index";
 // import '../test.js'
 // import sum from "./sum/index";
-import imgcpt from "./VueRenderCpt";
-import './index.css'
-import './index.less'
+import imgcpt from './VueRenderCpt';
+import './index.css';
+import './index.less';
 // const imgcpt  = require("./VueRenderCpt")
 // import './a.less'
 // console.log(sum(12, 3));
@@ -46,7 +46,6 @@ export { imgcpt };
 //   console.log("addd", 3333333);
 // };
 
-
-export let addp = function() {
-  console.log("addd", 3333333);
+export const addp = function() {
+  console.log('addd', 3333333);
 };

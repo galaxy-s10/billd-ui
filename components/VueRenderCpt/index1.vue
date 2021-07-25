@@ -14,7 +14,7 @@ export default {
           attrskey1111111111111111
         </div>
         <div {...{ attrs: { key: 234333333333333, xga: 34111112 } }}>key22</div>
-        <img src={require("./wechat123.jpg")} style="width:120px;" />
+        <img src={require('./wechat123.jpg')} style="width:120px;" />
       </div>
     );
   },
@@ -23,12 +23,12 @@ export default {
   mounted() {},
   methods: {
     clickme() {
-      console.log("clickmeclickmeclickme");
+      console.log('clickmeclickmeclickme');
     },
     enterClick(v) {
-      console.log("enter!!!");
-    }
-  }
+      console.log('enter!!!');
+    },
+  },
 };
 </script>
 

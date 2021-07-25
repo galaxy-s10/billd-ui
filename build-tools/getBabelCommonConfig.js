@@ -1,18 +1,19 @@
-const { _ERROR, _INFO, _SUCCESS } = require("./chalkTip");
-console.log(_SUCCESS("读取getBabelCommonConfig.js 🎉"));
+const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
+
+console.log(_SUCCESS('读取getBabelCommonConfig.js 🎉'));
 module.exports = function(modules) {
   return {
     presets: [
       // ["@babel/env"],
       [
-        "@babel/preset-env",
+        '@babel/preset-env',
         {
           // https://www.babeljs.cn/docs/babel-preset-env#modules
           modules,
         },
       ],
       [
-        "@vue/babel-preset-jsx",
+        '@vue/babel-preset-jsx',
         // {
         //   injectH: false,
         // },

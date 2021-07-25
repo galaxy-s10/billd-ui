@@ -2,14 +2,16 @@ import Vue from 'vue';
 import App from './App.vue';
 // import App from "./Appx";
 import auth from './plugins';
+
 Vue.use(auth);
 
 // import './index.css';
-const a = {
+const a214 = {
   a: 1,
   b: 333333333333333333333,
   c: 235,
 };
+console.log(a214);
 console.log('sdf');
 new Vue({
   render: h => h(App),

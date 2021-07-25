@@ -1,14 +1,19 @@
-import Switch from "../dist/switch";
-import "../dist/switch/style/css";
+// import Switch from '../dist/switch';
+// import '../dist/switch/style/css';
+const a = 124;
 export default {
   components: {
-    HSwitch: Switch
+    // HSwitch: Switch,
   },
   render() {
     console.log(
       <div>
-        <h-switch dgdf="sdgs" sg="fsdf" switchVal="false" vOn:clickSwitch={(x, e) => this.clickSwitch(x, e)}></h-switch>
-      </div>
+        <h-switch
+          dgdf="sdgs"
+          sg="fsdf"
+          switchVal="false"
+          vOn:clickSwitch={(x, e) => this.clickSwitch(x, e)}></h-switch>
+      </div>,
     );
     return (
       <div>
@@ -20,6 +25,6 @@ export default {
     clickSwitch(v, e) {
       console.log(arguments);
       console.log(v, e);
-    }
-  }
+    },
+  },
 };

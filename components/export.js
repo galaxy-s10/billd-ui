@@ -1,5 +1,5 @@
-export let esm = "hi,esm";
-let say = () => {
-  console.log("sayyy");
+export const esm = 'hi,esm';
+const say = () => {
+  console.log('sayyy');
 };
 export default say;

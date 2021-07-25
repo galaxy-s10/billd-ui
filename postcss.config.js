@@ -1,11 +1,45 @@
-// const chalk = require("chalk");
-// console.log(chalk.red("读取postcss.config.js 🎉"));
-const { _ERROR, _INFO, _SUCCESS } = require("./build-tools/chalkTip");
-console.log(_INFO("读取postcss.config.js 🎉"));
-module.exports = {
-  plugins: [
-    // 'autoprefixer',  // postcss-preset-env包含了autoprefixer的功能
-    // 'postcss-preset-env',  //简写，具体看各个插件的官网提供几种写法
-    require("postcss-preset-env"),
-  ],
-};
+// import Switch from "./switch/index";
+// import Message from "./message";
+// import Modal from "./modal";
+// import Table from "./table";
+// import Loading from "./loading/index";
+// import '../test.js'
+// import sum from "./sum/index";
+import imgcpt from './VueRenderCpt';
+// const imgcpt  = require("./VueRenderCpt")
+// import './a.less'
+// console.log(sum(12, 3));
+
+// import { esm } from "./export";
+// const { esm } = require("./export");
+// console.log(esm);
+
+// export { esm };
+// exports.esm1 = esm
+
+// console.log(imgcpt);
+// export const components = {
+//   Switch,
+//   Loading
+// };
+
+// const install = function(app) {
+//   Object.keys(components).forEach(key => {
+//     const component = components[key];
+//     // console.log(component);
+//     if (component.install) {
+//       app.use(component);
+//     }
+//   });
+// };
+// export default install;
+
+// export { sum, Loading,Switch,imgcpt };
+export { imgcpt };
+// console.log(imgcpt);
+// exports.hi = 'imgcpt'
+// exports.imgcpt1 = imgcpt
+
+// export let addp = function() {
+//   console.log("addd", 3333333);
+// };

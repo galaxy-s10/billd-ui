@@ -1,1 +1,1 @@
-exports.cjs = "hi,cjs";
+exports.cjs = 'hi,cjs';

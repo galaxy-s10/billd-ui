@@ -1,19 +1,20 @@
 // const chalk = require("chalk");
-const { _ERROR, _INFO, _SUCCESS } = require("./build-tools/chalkTip");
-console.log(_INFO("读取babel.config.js 🎉"));
+const { _ERROR, _INFO, _SUCCESS } = require('./build-tools/chalkTip');
+
+console.log(_INFO('读取babel.config.js 🎉'));
 module.exports = {
   presets: [
     // ["@babel/env"],
     // "@babel/preset-env",
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         // modules: "umd",
         // target: {},
       },
     ],
     [
-      "@vue/babel-preset-jsx",
+      '@vue/babel-preset-jsx',
       // {
       //   injectH: false,
       // },

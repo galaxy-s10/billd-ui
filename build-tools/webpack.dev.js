@@ -1,7 +1,7 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const resolveApp = require("./paths");
-let portfinder = require("portfinder");
-const { _ERROR, _INFO, _SUCCESS } = require("./chalkTip");
+const portfinder = require('portfinder');
+const resolveApp = require('./paths');
+const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
 
 // portfinder.getPort(
 //   {
@@ -15,15 +15,15 @@ const { _ERROR, _INFO, _SUCCESS } = require("./chalkTip");
 // );
 module.exports = new Promise((resolve, reject) => {
   // 默认端口8088，如果被占用了，会自动递增+1
-  let port = 8088;
+  const port = 8088;
   portfinder.basePort = port;
   portfinder
     .getPortPromise({
       port,
       stopPort: 9000,
     })
-    .then((port) => {
-      console.log(_INFO("当前webpack-dev-server使用的端口："), port);
+    .then(port => {
+      console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
       resolve({
         /**
         /**
@@ -31,10 +31,15 @@ module.exports = new Promise((resolve, reject) => {
          * 删掉.browserlistrc文件即可解决。但是我没有删，将webpack-dev-server升级到了4.x解决了，但也需要修改devServe属性的部分东西。
          */
         // mode: "production",
-        mode: "development",
-        devtool: "source-map",
+        mode: 'development',
+        devtool: 'source-map',
         devServer: {
-          stats: "errors-only",
+          // stats: 'errors-warnings',
+          stats: 'errors-only',
+          overlay: {
+            warnings: true,
+            errors: true,
+          },
           hot: true, // hrm，开启模块热替换
           // hotOnly: true, // 默认情况下（hotOnly:false），如果编译失败会刷新页面。设置了true后就不会刷新整个页面(!!!webpack-dev-server@4.x已改!!!)
           compress: true, // 开启gizp压缩
@@ -45,10 +50,10 @@ module.exports = new Promise((resolve, reject) => {
            * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
            * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
            */
-          contentBase: resolveApp("public1"), //模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
+          contentBase: resolveApp('public1'), // 模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
           // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
           // static: [resolveApp("./public")], //模拟vuecli的public
-          historyApiFallback: true, //默认值：false，设置true后可解决spa页面刷新404
+          historyApiFallback: true, // 默认值：false，设置true后可解决spa页面刷新404
           // historyApiFallback: {
           //   rewrites: [
           //     // 如果publicPath设置了/abc，就不能直接设置historyApiFallback: true，这样会重定向到hss_webpack5根目录下的index.html
@@ -60,7 +65,7 @@ module.exports = new Promise((resolve, reject) => {
           //   // webpack-dev-server4+写法。https://github.com/webpack/webpack-dev-server/blob/master/CHANGELOG.md
           //   publicPath: "./"
           // },
-          publicPath: "/", //devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
+          publicPath: '/', // devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
           // proxy: {
           //   "/api": {
           //     // target: 'https://www.zhengbeining.com/api/',  //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
@@ -81,7 +86,7 @@ module.exports = new Promise((resolve, reject) => {
         plugins: [],
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
     });
 });

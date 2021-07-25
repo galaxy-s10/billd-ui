@@ -1,3 +1,5 @@
+// const wechat123 = require('./wechat123.jpg');
+
 export default {
   components: {},
   data() {
@@ -13,7 +15,7 @@ export default {
           attrskey
         </div>
         <div {...{ attrs: { key: 234333333333333, xga: 34111112 } }}>key22</div>
-        <img src={require("./wechat123.jpg")} style="width:100px;" />
+        <img src={require('./wechat123.jpg')} style="width:100px;" />
       </div>
     );
   },
@@ -22,11 +24,10 @@ export default {
   mounted() {},
   methods: {
     clickme() {
-      console.log("clickmeclickmeclickme");
+      console.log('clickmeclickmeclickme');
     },
-    enterClick(v) {
-      console.log("enter!!!");
-    }
-  }
+    enterClick() {
+      console.log('enter!!!');
+    },
+  },
 };
-

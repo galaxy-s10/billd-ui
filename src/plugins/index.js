@@ -1,7 +1,7 @@
-import directiveAuth from "./auth";
+import directiveAuth from './auth';
 
 export default {
   install(Vue) {
-    Vue.directive("auth", directiveAuth);
+    Vue.directive('auth', directiveAuth);
   },
 };

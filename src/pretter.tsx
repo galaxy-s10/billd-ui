@@ -1,7 +1,9 @@
 export default {
-    render() {
-        return <div>
-            <span vOnclick=""></span>
-        </div>
-    }
+  render() {
+    return (
+      <div>
+        <span vOn:click=""></span>
+      </div>
+    );
+  },
 };

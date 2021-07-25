@@ -1,32 +1,33 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
-const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const PurgeCssPlugin = require('purgecss-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin");
-const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 // const AutoUploadServer = require('../webpack_plugins/AutoUploadServer')
 // const serverConfig = require('./server')
 // const glob = require('glob')
 // const webpack = require('webpack');
 // const path = require("path");
-const resolveApp = require("./paths");
+const resolveApp = require('./paths');
+
 module.exports = {
-  mode: "development",
+  mode: 'development',
   // mode: "none",
   // mode: "production",
-  devtool: "source-map",
+  devtool: 'source-map',
   output: {
     // path: resolveApp("./library"),
     // publicPath: "/library/",
-    filename: "billd-ui.js",
+    filename: 'billd-ui.js',
     library: {
-      name: "aaax",
+      name: 'aaax',
       // root: 'MyLibrary',
       // amd: 'my-library',
       // commonjs: 'my-common-library',
-      type: "umd",
+      type: 'umd',
     },
     // library: "billd_ui",
     // libraryTarget: "umd",//module,commonjs,umd
@@ -155,11 +156,11 @@ module.exports = {
     //   }
     // }),
     new CompressionPlugin({
-      //http压缩
+      // http压缩
       test: /\.(css|js)$/i,
-      threshold: 10 * 1024, //大于10k的文件才进行压缩
-      minRatio: 0.8, //只有压缩比这个比率更好的资产才会被处理(minRatio =压缩大小/原始大小),即压缩如果达不到0.8就不会进行压缩
-      algorithm: "gzip", //压缩算法
+      threshold: 10 * 1024, // 大于10k的文件才进行压缩
+      minRatio: 0.8, // 只有压缩比这个比率更好的资产才会被处理(minRatio =压缩大小/原始大小),即压缩如果达不到0.8就不会进行压缩
+      algorithm: 'gzip', // 压缩算法
       // exclude
       // include
     }),
