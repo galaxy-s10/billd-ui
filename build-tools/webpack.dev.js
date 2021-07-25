@@ -1,5 +1,6 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const portfinder = require('portfinder');
+const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const resolveApp = require('./paths');
 const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
 
@@ -36,10 +37,13 @@ module.exports = new Promise((resolve, reject) => {
         devServer: {
           // stats: 'errors-warnings',
           stats: 'errors-only',
-          overlay: {
-            warnings: true,
-            errors: true,
-          },
+          // overlay: true,
+          /**
+           * https://github.com/geowarin/friendly-errors-webpack-plugin
+           * If you use the webpack-dev-server, there is a setting in webpack's devServer options:
+           * quiet: true
+           */
+          quiet: true,
           hot: true, // hrm，开启模块热替换
           // hotOnly: true, // 默认情况下（hotOnly:false），如果编译失败会刷新页面。设置了true后就不会刷新整个页面(!!!webpack-dev-server@4.x已改!!!)
           compress: true, // 开启gizp压缩
@@ -50,7 +54,7 @@ module.exports = new Promise((resolve, reject) => {
            * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
            * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
            */
-          contentBase: resolveApp('public1'), // 模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
+          contentBase: resolveApp('public'), // 模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
           // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
           // static: [resolveApp("./public")], //模拟vuecli的public
           historyApiFallback: true, // 默认值：false，设置true后可解决spa页面刷新404
@@ -83,7 +87,7 @@ module.exports = new Promise((resolve, reject) => {
           //   },
           // },
         },
-        plugins: [],
+        // plugins: [new FriendlyErrorsWebpackPlugin({})],
       });
     })
     .catch(err => {

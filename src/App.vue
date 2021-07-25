@@ -9,7 +9,7 @@ import aa from './Appx.jsx';
 
 export default {
   components: {
-    aa,
+    // aa,
   },
 
   data() {
@@ -17,13 +17,13 @@ export default {
       adg: 234,
     };
   },
-  // render(){
-
-  // },
   computed: {},
   created() {},
   mounted() {},
   methods: {},
+  // render(){
+
+  // },
 };
 </script>
 

@@ -4,6 +4,9 @@ const WebpackBar = require('webpackbar');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');//webpack4
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webapck5对等依赖
+const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
@@ -132,6 +135,10 @@ const commonConfig = function(isProduction) {
           exclude: [/node_modules/],
           use: [
             {
+              /**
+               * eslint-loader has been deprecated. Please use eslint-webpack-plugin.
+               *  https://github.com/webpack-contrib/eslint-loader
+               */
               loader: 'eslint-loader',
               options: {
                 cache: true,
@@ -249,6 +256,7 @@ const commonConfig = function(isProduction) {
         name: 'billd-ui 🍵',
         color: 'yellow',
       }),
+      new FriendlyErrorsWebpackPlugin({}),
       /**
        * 默认webpack-dev-server会把devServer.contentBase目录做开发服务器，
        * 因此默认会找devServer.contentBase目录下的index.html
@@ -312,6 +320,7 @@ module.exports = function(env) {
     config.then(config => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
+      console.log(mergeConfig);
       resolve(mergeConfig);
     });
   });
