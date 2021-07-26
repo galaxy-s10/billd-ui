@@ -1,7 +1,7 @@
 const postcssPresetEnv = require('postcss-preset-env');
-const { _INFO } = require('./build-tools/chalkTip');
+const { _INFO, emoji } = require('./build-tools/chalkTip');
 
-console.log(_INFO('读取postcss.config.js 🎉'));
+console.log(_INFO('读取postcss.config.js '), emoji.get('hourglass'));
 module.exports = {
   plugins: [
     // 'autoprefixer',  // postcss-preset-env包含了autoprefixer的功能

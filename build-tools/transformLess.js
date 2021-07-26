@@ -20,7 +20,7 @@ function transformLess(lessFile) {
     filename: resolvedLessFile,
     // plugins: [new NpmImportPlugin({ prefix: "~" })],
     // compress: true, //使用less内置的压缩，但最好在解析完成less后，用第三方插件再次解析压缩。
-    javascriptEnabled: true, // 允许在.less文件中内联计算JavaScript
+    javascriptEnabled: true // 允许在.less文件中内联计算JavaScript
   };
   // console.log(lessOpts,'lessOptslessOpts');
   // console.log(data,'datadata');

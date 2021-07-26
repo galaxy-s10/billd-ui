@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2021: true,
+    es2021: true
   },
   extends: [
     // 'vue',
@@ -13,7 +13,7 @@ module.exports = {
     // 'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
     'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
     // 'prettier/prettier',
-    'prettier',
+    'prettier'
     // 'plugin:prettier/recommended', // 兼容prettier
   ],
   // https://eslint.vuejs.org/
@@ -23,8 +23,8 @@ module.exports = {
     ecmaVersion: 12,
     // parser: '@typescript-eslint/parser',
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
     /**
      * https://www.dazhuanlan.com/2020/01/06/5e12c9fe9a7a4/
      * https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser
@@ -36,7 +36,7 @@ module.exports = {
     // extraFileExtensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
-    'vue',
+    'vue'
     // '@typescript-eslint',
     // 'prettier',
     // 'plugin:prettier/recommended', // error！！！巨坑，这里写错位置了，应该是写在extends里面的！！！！
@@ -46,6 +46,16 @@ module.exports = {
     // 1 => warn
     // 2 => error
     // 'prettier/prettier': 'error',
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'never',
+        objects: 'never',
+        imports: 'never',
+        exports: 'never',
+        functions: 'never'
+      }
+    ],
     'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
     'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
     'no-shadow': 0,
@@ -68,6 +78,6 @@ module.exports = {
     'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
     quotes: [1, 'single'], // Strings must use singlequote，否则报warn
     'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
-    'array-callback-return': [2, { allowImplicit: false }], // expects a return value from arrow function.期望箭头函数的返回值。
-  },
+    'array-callback-return': [2, { allowImplicit: false }] // expects a return value from arrow function.期望箭头函数的返回值。
+  }
 };

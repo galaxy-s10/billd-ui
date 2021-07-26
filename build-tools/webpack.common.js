@@ -28,9 +28,9 @@ const commonConfig = function(isProduction) {
     target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction ? './components/index.js' : './src/index.js',
+        import: isProduction ? './components/index.js' : './src/index.js'
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
-      },
+      }
     },
 
     externals: {
@@ -53,18 +53,18 @@ const commonConfig = function(isProduction) {
       chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
       path: resolveApp('./dist'),
       assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: './', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+      publicPath: './' // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     },
     resolve: {
       // 解析路径
       extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
-        '@': resolveApp('./src'), // 设置路径别名
-      },
+        '@': resolveApp('./src') // 设置路径别名
+      }
     },
     resolveLoader: {
       // 用于解析webpack的loader
-      modules: ['node_modules'],
+      modules: ['node_modules']
     },
     optimization: {
       // splitChunks: {
@@ -96,8 +96,8 @@ const commonConfig = function(isProduction) {
           use: [
             { loader: 'babel-loader' },
             'eslint-loader',
-            { loader: 'ts-loader', options: { appendTsxSuffixTo: [/\.vue$/] } },
-          ],
+            { loader: 'ts-loader', options: { appendTsxSuffixTo: [/\.vue$/] } }
+          ]
         },
         // {
         //   test: /\.tsx$/,
@@ -126,10 +126,10 @@ const commonConfig = function(isProduction) {
                 // 显式禁用目录内文件的 Babel 编译。
                 // ignore: [/node_modules[\\\/]aaaa/],
                 // presets: ["@babel/preset-env"],
-              },
+              }
             },
-            'eslint-loader',
-          ],
+            'eslint-loader'
+          ]
         },
         {
           enforce: 'pre',
@@ -145,15 +145,15 @@ const commonConfig = function(isProduction) {
               options: {
                 cache: true,
                 emitWarning: false,
-                emitError: false,
+                emitError: false
                 // failOnError: true, // 如果有任何错误，将导致模块构建失败
-              },
-            },
-          ],
+              }
+            }
+          ]
         },
         {
           test: /\.vue$/,
-          use: [{ loader: 'vue-loader' }],
+          use: [{ loader: 'vue-loader' }]
         },
         {
           test: /\.css$/,
@@ -169,19 +169,19 @@ const commonConfig = function(isProduction) {
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
                     // publicPath: "../"
-                  },
+                  }
                 }
               : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
             {
               loader: 'css-loader', // 将引入的css文件解析成js模块
               options: {
-                importLoaders: 1, // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
-              },
+                importLoaders: 1 // 在css文件里面@import了其他资源，就回到上一个loader，在上一个loader那里重新解析@import里的资源
+              }
             },
-            'postcss-loader', // 默认会自动找postcss.config.js
+            'postcss-loader' // 默认会自动找postcss.config.js
           ],
           // loader: 'style-loader!css-loader', //旧版本webpack写法，也是从右到左执行。
-          sideEffects: true, // 告诉webpack是有副作用的，不对css进行删除
+          sideEffects: true // 告诉webpack是有副作用的，不对css进行删除
         },
         {
           test: /\.less$/,
@@ -196,15 +196,15 @@ const commonConfig = function(isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    publicPath: './',
-                  },
+                    publicPath: './'
+                  }
                 }
               : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 2, // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
-              },
+                importLoaders: 2 // 在less文件里面@import了其他资源，就回到上两个loader，在上两个loader那里开始重新解析@import里的资源
+              }
             },
             'postcss-loader', // 默认会自动找postcss.config.js
             {
@@ -218,11 +218,11 @@ const commonConfig = function(isProduction) {
               loader: 'less-loader',
               options: {
                 lessOptions: {
-                  javascriptEnabled: true,
-                },
-              },
-            },
-          ],
+                  javascriptEnabled: true
+                }
+              }
+            }
+          ]
         },
         {
           test: /\.(jpg|jpeg|png|gif)$/,
@@ -234,23 +234,23 @@ const commonConfig = function(isProduction) {
           // include: /node_modules/,
           type: 'asset',
           generator: {
-            filename: 'img/[name]-[hash:6][ext]',
+            filename: 'img/[name]-[hash:6][ext]'
           },
           parser: {
             dataUrlCondition: {
-              maxSize: 4 * 1024, // 如果一个模块源码大小小于 maxSize，那么模块会被作为一个 Base64 编码的字符串注入到包中， 否则模块文件会被生成到输出的目标目录中
-            },
-          },
+              maxSize: 4 * 1024 // 如果一个模块源码大小小于 maxSize，那么模块会被作为一个 Base64 编码的字符串注入到包中， 否则模块文件会被生成到输出的目标目录中
+            }
+          }
         },
         {
           // test: /\.(svg|eot|ttf|woff2?)\??.*$/,
           test: /\.(svg|eot|ttf|woff2?)$/,
           type: 'asset/resource',
           generator: {
-            filename: 'font/[name]-[hash:6][ext]',
-          },
-        },
-      ],
+            filename: 'font/[name]-[hash:6][ext]'
+          }
+        }
+      ]
     },
     plugins: [
       // new ESLintPlugin({
@@ -266,8 +266,8 @@ const commonConfig = function(isProduction) {
       // }),
       // 构建进度条
       new WebpackBar({
-        name: 'billd-ui 🍵',
-        color: 'yellow',
+        name: 'billd-ui',
+        color: 'yellow'
       }),
       // new FriendlyErrorsWebpackPlugin({}),
 
@@ -297,10 +297,10 @@ const commonConfig = function(isProduction) {
                   // 上面的都是production模式下默认值。
                   removeEmptyAttributes: true, // 移除一些空属性，如空的id,classs,style等等，但不是空的就全删，比如<img alt />中的alt不会删。
                   minifyCSS: true, // 使用clean-css插件删除 CSS 中一些无用的空格、注释等。
-                  minifyJS: true, // 使用Terser插件优化
+                  minifyJS: true // 使用Terser插件优化
                 }
               : false,
-            chunks: ['main'], // 包含的入口块
+            chunks: ['main'] // 包含的入口块
           })
         : { apply() {} }, // plugins数组类似是对象，且要有apply方法。
       // 解析vue
@@ -312,16 +312,16 @@ const commonConfig = function(isProduction) {
         // filename: "css/[name]-[hash:6].css",
         filename: '/billd.css',
         chunkFilename: 'css/[id].css',
-        ignoreOrder: false, // Enable to remove warnings about conflicting order
+        ignoreOrder: false // Enable to remove warnings about conflicting order
       }),
       // 定义全局变量
       new DefinePlugin({
         BASE_URL: '"./"', // public下的index.html里面的icon的路径
         'process.env': {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-        },
-      }),
-    ],
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+        }
+      })
+    ]
   };
 };
 
@@ -334,7 +334,7 @@ module.exports = function(env) {
     config.then(config => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
-      console.log(mergeConfig);
+      // console.log(mergeConfig);
       resolve(mergeConfig);
     });
   });

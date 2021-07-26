@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// import sds from './App';
+import sds from './App';
 
 export default {
   components: {

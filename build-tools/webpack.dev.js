@@ -21,7 +21,7 @@ module.exports = new Promise(resolve => {
   portfinder
     .getPortPromise({
       port,
-      stopPort: 9000,
+      stopPort: 9000
     })
     .then(port => {
       console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
@@ -35,15 +35,18 @@ module.exports = new Promise(resolve => {
         mode: 'development',
         devtool: 'source-map',
         devServer: {
-          // stats: 'errors-warnings',
-          stats: 'errors-only',
-          // overlay: true,
+          stats: 'errors-warnings', // 只显示警告和错误信息
+          // stats: 'errors-only', // 只显示错误信息（如果eslint有警告和错误，只会显示警告信息，不会显示错误信息）
+          // overlay: true, // 出现编译器错误或警告时，在浏览器中显示全屏覆盖。
           /**
            * https://github.com/geowarin/friendly-errors-webpack-plugin
            * If you use the webpack-dev-server, there is a setting in webpack's devServer options:
            * quiet: true
+           * 启用 devServer.quiet 后，除了初始启动信息外，什么都不会写入控制台。
+           * 这也意味着来自 webpack 的错误或警告是不可见的。
+           * warn:不使用FriendlyErrorsWebpackPlugin这个插件请把这个属性注释掉！否则控制台无警告和错误！
            */
-          quiet: true,
+          // quiet: true,
           hot: true, // hrm，开启模块热替换
           // hotOnly: true, // 默认情况下（hotOnly:false），如果编译失败会刷新页面。设置了true后就不会刷新整个页面(!!!webpack-dev-server@4.x已改!!!)
           compress: true, // 开启gizp压缩
@@ -69,7 +72,7 @@ module.exports = new Promise(resolve => {
           //   // webpack-dev-server4+写法。https://github.com/webpack/webpack-dev-server/blob/master/CHANGELOG.md
           //   publicPath: "./"
           // },
-          publicPath: '/', // devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
+          publicPath: '/' // devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
           // proxy: {
           //   "/api": {
           //     // target: 'https://www.zhengbeining.com/api/',  //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
@@ -86,7 +89,7 @@ module.exports = new Promise(resolve => {
           //     },
           //   },
           // },
-        },
+        }
         // plugins: [new FriendlyErrorsWebpackPlugin({})],
       });
     })

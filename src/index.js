@@ -1,20 +1,24 @@
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from "vue";
+import App from "./App.vue";
 // import App from "./Appx";
-import auth from './plugins';
+import auth from "./plugins";
 
 Vue.use(auth);
 
 // const a = 234;
 
 // import './index.css';
-// const a214 = { a: 1, b: 333333333333333333333, c: 235 };
+const a214 = {
+  a: 1,
+  b: 333333333333333333333,
+  c: "235",
+};
 
 // console.log(a214);
-console.log('sdf');
+console.log("sdf");
 new Vue({
   render: h => h(App),
-}).$mount('#app');
+}).$mount("#app");
 // console.log(1);
 // import { hi } from "aaaa/a";
 // console.log(hi);

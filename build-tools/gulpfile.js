@@ -11,7 +11,7 @@ const tsProject = require('../tsconfig.json');
 const transformLess = require('./transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
-const { _SUCCESS } = require('./chalkTip');
+const { _SUCCESS, emoji } = require('./chalkTip');
 
 gulp.task(
   'cleanall',
@@ -19,23 +19,29 @@ gulp.task(
     // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
     gulp
       .src(['../lib', '../es', '../dist'], { allowEmpty: true })
-      .pipe(clean({ force: true })), // 不添加force:true属性不能删除上层目录，因此加上。
+      .pipe(clean({ force: true })) // 不添加force:true属性不能删除上层目录，因此加上。
   // cb(); // 使用cb不管用，因为gulp-clean是异步的。
 );
 
 gulp.task(
   'clean-all',
   gulp.series('cleanall', done => {
-    console.log(_SUCCESS('清除旧构建文件成功！'));
+    console.log(
+      _SUCCESS('清除旧构建文件成功！'),
+      emoji.get('white_check_mark')
+    );
     done();
-  }),
+  })
 );
 
 gulp.task('copy-assets', cb => {
   gulp
     .src('../components/assets/**/*', { allowEmpty: true })
     .pipe(gulp.dest('../lib/assets'));
-  console.log(_SUCCESS('复制静态资源目录成功！'));
+  console.log(
+    _SUCCESS('复制静态资源目录成功！'),
+    emoji.get('white_check_mark')
+  );
   cb();
 });
 
@@ -71,7 +77,7 @@ gulp.task('compile-less', cb => {
         } else {
           next();
         }
-      }),
+      })
     )
     .pipe(postcss())
     .pipe(gulp.dest('../lib'));
@@ -81,7 +87,7 @@ gulp.task('compile-less', cb => {
   //   .pipe(gulpLess())
   //   .pipe(postcss())
   //   .pipe(gulp.dest("../lib"));
-  console.log(_SUCCESS('编译less成功！'));
+  console.log(_SUCCESS('编译less成功！'), emoji.get('white_check_mark'));
   cb();
 });
 
@@ -89,14 +95,14 @@ gulp.task('concat-css', () =>
   gulp
     .src('../lib/**/*.css')
     .pipe(concat('all.css'))
-    .pipe(gulp.dest('../lib')),
+    .pipe(gulp.dest('../lib'))
 );
 
 const tsFiles = [
   '../components/**/*.js',
   '../components/**/*.jsx',
   '../components/**/*.ts',
-  '../components/**/*.tsx',
+  '../components/**/*.tsx'
 ];
 
 function compile(modules) {
@@ -107,8 +113,8 @@ function compile(modules) {
         tsDefaultReporter.error(e);
         error = 1;
       },
-      finish: tsDefaultReporter.finish,
-    }),
+      finish: tsDefaultReporter.finish
+    })
   );
   function check() {
     if (error && !argv['ignore-error']) {
@@ -119,7 +125,7 @@ function compile(modules) {
 
   const stream = tsResult.js
     .pipe(
-      babel(babelConfig(modules)),
+      babel(babelConfig(modules))
       // babel({
       //   presets: ["@babel/env"],
       //   plugins: ["transform-vue-jsx"],
@@ -138,7 +144,7 @@ function compile(modules) {
             content
               // .replace(/\/style\/?'/g, "/style/css'")
               // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css'),
+              .replace(/\.less/g, '.css')
           );
           file.path = file.path.replace(/index\.(js|ts)$/, 'css.js');
           this.push(file);
@@ -151,13 +157,13 @@ function compile(modules) {
             content
               // .replace(/\/style\/?'/g, "/style/css'")
               // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css'),
+              .replace(/\.less/g, '.css')
           );
           // file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
           this.push(file);
         }
         next();
-      }),
+      })
     );
   gulp
     .src(['../components/**/*.@(jpg|png|svg)'])
@@ -172,7 +178,7 @@ function compile(modules) {
 gulp.task('compile-es', done => {
   // console.log("compile es modules");
   compile(false).on('finish', () => {
-    console.log(_SUCCESS('构建es完成！'));
+    console.log(_SUCCESS('构建es完成！'), emoji.get('white_check_mark'));
     done();
   });
 });
@@ -181,7 +187,7 @@ gulp.task('compile-es', done => {
 gulp.task('compile-lib', done => {
   // console.log("compile es commonjs");
   compile().on('finish', () => {
-    console.log(_SUCCESS('构建lib完成！'));
+    console.log(_SUCCESS('构建lib完成！'), emoji.get('white_check_mark'));
     done();
   });
 });
@@ -190,13 +196,13 @@ gulp.task(
   'all-task',
   gulp.series(
     'clean-all',
-    gulp.parallel('copy-assets', 'compile-less', 'compile-es', 'compile-lib'),
+    gulp.parallel('copy-assets', 'compile-less', 'compile-es', 'compile-lib')
     // "concat-css",
     // function allTasksDone(done) {
     //   console.log(_SUCCESS("所有任务执行完成！"));
     //   done();
     // }
-  ),
+  )
 );
 
 gulp.task('default', gulp.series('all-task'), () => {
