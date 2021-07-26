@@ -1,18 +1,19 @@
 <template>
   <div>
-    hello world1
+    
   </div>
 </template>
 
 <script>
-
+// import sds from './App';
 
 export default {
   components: {
+    // sds
   },
-
   data() {
     return {
+      asdg:'5345'
     };
   },
   computed: {},
@@ -22,4 +23,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

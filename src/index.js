@@ -5,6 +5,8 @@ import auth from './plugins';
 
 Vue.use(auth);
 
+// const a = 234;
+
 // import './index.css';
 // const a214 = { a: 1, b: 333333333333333333333, c: 235 };
 

@@ -1,8 +1,11 @@
+// const a = '4234'
 export default {
   render() {
-    return (
+    (
       <div>
-        <span vOn:click=""></span>
+        <span vOn:click="">
+
+        </span>
       </div>
     );
   },

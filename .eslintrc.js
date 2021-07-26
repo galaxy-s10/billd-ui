@@ -8,6 +8,7 @@ module.exports = {
     // 'vue',
     'airbnb-base',
     // 'eslint:recommended',
+    // 'plugin:@typescript-eslint/recommended', // 太严格了不用。
     // 'plugin:vue/essential', // 基本（错误预防）
     // 'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
     'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
@@ -16,14 +17,23 @@ module.exports = {
     // 'plugin:prettier/recommended', // 兼容prettier
   ],
   // https://eslint.vuejs.org/
+  // parser: '@typescript-eslint/parser',
   // parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 12,
     // parser: '@typescript-eslint/parser',
-    // parser: 'babel-eslint',
     ecmaFeatures: {
       jsx: true,
     },
+    /**
+     * https://www.dazhuanlan.com/2020/01/06/5e12c9fe9a7a4/
+     * https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser
+     * 此选项允许您提供一个或多个在 TypeScript 程序编译中应考虑的附加文件扩展名。
+     * 默认的扩展是.ts，.tsx，.js，和.jsx。添加以 开头的扩展名.，后跟文件扩展名。
+     * 例如，对于.vue文件使用"extraFileExtensions: [".vue"]
+     */
+    // 貌似代替不了eslint cli接口的--ext
+    // extraFileExtensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
     'vue',

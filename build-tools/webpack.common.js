@@ -4,11 +4,13 @@ const WebpackBar = require('webpackbar');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');//webpack4
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webpack4
 // const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webapck5对等依赖
-const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
+// const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
+// const ESLintPlugin = require('eslint-webpack-plugin');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
+
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
 
 const resolveApp = require('./paths');
@@ -151,7 +153,7 @@ const commonConfig = function(isProduction) {
         },
         {
           test: /\.vue$/,
-          use: [{ loader: 'vue-loader', options: {} }],
+          use: [{ loader: 'vue-loader' }],
         },
         {
           test: /\.css$/,
@@ -251,12 +253,24 @@ const commonConfig = function(isProduction) {
       ],
     },
     plugins: [
+      // new ESLintPlugin({
+      //   cwd: resolveApp('./'),
+      //   extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+      //   context: resolveApp('./'),
+      //   // cache: true,
+      //   // threads: false,
+      //   // emitWarning: false,
+      //   // emitError: false,
+      //   eslintPath: 'D:\\hss\\sxf-ui-report1\\vue33\\node_modules\\eslint',
+      //   formatter: 'codeframe',
+      // }),
       // 构建进度条
       new WebpackBar({
         name: 'billd-ui 🍵',
         color: 'yellow',
       }),
-      new FriendlyErrorsWebpackPlugin({}),
+      // new FriendlyErrorsWebpackPlugin({}),
+
       /**
        * 默认webpack-dev-server会把devServer.contentBase目录做开发服务器，
        * 因此默认会找devServer.contentBase目录下的index.html
@@ -320,7 +334,7 @@ module.exports = function(env) {
     config.then(config => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
-      // console.log(mergeConfig);
+      console.log(mergeConfig);
       resolve(mergeConfig);
     });
   });
