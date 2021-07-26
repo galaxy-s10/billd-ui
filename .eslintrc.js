@@ -2,19 +2,40 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2021: true
+    es2021: true,
   },
+  /**
+   * Tips: Airbnb的规则是正宗的eslint，而prettier的规则都是自己的一套规则,
+   * 比如Airbnb的quotes默认是single，即对于Airbnb来说，字符串应使用单引号，
+   * 而prettier的singleQuote默认是false，即对于Prettier来说，字符串默认应为双引号！
+   * 虽然属性名字不一样，但是实现的效果却可能会冲突！
+   */
+  /**
+   * eslint的extends，即继承，后面的会覆盖前面的
+   * 即如果prettier在airbnb后面，就prettier说了算；如果airbnb在prettier后面，就airbnb说了算。
+   * 如果将prettier放后面，即prettier如果有规则和airbnb的规则冲突，则会使用prettier的规则。
+   * Tips: Airbnb的规则并不仅仅对代码外观有要求，还有对代码质量的要求，而prettier只有对代码外观有要求，对代码质量没要求！
+   * Tips: 因此可以将prettier放到Airbnb后面，即如果有冲突规则，让prettier的规则覆盖Airbnb的,无所谓，因为prettier的规则全是外观的，
+   * Tips: 最多就是覆盖率Airbnb的外观规则而已（你用了prettier不就是想要prettier的外观，而prettier也就只能控制外观），
+   * Tips: Airbnb对代码质量的规则不会被覆盖（prettier也没有对代码质量的规则）。
+   */
   extends: [
     // 'vue',
-    'airbnb-base',
-    // 'eslint:recommended',
+    // "prettier", //prettier的eslint规范
+    'airbnb-base', // airbnb的eslint规范，indent：2，即一个缩进两个空格，qutoes：single，max-len：一行100
+    'plugin:prettier/recommended', // .prettierrc.js配置文件声明了singleQuote:true,即单引号，printWidth：80，即一行80，且prettier默认一个缩进四个空格
+    // 'prettier',
+    // 'eslint:recommended',//eslint官方默认规则
     // 'plugin:@typescript-eslint/recommended', // 太严格了不用。
     // 'plugin:vue/essential', // 基本（错误预防）
     // 'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
-    'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
+    // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
     // 'prettier/prettier',
-    'prettier'
-    // 'plugin:prettier/recommended', // 兼容prettier
+    // 'prettier'
+    /**
+     * 后面的会覆盖前面的规则，airbnb-base规则要求字符串必须是单引号，
+     */
+    // "plugin:prettier/recommended", // 兼容prettier
   ],
   // https://eslint.vuejs.org/
   // parser: '@typescript-eslint/parser',
@@ -23,8 +44,8 @@ module.exports = {
     ecmaVersion: 12,
     // parser: '@typescript-eslint/parser',
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
     /**
      * https://www.dazhuanlan.com/2020/01/06/5e12c9fe9a7a4/
      * https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser
@@ -36,48 +57,61 @@ module.exports = {
     // extraFileExtensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
-    'vue'
+    // 'vue'
     // '@typescript-eslint',
-    // 'prettier',
+    // "prettier",
     // 'plugin:prettier/recommended', // error！！！巨坑，这里写错位置了，应该是写在extends里面的！！！！
   ],
+  /**
+   * rules优先级最高，会覆盖上面的
+   */
   rules: {
-    // 0 => off
-    // 1 => warn
-    // 2 => error
+    //   // 0 => off
+    //   // 1 => warn
+    //   // 2 => error
+    /**
+     * plugins添加prettier后，还要开启这个才会把prettier的规则当做eslint来做校验。
+     * plugins没有添加prettier，直接开启这个会报错Definition for rule 'prettier/prettier' was not found。
+     * 直接在extends里面添加prettier，其实没用，并不会校验。
+     * 但在extends里添加"plugin:prettier/recommended"，就会开启校验，连rules里面的'prettier/prettier': 'error'和plugins的prettier都不用写，
+     * 因为"plugin:prettier/recommended"可以算是一个语法糖：https://github.com/prettier/eslint-plugin-prettier
+     */
     // 'prettier/prettier': 'error',
-    'comma-dangle': [
-      'error',
-      {
-        arrays: 'never',
-        objects: 'never',
-        imports: 'never',
-        exports: 'never',
-        functions: 'never'
-      }
-    ],
-    'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
-    'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
-    'no-shadow': 0,
-    'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-    'no-undef': 0, // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
-    'no-param-reassign': 0,
-    'func-names': 0, // 不能是匿名函数
-    'import/no-extraneous-dependencies': 0, // 开发/生产依赖混乱
-    'spaced-comment': 2, // 此规则将在注释//或开始后强制执行间距的一致性/*
-    'no-underscore-dangle': 0, // Unexpected dangling '_' in '_xxx'
-    'import/extensions': 0, // 省略导入源路径中的文件扩展名
-    'import/no-unresolved': 0, // 导入资源的时候没有后缀会报这个错，这里关掉他
-    'vars-on-top': 0, // 要求var声明位于其作用域的顶部
-    'prefer-rest-params': 0, // 此规则旨在标记arguments变量的使用
-    'import/newline-after-import': 1, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
-    'prefer-const': 1, // xxx is never reassigned. Use 'const' instead，此规则旨在标记使用let关键字声明的变量
-    'no-unused-vars': 1, // xxx is assigned a value but never used，此规则旨在消除未使用的变量、函数和函数参数
-    'no-var': 1, // Unexpected var, use let or const instead，该规则旨在阻止使用var或鼓励使用const或let代替。
-    'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
-    'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
-    quotes: [1, 'single'], // Strings must use singlequote，否则报warn
-    'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
-    'array-callback-return': [2, { allowImplicit: false }] // expects a return value from arrow function.期望箭头函数的返回值。
-  }
+    //   'comma-dangle': [
+    //     'error',
+    //     {
+    //       arrays: 'never',
+    //       objects: 'never',
+    //       imports: 'never',
+    //       exports: 'never',
+    //       functions: 'never'
+    //     }
+    //   ],
+    // quotes: [2, 'double'], // single,double。Strings must use singlequote，否则报warn
+    // indent: ['error', 6], // https://github.com/airbnb/javascript#whitespace--spaces，airbnb默认1个缩进2个空格，即换行后前面要有两空个格
+    // indent: ["error", 4], //https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
+    //   'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
+    //   'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
+    //   'no-shadow': 0,
+    //   'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+    //   'no-undef': 0, // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
+    //   'no-param-reassign': 0,
+    //   'func-names': 0, // 不能是匿名函数
+    //   'import/no-extraneous-dependencies': 0, // 开发/生产依赖混乱
+    //   'spaced-comment': 2, // 此规则将在注释//或开始后强制执行间距的一致性/*
+    //   'no-underscore-dangle': 0, // Unexpected dangling '_' in '_xxx'
+    //   'import/extensions': 0, // 省略导入源路径中的文件扩展名
+    //   'import/no-unresolved': 0, // 导入资源的时候没有后缀会报这个错，这里关掉他
+    //   'vars-on-top': 0, // 要求var声明位于其作用域的顶部
+    //   'prefer-rest-params': 0, // 此规则旨在标记arguments变量的使用
+    //   'import/newline-after-import': 1, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
+    //   'prefer-const': 1, // xxx is never reassigned. Use 'const' instead，此规则旨在标记使用let关键字声明的变量
+    //   'no-unused-vars': 1, // xxx is assigned a value but never used，此规则旨在消除未使用的变量、函数和函数参数
+    //   'no-var': 1, // Unexpected var, use let or const instead，该规则旨在阻止使用var或鼓励使用const或let代替。
+    //   'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
+    //   'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
+    //   'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
+    //   'array-callback-return': [2, { allowImplicit: false }]
+    // expects a return value from arrow function.期望箭头函数的返回值。
+  },
 };
