@@ -302,7 +302,7 @@ const commonConfig = function(isProduction) {
       }),
       // 定义全局变量
       new DefinePlugin({
-        BASE_URL: "'./'", // public下的index.html里面的icon的路径
+        BASE_URL: '"./"', // public下的index.html里面的icon的路径
         'process.env': {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
@@ -312,7 +312,7 @@ const commonConfig = function(isProduction) {
 };
 
 module.exports = function(env) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const isProduction = env.production;
     process.env.NODE_ENV = isProduction ? 'production' : 'development';
     // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
@@ -320,7 +320,7 @@ module.exports = function(env) {
     config.then(config => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
-      console.log(mergeConfig);
+      // console.log(mergeConfig);
       resolve(mergeConfig);
     });
   });

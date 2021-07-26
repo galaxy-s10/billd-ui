@@ -1,17 +1,17 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+// const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const PurgeCssPlugin = require('purgecss-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 // const AutoUploadServer = require('../webpack_plugins/AutoUploadServer')
 // const serverConfig = require('./server')
 // const glob = require('glob')
 // const webpack = require('webpack');
 // const path = require("path");
-const resolveApp = require('./paths');
+// const resolveApp = require('./paths');
 
 module.exports = {
   mode: 'development',

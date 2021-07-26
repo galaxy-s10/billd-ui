@@ -83,7 +83,6 @@ export default {
   data() {
     return {
       row: { b: 32 },
-      objabc: { a: 1 },
       defaultCheckedList: [200],
       defaultDisabledList: [100, 200],
       sourceData: [
@@ -212,6 +211,7 @@ export default {
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
           render(h, row) {
+            console.log(h,row);
             // return <span>{row.status}</span>;
             // return <h-switch></h-switch>;
             /**
@@ -221,7 +221,6 @@ export default {
              * 数组里面的第二个参数是数字，可以通过h函数转成vnode。
              */
             // console.log(this.$createElement === h, 3444334);
-            const obja = { ad: 323, obj: { dsg: 31 } };
             return (
               <div>
                 <div style="height:">3454</div>

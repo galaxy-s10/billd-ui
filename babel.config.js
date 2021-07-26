@@ -1,5 +1,5 @@
 // const chalk = require("chalk");
-const { _ERROR, _INFO, _SUCCESS } = require('./build-tools/chalkTip');
+const { _INFO } = require('./build-tools/chalkTip');
 
 console.log(_INFO('读取babel.config.js 🎉'));
 module.exports = {

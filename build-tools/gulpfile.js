@@ -2,22 +2,20 @@ const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
 const babel = require('gulp-babel');
-const gulpLess = require('gulp-less');
 const concat = require('gulp-concat');
 const postcss = require('gulp-postcss');
 const through2 = require('through2');
-const less = require('less');
 // const babelConfig = require("../babel.config.js");
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
 const transformLess = require('./transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
-const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
+const { _SUCCESS } = require('./chalkTip');
 
 gulp.task(
   'cleanall',
-  cb =>
+  () =>
     // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
     gulp
       .src(['../lib', '../es', '../dist'], { allowEmpty: true })

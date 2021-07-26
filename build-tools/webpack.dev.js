@@ -1,8 +1,8 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const portfinder = require('portfinder');
-const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
+// const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const resolveApp = require('./paths');
-const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
+const { _INFO } = require('./chalkTip');
 
 // portfinder.getPort(
 //   {
@@ -14,7 +14,7 @@ const { _ERROR, _INFO, _SUCCESS } = require('./chalkTip');
 //     console.log(err, port);
 //   }
 // );
-module.exports = new Promise((resolve, reject) => {
+module.exports = new Promise(resolve => {
   // 默认端口8088，如果被占用了，会自动递增+1
   const port = 8088;
   portfinder.basePort = port;

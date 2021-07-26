@@ -1,27 +1,30 @@
 /* eslint-disable no-nested-ternary */
 export default {
-  inheritAttrs: false, // 将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
+  // 将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   components: {},
-  props: {
-    switchVal: {
-      default: undefined,
-    },
-  },
+  inheritAttrs: false,
   model: {
     prop: 'switchVal',
     event: 'input',
   },
-  watch: {
-    switchVal(newVal) {
-      // console.log("switchVal变了");
-      this.isChecked = newVal;
-      this.$emit('changeSwitch', this.isChecked);
+  props: {
+    switchVal: {
+      type: Boolean,
+      default: undefined,
     },
   },
   data() {
     return {
       isChecked: this.switchVal,
     };
+  },
+  computed: {},
+  watch: {
+    switchVal(newVal) {
+      // console.log("switchVal变了");
+      this.isChecked = newVal;
+      this.$emit('changeSwitch', this.isChecked);
+    },
   },
   mounted() {
     /**
@@ -41,6 +44,23 @@ export default {
     ) {
       this.isChecked = true;
     }
+  },
+  created() {},
+
+  methods: {
+    clickSwitch(event) {
+      if (this.switchVal === undefined) {
+        // 如果没有使用v-model或者switchVal，则手动回调事件
+        this.$emit('clickSwitch', this.isChecked, event); // 最终拿到两个形参,即:fasle/true,event
+        this.isChecked = !this.isChecked;
+        this.$emit('changeSwitch', this.isChecked);
+      } else {
+        this.$emit('clickSwitch', this.isChecked, event); // 最终拿到两个形参,即:fasle/true,event
+        this.$emit('input', !this.isChecked);
+      }
+
+      // this.$emit("clickSwitch", { checked: !this.isChecked, event });  //最终拿到一个形参，即:{}
+    },
   },
   render() {
     // 如果有插槽，就使用插槽，如果没有插槽，就使用openText，如果openText没有，就代表没有文字
@@ -67,23 +87,5 @@ export default {
         </span>
       </div>
     );
-  },
-  computed: {},
-  created() {},
-
-  methods: {
-    clickSwitch(event) {
-      if (this.switchVal === undefined) {
-        // 如果没有使用v-model或者switchVal，则手动回调事件
-        this.$emit('clickSwitch', this.isChecked, event); // 最终拿到两个形参,即:fasle/true,event
-        this.isChecked = !this.isChecked;
-        this.$emit('changeSwitch', this.isChecked);
-      } else {
-        this.$emit('clickSwitch', this.isChecked, event); // 最终拿到两个形参,即:fasle/true,event
-        this.$emit('input', !this.isChecked);
-      }
-
-      // this.$emit("clickSwitch", { checked: !this.isChecked, event });  //最终拿到一个形参，即:{}
-    },
   },
 };
