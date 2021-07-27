@@ -1,6 +1,9 @@
 const { _SUCCESS, emoji } = require('./chalkTip');
 
-console.log(_SUCCESS('读取getBabelCommonConfig.js'), emoji.get('hourglass'));
+console.log(
+  _SUCCESS("读取getBabelCommonConfig.js"),
+  emoji.get("hourglass"),
+);
 module.exports = function(modules) {
   return {
     presets: [
@@ -9,15 +12,15 @@ module.exports = function(modules) {
         '@babel/preset-env',
         {
           // https://www.babeljs.cn/docs/babel-preset-env#modules
-          modules
-        }
+          modules,
+        },
       ],
       [
-        '@vue/babel-preset-jsx'
+        '@vue/babel-preset-jsx',
         // {
         //   injectH: false,
         // },
-      ]
+      ],
     ],
     plugins: [
       // billd-ui支持按需加载，安装babel-plugin-import，然后在babel配置文件添加如下内容即可
@@ -31,6 +34,6 @@ module.exports = function(modules) {
       //   "billd-ui",
       // ],
       // "transform-vue-jsx",//引入错误，这是Babel6的使用的版本。Babel7不需要这个。
-    ]
+    ],
   };
 };

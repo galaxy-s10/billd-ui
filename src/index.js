@@ -7,7 +7,14 @@ Vue.use(auth);
 
 // const a = 234;
 
-const a23 = '34345';
+const aa = {
+  a: '34345',
+  b: 'sdf',
+  d: '22222222221222a222',
+  hi: 23545,
+  hello: 5345,
+};
+const bb = { a: '34345' };
 
 // import './index.css';
 const a214 = {

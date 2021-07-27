@@ -1,7 +1,10 @@
 // const chalk = require("chalk");
 const { _INFO, emoji } = require('./build-tools/chalkTip');
 
-console.log(_INFO('读取babel.config.js '), emoji.get('hourglass'));
+console.log(
+  _INFO('读取babel.config.js '),
+  emoji.get('hourglass'),
+);
 module.exports = {
   presets: [
     // ["@babel/env"],
@@ -11,14 +14,14 @@ module.exports = {
       {
         // modules: "umd",
         // target: {},
-      }
+      },
     ],
     [
-      '@vue/babel-preset-jsx'
+      '@vue/babel-preset-jsx',
       // {
       //   injectH: false,
       // },
-    ]
+    ],
   ],
   plugins: [
     // billd-ui支持按需加载，安装babel-plugin-import，然后在babel配置文件添加如下内容即可
@@ -42,5 +45,5 @@ module.exports = {
     //   "aaax",
     // ],
     // "transform-vue-jsx",
-  ]
+  ],
 };

@@ -18,8 +18,10 @@ gulp.task(
   () =>
     // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
     gulp
-      .src(['../lib', '../es', '../dist'], { allowEmpty: true })
-      .pipe(clean({ force: true })) // 不添加force:true属性不能删除上层目录，因此加上。
+      .src(['../lib', '../es', '../dist'], {
+        allowEmpty: true,
+      })
+      .pipe(clean({ force: true })), // 不添加force:true属性不能删除上层目录，因此加上。
   // cb(); // 使用cb不管用，因为gulp-clean是异步的。
 );
 
@@ -28,10 +30,10 @@ gulp.task(
   gulp.series('cleanall', done => {
     console.log(
       _SUCCESS('清除旧构建文件成功！'),
-      emoji.get('white_check_mark')
+      emoji.get('white_check_mark'),
     );
     done();
-  })
+  }),
 );
 
 gulp.task('copy-assets', cb => {
@@ -40,7 +42,7 @@ gulp.task('copy-assets', cb => {
     .pipe(gulp.dest('../lib/assets'));
   console.log(
     _SUCCESS('复制静态资源目录成功！'),
-    emoji.get('white_check_mark')
+    emoji.get('white_check_mark'),
   );
   cb();
 });
@@ -66,7 +68,10 @@ gulp.task('compile-less', cb => {
               // File.contents can only be a Buffer, a Stream, or null.
               file.contents = Buffer.from(css);
               // 将转换后的less文件路径修改文件成css
-              file.path = file.path.replace(/\.less$/, '.css');
+              file.path = file.path.replace(
+                /\.less$/,
+                ".css",
+              );
               // 将修改文件路径后的文件放流里面
               this.push(file);
               next();
@@ -77,7 +82,7 @@ gulp.task('compile-less', cb => {
         } else {
           next();
         }
-      })
+      }),
     )
     .pipe(postcss())
     .pipe(gulp.dest('../lib'));
@@ -87,7 +92,10 @@ gulp.task('compile-less', cb => {
   //   .pipe(gulpLess())
   //   .pipe(postcss())
   //   .pipe(gulp.dest("../lib"));
-  console.log(_SUCCESS('编译less成功！'), emoji.get('white_check_mark'));
+  console.log(
+    _SUCCESS("编译less成功！"),
+    emoji.get("white_check_mark"),
+  );
   cb();
 });
 
@@ -95,14 +103,14 @@ gulp.task('concat-css', () =>
   gulp
     .src('../lib/**/*.css')
     .pipe(concat('all.css'))
-    .pipe(gulp.dest('../lib'))
+    .pipe(gulp.dest('../lib')),
 );
 
 const tsFiles = [
   '../components/**/*.js',
   '../components/**/*.jsx',
   '../components/**/*.ts',
-  '../components/**/*.tsx'
+  '../components/**/*.tsx',
 ];
 
 function compile(modules) {
@@ -113,8 +121,8 @@ function compile(modules) {
         tsDefaultReporter.error(e);
         error = 1;
       },
-      finish: tsDefaultReporter.finish
-    })
+      finish: tsDefaultReporter.finish,
+    }),
   );
   function check() {
     if (error && !argv['ignore-error']) {
@@ -125,7 +133,7 @@ function compile(modules) {
 
   const stream = tsResult.js
     .pipe(
-      babel(babelConfig(modules))
+      babel(babelConfig(modules)),
       // babel({
       //   presets: ["@babel/env"],
       //   plugins: ["transform-vue-jsx"],
@@ -135,7 +143,11 @@ function compile(modules) {
       through2.obj(function(file, encoding, next) {
         this.push(file.clone());
         // mac环境下的正则没问题，windows的有问题。
-        if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
+        if (
+          file.path.match(
+            /[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/,
+          )
+        ) {
           // if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
           // if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
           // 匹配所有组件(文件夹)下的style目录下面的文件。
@@ -144,9 +156,12 @@ function compile(modules) {
             content
               // .replace(/\/style\/?'/g, "/style/css'")
               // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css')
+              .replace(/\.less/g, '.css'),
           );
-          file.path = file.path.replace(/index\.(js|ts)$/, 'css.js');
+          file.path = file.path.replace(
+            /index\.(js|ts)$/,
+            "css.js",
+          );
           this.push(file);
         } else {
           // console.log("匹配到了", file.path);
@@ -157,28 +172,37 @@ function compile(modules) {
             content
               // .replace(/\/style\/?'/g, "/style/css'")
               // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css')
+              .replace(/\.less/g, '.css'),
           );
           // file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
           this.push(file);
         }
         next();
-      })
+      }),
     );
   gulp
     .src(['../components/**/*.@(jpg|png|svg)'])
-    .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
-  tsResult.dts.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
+    .pipe(
+      gulp.dest(modules === false ? "../es" : "../lib"),
+    );
+  tsResult.dts.pipe(
+    gulp.dest(modules === false ? "../es" : "../lib"),
+  );
   tsResult.on('finish', check);
   tsResult.on('end', check);
-  return stream.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
+  return stream.pipe(
+    gulp.dest(modules === false ? "../es" : "../lib"),
+  );
 }
 
 // es modules
 gulp.task('compile-es', done => {
   // console.log("compile es modules");
   compile(false).on('finish', () => {
-    console.log(_SUCCESS('构建es完成！'), emoji.get('white_check_mark'));
+    console.log(
+      _SUCCESS("构建es完成！"),
+      emoji.get("white_check_mark"),
+    );
     done();
   });
 });
@@ -187,7 +211,10 @@ gulp.task('compile-es', done => {
 gulp.task('compile-lib', done => {
   // console.log("compile es commonjs");
   compile().on('finish', () => {
-    console.log(_SUCCESS('构建lib完成！'), emoji.get('white_check_mark'));
+    console.log(
+      _SUCCESS("构建lib完成！"),
+      emoji.get("white_check_mark"),
+    );
     done();
   });
 });
@@ -196,13 +223,18 @@ gulp.task(
   'all-task',
   gulp.series(
     'clean-all',
-    gulp.parallel('copy-assets', 'compile-less', 'compile-es', 'compile-lib')
+    gulp.parallel(
+      'copy-assets',
+      'compile-less',
+      'compile-es',
+      'compile-lib',
+    ),
     // "concat-css",
     // function allTasksDone(done) {
     //   console.log(_SUCCESS("所有任务执行完成！"));
     //   done();
     // }
-  )
+  ),
 );
 
 gulp.task('default', gulp.series('all-task'), () => {

@@ -21,10 +21,13 @@ module.exports = new Promise(resolve => {
   portfinder
     .getPortPromise({
       port,
-      stopPort: 9000
+      stopPort: 9000,
     })
     .then(port => {
-      console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
+      console.log(
+        _INFO("当前webpack-dev-server使用的端口："),
+        port,
+      );
       resolve({
         /**
         /**
@@ -72,7 +75,7 @@ module.exports = new Promise(resolve => {
           //   // webpack-dev-server4+写法。https://github.com/webpack/webpack-dev-server/blob/master/CHANGELOG.md
           //   publicPath: "./"
           // },
-          publicPath: '/' // devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
+          publicPath: '/', // devServer的publicPath建议与output的publicPath一致(!!!webpack-dev-server@4.x已改!!!)
           // proxy: {
           //   "/api": {
           //     // target: 'https://www.zhengbeining.com/api/',  //默认：/api/type/pageList ===>https://www.zhengbeining.com/api/api/type/pageList
@@ -89,7 +92,7 @@ module.exports = new Promise(resolve => {
           //     },
           //   },
           // },
-        }
+        },
         // plugins: [new FriendlyErrorsWebpackPlugin({})],
       });
     })

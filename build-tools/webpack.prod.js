@@ -1,4 +1,6 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin,
+} = require("clean-webpack-plugin");
 // const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 // const TerserPlugin = require('terser-webpack-plugin');
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
@@ -27,8 +29,8 @@ module.exports = {
       // root: 'MyLibrary',
       // amd: 'my-library',
       // commonjs: 'my-common-library',
-      type: 'umd'
-    }
+      type: 'umd',
+    },
     // library: "billd_ui",
     // libraryTarget: "umd",//module,commonjs,umd
     // umdNamedDefine: true,
@@ -48,7 +50,7 @@ module.exports = {
     // },
     // concatenateModules: true,  // production模式下默认true。告知 webpack 去寻找模块图形中的片段，哪些是可以安全地被合并到单一模块中。
     usedExports: false, // production模式或者不设置usedExports，它默认就是true。usedExports的目的是标注出来哪些函数是没有被使用 unused，会结合Terser进行处理
-    sideEffects: false
+    sideEffects: false,
     // minimize: true, //是否开启Terser,默认就是true，设置false后，不会压缩和转化
     // minimizer: [
     //   new TerserPlugin({
@@ -160,10 +162,10 @@ module.exports = {
       test: /\.(css|js)$/i,
       threshold: 10 * 1024, // 大于10k的文件才进行压缩
       minRatio: 0.8, // 只有压缩比这个比率更好的资产才会被处理(minRatio =压缩大小/原始大小),即压缩如果达不到0.8就不会进行压缩
-      algorithm: 'gzip' // 压缩算法
+      algorithm: 'gzip', // 压缩算法
       // exclude
       // include
-    })
+    }),
     // new PreloadWebpackPlugin( //预加载
     //   {
     //     rel: 'preload',
@@ -180,5 +182,5 @@ module.exports = {
     //     include: 'asyncChunks'
     //   }
     // ),
-  ]
+  ],
 };

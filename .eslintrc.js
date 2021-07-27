@@ -11,7 +11,7 @@ module.exports = {
    * 虽然属性名字不一样，但是实现的效果却可能会冲突！
    */
   /**
-   * eslint的extends，即继承，后面的会覆盖前面的
+   * Tips：eslint的extends，即继承，且后面的会覆盖前面的。extentds可以理解为继承别人的.eslintrc.js
    * 即如果prettier在airbnb后面，就prettier说了算；如果airbnb在prettier后面，就airbnb说了算。
    * 如果将prettier放后面，即prettier如果有规则和airbnb的规则冲突，则会使用prettier的规则。
    * Tips: Airbnb的规则并不仅仅对代码外观有要求，还有对代码质量的要求，而prettier只有对代码外观有要求，对代码质量没要求！
@@ -22,14 +22,16 @@ module.exports = {
   extends: [
     // 'vue',
     // "prettier", //prettier的eslint规范
-    'airbnb-base', // airbnb的eslint规范，indent：2，即一个缩进两个空格，qutoes：single，max-len：一行100
-    'plugin:prettier/recommended', // .prettierrc.js配置文件声明了singleQuote:true,即单引号，printWidth：80，即一行80，且prettier默认一个缩进四个空格
-    // 'prettier',
+    'airbnb-base', // airbnb的eslint规范，indent：2，即一个缩进两个空格，qutoes：single，即单引号，max-len：一行100
+    // 'plugin:prettier/recommended'这个插件的主要作用是关闭所有不必要的或可能与Prettier冲突的规则。
+    // plugin:prettier/recommended关闭了max-len，quotes，no-tabs等等一些可能存在冲突的规则。
+    // "prettier",
     // 'eslint:recommended',//eslint官方默认规则
     // 'plugin:@typescript-eslint/recommended', // 太严格了不用。
     // 'plugin:vue/essential', // 基本（错误预防）
-    // 'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
-    // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
+    'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
+    'plugin:prettier/recommended', // prettierrc配置文件声明了singleQuote:true,即单引号，printWidth：80，即一行80，且prettier默认一个缩进四个空格
+    // "plugin:vue/recommended", // 推荐（最小化任意选择和认知开销）
     // 'prettier/prettier',
     // 'prettier'
     /**
@@ -76,7 +78,26 @@ module.exports = {
      * 但在extends里添加"plugin:prettier/recommended"，就会开启校验，连rules里面的'prettier/prettier': 'error'和plugins的prettier都不用写，
      * 因为"plugin:prettier/recommended"可以算是一个语法糖：https://github.com/prettier/eslint-plugin-prettier
      */
+    // 'max-len': [2, 120],
+    /**
+     * 如果rules有选项'prettier/prettier': [2, { singleQuote: false }]，代表着什么？
+     * 1，如果prettierrc配置文件有相同的规则，rules会覆盖掉prettierrc的，以rules的prettier规则作为eslint的校验规则
+     * 2，这个选项把prettierrc的singleQutoe规则给覆盖掉了，要求字符串使用双引号，如果在文件使用单引号，prettier会通过eslint报错
+     * tips: 这里是rules，仅仅是告诉eslint，字符串的引号规则改成了双引号，
+     * tips: 在使用shift+alt+f格式化的时候，是vscode的行为，vscode依旧会
+     * tips: 找prettierrc这个文件，使用这个文件的配置进行格式化！这就代表这，如果prettierrc的规则和rules冲突，
+     * tips: 在格式化后，依旧还是会有冲突，因为prettierrc告诉vscode把字符串的引号改为单引号，格式化就只会把字符串
+     * tips: 的引号改为单引号。改完之后，eslint的rules检测到了字符串使用了单引号，但是eslint的rules要求的是双引号，
+     * tips: 这时就会报错，并且告诉编辑器字符串应该使用双引号。
+     * warn: 那么此时此刻，该怎么处理？有两种方式，一：因为最终代码是要符合eslint的要求的，既然eslint要求要用双引号，
+     * warn: 那我就不使用prettier的格式化（因为用prettier格式化就变单引号了）岂不就完事了。二：把prettierrc的规则改成
+     * warn: 和eslint的rules规则一致，那样就还是可以用prettier格式化，而且格式化后也不会和eslint的rules冲突。
+     */
     // 'prettier/prettier': 'error',
+    // prettierrc要求单引号，但是rules优先级高，eslint会把rules的双引号作为标准
+    // 'max-len':[2, 100],
+    // 'max-len': 0,
+    // "prettier/prettier": "error",
     //   'comma-dangle': [
     //     'error',
     //     {
@@ -87,31 +108,29 @@ module.exports = {
     //       functions: 'never'
     //     }
     //   ],
-    // quotes: [2, 'double'], // single,double。Strings must use singlequote，否则报warn
     // indent: ['error', 6], // https://github.com/airbnb/javascript#whitespace--spaces，airbnb默认1个缩进2个空格，即换行后前面要有两空个格
     // indent: ["error", 4], //https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
-    //   'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
-    //   'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
-    //   'no-shadow': 0,
-    //   'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-    //   'no-undef': 0, // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
-    //   'no-param-reassign': 0,
-    //   'func-names': 0, // 不能是匿名函数
-    //   'import/no-extraneous-dependencies': 0, // 开发/生产依赖混乱
-    //   'spaced-comment': 2, // 此规则将在注释//或开始后强制执行间距的一致性/*
-    //   'no-underscore-dangle': 0, // Unexpected dangling '_' in '_xxx'
-    //   'import/extensions': 0, // 省略导入源路径中的文件扩展名
-    //   'import/no-unresolved': 0, // 导入资源的时候没有后缀会报这个错，这里关掉他
-    //   'vars-on-top': 0, // 要求var声明位于其作用域的顶部
-    //   'prefer-rest-params': 0, // 此规则旨在标记arguments变量的使用
-    //   'import/newline-after-import': 1, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
-    //   'prefer-const': 1, // xxx is never reassigned. Use 'const' instead，此规则旨在标记使用let关键字声明的变量
-    //   'no-unused-vars': 1, // xxx is assigned a value but never used，此规则旨在消除未使用的变量、函数和函数参数
-    //   'no-var': 1, // Unexpected var, use let or const instead，该规则旨在阻止使用var或鼓励使用const或let代替。
-    //   'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
-    //   'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
-    //   'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
-    //   'array-callback-return': [2, { allowImplicit: false }]
-    // expects a return value from arrow function.期望箭头函数的返回值。
+    'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
+    'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
+    'no-shadow': 0,
+    'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+    'no-undef': 0, // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
+    'no-param-reassign': 0,
+    'func-names': 0, // 不能是匿名函数
+    'import/no-extraneous-dependencies': 0, // 开发/生产依赖混乱
+    'spaced-comment': 2, // 此规则将在注释//或开始后强制执行间距的一致性/*
+    'no-underscore-dangle': 0, // Unexpected dangling '_' in '_xxx'
+    'import/extensions': 0, // 省略导入源路径中的文件扩展名
+    'import/no-unresolved': 0, // 导入资源的时候没有后缀会报这个错，这里关掉他
+    'vars-on-top': 0, // 要求var声明位于其作用域的顶部
+    'prefer-rest-params': 0, // 此规则旨在标记arguments变量的使用
+    'import/newline-after-import': 1, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
+    'prefer-const': 1, // xxx is never reassigned. Use 'const' instead，此规则旨在标记使用let关键字声明的变量
+    'no-unused-vars': 1, // xxx is assigned a value but never used，此规则旨在消除未使用的变量、函数和函数参数
+    'no-var': 1, // Unexpected var, use let or const instead，该规则旨在阻止使用var或鼓励使用const或let代替。
+    'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
+    'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
+    'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
+    'array-callback-return': [2, { allowImplicit: false }], // expects a return value from arrow function.期望箭头函数的返回值。
   },
 };
