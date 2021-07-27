@@ -1,13 +1,13 @@
 <template>
   <div class="">
-    dgdsg的粉红色的12432
+    dgdsg的粉红色的12432112
     <prettier></prettier>
   </div>
 </template>
 
 <script>
 // import sds from './App';
-import prettier from './pretter';
+import prettier from './pretter1';
 
 export default {
   components: {

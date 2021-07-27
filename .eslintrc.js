@@ -61,7 +61,7 @@ module.exports = {
     // extraFileExtensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
-    'vue',
+    // 'vue',
     // '@typescript-eslint',
     // 'prettier',
     // 'plugin:prettier/recommended', // error！！！巨坑，这里写错位置了，应该是写在extends里面的！！！！
@@ -111,7 +111,7 @@ module.exports = {
     //     }
     //   ],
     // indent: ['error', 6], // https://github.com/airbnb/javascript#whitespace--spaces，airbnb默认1个缩进2个空格，即换行后前面要有两空个格
-    // indent: ["error", 4], //https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
+    // indent: ['error', 2], // https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
     'no-plusplus': 0,
     'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
     'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
