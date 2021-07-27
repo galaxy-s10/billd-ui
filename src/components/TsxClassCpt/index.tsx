@@ -10,9 +10,8 @@ export default {
       </div>
     );
   },
-  methods: {
-    enterClick(e) {
-      console.log('enter!!!', e);
-    },
-  },
+  methods: {},
+  // enterClick(e) {
+  //   console.log('enter!!!', e);
+  // }
 };

@@ -8,7 +8,7 @@
     "dev": "webpack serve --config ./build-tools/webpack.common.js --env development",
     "dist": "webpack --config ./build-tools/webpack.common.js --env production",
     "compile": "gulp -f ./build-tools/gulpfile.js",
-    "lint": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx,.vue",
+    "lint": "eslint --config ./.eslintrc.js --fix . --ext .js,.jsx,.ts,.tsx,.vue",
     "prettier": "prettier --write *",
     "prepare": "husky install",
     "commit": "cz"
