@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2021: true,
+    // es2021: true,
   },
   /**
    * Tips: Airbnb的规则是正宗的eslint，而prettier的规则都是自己的一套规则,
@@ -29,11 +29,12 @@ module.exports = {
     // 'eslint:recommended',//eslint官方默认规则
     // 'plugin:@typescript-eslint/recommended', // 太严格了不用。
     // 'plugin:vue/essential', // 基本（错误预防）
+    // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
     'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
     'plugin:prettier/recommended', // prettierrc配置文件声明了singleQuote:true,即单引号，printWidth：80，即一行80，且prettier默认一个缩进四个空格
-    // "plugin:vue/recommended", // 推荐（最小化任意选择和认知开销）
+    // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
     // 'prettier/prettier',
-    // 'prettier'
+    // 'prettier',
     /**
      * 后面的会覆盖前面的规则，airbnb-base规则要求字符串必须是单引号，
      */
@@ -43,7 +44,8 @@ module.exports = {
   // parser: '@typescript-eslint/parser',
   // parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 12,
+    // parser: 'vue-eslint-parser',
+    // ecmaVersion: 12,
     // parser: '@typescript-eslint/parser',
     ecmaFeatures: {
       jsx: true,
@@ -59,9 +61,9 @@ module.exports = {
     // extraFileExtensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
-    // 'vue'
+    'vue',
     // '@typescript-eslint',
-    // "prettier",
+    // 'prettier',
     // 'plugin:prettier/recommended', // error！！！巨坑，这里写错位置了，应该是写在extends里面的！！！！
   ],
   /**

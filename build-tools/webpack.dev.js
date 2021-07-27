@@ -24,10 +24,7 @@ module.exports = new Promise(resolve => {
       stopPort: 9000,
     })
     .then(port => {
-      console.log(
-        _INFO("当前webpack-dev-server使用的端口："),
-        port,
-      );
+      console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
       resolve({
         /**
         /**

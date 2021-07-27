@@ -6,7 +6,7 @@ module.exports = {
   },
 
   extends: [
-    'plugin:prettier/recommended', //prettierrc要求字符串使用双引号。
+    'plugin:prettier/recommended', // prettierrc要求字符串使用双引号。
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -37,6 +37,6 @@ module.exports = {
      * Tips: 符合prettierrc里的规则也可以（其实不必多此一举）。即外观方面尽量完全由prettierrc做主力，
      * Tips: 而代码质量方面尽量完全由eslint的其它规范（如airbnb）做主力
      */
-    quotes: [2, "single"],
+    quotes: [2, 'single'],
   },
 };

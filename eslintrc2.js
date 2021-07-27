@@ -11,7 +11,7 @@ module.exports = {
      * 所以如果extends只有它自己一个插件，而且rules里面有没有规则，就不会有冲突。
      * 那么就会按照prettierrc的规则来。
      */
-    'plugin:prettier/recommended', //prettierrc要求字符串使用双引号。
+    'plugin:prettier/recommended', // prettierrc要求字符串使用双引号。
   ],
   parserOptions: {
     ecmaVersion: 12,

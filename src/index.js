@@ -7,21 +7,7 @@ Vue.use(auth);
 
 // const a = 234;
 
-const aa = {
-  a: '34345',
-  b: 'sdf',
-  d: '22222222221222a222',
-  hi: 23545,
-  hello: 5345,
-};
-const bb = { a: '34345' };
-
 // import './index.css';
-const a214 = {
-  a: 1,
-  b: 333333333333333333333,
-  c: '235',
-};
 
 // console.log(a214);
 console.log('sdf');

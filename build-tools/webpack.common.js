@@ -28,9 +28,7 @@ const commonConfig = function(isProduction) {
     target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction
-          ? "./components/index.js"
-          : "./src/index.js",
+        import: isProduction ? './components/index.js' : './src/index.js',
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
       },
     },
@@ -59,14 +57,7 @@ const commonConfig = function(isProduction) {
     },
     resolve: {
       // 解析路径
-      extensions: [
-        '.js',
-        '.json',
-        '.jsx',
-        '.ts',
-        '.tsx',
-        '.vue',
-      ], // 解析扩展名
+      extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
         '@': resolveApp('./src'), // 设置路径别名
       },
@@ -106,7 +97,7 @@ const commonConfig = function(isProduction) {
             { loader: 'babel-loader' },
             'eslint-loader',
             {
-              loader: "ts-loader",
+              loader: 'ts-loader',
               options: { appendTsxSuffixTo: [/\.vue$/] },
             },
           ],
@@ -273,8 +264,7 @@ const commonConfig = function(isProduction) {
       //   // threads: false,
       //   // emitWarning: false,
       //   // emitError: false,
-      //   eslintPath: 'D:\\hss\\sxf-ui-report1\\vue33\\node_modules\\eslint',
-      //   formatter: 'codeframe',
+      //   // formatter: 'codeframe',
       // }),
       // 构建进度条
       new WebpackBar({
@@ -330,9 +320,7 @@ const commonConfig = function(isProduction) {
       new DefinePlugin({
         BASE_URL: '"./"', // public下的index.html里面的icon的路径
         'process.env': {
-          NODE_ENV: JSON.stringify(
-            process.env.NODE_ENV || "development",
-          ),
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
       }),
     ],
@@ -342,19 +330,12 @@ const commonConfig = function(isProduction) {
 module.exports = function(env) {
   return new Promise(resolve => {
     const isProduction = env.production;
-    process.env.NODE_ENV = isProduction
-      ? "production"
-      : "development";
+    process.env.NODE_ENV = isProduction ? 'production' : 'development';
     // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
-    const config = Promise.resolve(
-      isProduction ? prodConfig : devConfig,
-    );
+    const config = Promise.resolve(isProduction ? prodConfig : devConfig);
     config.then(config => {
       // 根据当前环境，合并配置文件
-      const mergeConfig = merge(
-        commonConfig(isProduction),
-        config,
-      );
+      const mergeConfig = merge(commonConfig(isProduction), config);
       // console.log(mergeConfig);
       resolve(mergeConfig);
     });

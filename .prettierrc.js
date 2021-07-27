@@ -4,6 +4,6 @@ module.exports = {
   jsxBracketSameLine: true, //将>多行 JSX 元素的 放在最后一行的末尾，而不是单独放在下一行
   trailingComma: 'es5', // 默认"es5"：在ES5中有效的尾随逗号（对象、数组等）。可选："none"：没有尾随逗号；"all"：尽可能尾随逗号
   printWidth: 80, //默认80,printWidth不是硬性的允许行长度上限，不要试图将 printWidth 当作 ESLint 的max-len 来使用——它们不一样
-  parser: 'babel',
+  // parser: 'babel',
 };
 // prettier默认1个缩进4个空格，即换行后，前面要有四个空格
