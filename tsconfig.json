@@ -10,7 +10,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "declaration": true,
-    "rootDir": "../"
+    "rootDir": "../",
+    "outDir": "./"
   },
   "include": [
     "./src/**/*.ts",

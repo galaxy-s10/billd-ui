@@ -23,6 +23,7 @@ module.exports = {
     // 'vue',
     // "prettier", //prettier的eslint规范
     'airbnb-base', // airbnb的eslint规范，indent：2，即一个缩进两个空格，qutoes：single，即单引号，max-len：一行100
+    // 'plugin:@typescript-eslint/recommended',
     // 'plugin:prettier/recommended'这个插件的主要作用是关闭所有不必要的或可能与Prettier冲突的规则。
     // plugin:prettier/recommended关闭了max-len，quotes，no-tabs等等一些可能存在冲突的规则。
     // "prettier",
@@ -30,8 +31,10 @@ module.exports = {
     // 'plugin:@typescript-eslint/recommended', // 太严格了不用。
     // 'plugin:vue/essential', // 基本（错误预防）
     // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
+    // 'plugin:@typescript-eslint/recommended',
     'plugin:vue/strongly-recommended', // 强烈推荐（提高可读性）
     'plugin:prettier/recommended', // prettierrc配置文件声明了singleQuote:true,即单引号，printWidth：80，即一行80，且prettier默认一个缩进四个空格
+    // 'tslint-config-prettier',
     // 'plugin:vue/recommended', // 推荐（最小化任意选择和认知开销）
     // 'prettier/prettier',
     // 'prettier',
@@ -42,7 +45,6 @@ module.exports = {
   ],
   // https://eslint.vuejs.org/
   // parser: '@typescript-eslint/parser',
-  // parser: 'vue-eslint-parser',
   parserOptions: {
     // parser: 'vue-eslint-parser',
     // ecmaVersion: 12,
@@ -50,6 +52,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    // project: 'tsconfig.json',
     /**
      * https://www.dazhuanlan.com/2020/01/06/5e12c9fe9a7a4/
      * https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser
@@ -64,7 +67,24 @@ module.exports = {
     // 'vue',
     // '@typescript-eslint',
     // 'prettier',
-    // 'plugin:prettier/recommended', // error！！！巨坑，这里写错位置了，应该是写在extends里面的！！！！
+    // 'plugin:prettier/recommended', // error！！！巨坑，这个写错位置了，应该是写在extends里面的！！！！
+    // '@typescript-eslint/tslint',
+  ],
+  overrides: [
+    {
+      files: ['*.ts', '*tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        // parser: 'vue-eslint-parser',
+        // ecmaVersion: 12,
+        // parser: '@typescript-eslint/parser',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      plugins: ['@typescript-eslint'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
   ],
   /**
    * rules优先级最高，会覆盖上面的

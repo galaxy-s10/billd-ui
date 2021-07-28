@@ -1,6 +1,6 @@
 import HssIcon from '../icon/index';
 
-const closepng = require('../../../assets/img/close.svg');
+const closepng = require('../../assets/img/close.svg');
 
 export default {
   props: {

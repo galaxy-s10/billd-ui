@@ -3,6 +3,8 @@ import App from './App.vue';
 // import App from "./Appx";
 import auth from './plugins';
 
+// const path = require('path');
+
 Vue.use(auth);
 
 // const a = 234;
@@ -18,3 +20,14 @@ new Vue({
 // import { hi } from "aaaa/a";
 // console.log(hi);
 // hi(111);
+
+// const cpts = require('./cpts');
+// const cpts = require.context('./cpts', true, /\.js$/, 'sync');
+const cpts = require.context('./', true, /\.js$/);
+console.log('------1--');
+console.log(cpts);
+cpts.keys().forEach(item => {
+  console.log(item);
+  console.log(`${item}`);
+  // require(item);
+});

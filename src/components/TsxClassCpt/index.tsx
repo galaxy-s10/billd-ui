@@ -1,7 +1,7 @@
 // const { hello } = require("../../utils/hello"); //node模块化
 
 export default {
-  render() {
+  render(): unknown {
     return (
       <div>
         我是tsxClassCpt

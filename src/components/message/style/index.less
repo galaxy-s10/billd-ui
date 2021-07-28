@@ -1,0 +1,31 @@
+.list-enter-active {
+  transition: all 0.5s ease;
+}
+.list-enter, .list-leave-to
+  /* .list-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.hss-message {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  .content {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+
+    .close-btn {
+      margin-left: 20px;
+      width: 15px;
+      height: 15px;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+  }
+}

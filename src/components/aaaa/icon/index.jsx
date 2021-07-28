@@ -1,4 +1,4 @@
-const icon = require('../assets/img/info.png');
+const icon = require('../../../assets/img/info.svg');
 
 export default {
   props: {

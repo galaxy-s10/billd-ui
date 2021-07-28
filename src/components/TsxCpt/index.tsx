@@ -11,7 +11,7 @@ export default {
   components: {
     // HInput:Input,
   },
-  render() {
+  render(): unknown {
     return (
       <div>
         我是tsxCpt

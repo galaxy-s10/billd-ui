@@ -60,6 +60,7 @@ const commonConfig = function(isProduction) {
       extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
         '@': resolveApp('./src'), // 设置路径别名
+        // crypto: false,
       },
     },
     resolveLoader: {
@@ -95,11 +96,12 @@ const commonConfig = function(isProduction) {
           test: /\.tsx?$/,
           use: [
             { loader: 'babel-loader' },
-            'eslint-loader',
+            // 'eslint-loader',
             {
               loader: 'ts-loader',
               options: { appendTsxSuffixTo: [/\.vue$/] },
             },
+            'eslint-loader',
           ],
         },
         // {
@@ -146,7 +148,7 @@ const commonConfig = function(isProduction) {
                */
               loader: 'eslint-loader',
               options: {
-                cache: true,
+                // cache: true,
                 emitWarning: false,
                 emitError: false,
                 // failOnError: true, // 如果有任何错误，将导致模块构建失败
@@ -249,6 +251,7 @@ const commonConfig = function(isProduction) {
           test: /\.(svg|eot|ttf|woff2?)\??.*$/,
           // test: /\.(svg|eot|ttf|woff2?)$/,
           type: 'asset/resource',
+          // type: 'javascript/auto',
           generator: {
             filename: 'font/[name]-[hash:6][ext]',
           },

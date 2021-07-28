@@ -6,7 +6,7 @@ export default {
   components: {
     // HInput: Input,
   },
-  render() {
+  render(): unknown {
     return <div>sdgdsg</div>;
   },
 };
