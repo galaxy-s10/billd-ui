@@ -74,7 +74,7 @@ export default {
       return v instanceof VNode;
     },
     close(v) {
-      const index = this.list.findIndex(item => item.id === v.id);
+      const index = this.list.findIndex((item) => item.id === v.id);
       this.list.splice(index, 1);
       clearTimeout(this.timerList[index].timer);
       this.timerList.splice(index, 1);

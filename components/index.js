@@ -46,6 +46,6 @@ export { imgcpt };
 //   console.log("addd", 3333333);
 // };
 
-export const addp = function() {
+export const addp = function () {
   console.log('addd', 3333333);
 };

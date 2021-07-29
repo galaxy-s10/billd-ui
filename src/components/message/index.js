@@ -11,22 +11,28 @@ const messageInstance = new MessageConstructor();
 messageInstance.$mount();
 document.body.appendChild(messageInstance.$el);
 
-const Message = function(options) {
+const Message = function (options) {
   const newOptions = { ...baseConfig, ...options };
+  if (!messageInstance[newOptions.type])
+    return console.error(
+      `Message.type: '${newOptions.type}' is error,Message.type can only be one of 'success' 'warning' 'info' 'error'`
+    );
   return messageInstance[newOptions.type](newOptions);
 };
 
-['success', 'warning', 'info', 'error'].forEach(type => {
-  Message[type] = options => {
+['success', 'warning', 'info', 'error'].forEach((type) => {
+  console.log(type, 999999999999998);
+  Message[type] = (options) => {
     options.type = type;
+    console.log(options, 343643);
     return Message(options);
   };
 });
 
-Message.closeAll = function() {
+Message.closeAll = function () {
   messageInstance.closeAll();
 };
-Message.config = function(options) {
+Message.config = function (options) {
   baseConfig = { ...baseConfig, ...options };
 };
 export default Message;

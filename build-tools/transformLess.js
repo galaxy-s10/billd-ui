@@ -24,7 +24,7 @@ function transformLess(lessFile) {
   };
   // console.log(lessOpts,'lessOptslessOpts');
   // console.log(data,'datadata');
-  return less.render(data, lessOpts).then(r => r.css);
+  return less.render(data, lessOpts).then((r) => r.css);
   // return less.render(data, lessOpts).then(r => {
   //   // r.css是解析less后得到的css字符串
   //   return r.css;

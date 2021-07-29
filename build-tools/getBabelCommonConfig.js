@@ -1,7 +1,7 @@
 const { _SUCCESS, emoji } = require('./chalkTip');
 
 console.log(_SUCCESS('读取getBabelCommonConfig.js'), emoji.get('hourglass'));
-module.exports = function(modules) {
+module.exports = function (modules) {
   return {
     presets: [
       // ["@babel/env"],

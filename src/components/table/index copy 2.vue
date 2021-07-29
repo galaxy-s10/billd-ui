@@ -4,7 +4,7 @@
       'hss-table': true,
       border: bordered,
     }"
-    style="width:800px;"
+    style="width: 800px"
   >
     <div class="table-scroll">
       <div
@@ -99,20 +99,18 @@
                 <div
                   :class="{
                     'hss-checkbox': true,
-                    'hss-checkbox-disabled': rowSelection.getCheckboxProps(
-                      rowItem
-                    ).disabled,
+                    'hss-checkbox-disabled':
+                      rowSelection.getCheckboxProps(rowItem).disabled,
                   }"
-                  @click="e => onSelect(rowItem, isSelected(rowItem), e)"
+                  @click="(e) => onSelect(rowItem, isSelected(rowItem), e)"
                 >
                   <input
                     type="checkbox"
                     :class="{
                       'hss-checkbox-input': true,
                       'hss-checkbox-checked': isSelected(rowItem),
-                      'hss-checkbox-disabled': rowSelection.getCheckboxProps(
-                        rowItem
-                      ).disabled,
+                      'hss-checkbox-disabled':
+                        rowSelection.getCheckboxProps(rowItem).disabled,
                     }"
                     :disabled="rowSelection.getCheckboxProps(rowItem).disabled"
                     :value="rowItem"
@@ -161,7 +159,7 @@
 
     <div class="fixed-left" v-if="fixedLeftData.length">
       <div>
-        <table style="min-width:auto">
+        <table style="min-width: auto">
           <colgroup>
             <col v-if="rowSelection.type" class="hss-table-selection-col" />
             <col
@@ -230,7 +228,7 @@
           ref="h-table-fixed-left-body"
           @scroll.self="normalScroll"
         >
-          <table style="background:white">
+          <table style="background: white">
             <colgroup>
               <col v-if="rowSelection.type" class="hss-table-selection-col" />
               <col
@@ -266,7 +264,7 @@
                       ).disabled,
                     }"
                     @click="
-                      e =>
+                      (e) =>
                         onSelect(
                           fixedLeftData[0].data[index],
                           isSelected(fixedLeftData[0].data[index]),
@@ -322,9 +320,7 @@
                   }}
                   <slot
                     v-if="typeof col.column.col.render == 'function'"
-                    :name="
-                      `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`
-                    "
+                    :name="`fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`"
                   ></slot>
                   <template v-else>
                     {{ getRowData(col.column.col, col.data[index]) }}
@@ -340,7 +336,7 @@
     <div class="fixed-right" v-if="fixedRightData.length">
       <!-- <div class="scroll-bar"></div> -->
       <div>
-        <table style="min-width:auto">
+        <table style="min-width: auto">
           <colgroup>
             <col
               v-for="(item, index) in fixedRightData"
@@ -380,7 +376,7 @@
         ref="h-table-fixed-right-body"
         @scroll.self="normalScroll"
       >
-        <table style="background:white">
+        <table style="background: white">
           <colgroup>
             <col
               v-for="(item, index) in fixedRightData"
@@ -423,9 +419,7 @@
                 }}
                 <slot
                   v-if="typeof col.column.col.render == 'function'"
-                  :name="
-                    `fixed-right-${col.column.col.key}-${colIndex}-${index}`
-                  "
+                  :name="`fixed-right-${col.column.col.key}-${colIndex}-${index}`"
                 ></slot>
                 <template v-else>
                   {{ getRowData(col.column.col, col.data[index]) }}
@@ -560,7 +554,7 @@ export default {
 
       rowSelection: {
         type: 'checkbox',
-        getCheckboxProps: row => {
+        getCheckboxProps: (row) => {
           // console.log(row.key, "getCheckboxProps");
           // console.log(row,this.getRowKey(row));
           const key = row[this.getRowKey(row)];
@@ -672,9 +666,9 @@ export default {
       newVal.length === this.sourceData.length &&
         (this.tableIsSelectAll = true);
       // let key = this.getRowKey()
-      const newSelectedRowKeys = newVal.map(v => v.key);
+      const newSelectedRowKeys = newVal.map((v) => v.key);
       const newSelectedRows = newVal;
-      const oldSelectedRowKeys = oldVal.map(v => v.key);
+      const oldSelectedRowKeys = oldVal.map((v) => v.key);
       const oldSelectedRows = oldVal;
       console.log(
         '选中项发生变化时的回调onChange:',
@@ -716,10 +710,10 @@ export default {
       },
     },
     isSelected() {
-      return v => {
+      return (v) => {
         const key = this.getRowKey(v);
         return (
-          this.selectedList.filter(item => item[key] === v[key]).length === 1
+          this.selectedList.filter((item) => item[key] === v[key]).length === 1
         );
       };
     },
@@ -731,7 +725,7 @@ export default {
     //   };
     // },
     getHeight() {
-      return v => {
+      return (v) => {
         console.log(v);
         console.log(this.$refs);
         console.log(Object.keys(this.$refs).length, 9999);
@@ -749,7 +743,7 @@ export default {
      */
     const allData = { left: [], normal: [], right: [] };
     const sortColumns = [];
-    this.columns.forEach(item => {
+    this.columns.forEach((item) => {
       // console.log(item);
       // 判断columnKey是否正确
       const columnKey = this.getColumnKey(item);
@@ -760,7 +754,7 @@ export default {
       }
       const fixed = item.fixed ? item.fixed : false;
       if (item.fixed === true || fixed === 'left') {
-        const fixedLeftRowData = this.sourceData.filter(v => {
+        const fixedLeftRowData = this.sourceData.filter((v) => {
           // row的key优先级：rowKey > key
           const rowKey = this.getRowKey(v);
           if (!rowKey) {
@@ -777,7 +771,7 @@ export default {
           data: fixedLeftRowData,
         });
       } else if (fixed === 'right') {
-        const fixedRightRowData = this.sourceData.filter(v => {
+        const fixedRightRowData = this.sourceData.filter((v) => {
           const rowKey = this.getRowKey(v);
           if (!rowKey) {
             console.error(
@@ -791,7 +785,7 @@ export default {
           data: fixedRightRowData,
         });
       } else {
-        const normalRowData = this.sourceData.filter(v => {
+        const normalRowData = this.sourceData.filter((v) => {
           // console.log(v, 39, item.key, item);
           const rowKey = this.getRowKey(v);
           if (!rowKey) {
@@ -812,9 +806,9 @@ export default {
     this.fixedRightData = allData.right;
     const arr1 = Object.values(allData);
     console.log(arr1);
-    arr1.forEach(item => {
+    arr1.forEach((item) => {
       console.log(item);
-      item.forEach(v => {
+      item.forEach((v) => {
         console.log(v.column.title);
         sortColumns.push(v.column.col);
       });
@@ -824,7 +818,7 @@ export default {
 
     // 求出默认选中和默认禁用的交集
     const intersection = this.defaultCheckedList.filter(
-      v => this.defaultDisabledList.indexOf(v) > -1
+      (v) => this.defaultDisabledList.indexOf(v) > -1
     );
     this.intersection = intersection;
     console.log('求出默认选中和默认禁用的交集', intersection);
@@ -837,18 +831,18 @@ export default {
 
     // 求出默认选中和默认禁用的差集
     this.difference = this.defaultDisabledList.filter(
-      v => this.defaultCheckedList.indexOf(v) === -1
+      (v) => this.defaultCheckedList.indexOf(v) === -1
     );
     console.log('求出默认选中和默认禁用的差集', this.union);
 
     // 查找所有非disabled的数据
     const canSelected = this.sourceData.filter(
-      v => this.defaultDisabledList.indexOf(v.key) === -1
+      (v) => this.defaultDisabledList.indexOf(v.key) === -1
     );
     this.canSelected = canSelected;
 
     // 处理默认选中数据
-    this.selectedList = this.sourceData.filter(item => {
+    this.selectedList = this.sourceData.filter((item) => {
       console.log('处理默认选中数据', item);
       return this.defaultCheckedList.indexOf(item.key) !== -1;
     });
@@ -918,10 +912,10 @@ export default {
       if (this.tableIsSelectAll) {
         // 当前是全选了，则取消全选
         isAll = false;
-        const selectKey = this.selectedList.map(v => v.key);
+        const selectKey = this.selectedList.map((v) => v.key);
         // console.log(selectKey);
         const changeData = this.sourceData.filter(
-          item => selectKey.indexOf(item.key) === -1
+          (item) => selectKey.indexOf(item.key) === -1
         );
         console.log(
           '取消全选',
@@ -935,14 +929,14 @@ export default {
           changeData
         );
         this.selectedList = this.sourceData.filter(
-          v => this.intersection.indexOf(v.key) !== -1
+          (v) => this.intersection.indexOf(v.key) !== -1
         );
       } else {
         // 当前不是全选，需要全选
         // console.log(changeData);
         isAll = true;
         // 查找当前选中的数据的key
-        const selectKey = this.selectedList.map(v => v.key);
+        const selectKey = this.selectedList.map((v) => v.key);
         // // 查找所有非disabled的数据
         // let canSelected = this.sourceData.filter(v => {
         //   return this.defaultDisabledList.indexOf(v.key) != -1;
@@ -952,11 +946,11 @@ export default {
         // console.log(selectKey);
         // 过滤出修改的数据
         const changeRows = this.canSelected.filter(
-          item => selectKey.indexOf(item.key) === -1
+          (item) => selectKey.indexOf(item.key) === -1
         );
         // 当前选中的数据(默认不可修改和默认选中这两数据的交集+所有可选中的数据)
         const nowSelectedRows = this.canSelected.concat(
-          this.sourceData.filter(v => v.key === this.intersection)
+          this.sourceData.filter((v) => v.key === this.intersection)
         );
         // let nowSelectedRows = this.sourceData.filter(
         //   item => this.defaultDisabledList.indexOf(item.key) == -1

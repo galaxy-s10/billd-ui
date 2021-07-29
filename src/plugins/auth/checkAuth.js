@@ -17,7 +17,7 @@ export default (authData, roleRoutes) => {
     // 如果不是children里面的authKey，而是路由表roleRoutes外层的authKey
     // console.log('如果不是children里面的authKey，而是外层的authKey');
     // console.log(roleRoutes);
-    roleRoutes.forEach(item => {
+    roleRoutes.forEach((item) => {
       // console.log(item);
       // 如果authData有一个权限在外层的authKey，即显示外层路由
       if (authData.includes(item)) {

@@ -3,7 +3,7 @@ export function throttle(fn, interval, option) {
   let timer;
   option = option || {};
   const trailing = option.trailing || false;
-  return function() {
+  return function () {
     const _this = this;
     const _arguments = arguments;
     const newTime = new Date().getTime();
@@ -13,7 +13,7 @@ export function throttle(fn, interval, option) {
     }
 
     let result;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (newTime - lastTime > interval) {
         result = fn.apply(_this, _arguments);
         resolve(result);
@@ -31,13 +31,13 @@ export function throttle(fn, interval, option) {
 export function debounce(fn, delay, leading) {
   let timer;
   leading = leading || false;
-  const debounceFn = function() {
+  const debounceFn = function () {
     if (timer) {
       clearTimeout(timer);
     }
     const _this = this;
     const _arguments = arguments;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (leading) {
         let isFirst = false;
         if (!timer) {
@@ -58,7 +58,7 @@ export function debounce(fn, delay, leading) {
     });
   };
 
-  debounceFn.cancel = function() {
+  debounceFn.cancel = function () {
     clearTimeout(timer);
     timer = null;
   };

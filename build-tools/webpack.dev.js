@@ -14,7 +14,7 @@ const { _INFO } = require('./chalkTip');
 //     console.log(err, port);
 //   }
 // );
-module.exports = new Promise(resolve => {
+module.exports = new Promise((resolve) => {
   // 默认端口8088，如果被占用了，会自动递增+1
   const port = 8088;
   portfinder.basePort = port;
@@ -23,7 +23,7 @@ module.exports = new Promise(resolve => {
       port,
       stopPort: 9000,
     })
-    .then(port => {
+    .then((port) => {
       console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
       resolve({
         /**
@@ -93,7 +93,7 @@ module.exports = new Promise(resolve => {
         // plugins: [new FriendlyErrorsWebpackPlugin({})],
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });

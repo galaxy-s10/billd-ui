@@ -54,7 +54,7 @@ export default {
             on-foot-cancel={this.footCancel}
             on-foot-confirm={this.footConfirm}
             scopedSlots={{
-              footer: props =>
+              footer: (props) =>
                 this.$scopedSlots.foot
                   ? this.$scopedSlots.foot({ ...props })
                   : undefined,

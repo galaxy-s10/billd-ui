@@ -15,7 +15,7 @@ const prodConfig = require('./webpack.prod.js');
 
 const resolveApp = require('./paths');
 
-const commonConfig = function(isProduction) {
+const commonConfig = function (isProduction) {
   return {
     /**
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
@@ -251,10 +251,11 @@ const commonConfig = function(isProduction) {
           test: /\.(svg|eot|ttf|woff2?)\??.*$/,
           // test: /\.(svg|eot|ttf|woff2?)$/,
           type: 'asset/resource',
+          // type: 'asset/resource',
           // type: 'javascript/auto',
-          generator: {
-            filename: 'font/[name]-[hash:6][ext]',
-          },
+          // generator: {
+          //   filename: 'font/[name]-[hash:6][ext]',
+          // },
         },
       ],
     },
@@ -330,13 +331,13 @@ const commonConfig = function(isProduction) {
   };
 };
 
-module.exports = function(env) {
-  return new Promise(resolve => {
+module.exports = function (env) {
+  return new Promise((resolve) => {
     const isProduction = env.production;
     process.env.NODE_ENV = isProduction ? 'production' : 'development';
     // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
     const config = Promise.resolve(isProduction ? prodConfig : devConfig);
-    config.then(config => {
+    config.then((config) => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
       // console.log(mergeConfig);

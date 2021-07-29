@@ -2,6 +2,8 @@
   <div>
     <span class="myfont">加载字体</span>
     <prettier></prettier>
+    <div @click="showMessage">点击显示message</div>
+    <div @click="closeAll">关闭所有</div>
   </div>
 </template>
 
@@ -27,19 +29,35 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {
-    HssMessage({
-      content: 'infoinfo',
-      closeAble: true,
-      duration: 30000,
-    });
-    HssMessage.success({
-      content: 'successsuccess',
-      type: 'error', // 覆盖不了，不生效
-      duration: 30000,
-    });
+  mounted() {},
+  methods: {
+    closeAll() {
+      HssMessage.closeAll();
+    },
+    showMessage() {
+      HssMessage({
+        content: 'default:info',
+        closeAble: true,
+        duration: 30000,
+      });
+      HssMessage({
+        content: 'error',
+        closeAble: true,
+        duration: 30000,
+        type: 'error',
+      });
+      HssMessage.success({
+        content: 'success',
+        type: 'success', // 覆盖不了，不生效
+        duration: 30000,
+      });
+      HssMessage.warning({
+        content: 'warning',
+        type: 'warning', // 覆盖不了，不生效
+        duration: 30000,
+      });
+    },
   },
-  methods: {},
 };
 </script>
 

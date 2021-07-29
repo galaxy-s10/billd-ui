@@ -14,7 +14,7 @@ Vue.use(auth);
 // console.log(a214);
 console.log('sdf');
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 // console.log(1);
 // import { hi } from "aaaa/a";
@@ -22,12 +22,13 @@ new Vue({
 // hi(111);
 
 // const cpts = require('./cpts');
-// const cpts = require.context('./cpts', true, /\.js$/, 'sync');
-const cpts = require.context('./', true, /\.js$/);
+const cpts = require.context('./cpts', true, /\.js$/);
+// const cpts = require.context('./', true, /\.js$/);
 console.log('------1--');
 console.log(cpts);
-cpts.keys().forEach(item => {
-  console.log(item);
+console.log(cpts.keys);
+cpts.keys().forEach((item) => {
+  // console.log(item);
   console.log(`${item}`);
-  // require(item);
+  // const aaa = require(item);
 });

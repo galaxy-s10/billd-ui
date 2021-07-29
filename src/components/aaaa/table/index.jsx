@@ -44,7 +44,7 @@ export default {
               marginBottom: `-${this.scrollBarWidth}px`,
             }}
             ref="h-table-scroll-head"
-            vOn:scroll_self={e => this.normalScroll(e)}>
+            vOn:scroll_self={(e) => this.normalScroll(e)}>
             <table
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
@@ -113,7 +113,7 @@ export default {
             class="h-table-body h-table-scroll-body"
             style={{ overflow: 'scroll', maxHeight: `${this.scroll.y}px` }}
             ref="h-table-scroll-body"
-            vOn:scroll_self={e => this.normalScroll(e)}>
+            vOn:scroll_self={(e) => this.normalScroll(e)}>
             <table
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
@@ -137,17 +137,16 @@ export default {
                     class={{ hovertr: rowIndex === this.nowTr }}
                     key={this.sourceData[rowIndex][this.getRowKey(rowItem)]}
                     row-key={this.sourceData[rowIndex][this.getRowKey(rowItem)]}
-                    vOn:mouseenter={e => this.mouseEnter(e, rowIndex)}
-                    vOn:mouseleave={e => this.mouseLeave(e)}>
+                    vOn:mouseenter={(e) => this.mouseEnter(e, rowIndex)}
+                    vOn:mouseleave={(e) => this.mouseLeave(e)}>
                     <td>
                       <div
                         class={{
                           'hss-checkbox': true,
-                          'hss-checkbox-disabled': this._getCheckboxProps(
-                            rowItem
-                          ).disabled,
+                          'hss-checkbox-disabled':
+                            this._getCheckboxProps(rowItem).disabled,
                         }}
-                        vOn:click={e =>
+                        vOn:click={(e) =>
                           this.onSelect(rowItem, this.isSelected(rowItem), e)
                         }>
                         <input
@@ -155,9 +154,8 @@ export default {
                           class={{
                             'hss-checkbox-input': true,
                             'hss-checkbox-checked': this.isSelected(rowItem),
-                            'hss-checkbox-disabled': this._getCheckboxProps(
-                              rowItem
-                            ).disabled,
+                            'hss-checkbox-disabled':
+                              this._getCheckboxProps(rowItem).disabled,
                           }}
                           disabled={this._getCheckboxProps(rowItem).disabled}
                           value={rowItem}
@@ -274,7 +272,7 @@ export default {
                   overflow: 'scroll',
                 }}
                 ref="h-table-fixed-left-body"
-                vOn:scroll_self={e => this.normalScroll(e)}>
+                vOn:scroll_self={(e) => this.normalScroll(e)}>
                 <table style="background:white">
                   <colgroup>
                     {this.rowSelection.type && (
@@ -300,8 +298,8 @@ export default {
                           height: `${this.trList[index]}px` || 'auto',
                         }}
                         class={{ hovertr: index === this.nowTr }}
-                        vOn:mouseenter={e => this.mouseEnter(e, index)}
-                        vOn:mouseleave={e => this.mouseLeave(e)}>
+                        vOn:mouseenter={(e) => this.mouseEnter(e, index)}
+                        vOn:mouseleave={(e) => this.mouseLeave(e)}>
                         <td>
                           <div
                             class={{
@@ -310,7 +308,7 @@ export default {
                                 this.fixedLeftData[0].data[index]
                               ).disabled,
                             }}
-                            vOn:click={e =>
+                            vOn:click={(e) =>
                               this.onSelect(
                                 this.fixedLeftData[0].data[index],
                                 this.isSelected(
@@ -418,7 +416,7 @@ export default {
                 marginBottom: `-${this.scrollBarWidth}px`,
               }}
               ref="h-table-fixed-right-body"
-              vOn:scroll_self={e => this.normalScroll(e)}>
+              vOn:scroll_self={(e) => this.normalScroll(e)}>
               <table>
                 <colgroup>
                   {this.fixedRightData.map((item, index) => (
@@ -439,8 +437,8 @@ export default {
                       row-key={this.sourceData[index][this.getRowKey(item)]}
                       style={{ height: `${this.trList[index]}px` || 'auto' }}
                       class={{ hovertr: index === this.nowTr }}
-                      vOn:mouseenter={e => this.mouseEnter(e, index)}
-                      vOn:mouseleave={e => this.mouseLeave(e)}>
+                      vOn:mouseenter={(e) => this.mouseEnter(e, index)}
+                      vOn:mouseleave={(e) => this.mouseLeave(e)}>
                       {this.fixedRightData.map((col, colIndex) => (
                         <td
                           key={col.column.key || colIndex}
@@ -512,12 +510,12 @@ export default {
         (this.tableIsSelectAll = true);
       // let key = this.getRowKey()
       const newSelectedRowKeys = newVal.map(
-        v =>
+        (v) =>
           // console.log(v, "vv");
           v.key
       );
       const newSelectedRows = newVal;
-      const oldSelectedRowKeys = oldVal.map(v => v.key);
+      const oldSelectedRowKeys = oldVal.map((v) => v.key);
       const oldSelectedRows = oldVal;
       console.log(
         '选中项发生变化时的回调onChange:',
@@ -545,10 +543,10 @@ export default {
       },
     },
     isSelected() {
-      return v => {
+      return (v) => {
         const key = this.getRowKey(v);
         return (
-          this.selectedList.filter(item => item[key] === v[key]).length === 1
+          this.selectedList.filter((item) => item[key] === v[key]).length === 1
         );
       };
     },
@@ -560,7 +558,7 @@ export default {
     //   };
     // },
     getHeight() {
-      return v => {
+      return (v) => {
         console.log(v);
         console.log(this.$refs);
         console.log(Object.keys(this.$refs).length, 9999);
@@ -589,7 +587,7 @@ export default {
        */
       const allData = { left: [], normal: [], right: [] };
       const sortColumns = [];
-      this.columns.forEach(item => {
+      this.columns.forEach((item) => {
         // console.log(item);
         // 判断columnKey是否正确
         const columnKey = this.getColumnKey(item);
@@ -600,7 +598,7 @@ export default {
         }
         const fixed = item.fixed ? item.fixed : false;
         if (item.fixed === true || fixed === 'left') {
-          const fixedLeftRowData = this.sourceData.filter(v => {
+          const fixedLeftRowData = this.sourceData.filter((v) => {
             // row的key优先级：rowKey > key
             const rowKey = this.getRowKey(v);
             if (!rowKey) {
@@ -617,7 +615,7 @@ export default {
             data: fixedLeftRowData,
           });
         } else if (fixed === 'right') {
-          const fixedRightRowData = this.sourceData.filter(v => {
+          const fixedRightRowData = this.sourceData.filter((v) => {
             const rowKey = this.getRowKey(v);
             if (!rowKey) {
               console.error(
@@ -631,7 +629,7 @@ export default {
             data: fixedRightRowData,
           });
         } else {
-          const normalRowData = this.sourceData.filter(v => {
+          const normalRowData = this.sourceData.filter((v) => {
             // console.log(v, 39, item.key, item);
             const rowKey = this.getRowKey(v);
             if (!rowKey) {
@@ -652,9 +650,9 @@ export default {
       this.fixedRightData = allData.right;
       const arr1 = Object.values(allData);
       console.log(arr1);
-      arr1.forEach(item => {
+      arr1.forEach((item) => {
         console.log(item);
-        item.forEach(v => {
+        item.forEach((v) => {
           console.log(v.column.title);
           sortColumns.push(v.column.col);
         });
@@ -664,7 +662,7 @@ export default {
 
       // 求出默认选中和默认禁用的交集
       const intersection = this.defaultCheckedList.filter(
-        v => this.defaultDisabledList.indexOf(v) > -1
+        (v) => this.defaultDisabledList.indexOf(v) > -1
       );
       this.intersection = intersection;
       console.log('求出默认选中和默认禁用的交集', intersection);
@@ -677,18 +675,18 @@ export default {
 
       // 求出默认选中和默认禁用的差集
       this.difference = this.defaultDisabledList.filter(
-        v => this.defaultCheckedList.indexOf(v) === -1
+        (v) => this.defaultCheckedList.indexOf(v) === -1
       );
       console.log('求出默认选中和默认禁用的差集', this.union);
 
       // 查找所有非disabled的数据
       const canSelected = this.sourceData.filter(
-        v => this.defaultDisabledList.indexOf(v.key) === -1
+        (v) => this.defaultDisabledList.indexOf(v.key) === -1
       );
       this.canSelected = canSelected;
 
       // 处理默认选中数据
-      this.selectedList = this.sourceData.filter(item => {
+      this.selectedList = this.sourceData.filter((item) => {
         console.log('处理默认选中数据', item);
         return this.defaultCheckedList.indexOf(item.key) !== -1;
       });
@@ -760,10 +758,10 @@ export default {
       if (this.tableIsSelectAll) {
         // 当前是全选了，则取消全选
         isAll = false;
-        const selectKey = this.selectedList.map(v => v.key);
+        const selectKey = this.selectedList.map((v) => v.key);
         // console.log(selectKey);
         const changeData = this.sourceData.filter(
-          item => selectKey.indexOf(item.key) === -1
+          (item) => selectKey.indexOf(item.key) === -1
         );
         console.log(
           '取消全选',
@@ -777,14 +775,14 @@ export default {
           changeData
         );
         this.selectedList = this.sourceData.filter(
-          v => this.intersection.indexOf(v.key) !== -1
+          (v) => this.intersection.indexOf(v.key) !== -1
         );
       } else {
         // 当前不是全选，需要全选
         // console.log(changeData);
         isAll = true;
         // 查找当前选中的数据的key
-        const selectKey = this.selectedList.map(v => v.key);
+        const selectKey = this.selectedList.map((v) => v.key);
         // // 查找所有非disabled的数据
         // let canSelected = this.sourceData.filter(v => {
         //   return this.defaultDisabledList.indexOf(v.key) != -1;
@@ -794,11 +792,11 @@ export default {
         // console.log(selectKey);
         // 过滤出修改的数据
         const changeRows = this.canSelected.filter(
-          item => selectKey.indexOf(item.key) === -1
+          (item) => selectKey.indexOf(item.key) === -1
         );
         // 当前选中的数据(默认不可修改和默认选中这两数据的交集+所有可选中的数据)
         const nowSelectedRows = this.canSelected.concat(
-          this.sourceData.filter(v => v.key === this.intersection)
+          this.sourceData.filter((v) => v.key === this.intersection)
         );
         // let nowSelectedRows = this.sourceData.filter(
         //   item => this.defaultDisabledList.indexOf(item.key) == -1

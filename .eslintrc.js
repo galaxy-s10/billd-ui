@@ -132,6 +132,16 @@ module.exports = {
     //   ],
     // indent: ['error', 6], // https://github.com/airbnb/javascript#whitespace--spaces，airbnb默认1个缩进2个空格，即换行后前面要有两空个格
     // indent: ['error', 2], // https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
+    'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+    'no-restricted-syntax': [
+      // airbnb默认禁用了一些语法
+      1,
+      // 'FunctionExpression',
+      // 'ForInStatement',
+      { selector: 'ForInStatement', message: '不建议使用for in' },
+    ],
+    'guard-for-in': 0, // 当for in循环不使用if语句过滤其结果时，它会发出警告
+    'no-nested-ternary': 0, // 禁止嵌套三元
     'no-plusplus': 0,
     'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
     'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。

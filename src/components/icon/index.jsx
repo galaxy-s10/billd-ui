@@ -1,10 +1,13 @@
-const icon = require('../../assets/img/info.svg');
+const success = require('../../assets/img/success.svg');
+const error = require('../../assets/img/error.svg');
+const info = require('../../assets/img/info.svg');
+const warning = require('../../assets/img/warning.svg');
 
 const iconType = {
-  success: require('../../assets/img/success.svg'),
-  error: require('../../assets/img/error.svg'),
-  info: require('../../assets/img/info.svg'),
-  warning: require('../../assets/img/warning.svg'),
+  success,
+  error,
+  info,
+  warning,
 };
 export default {
   props: {
@@ -26,14 +29,15 @@ export default {
         {this.typeList.indexOf(this.type) !== -1 ? (
           <img
             // src={iconType[this.type]}
-            src={icon}
+            src={iconType[this.type]}
             // src={require(`../assets/img/${this.type}.png`)}
             style="width: 20px; height: 20px; vertical-align: bottom"
             alt={this.typeList.indexOf(this.type) !== -1}
           />
         ) : (
           <img
-            src={iconType[this.type]}
+            // src={iconType[this.type]}
+            src={iconType.info}
             style="width: 20px; height: 20px; vertical-align: bottom"
             alt={this.typeList.indexOf(this.type) !== -1}
           />
