@@ -21,8 +21,6 @@ export default {
     };
   },
   render() {
-    console.log(this.type, '----------1--');
-    console.log(this.typeList.indexOf(this.type) !== -1);
     return (
       <div>
         {/* 判断type，如果没有设置type或者设置了type但是找不到，默认icon就是info */}

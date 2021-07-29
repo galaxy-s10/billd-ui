@@ -21,10 +21,8 @@ const Message = function (options) {
 };
 
 ['success', 'warning', 'info', 'error'].forEach((type) => {
-  console.log(type, 999999999999998);
   Message[type] = (options) => {
     options.type = type;
-    console.log(options, 343643);
     return Message(options);
   };
 });

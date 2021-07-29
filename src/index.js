@@ -3,23 +3,20 @@ import App from './App.vue';
 // import App from "./Appx";
 import auth from './plugins';
 
-// const path = require('path');
+const { optimize } = require('svgo');
+
+const result = optimize(svgString, {
+  path: 'path-to.svg',
+  multipass: true,
+});
+const optimizedSvgString = result.data;
+console.log(optimizedSvgString);
 
 Vue.use(auth);
 
-// const a = 234;
-
-// import './index.css';
-
-// console.log(a214);
-console.log('sdf');
 new Vue({
   render: (h) => h(App),
 }).$mount('#app');
-// console.log(1);
-// import { hi } from "aaaa/a";
-// console.log(hi);
-// hi(111);
 
 // const cpts = require('./cpts');
 const cpts = require.context('./cpts', true, /\.js$/);

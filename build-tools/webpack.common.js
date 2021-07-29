@@ -60,7 +60,20 @@ const commonConfig = function (isProduction) {
       extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
         '@': resolveApp('./src'), // 设置路径别名
-        // crypto: false,
+      },
+      // https://webpack.docschina.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed
+      // https://webpack.js.org/migrate/5/#clean-up-configuration
+      fallback: {
+        os: false,
+        fs: false,
+        tls: false,
+        net: false,
+        path: false,
+        zlib: false,
+        http: false,
+        https: false,
+        stream: false,
+        crypto: false,
       },
     },
     resolveLoader: {

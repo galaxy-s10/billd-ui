@@ -70,6 +70,12 @@ module.exports = {
     // 'plugin:prettier/recommended', // error！！！巨坑，这个写错位置了，应该是写在extends里面的！！！！
     // '@typescript-eslint/tslint',
   ],
+  /**
+   * overrides可共享配置中的配置不再覆盖.eslintrc文件中的用户设置
+   * 在 ESLint v6.0.0 中，父配置始终优先于扩展配置，即使是overrides块。
+   * https://eslint.org/docs/user-guide/migrating-to-6.0.0#overrides-in-a-config-file-can-now-match-dotfiles
+   * https://github.com/eslint/rfcs/pull/13
+   */
   overrides: [
     {
       files: ['*.ts', '*tsx'],
