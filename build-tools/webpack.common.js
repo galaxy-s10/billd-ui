@@ -8,12 +8,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webapck5对等依赖
 // const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 // const ESLintPlugin = require('eslint-webpack-plugin');
+// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
 
-const resolveApp = require('./paths');
+const resolveApp = require('./utils/paths');
 
 const commonConfig = function (isProduction) {
   return {
@@ -288,6 +290,7 @@ const commonConfig = function (isProduction) {
         name: 'billd-ui',
         color: 'yellow',
       }),
+      // new DashboardPlugin(),
       // new FriendlyErrorsWebpackPlugin({}),
 
       /**
@@ -344,6 +347,7 @@ const commonConfig = function (isProduction) {
   };
 };
 
+// const smp = new SpeedMeasurePlugin();
 module.exports = function (env) {
   return new Promise((resolve) => {
     const isProduction = env.production;
@@ -354,6 +358,7 @@ module.exports = function (env) {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
       // console.log(mergeConfig);
+      // resolve(smp.wrap(mergeConfig));
       resolve(mergeConfig);
     });
   });

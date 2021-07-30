@@ -1,5 +1,5 @@
 const postcssPresetEnv = require('postcss-preset-env');
-const { _INFO, emoji } = require('./build-tools/chalkTip');
+const { _INFO, emoji } = require('./build-tools/utils/chalkTip');
 
 console.log(_INFO('读取postcss.config.js '), emoji.get('hourglass'));
 module.exports = {

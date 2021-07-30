@@ -1,4 +1,4 @@
-const { _SUCCESS, emoji } = require('./chalkTip');
+const { _SUCCESS, emoji } = require('./utils/chalkTip');
 
 console.log(_SUCCESS('读取getBabelCommonConfig.js'), emoji.get('hourglass'));
 module.exports = function (modules) {

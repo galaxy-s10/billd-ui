@@ -8,10 +8,10 @@ const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
-const transformLess = require('./transformLess.js');
+const transformLess = require('./utils/transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
-const { _SUCCESS, emoji } = require('./chalkTip');
+const { _SUCCESS, emoji } = require('./utils/chalkTip');
 
 gulp.task(
   'cleanall',
@@ -46,6 +46,18 @@ gulp.task('copy-assets', (cb) => {
   );
   cb();
 });
+
+gulp.task('svg', (done) =>
+  gulp
+    .src('./error.svg')
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        this.push(file.clone());
+        next();
+      })
+    )
+    .pipe(gulp.dest('./img'))
+);
 
 gulp.task('compile-less', (cb) => {
   /**
@@ -204,6 +216,9 @@ gulp.task(
   )
 );
 
-gulp.task('default', gulp.series('all-task'), () => {
+gulp.task('default', gulp.series('clean-all'), () => {
   console.log('dddd');
 });
+// gulp.task('default', gulp.series('all-task'), () => {
+//   console.log('dddd');
+// });

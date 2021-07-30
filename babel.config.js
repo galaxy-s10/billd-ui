@@ -1,5 +1,5 @@
 // const chalk = require("chalk");
-const { _INFO, emoji } = require('./build-tools/chalkTip');
+const { _INFO, emoji } = require('./build-tools/utils/chalkTip');
 
 console.log(_INFO('读取babel.config.js '), emoji.get('hourglass'));
 module.exports = {
