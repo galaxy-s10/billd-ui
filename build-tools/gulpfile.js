@@ -6,6 +6,7 @@ const concat = require('gulp-concat');
 const postcss = require('gulp-postcss');
 const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
+const { optimize } = require('svgo');
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
 const transformLess = require('./utils/transformLess.js');
@@ -47,12 +48,24 @@ gulp.task('copy-assets', (cb) => {
   cb();
 });
 
+// const optimizedSvgString = result.data;
+// console.log(optimizedSvgString);
+
 gulp.task('svg', (done) =>
   gulp
     .src('./error.svg')
     .pipe(
       through2.obj(function (file, encoding, next) {
         this.push(file.clone());
+        const svgString = file.contents.toString(encoding);
+        console.log(svgString);
+        console.log('-----');
+        const result = optimize(svgString, {
+          // path: 'path-to.svg',
+          // multipass: true,
+        });
+        const optimizedSvgString = result.data;
+        console.log(optimizedSvgString);
         next();
       })
     )
