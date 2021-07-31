@@ -51,7 +51,7 @@ gulp.task('copy-assets', (cb) => {
 // const optimizedSvgString = result.data;
 // console.log(optimizedSvgString);
 
-gulp.task('svg', (done) =>
+gulp.task('svg', () =>
   gulp
     .src('./error.svg')
     .pipe(
