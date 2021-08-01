@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
+    "@rgrove/parse-xml": "^3.0.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.5",

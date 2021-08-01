@@ -1,5 +1,5 @@
 # https://editorconfig.org
-
+# 控制编辑器代码规范，如按下回车的时候，缩进几个空格等等。
 root = true
 
 [*]

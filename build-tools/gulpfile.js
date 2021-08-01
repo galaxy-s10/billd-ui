@@ -1,3 +1,5 @@
+const parseXML = require('@rgrove/parse-xml');
+
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
@@ -60,12 +62,16 @@ gulp.task('svg', () =>
         const svgString = file.contents.toString(encoding);
         console.log(svgString);
         console.log('-----');
+
         const result = optimize(svgString, {
           // path: 'path-to.svg',
           // multipass: true,
         });
         const optimizedSvgString = result.data;
-        console.log(optimizedSvgString);
+        const str = parseXML(optimizedSvgString);
+        console.log('sdssdsds');
+        console.log(str);
+        console.log(JSON.stringify(str));
         next();
       })
     )
