@@ -1,3 +1,5 @@
+const parseXML = require('@rgrove/parse-xml');
+
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
@@ -6,14 +8,13 @@ const concat = require('gulp-concat');
 const postcss = require('gulp-postcss');
 const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
+const { optimize } = require('svgo');
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
 const transformLess = require('./utils/transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
 const { _SUCCESS, emoji } = require('./utils/chalkTip');
-
-const componentsDir = '../components';
 
 gulp.task(
   'cleanall',
@@ -32,32 +33,61 @@ gulp.task(
   gulp.series('cleanall', (done) => {
     console.log(
       _SUCCESS('清除旧构建文件成功！'),
-      emoji.get('heavy_check_mark')
+      emoji.get('white_check_mark')
     );
     done();
   })
 );
 
-// 复制静态资源目录
-function copyAssets(modules) {
-  const assetsStream = gulp
-    .src(`${componentsDir}/assets/**/*`, { allowEmpty: true })
-    .pipe(gulp.dest(modules === false ? '../es/assets/' : '../lib/assets/'));
-  assetsStream.on('finish', () => {
-    console.log(
-      _SUCCESS('复制静态资源目录成功！'),
-      emoji.get('heavy_check_mark')
-    );
-  });
-}
+gulp.task('copy-assets', (cb) => {
+  gulp
+    .src('../components/assets/**/*', { allowEmpty: true })
+    .pipe(gulp.dest('../lib/assets'));
+  console.log(
+    _SUCCESS('复制静态资源目录成功！'),
+    emoji.get('white_check_mark')
+  );
+  cb();
+});
 
-// 编译less
-function compileLess(modules) {
-  // 编译src下面的所以less文件，但是排除src下的assets文件夹。
-  const lessStr = gulp
-    .src([`${componentsDir}/**/*.less`, `!${componentsDir}/assets/**/*`], {
-      cwd: '../',
-    })
+// const optimizedSvgString = result.data;
+// console.log(optimizedSvgString);
+
+gulp.task('svg', () =>
+  gulp
+    .src('./error.svg')
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        this.push(file.clone());
+        const svgString = file.contents.toString(encoding);
+        console.log(svgString);
+        console.log('-----');
+
+        const result = optimize(svgString, {
+          // path: 'path-to.svg',
+          // multipass: true,
+        });
+        const optimizedSvgString = result.data;
+        const str = parseXML(optimizedSvgString);
+        console.log('sdssdsds');
+        console.log(optimizedSvgString);
+        console.log(JSON.stringify(str));
+        next();
+      })
+    )
+    .pipe(gulp.dest('./img'))
+);
+
+gulp.task('compile-less', (cb) => {
+  /**
+   * 由于在package.json设置了gulpfile配置文件在build-tools，所以工作目录也会改成了build-tools,
+   * 在执行gulp命令的时候可以看到控制台有打印：[13:54:09] Working directory changed to D:\hss\billd-ui\build-tools
+   */
+  // 编译less的时候，我需要编译components目录下的所有文件，如果当前工作目录在build-tools，就得../返回上层找
+  // components，这样没问题。但如果我又想排除components目录下的某个文件或者文件夹，就得用到!（这是glob语法）,
+  // 但如果用'!../components/xxx/**/*'的话，glob语法就有问题了，所以gulp.src的时候指定工作目录为components的外层。
+  gulp
+    .src(['components/**/*.less'], { cwd: '../' })
     .pipe(
       through2.obj(function (file, encoding, next) {
         // 将源文件复制一份放流里面
@@ -83,18 +113,16 @@ function compileLess(modules) {
       })
     )
     .pipe(postcss())
-    .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
-  // .pipe(gulp.dest('../lib'));
+    .pipe(gulp.dest('../lib'));
   // 旧版使用gulp-less解析less,源文件会被解析成css文件，即原less文件会变成css文件。
   // return gulp
   //   .src("../components/**/*.less")
   //   .pipe(gulpLess())
   //   .pipe(postcss())
   //   .pipe(gulp.dest("../lib"));
-  lessStr.on('finish', () => {
-    console.log(_SUCCESS('编译less成功！'), emoji.get('heavy_check_mark'));
-  });
-}
+  console.log(_SUCCESS('编译less成功！'), emoji.get('white_check_mark'));
+  cb();
+});
 
 gulp.task('concat-css', () =>
   gulp.src('../lib/**/*.css').pipe(concat('all.css')).pipe(gulp.dest('../lib'))
@@ -108,8 +136,6 @@ const tsFiles = [
 ];
 
 function compile(modules) {
-  copyAssets(modules);
-  compileLess(modules);
   let error;
   const tsResult = gulp.src(tsFiles).pipe(
     ts(tsProject.compilerOptions, {
@@ -182,7 +208,7 @@ function compile(modules) {
 gulp.task('compile-es', (done) => {
   // console.log("compile es modules");
   compile(false).on('finish', () => {
-    console.log(_SUCCESS('构建es完成！'), emoji.get('heavy_check_mark'));
+    console.log(_SUCCESS('构建es完成！'), emoji.get('white_check_mark'));
     done();
   });
 });
@@ -191,25 +217,27 @@ gulp.task('compile-es', (done) => {
 gulp.task('compile-lib', (done) => {
   // console.log("compile es commonjs");
   compile().on('finish', () => {
-    console.log(_SUCCESS('构建lib完成！'), emoji.get('heavy_check_mark'));
+    console.log(_SUCCESS('构建lib完成！'), emoji.get('white_check_mark'));
     done();
   });
 });
 
 gulp.task(
-  'default',
+  'all-task',
   gulp.series(
     'clean-all',
-    // gulp.parallel('copy-assets', 'compile-es')
-    // gulp.parallel('copy-assets', 'compile-es', 'compile-lib')
-    gulp.parallel('compile-es', 'compile-lib'),
+    gulp.parallel('copy-assets', 'compile-less', 'compile-es', 'compile-lib')
     // "concat-css",
-    function allTasksDone(done) {
-      console.log(
-        _SUCCESS('所有任务执行完成！'),
-        emoji.get('white_check_mark')
-      );
-      done();
-    }
+    // function allTasksDone(done) {
+    //   console.log(_SUCCESS("所有任务执行完成！"));
+    //   done();
+    // }
   )
 );
+
+gulp.task('default', gulp.series('clean-all'), () => {
+  console.log('dddd');
+});
+// gulp.task('default', gulp.series('all-task'), () => {
+//   console.log('dddd');
+// });
