@@ -1,3 +1,7 @@
+// const SVGO = require('svgo');
+
+// import SVGO from 'svgo';
+
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
@@ -7,7 +11,7 @@ const postcss = require('gulp-postcss');
 const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
 const parseXML = require('@rgrove/parse-xml');
-const { optimize } = require('svgo');
+const { optimize, extendDefaultPlugins } = require('svgo');
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
 const transformLess = require('./utils/transformLess.js');
@@ -16,27 +20,84 @@ const tsDefaultReporter = ts.reporter.defaultReporter();
 const { _SUCCESS, emoji } = require('./utils/chalkTip');
 
 const componentsDir = '../components';
-
+const svgOptions = {
+  floatPrecision: 2,
+  plugins: [
+    // { cleanupAttrs: true },
+    {
+      name: 'removeTitle',
+      active: true,
+    },
+    {
+      name: 'removeDoctype',
+      active: false, // true的时候，删除文档类型标签；false的时候，不删除文档类型标签(即使不删除文档类型标签，有这个文档类型标签存在，parseXML插件也会忽略它，不会将它解析出来)
+    },
+    // { removeDoctype: true },
+    // { removeXMLProcInst: true },
+    // { removeXMLNS: true },
+    // { removeComments: true },
+    // { removeMetadata: true },
+    // { removeTitle: true },
+    // { removeDesc: true },
+    // { removeUselessDefs: true },
+    // { removeEditorsNSData: true },
+    // { removeEmptyAttrs: true },
+    // { removeHiddenElems: true },
+    // { removeEmptyText: true },
+    // { removeEmptyContainers: true },
+    // { removeViewBox: false },
+    // { cleanupEnableBackground: true },
+    // { convertStyleToAttrs: true },
+    // { convertColors: true },
+    // { convertPathData: true },
+    // { convertTransform: true },
+    // { removeUnknownsAndDefaults: true },
+    // { removeNonInheritableGroupAttrs: true },
+    // { removeUselessStrokeAndFill: true },
+    // { removeUnusedNS: true },
+    // { cleanupIDs: true },
+    // { cleanupNumericValues: true },
+    // { moveElemsAttrsToGroup: true },
+    // { moveGroupAttrsToElems: true },
+    // { collapseGroups: true },
+    // { removeRasterImages: false },
+    // { mergePaths: true },
+    // { convertShapeToPath: true },
+    // { sortAttrs: true },
+    // { removeDimensions: true },
+  ],
+};
+// extendDefaultPlugins(svgOptions.plugins);
 gulp.task('svg', () =>
   gulp
-    .src('./error.svg')
+    .src('../components/assets/svg/**/*.svg')
     .pipe(
       through2.obj(function (file, encoding, next) {
-        this.push(file.clone());
+        // this.push(file.clone());
         const svgString = file.contents.toString(encoding);
-        console.log(svgString);
-        console.log('-----');
+        // console.log(svgString);
+        // console.log('-----');
 
-        const result = optimize(svgString, {
-          // path: 'path-to.svg',
-          // multipass: true,
-        });
+        const result = optimize(svgString);
+        // const result = optimize(svgString, {
+        //   plugins: svgOptions.plugins,
+        // });
         const optimizedSvgString = result.data;
+        console.log(optimizedSvgString, 3838383);
         const str = parseXML(optimizedSvgString);
-        console.log('sdssdsds');
-        console.log(optimizedSvgString);
-        console.log(JSON.stringify(str));
-        next();
+        // console.log('sdssdsds');
+        // console.log(optimizedSvgString);
+        // console.log('000000', str.children[0]);
+        const svgstr = JSON.stringify(str);
+        // console.log('sssss', str.children[0]);
+        const template = `const data=${svgstr}`;
+        // console.log(JSON.stringify(svgDom));
+        // file.contents = Buffer.from(aaaa);
+        file.contents = Buffer.from(template);
+        // console.log(file);
+        // console.log(file.path);
+        file.path = file.path.replace(/\.svg$/, '.js');
+        next(null, file);
       })
     )
     .pipe(gulp.dest('./img'))
