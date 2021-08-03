@@ -1,5 +1,7 @@
 <template>
   <div>
+    <class-cpt></class-cpt>
+    <h-svg></h-svg>
     <span class="myfont">加载字体</span>
     <prettier></prettier>
     <div @click="showMessage">点击显示message</div>
@@ -9,10 +11,14 @@
 
 <script>
 // import sds from './App';
+import HSvg from './svg.vue';
+import classCpt from './components/classCpt'; // 翻车
 import HssMessage from './components/message/index';
 import './components/message/style/index';
 import prettier from './pretter';
 import { sayHello } from './hi';
+
+console.log(classCpt);
 
 console.log(sayHello('ts !'));
 
@@ -20,6 +26,8 @@ export default {
   components: {
     // sds
     prettier,
+    classCpt,
+    HSvg,
     // HssMessage: Message,
   },
   data() {

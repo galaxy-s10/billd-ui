@@ -6,6 +6,8 @@ const concat = require('gulp-concat');
 const postcss = require('gulp-postcss');
 const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
+const parseXML = require('@rgrove/parse-xml');
+const { optimize } = require('svgo');
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
 const transformLess = require('./utils/transformLess.js');
@@ -14,6 +16,31 @@ const tsDefaultReporter = ts.reporter.defaultReporter();
 const { _SUCCESS, emoji } = require('./utils/chalkTip');
 
 const componentsDir = '../components';
+
+gulp.task('svg', () =>
+  gulp
+    .src('./error.svg')
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        this.push(file.clone());
+        const svgString = file.contents.toString(encoding);
+        console.log(svgString);
+        console.log('-----');
+
+        const result = optimize(svgString, {
+          // path: 'path-to.svg',
+          // multipass: true,
+        });
+        const optimizedSvgString = result.data;
+        const str = parseXML(optimizedSvgString);
+        console.log('sdssdsds');
+        console.log(optimizedSvgString);
+        console.log(JSON.stringify(str));
+        next();
+      })
+    )
+    .pipe(gulp.dest('./img'))
+);
 
 gulp.task(
   'cleanall',
@@ -101,10 +128,10 @@ gulp.task('concat-css', () =>
 );
 
 const tsFiles = [
-  '../components/**/*.js',
-  '../components/**/*.jsx',
-  '../components/**/*.ts',
-  '../components/**/*.tsx',
+  `${componentsDir}/**/*.js`,
+  `${componentsDir}/**/*.jsx`,
+  `${componentsDir}/**/*.ts`,
+  `${componentsDir}/**/*.tsx`,
 ];
 
 function compile(modules) {
@@ -170,7 +197,7 @@ function compile(modules) {
       })
     );
   gulp
-    .src(['../components/**/*.@(jpg|png|svg)'])
+    .src([`${componentsDir}/**/*.@(jpg|png|svg)`])
     .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
   tsResult.dts.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
   tsResult.on('finish', check);
