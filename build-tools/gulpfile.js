@@ -1,7 +1,4 @@
-// const SVGO = require('svgo');
-
-// import SVGO from 'svgo';
-
+const { readFileSync } = require('fs');
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
@@ -9,98 +6,52 @@ const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 const postcss = require('gulp-postcss');
 const through2 = require('through2');
-// const babelConfig = require("../babel.config.js");
 const parseXML = require('@rgrove/parse-xml');
-const { optimize, extendDefaultPlugins } = require('svgo');
+const { optimize } = require('svgo');
+const { template } = require('lodash');
+const { resolve } = require('path');
+// import SVGO from 'svgo';//报错：Cannot use import statement outside a module
+// import { readFileSync } from 'fs';//报错：Cannot use import statement outside a module
+
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
-const transformLess = require('./utils/transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
 const { _SUCCESS, emoji } = require('./utils/chalkTip');
+const transformLess = require('./utils/transformLess.js');
+const svgOptions = require('./svgo/svgOptions');
 
 const componentsDir = '../components';
-const svgOptions = {
-  floatPrecision: 2,
-  plugins: [
-    // { cleanupAttrs: true },
-    {
-      name: 'removeTitle',
-      active: true,
-    },
-    {
-      name: 'removeDoctype',
-      active: false, // true的时候，删除文档类型标签；false的时候，不删除文档类型标签(即使不删除文档类型标签，有这个文档类型标签存在，parseXML插件也会忽略它，不会将它解析出来)
-    },
-    // { removeDoctype: true },
-    // { removeXMLProcInst: true },
-    // { removeXMLNS: true },
-    // { removeComments: true },
-    // { removeMetadata: true },
-    // { removeTitle: true },
-    // { removeDesc: true },
-    // { removeUselessDefs: true },
-    // { removeEditorsNSData: true },
-    // { removeEmptyAttrs: true },
-    // { removeHiddenElems: true },
-    // { removeEmptyText: true },
-    // { removeEmptyContainers: true },
-    // { removeViewBox: false },
-    // { cleanupEnableBackground: true },
-    // { convertStyleToAttrs: true },
-    // { convertColors: true },
-    // { convertPathData: true },
-    // { convertTransform: true },
-    // { removeUnknownsAndDefaults: true },
-    // { removeNonInheritableGroupAttrs: true },
-    // { removeUselessStrokeAndFill: true },
-    // { removeUnusedNS: true },
-    // { cleanupIDs: true },
-    // { cleanupNumericValues: true },
-    // { moveElemsAttrsToGroup: true },
-    // { moveGroupAttrsToElems: true },
-    // { collapseGroups: true },
-    // { removeRasterImages: false },
-    // { mergePaths: true },
-    // { convertShapeToPath: true },
-    // { sortAttrs: true },
-    // { removeDimensions: true },
-  ],
-};
-// extendDefaultPlugins(svgOptions.plugins);
+
+const iconTemplate = readFileSync(
+  resolve(__dirname, './svgo/template/icon.ejs'),
+  'utf8'
+);
+
+// 将svg文件转换为dom对象。
 gulp.task('svg', () =>
   gulp
     .src('../components/assets/svg/**/*.svg')
     .pipe(
       through2.obj(function (file, encoding, next) {
-        // this.push(file.clone());
         const svgString = file.contents.toString(encoding);
-        // console.log(svgString);
-        // console.log('-----');
+        // const result = optimize(svgString);
+        const { data } = optimize(svgString, {
+          plugins: svgOptions.plugins,
+        });
+        // const optimizedSvgString = result.data;
+        const domStr = parseXML(data);
+        const iconcontent = JSON.stringify(domStr);
+        const iconname = `${file.path.match(/([^\\]+)\.svg/)[1]}Icon`;
 
-        const result = optimize(svgString);
-        // const result = optimize(svgString, {
-        //   plugins: svgOptions.plugins,
-        // });
-        const optimizedSvgString = result.data;
-        console.log(optimizedSvgString, 3838383);
-        const str = parseXML(optimizedSvgString);
-        // console.log('sdssdsds');
-        // console.log(optimizedSvgString);
-        // console.log('000000', str.children[0]);
-        const svgstr = JSON.stringify(str);
-        // console.log('sssss', str.children[0]);
-        const template = `const data=${svgstr}`;
-        // console.log(JSON.stringify(svgDom));
-        // file.contents = Buffer.from(aaaa);
-        file.contents = Buffer.from(template);
-        // console.log(file);
-        // console.log(file.path);
+        const compiled = template(iconTemplate);
+        const compileTemplateRes = compiled({ iconname, iconcontent });
+        file.contents = Buffer.from(compileTemplateRes);
         file.path = file.path.replace(/\.svg$/, '.js');
         next(null, file);
       })
     )
-    .pipe(gulp.dest('./img'))
+    .pipe(gulp.dest('../components/icon'))
 );
 
 gulp.task(

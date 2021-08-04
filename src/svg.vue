@@ -1,5 +1,6 @@
 <script>
 import svgData from './svgdata';
+import successSvg from '../components/assets/svgdata/close';
 
 export default {
   components: {},
@@ -8,6 +9,7 @@ export default {
   },
   render() {
     console.log(this.svgData.children[0]);
+    console.log(successSvg, 5555);
     const viewBox = '0 0 1024 1024';
     const svgClassString = 'icon';
     const svgStyle = '';
