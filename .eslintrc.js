@@ -138,6 +138,7 @@ module.exports = {
     //   ],
     // indent: ['error', 6], // https://github.com/airbnb/javascript#whitespace--spaces，airbnb默认1个缩进2个空格，即换行后前面要有两空个格
     // indent: ['error', 2], // https://eslint.org/docs/rules/indent.html，官方的eslint默认1个缩进4个空格，即换行后前面要有四个空格
+    'vue/attribute-hyphenation': 0, // 此规则强制在 Vue 模板中的自定义组件上使用带连字符的属性名称。
     'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
     'no-restricted-syntax': [
       // airbnb默认禁用了一些语法

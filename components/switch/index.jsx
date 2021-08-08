@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 export default {
   // 将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   components: {},

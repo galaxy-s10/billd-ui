@@ -17,6 +17,7 @@
   "author": "galaxy-s10",
   "license": "ISC",
   "dependencies": {
+    "@huangshuisheng/icons-vue": "^1.0.8",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-preset-jsx": "^1.2.4",
     "node-emoji": "^1.10.0",
@@ -28,7 +29,6 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
-    "@rgrove/parse-xml": "^3.0.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.5",
@@ -70,7 +70,6 @@
     "prettier": "^2.3.2",
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^3.0.0",
-    "svgo": "^2.3.1",
     "through2": "^4.0.2",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",

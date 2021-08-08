@@ -1,13 +1,16 @@
-import Switch from '../switch';
+import { LoadingOutlined } from '@huangshuisheng/icons-vue';
 
 export default {
-  components: { HSwitch: Switch },
+  components: { LoadingOutlined },
   render() {
     return (
-      <div>
-        <h-switch a="23" b="sdgh"></h-switch>
-        <img src="./loading.png" alt="" />
-        加载中
+      <div class="billd-loading">
+        <LoadingOutlined
+          spin={true}
+          customStyle={[
+            { 'vertical-align': 'middle', 'margin-right': '10px' },
+          ]}></LoadingOutlined>
+        加载中...
       </div>
     );
   },

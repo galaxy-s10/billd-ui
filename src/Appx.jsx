@@ -20,9 +20,13 @@ export default {
     //       vOn:clickSwitch={(x, e) => this.clickSwitch(x, e)}></h-switch>
     //   </div>,
     // );
+    const a = 0;
+    const b = 2;
     return (
       <div>
-        <h-switch vOn:clickSwitch={(x, e) => this.clickSwitch(x, e)}></h-switch>
+        eee
+        <span style={[a && b && { color: 'red' }]}>ff</span>
+        {/* <h-switch vOn:clickSwitch={(x, e) => this.clickSwitch(x, e)}></h-switch> */}
       </div>
     );
   },
