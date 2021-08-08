@@ -1,5 +1,9 @@
 <template>
   <div>
+    <jsx-cpt></jsx-cpt>
+    <create-elementCpt></create-elementCpt>
+    <hr />
+    {{ objabc }}
     <h-table
       rowKey="idd"
       :bordered="true"
@@ -7,13 +11,18 @@
       :columns="columns"
       :rowSelection="rowSelection"
     ></h-table>
+    <br />
+    <span @click="changeModal">点击显示modal1</span>
+    <br />
+    <img src="./assets/img/author.jpg" style="width: 200px" alt="" />
   </div>
 </template>
 
 <script>
-// import createElementCpt from './components/createElementCpt';
-// import JsxCpt from './components/JsxCpt';
-import HTable from '../components/table';
+import createElementCpt from './components/createElementCpt';
+import JsxCpt from './components/JsxCpt';
+import HTable from './components/table/index.tsx';
+
 // import Dashboard from '../lib/dashboard'
 
 // import { Modal } from "../dist";
@@ -25,8 +34,8 @@ import HTable from '../components/table';
 export default {
   components: {
     // Dashboard,
-    // JsxCpt,
-    // createElementCpt,
+    JsxCpt,
+    createElementCpt,
     HTable,
     // HModal: Modal,
     // HSwitch:Switch,
@@ -127,8 +136,8 @@ export default {
           const key = row[this.getRowKey(row)];
           // console.log(row, key, "0000000");
           const prop = {
-            defaultChecked: this.defaultCheckedList.indexOf(key) !== -1,
-            disabled: this.defaultDisabledList.indexOf(key) !== -1,
+            defaultChecked: this.defaultCheckedList.indexOf(key) != -1,
+            disabled: this.defaultDisabledList.indexOf(key) != -1,
           };
           // console.log("proppropprop", prop);
           return prop;
@@ -162,7 +171,7 @@ export default {
           // key: "sex",
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
-          render(h) {
+          render(h, row) {
             // return <span>{row.status}</span>;
             // return <h-switch></h-switch>;
             /**
@@ -171,13 +180,11 @@ export default {
              * 数组里面的第一个参数row是对象，是不能通过h函数转成vnode的，会渲染成undefined，
              * 数组里面的第二个参数是数字，可以通过h函数转成vnode。
              */
-            // console.log(this.$createElement === h, 3444334);
+            console.log(this.$createElement === h, 3444334);
             const obja = { ad: 323, obj: { dsg: 31 } };
             return (
               <div>
-                <span style="color:red;height:80px;display:block">
-                  {obja}3454
-                </span>
+                <span>{obja}3454</span>
               </div>
             );
           },
@@ -263,7 +270,7 @@ export default {
   mounted() {
     console.log('fsfsdfsf');
     console.log(Object.keys(this.theme));
-    Object.keys(this.theme).forEach((item) => {
+    Object.keys(this.theme).map((item) => {
       console.log(this.theme[item]);
     });
   },
@@ -304,3 +311,13 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+// 下面的less样式会有作用域
+@import './index.less';
+</style>
+
+<style scoped>
+/* 下面的css样式不会有作用域 */
+@import './index.css';
+</style>

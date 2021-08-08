@@ -67,11 +67,11 @@ export default {
       <div
         class={{
           bar: true,
-          'hss-switch': true,
-          'hss-switch-checked': this.isChecked,
+          'billd-switch': true,
+          'billd-switch-checked': this.isChecked,
         }}
         vOn:click={(e) => this.clickSwitch(e)}>
-        <span class="hss-switch-inner">
+        <span class="billd-switch-inner">
           {this.isChecked
             ? this.$scopedSlots.openSlot
               ? this.$scopedSlots.openSlot({})
