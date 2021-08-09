@@ -5,7 +5,8 @@ Object.keys(allIcons).forEach((name) => {
   Vue.component(name, allIcons[name]);
 });
 
-export default {
+const Icon = {
+  name: 'BIcon',
   inheritAttrs: false,
   render(h) {
     // 注意：如果是props定义了customStyle，那么在传参时可以使用custom-style或者customStyle
@@ -22,3 +23,10 @@ export default {
     });
   },
 };
+
+Icon.install = function (Vue) {
+  console.log(33223);
+  Vue.component(Icon.name, Icon);
+};
+
+export default Icon;

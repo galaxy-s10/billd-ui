@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Main from './main';
 
-console.log('===++++++++');
 let baseConfig = {
   type: 'info',
   closeAble: false,

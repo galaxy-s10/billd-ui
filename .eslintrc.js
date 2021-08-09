@@ -1,3 +1,6 @@
+const { _INFO, emoji } = require('./build-tools/utils/chalkTip');
+
+console.log(_INFO('读取eslintrc.js'), emoji.get('hourglass'));
 module.exports = {
   env: {
     browser: true,
@@ -168,7 +171,8 @@ module.exports = {
     'prefer-const': 1, // xxx is never reassigned. Use 'const' instead，此规则旨在标记使用let关键字声明的变量
     'no-unused-vars': 1, // xxx is assigned a value but never used，此规则旨在消除未使用的变量、函数和函数参数
     'no-var': 1, // Unexpected var, use let or const instead，该规则旨在阻止使用var或鼓励使用const或let代替。
-    'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
+    'no-console': 0, // 此规则不允许调用console对象的方法。
+    // 'no-console': process.env.NODE_ENV !== 'production' ? 0 : 2, // 此规则不允许调用console对象的方法。
     'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
     'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
     'array-callback-return': [2, { allowImplicit: false }], // expects a return value from arrow function.期望箭头函数的返回值。

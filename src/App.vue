@@ -1,19 +1,29 @@
 <template>
   <div>
-    <h-table
+    <!-- <b-table
       rowKey="idd"
       :bordered="true"
       :sourceData="sourceData"
       :columns="columns"
       :rowSelection="rowSelection"
-    ></h-table>
+    ></b-table> -->
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 // import createElementCpt from './components/createElementCpt';
 // import JsxCpt from './components/JsxCpt';
-import HTable from '../components/table';
+// import BTable from '../components/table';
+// import { Table as BTable } from '../es/index';
+// import { Table as BTable } from '../components';
+// import BilldUI from '../components';
+// import '../components/style';
+// import '../index';
+
+// console.log(BilldUI);
+
+// Vue.use(BilldUI);
 // import Dashboard from '../lib/dashboard'
 
 // import { Modal } from "../dist";
@@ -27,7 +37,7 @@ export default {
     // Dashboard,
     // JsxCpt,
     // createElementCpt,
-    HTable,
+    // BTable,
     // HModal: Modal,
     // HSwitch:Switch,
   },

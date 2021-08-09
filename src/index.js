@@ -14,10 +14,12 @@ import auth from './plugins';
 
 Vue.use(auth);
 
-new Vue({
+const vm = new Vue({
   render: (h) => h(App),
 }).$mount('#app');
-console.log('ssd');
+
+console.log(vm.$options.components, 333);
+
 // const cpts = require('./cpts');
 const cpts = require.context('./cpts', true, /\.js$/);
 // const cpts = require.context('./', true, /\.js$/);

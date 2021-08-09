@@ -7,7 +7,7 @@ const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
-const postcss = require('gulp-postcss');
+// const postcss = require('gulp-postcss');
 const through2 = require('through2');
 // const babelConfig = require("../babel.config.js");
 const babelConfig = require('./getBabelCommonConfig');
@@ -19,88 +19,99 @@ const { _SUCCESS, emoji } = require('./utils/chalkTip');
 
 const componentsDir = '../components';
 
-gulp.task(
-  'cleanall',
-  () =>
-    // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
-    gulp
-      .src(['../lib', '../es', '../dist'], {
-        allowEmpty: true,
-      })
-      .pipe(clean({ force: true })) // 不添加force:true属性不能删除上层目录，因此加上。
+gulp.task('clean-all', (done) => {
+  // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
+  const res = gulp
+    .src(['../lib', '../es', '../dist'], {
+      allowEmpty: true,
+    })
+    .pipe(clean({ force: true })); // 不添加force:true属性不能删除上层目录，因此加上。
   // cb(); // 使用cb不管用，因为gulp-clean是异步的。
-);
-
-gulp.task(
-  'clean-all',
-  gulp.series('cleanall', (done) => {
+  res.on('finish', function () {
     console.log(
       _SUCCESS('清除旧构建文件成功！'),
       emoji.get('heavy_check_mark')
     );
     done();
-  })
-);
+  });
+});
+
+// gulp.task(
+//   'clean-all',
+//   gulp.series('cleanall', (done) => {
+//     console.log(
+//       _SUCCESS('清除旧构建文件成功！'),
+//       emoji.get('heavy_check_mark')
+//     );
+//     done();
+//   })
+// );
 
 // 复制静态资源目录
 function copyAssets(modules) {
-  const assetsStream = gulp
-    .src(`${componentsDir}/assets/**/*`, { allowEmpty: true })
-    .pipe(gulp.dest(modules === false ? '../es/assets/' : '../lib/assets/'));
-  assetsStream.on('finish', () => {
-    console.log(
-      _SUCCESS('复制静态资源目录成功！'),
-      emoji.get('heavy_check_mark')
-    );
-  });
-  return assetsStream;
+  return function copyassets(done) {
+    const assetsStream = gulp
+      .src(`${componentsDir}/assets/**/*`, { allowEmpty: true })
+      .pipe(gulp.dest(modules === false ? '../es/assets/' : '../lib/assets/'));
+    assetsStream.on('finish', () => {
+      console.log(
+        _SUCCESS('复制静态资源目录成功！'),
+        emoji.get('heavy_check_mark')
+      );
+      done();
+    });
+    return assetsStream;
+  };
 }
 
 // 编译less
 function compileLess(modules) {
-  // 编译src下面的所有less文件，但是排除src下的assets文件夹。
-  const lessStr = gulp
-    .src([`components/**/*.less`, `!components/assets/**/*`], {
-      cwd: '../',
-    })
-    .pipe(
-      through2.obj(function (file, encoding, next) {
-        console.log(file, 438349);
-        // 将源文件复制一份放流里面
-        this.push(file.clone());
-        // 匹配所有less文件
-        if (file.path.match(/\.less$/)) {
-          transformLess(file.path)
-            .then((css) => {
-              // File.contents can only be a Buffer, a Stream, or null.
-              file.contents = Buffer.from(css);
-              // 将转换后的less文件路径修改文件成css
-              file.path = file.path.replace(/\.less$/, '.css');
-              // 将修改文件路径后的文件放流里面
-              this.push(file);
-              next();
-            })
-            .catch((e) => {
-              console.error(e);
-            });
-        } else {
-          next();
-        }
+  return function compileless(done) {
+    // 编译src下面的所有less文件，但是排除src下的assets文件夹。
+    const lessStream = gulp
+      .src([`components/**/*.less`, `!components/assets/**/*`], {
+        cwd: '../',
       })
-    )
-    .pipe(postcss())
-    .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
-  // .pipe(gulp.dest('../lib'));
-  // 旧版使用gulp-less解析less,源文件会被解析成css文件，即原less文件会变成css文件。
-  // return gulp
-  //   .src("../components/**/*.less")
-  //   .pipe(gulpLess())
-  //   .pipe(postcss())
-  //   .pipe(gulp.dest("../lib"));
-  lessStr.on('finish', () => {
-    console.log(_SUCCESS('编译less成功！'), emoji.get('heavy_check_mark'));
-  });
-  return lessStr;
+      .pipe(
+        through2.obj(function (file, encoding, next) {
+          // 将源文件复制一份放流里面
+          this.push(file.clone());
+          // 匹配所有less文件
+          if (file.path.match(/\.less$/)) {
+            transformLess(file.path)
+              .then((css) => {
+                // File.contents can only be a Buffer, a Stream, or null.
+                file.contents = Buffer.from(css);
+                // 将转换后的less文件路径修改文件成css
+                file.path = file.path.replace(/\.less$/, '.css');
+                // 将修改文件路径后的文件放流里面
+                this.push(file);
+                next();
+              })
+              .catch((e) => {
+                console.error(e);
+              });
+          } else {
+            next();
+          }
+        })
+      )
+      // .pipe(postcss()) // gulp-postcss不能在这里使用，因为上面gulp.pipe的结果是promise异步的
+      .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
+    // .pipe(gulp.dest('../lib'));
+    // 旧版使用gulp-less解析less,源文件会被解析成css文件，即原less文件会变成css文件。
+    // return gulp
+    //   .src("../components/**/*.less")
+    //   .pipe(gulpLess())
+    //   .pipe(postcss())
+    //   .pipe(gulp.dest("../lib"));
+    lessStream.on('finish', () => {
+      console.log(_SUCCESS('编译less成功！'), emoji.get('heavy_check_mark'));
+      done();
+    });
+    // console.log(lessStream, 98766);
+    // return lessStream;
+  };
 }
 
 gulp.task('concat-css', () =>
@@ -186,23 +197,34 @@ function compile(modules) {
 // es modules
 gulp.task(
   'compile-es',
-  gulp.parallel(copyAssets(false), compileLess(false), (done) => {
-    // console.log("compile es modules");
-    compile(false).on('finish', () => {
-      console.log(_SUCCESS('构建es完成！'), emoji.get('heavy_check_mark'));
-      done();
-    });
-  })
+  gulp.parallel(
+    copyAssets(false),
+    compileLess(false),
+    function compileEs(done) {
+      // console.log("compile es modules");
+      compile(false).on('finish', () => {
+        console.log(_SUCCESS('构建es完成！'), emoji.get('heavy_check_mark'));
+        done();
+      });
+    }
+  )
 );
 
 // commonjs
-gulp.task('compile-lib', (done) => {
-  // console.log("compile es commonjs");
-  compile().on('finish', () => {
-    console.log(_SUCCESS('构建lib完成！'), emoji.get('heavy_check_mark'));
-    done();
-  });
-});
+gulp.task(
+  'compile-lib',
+  gulp.parallel(
+    copyAssets(undefined),
+    compileLess(undefined),
+    function compileLib(done) {
+      // console.log("compile es modules");
+      compile(undefined).on('finish', () => {
+        console.log(_SUCCESS('构建lib完成！'), emoji.get('heavy_check_mark'));
+        done();
+      });
+    }
+  )
+);
 
 gulp.task(
   'default',
@@ -210,6 +232,7 @@ gulp.task(
     'clean-all',
     // gulp.parallel('copy-assets', 'compile-es')
     // gulp.parallel('copy-assets', 'compile-es', 'compile-lib')
+    // gulp.parallel('compile-es'),
     gulp.parallel('compile-es', 'compile-lib'),
     // "concat-css",
     function allTasksDone(done) {

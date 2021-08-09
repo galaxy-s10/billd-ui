@@ -1,4 +1,5 @@
-export default {
+const Switch = {
+  name: 'BSwitch',
   // 将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   components: {},
   inheritAttrs: false,
@@ -66,7 +67,6 @@ export default {
     return (
       <div
         class={{
-          bar: true,
           'billd-switch': true,
           'billd-switch-checked': this.isChecked,
         }}
@@ -88,3 +88,9 @@ export default {
     );
   },
 };
+
+Switch.install = function (Vue) {
+  Vue.component(Switch.name, Switch);
+};
+
+export default Switch;

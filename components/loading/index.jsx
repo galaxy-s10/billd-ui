@@ -1,6 +1,7 @@
 import { LoadingOutlined } from '@huangshuisheng/icons-vue';
 
-export default {
+const Loading = {
+  name: 'BLoading',
   components: { LoadingOutlined },
   render() {
     return (
@@ -15,3 +16,9 @@ export default {
     );
   },
 };
+
+Loading.install = function (Vue) {
+  Vue.component(Loading.name, Loading);
+};
+
+export default Loading;

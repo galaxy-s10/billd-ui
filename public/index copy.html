@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="stylesheet" href="../dist/billd.css">
+        <title>
+      <%= htmlWebpackPlugin.options.title %>
+    </title>
+  </head>
+
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
+    </noscript>
+    <div id="app">
+      {{msg}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="../dist/billd-ui.js"></script>
+    <script>
+      console.log(this);
+      window.onload =function(){
+        console.log(Billd);
+        Vue.use(Billd.Billd)
+      let vm = new Vue({
+        el:"#app",
+        template:`
+          <div>
+            <b-switch></b-switch>
+          </div>
+        `,
+        data(){
+          return {
+            msg:123
+          }
+        }
+      })
+      console.log(Billd.Billd);
+      // console.log(antd);
+      // Vue.use(Billd.Billd)
+      console.log(vm);
+      // Vue.component('BSwitch',Billd.Billd.Switch)
+      // Vue.component('aaa',antd.Button)
+      // Vue.use(antd)
+      
+
+      }
+
+    </script>
+
+  </body>
+</html>

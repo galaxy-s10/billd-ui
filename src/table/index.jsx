@@ -1,7 +1,8 @@
+import './style/index.js';
+// import "../../../dist/switch/style/index.css";
 import { getScrollBarWidth } from '../utils/common';
 
-const Table = {
-  name: 'BTable',
+export default {
   inheritAttrs: false,
   props: {
     rowKey: {
@@ -33,7 +34,7 @@ const Table = {
   render() {
     return (
       <div
-        class={{ 'billd-table': true, border: this.bordered }}
+        class={{ 'hss-table': true, border: this.bordered }}
         style="width:810px;">
         <div class="table-scroll">
           <div
@@ -48,7 +49,7 @@ const Table = {
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
                 {this.rowSelection.type && (
-                  <col class="billd-table-selection-col" />
+                  <col class="hss-table-selection-col" />
                 )}
                 {this.columns.map((item, index) => (
                   <col
@@ -61,24 +62,24 @@ const Table = {
                   />
                 ))}
               </colgroup>
-              <thead class="billd-table-thead">
+              <thead class="hss-table-thead">
                 <tr>
                   <th>
                     <div
-                      class="billd-checkbox"
+                      class="hss-checkbox"
                       vOn:click={() => this.onSelectAll()}>
                       <input
                         type="checkbox"
                         class={{
-                          'billd-checkbox-input': true,
-                          'billd-checkbox-checked': this.tableIsSelectAll,
+                          'hss-checkbox-input': true,
+                          'hss-checkbox-checked': this.tableIsSelectAll,
                         }}
                         vModel={this.tableIsSelectAll}
                       />
                       {/* <!-- 当已选择的数据数组长度等于所有数据减去交集数组长度，即代表全选 --> */}
                       <span
                         class={{
-                          'billd-checkbox-inner': true,
+                          'hss-checkbox-inner': true,
                           'none-selected':
                             this.selectedList.length -
                               this.intersection.length ===
@@ -117,7 +118,7 @@ const Table = {
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
                 {this.rowSelection.type && (
-                  <col class="billd-table-selection-col" />
+                  <col class="hss-table-selection-col" />
                 )}
                 {this.columns.map((item, index) => (
                   <col
@@ -130,7 +131,7 @@ const Table = {
                   />
                 ))}
               </colgroup>
-              <tbody class="billd-table-tbody" ref="billd-table-tbody">
+              <tbody class="hss-table-tbody" ref="hss-table-tbody">
                 {this.sourceData.map((rowItem, rowIndex) => (
                   <tr
                     class={{ hovertr: rowIndex === this.nowTr }}
@@ -141,8 +142,8 @@ const Table = {
                     <td>
                       <div
                         class={{
-                          'billd-checkbox': true,
-                          'billd-checkbox-disabled':
+                          'hss-checkbox': true,
+                          'hss-checkbox-disabled':
                             this._getCheckboxProps(rowItem).disabled,
                         }}
                         vOn:click={(e) =>
@@ -151,9 +152,9 @@ const Table = {
                         <input
                           type="checkbox"
                           class={{
-                            'billd-checkbox-input': true,
-                            'billd-checkbox-checked': this.isSelected(rowItem),
-                            'billd-checkbox-disabled':
+                            'hss-checkbox-input': true,
+                            'hss-checkbox-checked': this.isSelected(rowItem),
+                            'hss-checkbox-disabled':
                               this._getCheckboxProps(rowItem).disabled,
                           }}
                           disabled={this._getCheckboxProps(rowItem).disabled}
@@ -161,7 +162,7 @@ const Table = {
                           vModel={this.selectedList}
                         />
                         {/* <!-- <input type="checkbox" disabled> --> */}
-                        <span class={{ 'billd-checkbox-inner': true }}></span>
+                        <span class={{ 'hss-checkbox-inner': true }}></span>
                       </div>
                     </td>
                     {this.columns.map((columnsItem, columnsIndex) => (
@@ -198,7 +199,7 @@ const Table = {
               <table style="min-width:auto">
                 <colgroup>
                   {this.rowSelection.type && (
-                    <col class="billd-table-selection-col" />
+                    <col class="hss-table-selection-col" />
                   )}
                   {this.fixedLeftData.map((item, index) => (
                     <col
@@ -211,24 +212,24 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <thead class="billd-table-thead">
+                <thead class="hss-table-thead">
                   <tr>
                     <th>
                       <div
-                        class="billd-checkbox"
+                        class="hss-checkbox"
                         vOn:click={() => this.onSelectAll()}>
                         <input
                           type="checkbox"
                           class={{
-                            'billd-checkbox-input': true,
-                            'billd-checkbox-checked': this.tableIsSelectAll,
+                            'hss-checkbox-input': true,
+                            'hss-checkbox-checked': this.tableIsSelectAll,
                           }}
                           vModel={this.tableIsSelectAll}
                         />
                         {/* <!-- 当已选择的数据数组长度等于所有数据减去交集数组长度，即代表全选 --> */}
                         <span
                           class={{
-                            'billd-checkbox-inner': true,
+                            'hss-checkbox-inner': true,
                             'none-selected':
                               this.selectedList.length -
                                 this.intersection.length ===
@@ -275,7 +276,7 @@ const Table = {
                 <table style="background:white">
                   <colgroup>
                     {this.rowSelection.type && (
-                      <col class="billd-table-selection-col" />
+                      <col class="hss-table-selection-col" />
                     )}
                     {this.fixedLeftData.map((item, index) => (
                       <col
@@ -288,7 +289,7 @@ const Table = {
                       />
                     ))}
                   </colgroup>
-                  <tbody class="billd-table-tbody">
+                  <tbody class="hss-table-tbody">
                     {this.sourceData.map((item, index) => (
                       <tr
                         key={this.sourceData[index][this.getRowKey(item)]}
@@ -302,8 +303,8 @@ const Table = {
                         <td>
                           <div
                             class={{
-                              'billd-checkbox': true,
-                              'billd-checkbox-disabled': this._getCheckboxProps(
+                              'hss-checkbox': true,
+                              'hss-checkbox-disabled': this._getCheckboxProps(
                                 this.fixedLeftData[0].data[index]
                               ).disabled,
                             }}
@@ -319,14 +320,13 @@ const Table = {
                             <input
                               type="checkbox"
                               class={{
-                                'billd-checkbox-input': true,
-                                'billd-checkbox-checked': this.isSelected(
+                                'hss-checkbox-input': true,
+                                'hss-checkbox-checked': this.isSelected(
                                   this.fixedLeftData[0].data[index]
                                 ),
-                                'billd-checkbox-disabled':
-                                  this._getCheckboxProps(
-                                    this.fixedLeftData[0].data[index]
-                                  ).disabled,
+                                'hss-checkbox-disabled': this._getCheckboxProps(
+                                  this.fixedLeftData[0].data[index]
+                                ).disabled,
                               }}
                               disabled={
                                 this._getCheckboxProps(
@@ -336,8 +336,7 @@ const Table = {
                               value={this.fixedLeftData[0].data[index]}
                               vModel={this.selectedList}
                             />
-                            <span
-                              class={{ 'billd-checkbox-inner': true }}></span>
+                            <span class={{ 'hss-checkbox-inner': true }}></span>
                           </div>
                         </td>
                         {this.fixedLeftData.map((col, colIndex) => (
@@ -392,7 +391,7 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <thead class="billd-table-thead">
+                <thead class="hss-table-thead">
                   <tr>
                     {this.fixedRightData.map((item, index) => (
                       <th
@@ -431,7 +430,7 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <tbody class="billd-table-tbody">
+                <tbody class="hss-table-tbody">
                   {this.sourceData.map((item, index) => (
                     <tr
                       key={this.sourceData[index][this.getRowKey(item)]}
@@ -563,7 +562,7 @@ const Table = {
         // console.log(v);
         // console.log(this.$refs);
         // console.log(Object.keys(this.$refs).length, 9999);
-        // console.log(this.$refs['billd-table-tbody']);
+        // console.log(this.$refs['hss-table-tbody']);
         `${100}px`;
     },
   },
@@ -817,8 +816,8 @@ const Table = {
       }
     },
     asyncRowHeight() {
-      // console.log(this.$refs["billd-table-tbody"].children);
-      const tr = this.$refs['billd-table-tbody'].children;
+      // console.log(this.$refs["hss-table-tbody"].children);
+      const tr = this.$refs['hss-table-tbody'].children;
       const trList = [];
       for (let i = 0; i < tr.length; i += 1) {
         // console.log(tr[i], tr[i].offsetHeight, '====================');
@@ -910,9 +909,3 @@ const Table = {
     },
   },
 };
-
-Table.install = function (Vue) {
-  Vue.component(Table.name, Table);
-};
-
-export default Table;

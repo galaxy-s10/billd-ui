@@ -11,19 +11,19 @@ const CompressionPlugin = require('compression-webpack-plugin');
 // const glob = require('glob')
 // const webpack = require('webpack');
 // const path = require("path");
-// const resolveApp = require('./paths');
+const resolveApp = require('./utils/paths');
 
 module.exports = {
-  mode: 'development',
+  // mode: 'development',
   // mode: "none",
-  // mode: "production",
-  devtool: 'source-map', // cheap-module-eval-source-map
+  mode: "production",
+  devtool: 'eval-cheap-module-source-map', // 旧版cheap-module-eval-source-map已经不能用了，改成eval-cheap-module-source-map
   output: {
-    // path: resolveApp("./library"),
+    path: resolveApp('./dist'),
     // publicPath: "/library/",
     filename: 'billd-ui.js',
     library: {
-      name: 'aaax',
+      name: 'Billd',
       // root: 'MyLibrary',
       // amd: 'my-library',
       // commonjs: 'my-common-library',
@@ -86,7 +86,7 @@ module.exports = {
     // }
   },
   plugins: [
-    new CleanWebpackPlugin({}), // 自动删除生成的dist文件夹
+    new CleanWebpackPlugin({}), // 默认删除output.path目录下的内容
     // new HtmlWebpackExternalsPlugin({  //将vendors添加到externals属性中，并在index.html引入。这个库不维护了。
     //   externals: [
     //     {

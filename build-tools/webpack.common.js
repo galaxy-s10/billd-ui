@@ -30,7 +30,7 @@ const commonConfig = function (isProduction) {
     target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction ? './components/index.js' : './src/index.js',
+        import: isProduction ? './index.js' : './src/index.js',
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
       },
     },
@@ -50,13 +50,13 @@ const commonConfig = function (isProduction) {
       // echarts: 'echarts',
       // iview: 'iview',
     },
-    output: {
-      filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
-      chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
-      path: resolveApp('./dist'),
-      assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
-      publicPath: './', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
-    },
+    // output: {
+    //   filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
+    //   chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
+    //   path: resolveApp('./dist'),
+    //   assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
+    //   publicPath: '/', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+    // },
     resolve: {
       // 解析路径
       extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
@@ -188,7 +188,7 @@ const commonConfig = function (isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    // publicPath: "../"
+                    // publicPath: '../',
                   },
                 }
               : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
@@ -216,7 +216,7 @@ const commonConfig = function (isProduction) {
                      * 即默认打包的css文件是webpackOptions.output的publicPath，
                      * 但在new MiniCssExtractPlugin()时候，设置了打包生成的文件在dist下面的css目录里，
                      */
-                    publicPath: './',
+                    publicPath: '../',
                   },
                 }
               : { loader: 'style-loader' }, // Do not use style-loader and mini-css-extract-plugin together.
@@ -230,8 +230,8 @@ const commonConfig = function (isProduction) {
             {
               /**
                * antd当前的版本不支持less4.x版本，会报类似：Operation on an invalid type错误，
-               * 因此这里用less的3.x版本。less-loader貌似都可以，但最新的8.x也会有兼容性问题，
-               * 这里的less-loader用的7.x版本
+               * 因此这里用less的3.x版本。less-loader貌似都可以，
+               * 但最新的less-loader8.x也有其他兼容性问题，所以这里的less-loader用的7.x版本
                * https://github.com/ant-design/ant-design/issues/23125#issuecomment-757678485
                * https://lesscss.org/usage/#less-options-math
                */
@@ -357,9 +357,10 @@ module.exports = function (env) {
     config.then((config) => {
       // 根据当前环境，合并配置文件
       const mergeConfig = merge(commonConfig(isProduction), config);
-      // console.log(mergeConfig);
-      resolve(smp.wrap(mergeConfig));
-      // resolve(mergeConfig);
+      // 不要使用SpeedMeasurePlugin插件，使用它会导致MiniCssExtractPlugin插件报错。
+      // resolve(smp.wrap(mergeConfig));
+      console.log(mergeConfig);
+      resolve(mergeConfig);
     });
   });
 };

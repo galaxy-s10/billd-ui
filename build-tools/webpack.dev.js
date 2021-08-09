@@ -34,6 +34,13 @@ module.exports = new Promise((resolve) => {
         // mode: "production",
         mode: 'development',
         devtool: 'source-map',
+        output: {
+          filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
+          chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
+          path: resolveApp('./dist'),
+          assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
+          publicPath: '/', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
+        },
         devServer: {
           stats: 'errors-warnings', // 只显示警告和错误信息
           // stats: 'errors-only', // 只显示错误信息（如果eslint有警告和错误，只会显示警告信息，不会显示错误信息）

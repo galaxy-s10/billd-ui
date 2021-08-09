@@ -1,7 +1,8 @@
 import { Fragment as HVueFragment } from 'vue-fragment';
 import HFoot from './foot';
 
-export default {
+const Modal = {
+  name: 'BModal',
   inheritAttrs: false, // 将自定义组件的attrs不显示在渲染的html元素上，防止冲突（比如title）
   props: {
     // cancelText: String,
@@ -97,3 +98,9 @@ export default {
     },
   },
 };
+
+Modal.install = function (Vue) {
+  Vue.component(Modal.name, Modal);
+};
+
+export default Modal;
