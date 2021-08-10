@@ -39,32 +39,34 @@ gulp.task('clean-all', (done) => {
   });
 });
 
-// gulp.task(
-//   'clean-all',
-//   gulp.series('cleanall', (done) => {
-//     console.log(
-//       _SUCCESS('清除旧构建文件成功！'),
-//       emoji.get('heavy_check_mark')
-//     );
-//     done();
-//   })
-// );
-
-function dist() {
-  console.log(webpackConfig);
-}
 gulp.task('dist', (done) => {
-  dist();
-  // webpackConfig({ production: true }).then((res) => {
-  // console.log(res, 8876);
-  webpack(
-    { entry: './index.js', output: { filename: 'bundle.js' } },
-    (err, stats) => {
-      console.log(err, 22);
-      console.log(stats.hasErrors());
-    }
-  );
-  // });
+  webpackConfig({ production: true }).then((res) => {
+    console.log('0');
+    webpack(res, (err, stats) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      const info = stats.toJson();
+      if (stats.hasErrors()) {
+        console.error(info.errors);
+      }
+      if (stats.hasWarnings()) {
+        console.warn(info.warnings);
+      }
+      const buildInfo = stats.toString({
+        colors: true,
+        children: true,
+        chunks: false,
+        modules: false,
+        chunkModules: false,
+        hash: false,
+        version: false,
+      });
+      console.log(buildInfo);
+      done(0);
+    });
+  });
 });
 
 // 复制静态资源目录

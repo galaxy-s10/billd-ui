@@ -31,7 +31,7 @@ const commonConfig = function (isProduction) {
     target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction ? './index.js' : './src/index.js',
+        import: isProduction ? resolveApp('../index.js') : './src/index.js',
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
       },
     },
