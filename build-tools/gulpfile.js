@@ -54,7 +54,7 @@ function dist() {
   console.log(webpackConfig);
 }
 gulp.task('dist', (done) => {
-  // dist();
+  dist();
   // webpackConfig({ production: true }).then((res) => {
   // console.log(res, 8876);
   webpack(
