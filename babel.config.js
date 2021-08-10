@@ -10,6 +10,8 @@ module.exports = {
       {
         // modules: "umd",
         // target: {},
+        useBuiltIns: 'usage',
+        corejs: '3',
       },
     ],
     [

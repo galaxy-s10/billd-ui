@@ -2,6 +2,8 @@
 
 // import SVGO from 'svgo';
 
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
@@ -9,6 +11,7 @@ const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 // const postcss = require('gulp-postcss');
 const through2 = require('through2');
+const webpackConfig = require('./webpack.common');
 // const babelConfig = require("../babel.config.js");
 const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
@@ -46,6 +49,23 @@ gulp.task('clean-all', (done) => {
 //     done();
 //   })
 // );
+
+function dist() {
+  console.log(webpackConfig);
+}
+gulp.task('dist', (done) => {
+  // dist();
+  // webpackConfig({ production: true }).then((res) => {
+  // console.log(res, 8876);
+  webpack(
+    { entry: './index.js', output: { filename: 'bundle.js' } },
+    (err, stats) => {
+      console.log(err, 22);
+      console.log(stats.hasErrors());
+    }
+  );
+  // });
+});
 
 // 复制静态资源目录
 function copyAssets(modules) {

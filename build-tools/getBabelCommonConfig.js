@@ -10,6 +10,8 @@ module.exports = function (modules) {
         {
           // https://www.babeljs.cn/docs/babel-preset-env#modules
           modules,
+          useBuiltIns: 'usage',
+          corejs: '3',
         },
       ],
       [

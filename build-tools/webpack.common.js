@@ -12,6 +12,7 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
+const prodMinConfig = require('./webpack.prod.min.js');
 
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
 
@@ -349,6 +350,7 @@ const commonConfig = function (isProduction) {
 
 const smp = new SpeedMeasurePlugin();
 module.exports = function (env) {
+  console.log(env, 998888);
   return new Promise((resolve) => {
     const isProduction = env.production;
     process.env.NODE_ENV = isProduction ? 'production' : 'development';
@@ -359,7 +361,7 @@ module.exports = function (env) {
       const mergeConfig = merge(commonConfig(isProduction), config);
       // 不要使用SpeedMeasurePlugin插件，使用它会导致MiniCssExtractPlugin插件报错。
       // resolve(smp.wrap(mergeConfig));
-      console.log(mergeConfig);
+      // console.log(mergeConfig);
       resolve(mergeConfig);
     });
   });
