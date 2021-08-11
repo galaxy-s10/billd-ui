@@ -8,11 +8,23 @@
       :rowSelection="rowSelection"
       :scroll="{ x: 900, y: 400 }"
     ></b-table>
+    <!-- <h-table
+      rowKey="idd"
+      :bordered="true"
+      :sourceData="sourceData"
+      :columns="columns"
+      :rowSelection="rowSelection"
+      :scroll="{ x: 900, y: 400 }"
+    ></h-table> -->
   </div>
 </template>
 
 <script>
+// import HTable from './table1/index.vue';
+// import HTable from '../components/table';
+
 export default {
+  // components: { HTable },
   data() {
     return {
       row: { b: 32 },

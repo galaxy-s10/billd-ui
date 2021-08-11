@@ -76,7 +76,7 @@ export default {
 
     return (
       <div>
-        <div class="hss-message">
+        <div class="billd-message">
           <transition-group name="billd-list">
             {this.list.map((item, index) => (
               <div style="margin: 10px 0" key={index}>

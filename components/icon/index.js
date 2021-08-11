@@ -25,7 +25,6 @@ const Icon = {
 };
 
 Icon.install = function (Vue) {
-  console.log(33223);
   Vue.component(Icon.name, Icon);
 };
 

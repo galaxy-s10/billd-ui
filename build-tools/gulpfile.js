@@ -11,6 +11,8 @@ const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 // const postcss = require('gulp-postcss');
 const through2 = require('through2');
+const { chdir, cwd } = require('process');
+const path = require('path');
 const webpackConfig = require('./webpack.common');
 // const babelConfig = require("../babel.config.js");
 const babelConfig = require('./getBabelCommonConfig');
@@ -25,7 +27,7 @@ const componentsDir = '../components';
 gulp.task('clean-all', (done) => {
   // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
   const res = gulp
-    .src(['../lib', '../es', '../dist'], {
+    .src(['../lib', '../es'], {
       allowEmpty: true,
     })
     .pipe(clean({ force: true })); // 不添加force:true属性不能删除上层目录，因此加上。
@@ -40,31 +42,37 @@ gulp.task('clean-all', (done) => {
 });
 
 gulp.task('dist', (done) => {
-  webpackConfig({ production: true }).then((res) => {
-    console.log('0');
-    webpack(res, (err, stats) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      const info = stats.toJson();
-      if (stats.hasErrors()) {
-        console.error(info.errors);
-      }
-      if (stats.hasWarnings()) {
-        console.warn(info.warnings);
-      }
-      const buildInfo = stats.toString({
-        colors: true,
-        children: true,
-        chunks: false,
-        modules: false,
-        chunkModules: false,
-        hash: false,
-        version: false,
+  chdir(path.resolve(__dirname, '../'));
+  // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
+  webpackConfig({ production: true, productionMin: true }).then((res) => {
+    webpackConfig({ production: true, productionMin: false }).then((res1) => {
+      console.log(res, 3333);
+      console.log(res1, 4444);
+      // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
+      webpack([res1, res], (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        const info = stats.toJson();
+        if (stats.hasErrors()) {
+          // console.error(info.errors);
+        }
+        if (stats.hasWarnings()) {
+          // console.warn(info.warnings);
+        }
+        const buildInfo = stats.toString({
+          colors: true,
+          children: true,
+          chunks: false,
+          modules: false,
+          chunkModules: false,
+          hash: false,
+          version: false,
+        });
+        // console.log(buildInfo);
+        done();
       });
-      console.log(buildInfo);
-      done(0);
     });
   });
 });

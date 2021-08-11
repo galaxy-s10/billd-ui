@@ -1,18 +1,54 @@
 <template>
   <div>
-    <b-table
+    <!-- <b-table
       rowKey="idd"
       :bordered="true"
       :sourceData="sourceData"
       :columns="columns"
       :rowSelection="rowSelection"
-      :scroll="{ x: 900, y: 400 }"
-    ></b-table>
+    ></b-table> -->
+    <AccountBookFilled></AccountBookFilled>
+    <AccountBookFilled :spin="true"></AccountBookFilled>
+    <AccountBookFilled :spin="true" :rotate="50"></AccountBookFilled>
+    <AccountBookFilled
+      :customStyle="{ color: 'red', fontSize: '30px' }"
+    ></AccountBookFilled>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
+import { AccountBookFilled } from '@huangshuisheng/icons-vue';
+// import createElementCpt from './components/createElementCpt';
+// import JsxCpt from './components/JsxCpt';
+// import BTable from '../components/table';
+// import { Table as BTable } from '../es/index';
+// import { Table as BTable } from '../components';
+// import BilldUI from '../components';
+// import '../components/style';
+// import '../index';
+
+// console.log(BilldUI);
+
+// Vue.use(BilldUI);
+// import Dashboard from '../lib/dashboard'
+
+// import { Modal } from "../dist";
+// import "../dist/modal/style/index.css";
+
+// import Switch from "../dist";
+// import "../dist/switch/style/index.css";
+
 export default {
+  components: {
+    AccountBookFilled,
+    // Dashboard,
+    // JsxCpt,
+    // createElementCpt,
+    // BTable,
+    // HModal: Modal,
+    // HSwitch:Switch,
+  },
   data() {
     return {
       row: { b: 32 },
@@ -23,8 +59,7 @@ export default {
         {
           key: 100,
           idd: 100,
-          name: '2222222222ssssssssssss',
-          ellipsis: true,
+          name: 'sddsdsdsdsdsdssd',
           status: '1',
           age: 323233223323,
           money: 34,
@@ -105,11 +140,15 @@ export default {
       rowSelection: {
         type: 'checkbox',
         getCheckboxProps: (row) => {
+          // console.log(row.key, "getCheckboxProps");
+          // console.log(row,this.getRowKey(row));
           const key = row[this.getRowKey(row)];
+          // console.log(row, key, "0000000");
           const prop = {
             defaultChecked: this.defaultCheckedList.indexOf(key) !== -1,
             disabled: this.defaultDisabledList.indexOf(key) !== -1,
           };
+          // console.log("proppropprop", prop);
           return prop;
         },
       },
@@ -134,14 +173,14 @@ export default {
         {
           // fixed: "left",
           // fixed: "right",
-          // width: '120',
+          width: '120',
           title: '性别',
           dataIndex: 'sex',
           align: 'center',
           // key: "sex",
           // slots: { title: "customTitle" },
           // scopedSlots: { customRender: "name" },
-          render() {
+          render(h) {
             // return <span>{row.status}</span>;
             // return <h-switch></h-switch>;
             /**
@@ -150,10 +189,13 @@ export default {
              * 数组里面的第一个参数row是对象，是不能通过h函数转成vnode的，会渲染成undefined，
              * 数组里面的第二个参数是数字，可以通过h函数转成vnode。
              */
+            // console.log(this.$createElement === h, 3444334);
             const obja = { ad: 323, obj: { dsg: 31 } };
             return (
               <div>
-                <span>{obja}3454</span>
+                <span style="color:red;height:80px;display:block">
+                  {obja}3454
+                </span>
               </div>
             );
           },
@@ -161,8 +203,8 @@ export default {
         {
           fixed: true,
           // fixed: "left",
-          // ellipsis: true,
-          width: '100',
+          ellipsis: true,
+          width: '200',
           title: 'name',
           dataIndex: 'name',
           align: 'center',
@@ -237,6 +279,8 @@ export default {
   computed: {},
   created() {},
   mounted() {
+    console.log('fsfsdfsf');
+    console.log(Object.keys(this.theme));
     Object.keys(this.theme).forEach((item) => {
       console.log(this.theme[item]);
     });
@@ -278,13 +322,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-// 下面的less样式会有作用域
-@import './index.less';
-</style>
-
-<style scoped>
-/* 下面的css样式不会有作用域 */
-@import './index.css';
-</style>

@@ -10,15 +10,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const ESLintPlugin = require('eslint-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
+const path = require('path');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 const prodMinConfig = require('./webpack.prod.min.js');
 
 // import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
-
-const resolveApp = require('./utils/paths');
+const { resolveApp } = require('./utils/paths');
 
 const commonConfig = function (isProduction) {
+  console.log(__dirname, '-----');
   return {
     /**
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
@@ -31,7 +32,9 @@ const commonConfig = function (isProduction) {
     target: isProduction ? 'browserslist' : 'web',
     entry: {
       main: {
-        import: isProduction ? resolveApp('../index.js') : './src/index.js',
+        import: isProduction
+          ? path.resolve(__dirname, '../index.js')
+          : resolveApp('./src/index.js'),
         // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
       },
     },
@@ -62,7 +65,7 @@ const commonConfig = function (isProduction) {
       // 解析路径
       extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.vue'], // 解析扩展名
       alias: {
-        '@': resolveApp('./src'), // 设置路径别名
+        '@': path.resolve(__dirname, '../src'), // 设置路径别名
       },
       // https://webpack.docschina.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed
       // https://webpack.js.org/migrate/5/#clean-up-configuration
@@ -82,28 +85,6 @@ const commonConfig = function (isProduction) {
     resolveLoader: {
       // 用于解析webpack的loader
       modules: ['node_modules'],
-    },
-    optimization: {
-      // splitChunks: {
-      //   cacheGroups: {
-      //     defaultVendors: {
-      //       //重写默认的defaultVendors
-      //       chunks: "initial",
-      //       // minSize: 50 * 1024,
-      //       // maxSize: 50 * 1024,
-      //       test: /[\\/]node_modules[\\/]/,
-      //       filename: "js/[name]-defaultVendors.js",
-      //       priority: -10
-      //     },
-      //     default: {
-      //       //重写默认的default
-      //       chunks: "all",
-      //       filename: "js/[name]-default.js",
-      //       minChunks: 2, //至少被minChunks个入口文件引入了minChunks次。
-      //       priority: -20
-      //     }
-      //   }
-      // }
     },
     module: {
       // loader执行顺序：从下往上，从右往左
@@ -333,16 +314,19 @@ const commonConfig = function (isProduction) {
         // Options similar to the same options in webpackOptions.output
         // all options are optional
         // filename: "css/[name]-[hash:6].css",
-        filename: '/billd.css',
+        filename:
+          process.env.isProductionMin === 'true'
+            ? 'billd.min.css'
+            : '/billd.css',
         chunkFilename: 'css/[id].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
-      // 定义全局变量
+      // 定义全局变量,https://stackoverflow.com/questions/66772358/webpack-warning-warning-in-defineplugin-conflicting-values-for-process-env-no
       new DefinePlugin({
         BASE_URL: '"./"', // public下的index.html里面的icon的路径
-        'process.env': {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-        },
+        // 'process.env': {
+        //   NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        // },
       }),
     ],
   };
@@ -353,12 +337,22 @@ module.exports = function (env) {
   console.log(env, 998888);
   return new Promise((resolve) => {
     const isProduction = env.production;
+    const isProductionMin = env.productionMin;
+    // Tip: process.env这个对象里面的所有属性的值都是字符串，给这个对象新增属性时，值都会默认进行toString()
     process.env.NODE_ENV = isProduction ? 'production' : 'development';
+    process.env.isProductionMin = !!isProductionMin;
+    // console.log(process.env);
     // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
-    const config = Promise.resolve(isProduction ? prodConfig : devConfig);
-    config.then((config) => {
+    const configPromise = Promise.resolve(
+      isProduction ? (isProductionMin ? prodMinConfig : prodConfig) : devConfig
+    );
+    configPromise.then((config) => {
       // 根据当前环境，合并配置文件
+      // if (isProductionMin) {
       const mergeConfig = merge(commonConfig(isProduction), config);
+      // } else {
+      //   mergeConfig = merge(commonConfig(isProduction), config);
+      // }
       // 不要使用SpeedMeasurePlugin插件，使用它会导致MiniCssExtractPlugin插件报错。
       // resolve(smp.wrap(mergeConfig));
       // console.log(mergeConfig);

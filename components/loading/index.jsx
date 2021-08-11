@@ -8,10 +8,12 @@ const Loading = {
       <div class="billd-loading">
         <LoadingOutlined
           spin={true}
-          customStyle={[
-            { 'vertical-align': 'middle', 'margin-right': '10px' },
-          ]}></LoadingOutlined>
-        加载中...
+          customStyle={{
+            'vertical-align': 'middle',
+            'margin-right': '4px',
+            'font-size': '20px',
+          }}></LoadingOutlined>
+        <span style="font-size:12px">加载中...</span>
       </div>
     );
   },

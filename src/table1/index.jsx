@@ -1,7 +1,8 @@
+import './style/index.js';
+// import "../../../dist/switch/style/index.css";
 import { getScrollBarWidth } from '../utils/common';
 
-const Table = {
-  name: 'BTable',
+export default {
   inheritAttrs: false,
   props: {
     rowKey: {
@@ -23,12 +24,6 @@ const Table = {
         return {};
       },
     },
-    scroll: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
     // columns: {
     //   type: Array,
     //   default: function () {
@@ -39,8 +34,8 @@ const Table = {
   render() {
     return (
       <div
-        class={{ 'billd-table': true, border: this.bordered }}
-        style={{ width: `${this.scroll.x}px` }}>
+        class={{ 'hss-table': true, border: this.bordered }}
+        style="width:810px;">
         <div class="table-scroll">
           <div
             class="h-table-header h-hide-scrollbar"
@@ -54,7 +49,7 @@ const Table = {
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
                 {this.rowSelection.type && (
-                  <col class="billd-table-selection-col" />
+                  <col class="hss-table-selection-col" />
                 )}
                 {this.columns.map((item, index) => (
                   <col
@@ -67,24 +62,24 @@ const Table = {
                   />
                 ))}
               </colgroup>
-              <thead class="billd-table-thead">
+              <thead class="hss-table-thead">
                 <tr>
                   <th>
                     <div
-                      class="billd-checkbox"
+                      class="hss-checkbox"
                       vOn:click={() => this.onSelectAll()}>
                       <input
                         type="checkbox"
                         class={{
-                          'billd-checkbox-input': true,
-                          'billd-checkbox-checked': this.tableIsSelectAll,
+                          'hss-checkbox-input': true,
+                          'hss-checkbox-checked': this.tableIsSelectAll,
                         }}
                         vModel={this.tableIsSelectAll}
                       />
                       {/* <!-- 当已选择的数据数组长度等于所有数据减去交集数组长度，即代表全选 --> */}
                       <span
                         class={{
-                          'billd-checkbox-inner': true,
+                          'hss-checkbox-inner': true,
                           'none-selected':
                             this.selectedList.length -
                               this.intersection.length ===
@@ -123,7 +118,7 @@ const Table = {
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
               <colgroup>
                 {this.rowSelection.type && (
-                  <col class="billd-table-selection-col" />
+                  <col class="hss-table-selection-col" />
                 )}
                 {this.columns.map((item, index) => (
                   <col
@@ -136,7 +131,7 @@ const Table = {
                   />
                 ))}
               </colgroup>
-              <tbody class="billd-table-tbody" ref="billd-table-tbody">
+              <tbody class="hss-table-tbody" ref="hss-table-tbody">
                 {this.sourceData.map((rowItem, rowIndex) => (
                   <tr
                     class={{ hovertr: rowIndex === this.nowTr }}
@@ -147,8 +142,8 @@ const Table = {
                     <td>
                       <div
                         class={{
-                          'billd-checkbox': true,
-                          'billd-checkbox-disabled':
+                          'hss-checkbox': true,
+                          'hss-checkbox-disabled':
                             this._getCheckboxProps(rowItem).disabled,
                         }}
                         vOn:click={(e) =>
@@ -157,9 +152,9 @@ const Table = {
                         <input
                           type="checkbox"
                           class={{
-                            'billd-checkbox-input': true,
-                            'billd-checkbox-checked': this.isSelected(rowItem),
-                            'billd-checkbox-disabled':
+                            'hss-checkbox-input': true,
+                            'hss-checkbox-checked': this.isSelected(rowItem),
+                            'hss-checkbox-disabled':
                               this._getCheckboxProps(rowItem).disabled,
                           }}
                           disabled={this._getCheckboxProps(rowItem).disabled}
@@ -167,7 +162,7 @@ const Table = {
                           vModel={this.selectedList}
                         />
                         {/* <!-- <input type="checkbox" disabled> --> */}
-                        <span class={{ 'billd-checkbox-inner': true }}></span>
+                        <span class={{ 'hss-checkbox-inner': true }}></span>
                       </div>
                     </td>
                     {this.columns.map((columnsItem, columnsIndex) => (
@@ -204,7 +199,7 @@ const Table = {
               <table style="min-width:auto">
                 <colgroup>
                   {this.rowSelection.type && (
-                    <col class="billd-table-selection-col" />
+                    <col class="hss-table-selection-col" />
                   )}
                   {this.fixedLeftData.map((item, index) => (
                     <col
@@ -217,24 +212,24 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <thead class="billd-table-thead">
+                <thead class="hss-table-thead">
                   <tr>
                     <th>
                       <div
-                        class="billd-checkbox"
+                        class="hss-checkbox"
                         vOn:click={() => this.onSelectAll()}>
                         <input
                           type="checkbox"
                           class={{
-                            'billd-checkbox-input': true,
-                            'billd-checkbox-checked': this.tableIsSelectAll,
+                            'hss-checkbox-input': true,
+                            'hss-checkbox-checked': this.tableIsSelectAll,
                           }}
                           vModel={this.tableIsSelectAll}
                         />
                         {/* <!-- 当已选择的数据数组长度等于所有数据减去交集数组长度，即代表全选 --> */}
                         <span
                           class={{
-                            'billd-checkbox-inner': true,
+                            'hss-checkbox-inner': true,
                             'none-selected':
                               this.selectedList.length -
                                 this.intersection.length ===
@@ -281,7 +276,7 @@ const Table = {
                 <table style="background:white">
                   <colgroup>
                     {this.rowSelection.type && (
-                      <col class="billd-table-selection-col" />
+                      <col class="hss-table-selection-col" />
                     )}
                     {this.fixedLeftData.map((item, index) => (
                       <col
@@ -294,7 +289,7 @@ const Table = {
                       />
                     ))}
                   </colgroup>
-                  <tbody class="billd-table-tbody">
+                  <tbody class="hss-table-tbody">
                     {this.sourceData.map((item, index) => (
                       <tr
                         key={this.sourceData[index][this.getRowKey(item)]}
@@ -308,8 +303,8 @@ const Table = {
                         <td>
                           <div
                             class={{
-                              'billd-checkbox': true,
-                              'billd-checkbox-disabled': this._getCheckboxProps(
+                              'hss-checkbox': true,
+                              'hss-checkbox-disabled': this._getCheckboxProps(
                                 this.fixedLeftData[0].data[index]
                               ).disabled,
                             }}
@@ -325,14 +320,13 @@ const Table = {
                             <input
                               type="checkbox"
                               class={{
-                                'billd-checkbox-input': true,
-                                'billd-checkbox-checked': this.isSelected(
+                                'hss-checkbox-input': true,
+                                'hss-checkbox-checked': this.isSelected(
                                   this.fixedLeftData[0].data[index]
                                 ),
-                                'billd-checkbox-disabled':
-                                  this._getCheckboxProps(
-                                    this.fixedLeftData[0].data[index]
-                                  ).disabled,
+                                'hss-checkbox-disabled': this._getCheckboxProps(
+                                  this.fixedLeftData[0].data[index]
+                                ).disabled,
                               }}
                               disabled={
                                 this._getCheckboxProps(
@@ -342,8 +336,7 @@ const Table = {
                               value={this.fixedLeftData[0].data[index]}
                               vModel={this.selectedList}
                             />
-                            <span
-                              class={{ 'billd-checkbox-inner': true }}></span>
+                            <span class={{ 'hss-checkbox-inner': true }}></span>
                           </div>
                         </td>
                         {this.fixedLeftData.map((col, colIndex) => (
@@ -398,7 +391,7 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <thead class="billd-table-thead">
+                <thead class="hss-table-thead">
                   <tr>
                     {this.fixedRightData.map((item, index) => (
                       <th
@@ -437,7 +430,7 @@ const Table = {
                     />
                   ))}
                 </colgroup>
-                <tbody class="billd-table-tbody">
+                <tbody class="hss-table-tbody">
                   {this.sourceData.map((item, index) => (
                     <tr
                       key={this.sourceData[index][this.getRowKey(item)]}
@@ -494,7 +487,7 @@ const Table = {
       // tableIsSelectAll: false,
       nowTr: -1,
       trList: [],
-      // scroll: { x: 1000, y: 300 }, // 建议指定 scroll.x 为大于表格宽度的固定值或百分比。注意，且非固定列宽度之和不要超过 scroll.x
+      scroll: { x: 1000, y: 300 }, // 建议指定 scroll.x 为大于表格宽度的固定值或百分比。注意，且非固定列宽度之和不要超过 scroll.x
       // fixedLeft: [],
       // fixedRight: [],
       fixedLeftData: [],
@@ -524,15 +517,8 @@ const Table = {
       const newSelectedRows = newVal;
       const oldSelectedRowKeys = oldVal.map((v) => v.key);
       const oldSelectedRows = oldVal;
-      // console.log(
-      //   '选中项发生变化时的回调onChange:',
-      //   newSelectedRowKeys,
-      //   newSelectedRows,
-      //   oldSelectedRowKeys,
-      //   oldSelectedRows
-      // );
-      this.$emit(
-        'onChange',
+      console.log(
+        '选中项发生变化时的回调onChange:',
         newSelectedRowKeys,
         newSelectedRows,
         oldSelectedRowKeys,
@@ -572,12 +558,13 @@ const Table = {
     //   };
     // },
     getHeight() {
-      return () =>
-        // console.log(v);
-        // console.log(this.$refs);
-        // console.log(Object.keys(this.$refs).length, 9999);
-        // console.log(this.$refs['billd-table-tbody']);
-        `${100}px`;
+      return (v) => {
+        console.log(v);
+        console.log(this.$refs);
+        console.log(Object.keys(this.$refs).length, 9999);
+        // console.log(this.$refs['hss-table-tbody']);
+        return `${100}px`;
+      };
     },
   },
   created() {
@@ -587,9 +574,9 @@ const Table = {
   mounted() {
     // 同步行高
     this.asyncRowHeight();
+    console.log(getScrollBarWidth(), 234324);
     // 设置滚动条高度
     this.scrollBarWidth = getScrollBarWidth();
-    console.log('获取滚动条宽度', this.scrollBarWidth);
   },
   methods: {
     initTable() {
@@ -749,25 +736,24 @@ const Table = {
     // 用户手动选择/取消选择某列的回调
     onSelect(row, isSelected, event) {
       setTimeout(() => {
-        // console.log(
-        //   '用户手动选择/取消选择某列的回调onSelect',
-        //   '当前列数据：',
-        //   row,
-        //   '当前列是否选中：',
-        //   !isSelected,
-        //   '当前已选择数据：',
-        //   this.selectedList,
-        //   'event：',
-        //   event
-        // );
-        this.$emit('onSelect', row, !isSelected, this.selectedList, event);
+        console.log(
+          '用户手动选择/取消选择某列的回调onSelect',
+          '当前列数据：',
+          row,
+          '当前列是否选中：',
+          !isSelected,
+          '当前已选择数据：',
+          this.selectedList,
+          'event：',
+          event
+        );
       }, 0);
       // Function(row, isSelected, selectedRows, event){}
     },
     // 更改全选
     onSelectAll() {
       // console.log(v);
-      // console.log('更改全选onSelectAll');
+      console.log('更改全选onSelectAll');
       let isAll = null;
       if (this.tableIsSelectAll) {
         // 当前是全选了，则取消全选
@@ -788,7 +774,6 @@ const Table = {
           '改变的数据：',
           changeData
         );
-        this.$emit('onSelectAll', isAll, this.selectedList, changeData);
         this.selectedList = this.sourceData.filter(
           (v) => this.intersection.indexOf(v.key) !== -1
         );
@@ -817,31 +802,23 @@ const Table = {
         //   item => this.defaultDisabledList.indexOf(item.key) == -1
         // );
         // function(isAll,oldSelectRows,nowSelectedRows,changeRows){}
-        // console.log(
-        //   '点击全选',
-        //   '是否全选：',
-        //   isAll,
-        //   '原选择的数据：',
-        //   this.selectedList,
-        //   '现选择的数据：',
-        //   nowSelectedRows,
-        //   '改变的数据：',
-        //   changeRows
-        // );
-        this.$emit(
-          'onSelectAll',
+        console.log(
+          '点击全选',
+          '是否全选：',
           isAll,
+          '原选择的数据：',
           this.selectedList,
+          '现选择的数据：',
           nowSelectedRows,
+          '改变的数据：',
           changeRows
         );
-
         this.selectedList = nowSelectedRows;
       }
     },
     asyncRowHeight() {
-      // console.log(this.$refs["billd-table-tbody"].children);
-      const tr = this.$refs['billd-table-tbody'].children;
+      // console.log(this.$refs["hss-table-tbody"].children);
+      const tr = this.$refs['hss-table-tbody'].children;
       const trList = [];
       for (let i = 0; i < tr.length; i += 1) {
         console.log(tr[i], tr[i].offsetHeight, '====================');
@@ -878,14 +855,14 @@ const Table = {
             (this.$refs['h-table-fixed-right-body'].scrollTop = t);
         }
         if (e.target === this.$refs['h-table-fixed-left-body']) {
-          // console.log(e.target);
+          console.log(e.target);
           this.$refs['h-table-fixed-right-body'] &&
             (this.$refs['h-table-fixed-right-body'].scrollTop = t);
           this.$refs['h-table-scroll-body'] &&
             (this.$refs['h-table-scroll-body'].scrollTop = t);
         }
         if (e.target === this.$refs['h-table-fixed-right-body']) {
-          // console.log(e.target);
+          console.log(e.target);
           this.$refs['h-table-fixed-left-body'] &&
             (this.$refs['h-table-fixed-left-body'].scrollTop = t);
           this.$refs['h-table-scroll-body'] &&
@@ -933,9 +910,3 @@ const Table = {
     },
   },
 };
-
-Table.install = function (Vue) {
-  Vue.component(Table.name, Table);
-};
-
-export default Table;

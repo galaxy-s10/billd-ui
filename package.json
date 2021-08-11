@@ -1,8 +1,14 @@
 {
   "name": "billd-ui",
-  "version": "0.0.2",
+  "version": "1.2.0",
   "description": "基于vue2.x构建的billd-ui组件库~",
   "main": "dist/index.js",
+  "module": "es/index.js",
+  "files": [
+    "/lib",
+    "/es",
+    "/dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --config ./build-tools/webpack.common.js --env development",

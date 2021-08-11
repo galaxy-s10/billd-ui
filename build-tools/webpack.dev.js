@@ -1,6 +1,7 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const portfinder = require('portfinder');
 // const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
+const path = require('path');
 const resolveApp = require('./utils/paths');
 const { _INFO } = require('./utils/chalkTip');
 
@@ -27,7 +28,6 @@ module.exports = new Promise((resolve) => {
       console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
       resolve({
         /**
-        /**
          * .browserlistrc文件导致的热更新不生效。https://github.com/webpack/webpack-dev-server/pull/2761
          * 删掉.browserlistrc文件即可解决。但是我没有删，将webpack-dev-server升级到了4.x解决了，但也需要修改devServe属性的部分东西。
          */
@@ -37,7 +37,7 @@ module.exports = new Promise((resolve) => {
         output: {
           filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
           chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
-          path: resolveApp('./dist'),
+          path: path.resolve(__dirname, '../dist'),
           assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
           publicPath: '/', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
         },
@@ -64,7 +64,7 @@ module.exports = new Promise((resolve) => {
            * 打开localhost:8080/hss/demo.js,就会访问hss_webpack5目录下的hss目录下的demo.js。
            * 设置contentBase: path.resolve(__dirname, '../hss')后，打开localhost:8080/demo.js,即可访问hss_webpack5目录下的hss目录下的demo.js
            */
-          contentBase: resolveApp('public'), // 模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
+          contentBase: path.resolve(__dirname, '../public'), // 模拟vuecli的public(!!!webpack-dev-server@4.x已改!!!)
           // watchContentBase: true, //监听contenBase目录(!!!webpack-dev-server@4.x已改!!!)
           // static: [resolveApp("./public")], //模拟vuecli的public
           historyApiFallback: true, // 默认值：false，设置true后可解决spa页面刷新404

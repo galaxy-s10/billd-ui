@@ -10,4 +10,4 @@ console.log(_INFO(`Node.js进程的当前工作目录:${appDir}`), emoji.get('ge
  */
 const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
 
-module.exports = resolveApp;
+module.exports = { resolveApp };
