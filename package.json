@@ -1,6 +1,6 @@
 {
   "name": "billd-ui",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "基于vue2.x构建的billd-ui组件库~",
   "main": "dist/index.js",
   "module": "es/index.js",
@@ -10,7 +10,6 @@
     "/dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --config ./build-tools/webpack.common.js --env development",
     "dev1": "webpack-dashboard  -- webpack  serve --config ./build-tools/webpack.common.js --env development",
     "dist": "webpack --config ./build-tools/webpack.common.js --env production",
@@ -24,7 +23,7 @@
   "author": "galaxy-s10",
   "license": "ISC",
   "dependencies": {
-    "@huangshuisheng/icons-vue": "^1.0.8",
+    "@huangshuisheng/icons-vue": "^1.0.9",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-preset-jsx": "^1.2.4",
     "node-emoji": "^1.10.0",

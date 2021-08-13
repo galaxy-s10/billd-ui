@@ -9,7 +9,13 @@ let baseConfig = {
 const MessageConstructor = Vue.extend(Main);
 const messageInstance = new MessageConstructor();
 messageInstance.$mount();
-document.body.appendChild(messageInstance.$el);
+// document.body.appendChild(messageInstance.$el);
+// 支持服务端渲染
+Vue.mixin({
+  mounted() {
+    document.body.appendChild(messageInstance.$el);
+  },
+});
 
 const Message = function (options) {
   const newOptions = { ...baseConfig, ...options };

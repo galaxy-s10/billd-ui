@@ -38,17 +38,15 @@ const Table = {
   },
   render() {
     return (
-      <div
-        class={{ 'billd-table': true, border: this.bordered }}
-        style={{ width: `${this.scroll.x}px` }}>
+      <div class={{ 'billd-table': true, border: this.bordered }}>
         <div class="table-scroll">
           <div
-            class="h-table-header h-hide-scrollbar"
+            class="billd-table-header billd-hide-scrollbar"
             style={{
               overflow: 'scroll',
               marginBottom: `-${this.scrollBarWidth}px`,
             }}
-            ref="h-table-scroll-head"
+            ref="billd-table-scroll-head"
             vOn:scroll_self={(e) => this.normalScroll(e)}>
             <table
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
@@ -115,9 +113,9 @@ const Table = {
             </table>
           </div>
           <div
-            class="h-table-body h-table-scroll-body"
+            class="billd-table-body billd-table-scroll-body"
             style={{ overflow: 'scroll', maxHeight: `${this.scroll.y}px` }}
-            ref="h-table-scroll-body"
+            ref="billd-table-scroll-body"
             vOn:scroll_self={(e) => this.normalScroll(e)}>
             <table
               style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
@@ -276,7 +274,7 @@ const Table = {
                   maxHeight: `${this.scroll.y}px`,
                   overflow: 'scroll',
                 }}
-                ref="h-table-fixed-left-body"
+                ref="billd-table-fixed-left-body"
                 vOn:scroll_self={(e) => this.normalScroll(e)}>
                 <table style="background:white">
                   <colgroup>
@@ -422,7 +420,7 @@ const Table = {
                 overflow: 'scroll',
                 marginBottom: `-${this.scrollBarWidth}px`,
               }}
-              ref="h-table-fixed-right-body"
+              ref="billd-table-fixed-right-body"
               vOn:scroll_self={(e) => this.normalScroll(e)}>
               <table>
                 <colgroup>
@@ -862,62 +860,62 @@ const Table = {
       }
     },
     normalScroll(e) {
-      if (e.target === this.$refs['h-table-scroll-head']) {
+      if (e.target === this.$refs['billd-table-scroll-head']) {
         // console.log(e.target);
       }
       const l = e.target.scrollLeft;
       const t = e.target.scrollTop;
       if (this.lastScrollTop !== t) {
-        if (e.target === this.$refs['h-table-scroll-body']) {
-          // this.$refs["h-table-scroll-body"] &&
-          //   (this.$refs["h-table-scroll-body"].scrollTop = t);
+        if (e.target === this.$refs['billd-table-scroll-body']) {
+          // this.$refs["billd-table-scroll-body"] &&
+          //   (this.$refs["billd-table-scroll-body"].scrollTop = t);
           // if (!this.fixedScrolling) {
-          this.$refs['h-table-fixed-left-body'] &&
-            (this.$refs['h-table-fixed-left-body'].scrollTop = t);
-          this.$refs['h-table-fixed-right-body'] &&
-            (this.$refs['h-table-fixed-right-body'].scrollTop = t);
+          this.$refs['billd-table-fixed-left-body'] &&
+            (this.$refs['billd-table-fixed-left-body'].scrollTop = t);
+          this.$refs['billd-table-fixed-right-body'] &&
+            (this.$refs['billd-table-fixed-right-body'].scrollTop = t);
         }
-        if (e.target === this.$refs['h-table-fixed-left-body']) {
+        if (e.target === this.$refs['billd-table-fixed-left-body']) {
           // console.log(e.target);
-          this.$refs['h-table-fixed-right-body'] &&
-            (this.$refs['h-table-fixed-right-body'].scrollTop = t);
-          this.$refs['h-table-scroll-body'] &&
-            (this.$refs['h-table-scroll-body'].scrollTop = t);
+          this.$refs['billd-table-fixed-right-body'] &&
+            (this.$refs['billd-table-fixed-right-body'].scrollTop = t);
+          this.$refs['billd-table-scroll-body'] &&
+            (this.$refs['billd-table-scroll-body'].scrollTop = t);
         }
-        if (e.target === this.$refs['h-table-fixed-right-body']) {
+        if (e.target === this.$refs['billd-table-fixed-right-body']) {
           // console.log(e.target);
-          this.$refs['h-table-fixed-left-body'] &&
-            (this.$refs['h-table-fixed-left-body'].scrollTop = t);
-          this.$refs['h-table-scroll-body'] &&
-            (this.$refs['h-table-scroll-body'].scrollTop = t);
+          this.$refs['billd-table-fixed-left-body'] &&
+            (this.$refs['billd-table-fixed-left-body'].scrollTop = t);
+          this.$refs['billd-table-scroll-body'] &&
+            (this.$refs['billd-table-scroll-body'].scrollTop = t);
         }
       }
       // 虽然table-head不可见，鼠标滚动不了，但笔记本的触控板可以滚动table-head，可能有bug
       if (this.lastScrollLeft !== l) {
-        if (e.target === this.$refs['h-table-scroll-body']) {
+        if (e.target === this.$refs['billd-table-scroll-body']) {
           // console.log("左右滚动");
-          // this.$refs["h-table-scroll-body"] &&
-          //   (this.$refs["h-table-scroll-body"].scrollTop = t);
+          // this.$refs["billd-table-scroll-body"] &&
+          //   (this.$refs["billd-table-scroll-body"].scrollTop = t);
           // normal-head左右滚动
-          this.$refs['h-table-scroll-head'] &&
-            (this.$refs['h-table-scroll-head'].scrollLeft = l);
-          // this.$refs["h-table-scroll-body"] &&
-          //   (this.$refs["h-table-scroll-body"].scrollLeft = l);
+          this.$refs['billd-table-scroll-head'] &&
+            (this.$refs['billd-table-scroll-head'].scrollLeft = l);
+          // this.$refs["billd-table-scroll-body"] &&
+          //   (this.$refs["billd-table-scroll-body"].scrollLeft = l);
         }
-        if (e.target === this.$refs['h-table-scroll-head']) {
+        if (e.target === this.$refs['billd-table-scroll-head']) {
           console.log(e.target);
-          this.$refs['h-table-scroll-body'] &&
-            (this.$refs['h-table-scroll-body'].scrollLeft = l);
+          this.$refs['billd-table-scroll-body'] &&
+            (this.$refs['billd-table-scroll-body'].scrollLeft = l);
         }
       }
-      // if (e.target == this.$refs["h-table-scroll-body"]) {
+      // if (e.target == this.$refs["billd-table-scroll-body"]) {
       //   console.log("左右滚动");
-      //   this.$refs["h-table-scroll-body"] &&
-      //     (this.$refs["h-table-scroll-body"].scrollTop = t);
+      //   this.$refs["billd-table-scroll-body"] &&
+      //     (this.$refs["billd-table-scroll-body"].scrollTop = t);
       // }
-      // if (e.target == this.$refs["h-table-scroll-head"]) {
-      //   this.$refs["h-table-scroll-body"] &&
-      //     (this.$refs["h-table-scroll-body"].scrollLeft = l);
+      // if (e.target == this.$refs["billd-table-scroll-head"]) {
+      //   this.$refs["billd-table-scroll-body"] &&
+      //     (this.$refs["billd-table-scroll-body"].scrollLeft = l);
       // }
       this.lastScrollTop = t; // 记录最后的上下滚动距离
       this.lastScrollLeft = l; // 记录最后的左右滚动距离

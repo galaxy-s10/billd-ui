@@ -370,10 +370,11 @@ export default {
         content: "可关闭可关闭",
         closeAble: true,
       });
-      // // 设置持续时间，默认2000毫秒
+      // 设置持续时间，默认2000毫秒
       Message.success({
         content: "hello world",
         duration: 30000,
+        closeAble: true,
       });
       // 内容也可是VNode
       Message.success({
@@ -446,10 +447,11 @@ export default {
         content: "可关闭可关闭",
         closeAble: true,
       });
-      // // 设置持续时间，默认2000毫秒
+      // 设置持续时间，默认2000毫秒
       this.$Message.success({
         content: "hello world",
         duration: 30000,
+        closeAble: true
       });
       // 内容也可是VNode
       this.$Message.success({
@@ -889,3 +891,34 @@ export default {
 2. 设置固定列时候，建议设置width属性，否则会有宽度问题（antdv官方的也有此问题）。
 3. 固定头和列的时候，若列头与内容不对齐，请指定**固定列**的宽度 `width`。如果指定 `width` 不生效或出现白色垂直空隙，请尝试建议留一列不设宽度以适应弹性布局。（ps：如果全部column都设置了width，且设置了scroll.x，如果scroll.x大于所有column的和，就会出现白色空隙，这时候就留一列不设width即可。）
 
+
+
+# 简介
+
+前端框架
+
+Vue2.x
+
+打包构建工具
+
+webpack5 + gulp4 +bebel7 + less3
+
+代码规范
+
+eslint + prettier + husky
+
+依赖
+
+billd-ui组件库将icon组件单独抽离出来成一个独立的组件库：[@huangshuisheng/icons-vue](https://www.npmjs.com/package/@huangshuisheng/icons-vue) ，而这个组件库又依赖：[@huangshuisheng/icons-svg](https://www.npmjs.com/package/@huangshuisheng/icons-svg) 。这样做是为了将icon抽象成通用的基础库，后续可基于@huangshuisheng/icons-svg这个库开发react，angular的icons组件库，提高扩展性。
+
+## billd-ui
+
+> [https://github.com/galaxy-s10/billd-ui](https://github.com/galaxy-s10/billd-ui)
+
+## @huangshuisheng/icons-vue
+
+> [https://github.com/galaxy-s10/billd-ui-icons](https://github.com/galaxy-s10/billd-ui-icons)
+
+## @huangshuisheng/icons-svg
+
+> [https://github.com/galaxy-s10/billd-ui-icons](https://github.com/galaxy-s10/billd-ui-icons)
