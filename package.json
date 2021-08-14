@@ -1,8 +1,8 @@
 {
   "name": "billd-ui",
-  "version": "1.2.2",
-  "description": "基于vue2.x构建的billd-ui组件库~",
-  "main": "dist/index.js",
+  "version": "1.2.5",
+  "description": "基于vue2.x构建的billd-ui组件库",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
     "/lib",
@@ -20,6 +20,11 @@
     "prepare": "husky install",
     "commit": "cz"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/galaxy-s10/billd-ui"
+  },
+  "homepage": "https://www.hsslive.cn/billd",
   "author": "galaxy-s10",
   "license": "ISC",
   "dependencies": {
