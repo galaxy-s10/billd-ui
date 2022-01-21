@@ -3,7 +3,7 @@
     <jsx-cpt></jsx-cpt>
     <create-elementCpt></create-elementCpt>
     <hr />
-    {{ objabc }}
+    {{ objabc }}11
     <h-table
       rowKey="idd"
       :bordered="true"

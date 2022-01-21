@@ -34,7 +34,7 @@ module.exports = {
          * 这个style属性，如果没有这个属性，就不会引入样式；如果有这个style属性，它的值是true，代表：libraryName/libraryDirectory/组件名/style，即会引入style下的index.js
          * 如果值是'css',代表：libraryName/libraryDirectory/组件名/style/css，即会引入这个css.js文件
          */
-        style: true, // billd-ui使用了less，如果你的项目里面有对less做处理，可以使用此选项
+        style: true, // billd-ui使用了less，如果你的项目里面有对less做处理，可以使用此选项，如果没有处理less，请不要使用这个选项。
         // style: 'css', // 如果你的项目没有处理less，就使用这个选项。
       },
       'billd-ui',
