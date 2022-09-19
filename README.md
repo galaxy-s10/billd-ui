@@ -18,16 +18,9 @@
 <a href="https://www.npmjs.com/package/billd-ui"><img src="https://img.shields.io/npm/l/billd-ui.svg" alt="License"></a>
 </div>
 
-# 前言（感慨）
+# 前言
 
-billd-ui 组件库是 21 年 6 月份开始写的，那会工作不满一年，但是却能独立的写出这个组件库（不仅仅是 billd-ui，还包括 billd-ui-icons），即使放到现在来看也感觉实属不易，billd-ui 组件库大量借鉴了 [ant-design](https://github.com/ant-design/ant-design) 和 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) 和 [antd-tools](https://github.com/ant-design/antd-tools)，虽然 billd-ui 是一个组件库，但是重心并不在写组件的逻辑上，而是如何构建组件库的这个流程上，让我对组件库有了一个比较清晰的认知。
-
-billd-ui 组件库将 icon 组件单独抽离出来成一个独立的组件库：`@huangshuisheng/icons-vue` ，而这个 `@huangshuisheng/icons-vue` 又依赖：`@huangshuisheng/icons-svg` 。这样做是为了将 icon 抽象成通用的基础库，后续可基于 `@huangshuisheng/icons-svg` 这个库开发 react，angular 的 icons 组件库，提高扩展性。
-
-| 包名                                                                                 | 版本                                                                                                                      |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| [@huangshuisheng/icons-vue](https://www.npmjs.com/package/@huangshuisheng/icons-vue) | [![npm](https://img.shields.io/npm/v/@huangshuisheng/icons-vue)](https://www.npmjs.com/package/@huangshuisheng/icons-vue) |
-| [@huangshuisheng/icons-svg](https://www.npmjs.com/package/@huangshuisheng/icons-svg) | [![npm](https://img.shields.io/npm/v/@huangshuisheng/icons-svg)](https://www.npmjs.com/package/@huangshuisheng/icons-svg) |
+billd-ui 组件库是 21 年 6 月份开始写的，那会工作不满一年，但是却能独立的写出这个组件库（不仅仅是 billd-ui，还包括 [billd-ui-icons](https://github.com/galaxy-s10/billd-ui-icons)），即使放到现在来看也感觉实属不易，billd-ui 组件库大量借鉴了 [ant-design](https://github.com/ant-design/ant-design) 和 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) 和 [antd-tools](https://github.com/ant-design/antd-tools)，虽然 billd-ui 是一个组件库，但是重心并不在写组件的逻辑上，而是如何构建组件库的这个流程上，让我对组件库有了一个比较清晰的认知。
 
 # 简介
 
@@ -48,6 +41,16 @@ billd-ui 组件库将 icon 组件单独抽离出来成一个独立的组件库�
 | [loading](http://project.hsslive.cn/billd-ui/component/basic/loading.html) | ✅   |
 | [table](http://project.hsslive.cn/billd-ui/component/basic/table.html)     | ❗   |
 | [message](http://project.hsslive.cn/billd-ui/component/basic/message.html) | ✅   |
+
+# 生态系统
+
+billd-ui 组件库将 icon 组件单独抽离出来成一个独立的组件库：`@huangshuisheng/icons-vue` ，而这个 `@huangshuisheng/icons-vue` 又依赖：`@huangshuisheng/icons-svg` 。这样做是为了将 icon 抽象成通用的基础库，后续可基于 `@huangshuisheng/icons-svg` 这个库开发 react，angular 的 icons 组件库，提高扩展性。
+
+| 包名                                                                                 | 版本                                                                                                                      |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| [billd-ui](https://www.npmjs.com/package/billd-ui)                                   | [![npm](https://img.shields.io/npm/v/billd-ui)](https://www.npmjs.com/package/billd-ui)                                   |
+| [@huangshuisheng/icons-vue](https://www.npmjs.com/package/@huangshuisheng/icons-vue) | [![npm](https://img.shields.io/npm/v/@huangshuisheng/icons-vue)](https://www.npmjs.com/package/@huangshuisheng/icons-vue) |
+| [@huangshuisheng/icons-svg](https://www.npmjs.com/package/@huangshuisheng/icons-svg) | [![npm](https://img.shields.io/npm/v/@huangshuisheng/icons-svg)](https://www.npmjs.com/package/@huangshuisheng/icons-svg) |
 
 # 安装
 
@@ -204,3 +207,7 @@ npm run compile lib
 ```sh
 npm run compile dist
 ```
+
+# 感慨
+
+一年前，对前端的代码规范以及工程化没什么概念（即使有，也不是特别深），当时写出来的这个 billd-ui 组件库可以说是超常发挥（也是因为大量借鉴优秀的组件库源码）。但是，它毕竟是一年前写的，现在看来其实存在很多不足的地方，比如当时的发 npm 包都是手动的，没有一个完整的体系（比如：[release-it](https://github.com/release-it/release-it)），其次，组件的按需加载因为入口文件的问题，导致不能原生的支持 esm 的 tree shaking 等问题。billd-ui 这个组件库对我最明显的提升就是让我对 webpack、gulp 、babel 这些工具有了一个认知以及实际上的应用，还有如何开发一个库，需要考虑什么问题等等，对后面开发的一些有意思的库做铺垫~
