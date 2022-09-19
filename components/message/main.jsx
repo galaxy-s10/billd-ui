@@ -85,7 +85,8 @@ export default {
                     {/* <span style="margin-right: 5px"> */}
                     {!item.icon && (
                       <BilldIcon
-                        {...{ attrs: handleType(item.type) }}></BilldIcon>
+                        {...{ attrs: handleType(item.type) }}
+                      ></BilldIcon>
                     )}
                     {this.renderDom('icon', item.icon)}
                     {this.$slots.icon}
@@ -98,7 +99,8 @@ export default {
                       <BilldIcon
                         class="close-btn"
                         vOn:click_native={() => this.close(item)}
-                        type="CloseOutlined"></BilldIcon>
+                        type="CloseOutlined"
+                      ></BilldIcon>
                     )}
                   </div>
                 </div>

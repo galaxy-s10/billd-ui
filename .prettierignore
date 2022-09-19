@@ -8,8 +8,3 @@
 .eslintignore
 .browserlistrc
 .editorconfig
-**/*.jpg
-**/*.png
-**/*.svg
-**/*.md
-**/*.ejs

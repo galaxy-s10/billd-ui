@@ -47,9 +47,11 @@ const Table = {
               marginBottom: `-${this.scrollBarWidth}px`,
             }}
             ref="billd-table-scroll-head"
-            vOn:scroll_self={(e) => this.normalScroll(e)}>
+            vOn:scroll_self={(e) => this.normalScroll(e)}
+          >
             <table
-              style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
+              style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}
+            >
               <colgroup>
                 {this.rowSelection.type && (
                   <col class="billd-table-selection-col" />
@@ -70,7 +72,8 @@ const Table = {
                   <th>
                     <div
                       class="billd-checkbox"
-                      vOn:click={() => this.onSelectAll()}>
+                      vOn:click={() => this.onSelectAll()}
+                    >
                       <input
                         type="checkbox"
                         class={{
@@ -95,7 +98,8 @@ const Table = {
                             ) &&
                             this.selectedList.length !== 0 &&
                             this.selectedList.length < this.sourceData.length,
-                        }}></span>
+                        }}
+                      ></span>
                     </div>
                   </th>
                   {this.columns.map((item, index) => (
@@ -104,7 +108,8 @@ const Table = {
                       column-key={this.getColumnKey(item) || index}
                       style={{
                         'text-align': item.align ? item.align : 'left',
-                      }}>
+                      }}
+                    >
                       {item.title}
                     </th>
                   ))}
@@ -116,9 +121,11 @@ const Table = {
             class="billd-table-body billd-table-scroll-body"
             style={{ overflow: 'scroll', maxHeight: `${this.scroll.y}px` }}
             ref="billd-table-scroll-body"
-            vOn:scroll_self={(e) => this.normalScroll(e)}>
+            vOn:scroll_self={(e) => this.normalScroll(e)}
+          >
             <table
-              style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}>
+              style={{ width: this.scroll.x ? `${this.scroll.x}px` : '100%' }}
+            >
               <colgroup>
                 {this.rowSelection.type && (
                   <col class="billd-table-selection-col" />
@@ -141,7 +148,8 @@ const Table = {
                     key={this.sourceData[rowIndex][this.getRowKey(rowItem)]}
                     row-key={this.sourceData[rowIndex][this.getRowKey(rowItem)]}
                     vOn:mouseenter={(e) => this.mouseEnter(e, rowIndex)}
-                    vOn:mouseleave={(e) => this.mouseLeave(e)}>
+                    vOn:mouseleave={(e) => this.mouseLeave(e)}
+                  >
                     <td>
                       <div
                         class={{
@@ -151,7 +159,8 @@ const Table = {
                         }}
                         vOn:click={(e) =>
                           this.onSelect(rowItem, this.isSelected(rowItem), e)
-                        }>
+                        }
+                      >
                         <input
                           type="checkbox"
                           class={{
@@ -177,7 +186,8 @@ const Table = {
                           'text-align': columnsItem.align
                             ? columnsItem.align
                             : 'left',
-                        }}>
+                        }}
+                      >
                         {typeof columnsItem.render === 'function'
                           ? this.tempRender(
                               `${columnsItem.dataIndex}-${rowIndex}`,
@@ -220,7 +230,8 @@ const Table = {
                     <th>
                       <div
                         class="billd-checkbox"
-                        vOn:click={() => this.onSelectAll()}>
+                        vOn:click={() => this.onSelectAll()}
+                      >
                         <input
                           type="checkbox"
                           class={{
@@ -245,7 +256,8 @@ const Table = {
                               ) &&
                               this.selectedList.length !== 0 &&
                               this.selectedList.length < this.sourceData.length,
-                          }}></span>
+                          }}
+                        ></span>
                       </div>
                     </th>
                     {this.fixedLeftData.map((item, index) => (
@@ -256,7 +268,8 @@ const Table = {
                           'text-align': item.column.col.align
                             ? item.column.col.align
                             : 'left',
-                        }}>
+                        }}
+                      >
                         {item.column.col.title}
                       </th>
                     ))}
@@ -268,14 +281,16 @@ const Table = {
               style={{
                 marginRight: `-${this.scrollBarWidth}px`,
                 marginBottom: `-${this.scrollBarWidth}px`,
-              }}>
+              }}
+            >
               <div
                 style={{
                   maxHeight: `${this.scroll.y}px`,
                   overflow: 'scroll',
                 }}
                 ref="billd-table-fixed-left-body"
-                vOn:scroll_self={(e) => this.normalScroll(e)}>
+                vOn:scroll_self={(e) => this.normalScroll(e)}
+              >
                 <table style="background:white">
                   <colgroup>
                     {this.rowSelection.type && (
@@ -302,7 +317,8 @@ const Table = {
                         }}
                         class={{ hovertr: index === this.nowTr }}
                         vOn:mouseenter={(e) => this.mouseEnter(e, index)}
-                        vOn:mouseleave={(e) => this.mouseLeave(e)}>
+                        vOn:mouseleave={(e) => this.mouseLeave(e)}
+                      >
                         <td>
                           <div
                             class={{
@@ -319,7 +335,8 @@ const Table = {
                                 ),
                                 e
                               )
-                            }>
+                            }
+                          >
                             <input
                               type="checkbox"
                               class={{
@@ -341,7 +358,8 @@ const Table = {
                               vModel={this.selectedList}
                             />
                             <span
-                              class={{ 'billd-checkbox-inner': true }}></span>
+                              class={{ 'billd-checkbox-inner': true }}
+                            ></span>
                           </div>
                         </td>
                         {this.fixedLeftData.map((col, colIndex) => (
@@ -352,7 +370,8 @@ const Table = {
                               'text-align': col.column.col.align
                                 ? col.column.col.align
                                 : 'left',
-                            }}>
+                            }}
+                          >
                             {typeof col.column.col.render === 'function'
                               ? this.tempRender(
                                   `fixed-left-${col.column.col.dataIndex}-${colIndex}-${index}`,
@@ -406,7 +425,8 @@ const Table = {
                           'text-align': item.column.col.align
                             ? item.column.col.align
                             : 'left',
-                        }}>
+                        }}
+                      >
                         {item.column.col.title}
                       </th>
                     ))}
@@ -421,7 +441,8 @@ const Table = {
                 marginBottom: `-${this.scrollBarWidth}px`,
               }}
               ref="billd-table-fixed-right-body"
-              vOn:scroll_self={(e) => this.normalScroll(e)}>
+              vOn:scroll_self={(e) => this.normalScroll(e)}
+            >
               <table>
                 <colgroup>
                   {this.fixedRightData.map((item, index) => (
@@ -443,7 +464,8 @@ const Table = {
                       style={{ height: `${this.trList[index]}px` || 'auto' }}
                       class={{ hovertr: index === this.nowTr }}
                       vOn:mouseenter={(e) => this.mouseEnter(e, index)}
-                      vOn:mouseleave={(e) => this.mouseLeave(e)}>
+                      vOn:mouseleave={(e) => this.mouseLeave(e)}
+                    >
                       {this.fixedRightData.map((col, colIndex) => (
                         <td
                           key={col.column.key || colIndex}
@@ -452,7 +474,8 @@ const Table = {
                             'text-align': col.column.col.align
                               ? col.column.col.align
                               : 'left',
-                          }}>
+                          }}
+                        >
                           {typeof col.column.col.render === 'function'
                             ? this.tempRender(
                                 `fixed-right-${col.column.col.key}-${colIndex}-${index}`,

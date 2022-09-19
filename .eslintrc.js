@@ -1,6 +1,11 @@
-const { _INFO, emoji } = require('./build-tools/utils/chalkTip');
+const chalk = require('chalk');
 
-console.log(_INFO('读取eslintrc.js'), emoji.get('hourglass'));
+console.log(
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
+
 module.exports = {
   env: {
     browser: true,

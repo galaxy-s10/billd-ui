@@ -1,6 +1,11 @@
-const { _INFO, emoji } = require('./build-tools/utils/chalkTip');
+const chalk = require('chalk');
 
-console.log(_INFO('读取babel.config.js'), emoji.get('hourglass'));
+console.log(
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
+
 module.exports = {
   presets: [
     // ["@babel/env"],
@@ -10,8 +15,8 @@ module.exports = {
       {
         // modules: "umd",
         // target: {},
-        useBuiltIns: 'usage',
-        corejs: '3',
+        // useBuiltIns: 'usage',
+        // corejs: 3,
       },
     ],
     [
@@ -38,6 +43,19 @@ module.exports = {
         // style: 'css', // 如果你的项目没有处理less，就使用这个选项。
       },
       'billd-ui',
+    ],
+    [
+      /**
+       * useBuiltIns和polyfill选项在 v7 中被删除，只是将其设为默认值。
+       */
+      '@babel/plugin-transform-runtime',
+      {
+        absoluteRuntime: false, // boolean或者string，默认为false。
+        // corejs: 3, // false, 2,3或{ version: 2 | 3, proposals: boolean }, 默认为false
+        helpers: true, // boolean, 默认为true.切换内联的 Babel 助手（classCallCheck,extends等）是否替换为对 的调用moduleName
+        regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
+        // version: '7.0.0-beta.0',
+      },
     ],
   ],
 };

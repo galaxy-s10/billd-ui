@@ -1,7 +1,7 @@
 const postcssPresetEnv = require('postcss-preset-env');
-const { _SUCCESS, emoji } = require('./utils/chalkTip');
+const { chalkSUCCESS, emoji } = require('./utils/chalkTip');
 
-console.log(_SUCCESS('读取getPostcssConfig.js'), emoji.get('hourglass'));
+console.log(chalkSUCCESS('读取getPostcssConfig.js'), emoji.get('hourglass'));
 
 module.exports = {
   plugins: [

@@ -69,7 +69,8 @@ const Switch = {
           'billd-switch': true,
           'billd-switch-checked': this.isChecked,
         }}
-        vOn:click={(e) => this.clickSwitch(e)}>
+        vOn:click={(e) => this.clickSwitch(e)}
+      >
         <span class="billd-switch-inner">
           {this.isChecked
             ? this.$scopedSlots.openSlot

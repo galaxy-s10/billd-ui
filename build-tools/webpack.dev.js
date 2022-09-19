@@ -3,7 +3,7 @@ const portfinder = require('portfinder');
 // const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const path = require('path');
 const resolveApp = require('./utils/paths');
-const { _INFO } = require('./utils/chalkTip');
+const { chalkINFO } = require('./utils/chalkTip');
 
 // portfinder.getPort(
 //   {
@@ -25,7 +25,7 @@ module.exports = new Promise((resolve) => {
       stopPort: 9000,
     })
     .then((port) => {
-      console.log(_INFO('当前webpack-dev-server使用的端口：'), port);
+      console.log(chalkINFO('当前webpack-dev-server使用的端口：'), port);
       resolve({
         /**
          * .browserlistrc文件导致的热更新不生效。https://github.com/webpack/webpack-dev-server/pull/2761

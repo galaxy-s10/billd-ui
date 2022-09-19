@@ -59,7 +59,8 @@ export default {
             ],
             staticClass: 'sdgdsg',
             class: ['123', '2355'],
-          }}>
+          }}
+        >
           通过vnode指令数据格式1
         </div>
         {/* v-auth="a"和v-auth={"a"}约等于就是把字符串a传给自定义指令 */}

@@ -12,7 +12,8 @@ const Loading = {
             'vertical-align': 'middle',
             'margin-right': '4px',
             'font-size': '20px',
-          }}></LoadingOutlined>
+          }}
+        ></LoadingOutlined>
         <span style="font-size:12px">加载中...</span>
       </div>
     );

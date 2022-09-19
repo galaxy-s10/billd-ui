@@ -4,7 +4,6 @@ import App from './App.vue';
 import '../dist/billd.css';
 
 Vue.use(Billd);
-
 new Vue({
   render: (h) => h(App),
 }).$mount('#app');

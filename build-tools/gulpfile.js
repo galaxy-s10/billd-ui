@@ -20,62 +20,35 @@ const tsProject = require('../tsconfig.json');
 const transformLess = require('./utils/transformLess.js');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
-const { _SUCCESS, emoji } = require('./utils/chalkTip');
+const { chalkSUCCESS, chalkINFO, emoji } = require('./utils/chalkTip');
 
-const componentsDir = '../components';
+const componentsDir = path.resolve(__dirname, '../components');
 
-gulp.task('clean-all', (done) => {
+const tsFiles = [
+  `${componentsDir}/**/*.js`,
+  `${componentsDir}/**/*.jsx`,
+  `${componentsDir}/**/*.ts`,
+  `${componentsDir}/**/*.tsx`,
+];
+
+// 删除目录目录
+function delDir(path) {
   // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
   const res = gulp
-    .src(['../lib', '../es'], {
+    .src(path, {
       allowEmpty: true,
     })
     .pipe(clean({ force: true })); // 不添加force:true属性不能删除上层目录，因此加上。
-  // cb(); // 使用cb不管用，因为gulp-clean是异步的。
-  res.on('finish', function () {
-    console.log(
-      _SUCCESS('清除旧构建文件成功！'),
-      emoji.get('heavy_check_mark')
-    );
-    done();
-  });
-});
-
-gulp.task('dist', (done) => {
-  chdir(path.resolve(__dirname, '../'));
-  // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
-  webpackConfig({ production: true, productionMin: true }).then((res) => {
-    webpackConfig({ production: true, productionMin: false }).then((res1) => {
-      console.log(res, 3333);
-      console.log(res1, 4444);
-      // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
-      webpack([res1, res], (err, stats) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        const info = stats.toJson();
-        if (stats.hasErrors()) {
-          // console.error(info.errors);
-        }
-        if (stats.hasWarnings()) {
-          // console.warn(info.warnings);
-        }
-        const buildInfo = stats.toString({
-          colors: true,
-          children: true,
-          chunks: false,
-          modules: false,
-          chunkModules: false,
-          hash: false,
-          version: false,
-        });
-        // console.log(buildInfo);
-        done();
-      });
+  return new Promise((resolve) => {
+    res.on('finish', function () {
+      console.log(
+        chalkSUCCESS('清除旧构建文件成功！'),
+        emoji.get('heavy_check_mark')
+      );
+      resolve();
     });
   });
-});
+}
 
 // 复制静态资源目录
 function copyAssets(modules) {
@@ -85,7 +58,7 @@ function copyAssets(modules) {
       .pipe(gulp.dest(modules === false ? '../es/assets/' : '../lib/assets/'));
     assetsStream.on('finish', () => {
       console.log(
-        _SUCCESS('复制静态资源目录成功！'),
+        chalkSUCCESS('复制静态资源目录成功！'),
         emoji.get('heavy_check_mark')
       );
       done();
@@ -136,7 +109,10 @@ function compileLess(modules) {
     //   .pipe(postcss())
     //   .pipe(gulp.dest("../lib"));
     lessStream.on('finish', () => {
-      console.log(_SUCCESS('编译less成功！'), emoji.get('heavy_check_mark'));
+      console.log(
+        chalkSUCCESS('编译less成功！'),
+        emoji.get('heavy_check_mark')
+      );
       done();
     });
     // console.log(lessStream, 98766);
@@ -144,17 +120,7 @@ function compileLess(modules) {
   };
 }
 
-gulp.task('concat-css', () =>
-  gulp.src('../lib/**/*.css').pipe(concat('all.css')).pipe(gulp.dest('../lib'))
-);
-
-const tsFiles = [
-  `${componentsDir}/**/*.js`,
-  `${componentsDir}/**/*.jsx`,
-  `${componentsDir}/**/*.ts`,
-  `${componentsDir}/**/*.tsx`,
-];
-
+// 编译
 function compile(modules) {
   let error;
   const tsResult = gulp.src(tsFiles).pipe(
@@ -168,106 +134,131 @@ function compile(modules) {
   );
   function check() {
     if (error && !argv['ignore-error']) {
-      console.log('退出');
       process.exit(1);
     }
   }
-
-  const stream = tsResult.js
-    .pipe(
-      babel(babelConfig(modules))
-      // babel({
-      //   presets: ["@babel/env"],
-      //   plugins: ["transform-vue-jsx"],
-      // })
-    )
-    .pipe(
-      through2.obj(function (file, encoding, next) {
-        this.push(file.clone());
-        // mac环境下的正则没问题，windows的有问题。
-        if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
-          // if (file.path.match(/[\\/]style[\\/]index\.(js|jsx|ts|tsx)$/)) {
-          // if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
-          // 匹配所有组件(文件夹)下的style目录下面的文件。
-          const content = file.contents.toString(encoding);
-          file.contents = Buffer.from(
-            content
-              // .replace(/\/style\/?'/g, "/style/css'")
-              // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css')
-          );
-          file.path = file.path.replace(/index\.(js|ts)$/, 'css.js');
-          this.push(file);
-        } else {
-          // console.log("匹配到了", file.path);
-          const content = file.contents.toString(encoding);
-          // console.log(typeof content);
-          // console.log(content);
-          file.contents = Buffer.from(
-            content
-              // .replace(/\/style\/?'/g, "/style/css'")
-              // .replace(/\/style\/?"/g, '/style/css"')
-              .replace(/\.less/g, '.css')
-          );
-          // file.path = file.path.replace(/index\.(js|ts)$/, "css.js");
-          this.push(file);
-        }
-        next();
-      })
-    );
-  gulp
-    .src([`${componentsDir}/**/*.@(jpg|png|svg)`])
-    .pipe(gulp.dest(modules === false ? '../es' : '../lib'));
-  tsResult.dts.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
   tsResult.on('finish', check);
   tsResult.on('end', check);
+  const stream = tsResult.js.pipe(babel(babelConfig(modules)));
   return stream.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
 }
 
+gulp.task('concat-css', () =>
+  gulp.src('../lib/**/*.css').pipe(concat('all.css')).pipe(gulp.dest('../lib'))
+);
+
 // es modules
 gulp.task(
-  'compile-es',
-  gulp.parallel(
-    copyAssets(false),
-    compileLess(false),
-    function compileEs(done) {
-      // console.log("compile es modules");
-      compile(false).on('finish', () => {
-        console.log(_SUCCESS('构建es完成！'), emoji.get('heavy_check_mark'));
-        done();
-      });
-    }
+  'es',
+  gulp.series(
+    async function (done) {
+      await delDir(['../es']);
+      done();
+    },
+    gulp.parallel(
+      copyAssets(false),
+      compileLess(false),
+      function compileEs(done) {
+        console.log(chalkINFO('开始编译es版本...'));
+        compile(false).on('finish', () => {
+          console.log(
+            chalkSUCCESS('编译es版本完成！'),
+            emoji.get('heavy_check_mark')
+          );
+          done();
+        });
+      }
+    )
   )
 );
 
 // commonjs
 gulp.task(
-  'compile-lib',
-  gulp.parallel(
-    copyAssets(undefined),
-    compileLess(undefined),
-    function compileLib(done) {
-      // console.log("compile es modules");
-      compile(undefined).on('finish', () => {
-        console.log(_SUCCESS('构建lib完成！'), emoji.get('heavy_check_mark'));
+  'lib',
+  gulp.series(
+    async function (done) {
+      await delDir(['../lib']);
+      done();
+    },
+    gulp.parallel(
+      copyAssets(undefined),
+      compileLess(undefined),
+      function compileLib(done) {
+        console.log(chalkINFO('开始编译lib版本...'));
+        compile(undefined).on('finish', () => {
+          console.log(
+            chalkSUCCESS('编译lib版本完成！'),
+            emoji.get('heavy_check_mark')
+          );
+          done();
+        });
+      }
+    )
+  )
+);
+
+// umd
+gulp.task(
+  'dist',
+  gulp.series(
+    async function (done) {
+      await delDir(['../dist']);
+      done();
+    },
+    async (done) => {
+      chdir(path.resolve(__dirname, '../'));
+      console.log(chalkINFO('开始编译dist版本...'));
+      // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
+      const productionMinConfig = await webpackConfig({
+        production: true,
+        productionMin: true,
+      });
+      const productionConfig = await webpackConfig({
+        production: true,
+        productionMin: false,
+      });
+      // productionConfig会删除dist，productionMinConfig不会删除dist，因此，得将productionConfig放在productionMinConfig的前面
+      webpack([productionMinConfig, productionConfig], (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        const info = stats.toJson();
+        if (stats.hasErrors()) {
+          console.error(info.errors);
+        }
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings);
+        }
+        const buildInfo = stats.toString({
+          colors: true,
+          children: true,
+          chunks: false,
+          modules: false,
+          chunkModules: false,
+          hash: false,
+          version: false,
+        });
+        console.log(buildInfo);
         done();
       });
     }
   )
 );
 
+// es、commonjs、umd
 gulp.task(
   'default',
   gulp.series(
-    'clean-all',
-    // gulp.parallel('copy-assets', 'compile-es')
-    // gulp.parallel('copy-assets', 'compile-es', 'compile-lib')
-    // gulp.parallel('compile-es'),
-    gulp.parallel('compile-es', 'compile-lib'),
-    // "concat-css",
+    async function (done) {
+      await delDir(['../lib', '../es', '../dist']);
+      done();
+    },
+    gulp.parallel('es', 'lib'),
+    'dist',
     function allTasksDone(done) {
       console.log(
-        _SUCCESS('所有任务执行完成！'),
+        chalkSUCCESS('所有任务执行完成！'),
         emoji.get('white_check_mark')
       );
       done();

@@ -1,22 +1,15 @@
 {
-  "files": ["src/index.js"],
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "jsx": "preserve",
     "noImplicitAny": false,
     "experimentalDecorators": true,
-    "lib": ["dom"],
+    "lib": ["DOM", "ESNext"],
     "skipLibCheck": true,
     "allowJs": true,
     "moduleResolution": "node",
     "declaration": true,
-    "rootDir": "../",
-    "outDir": "./"
-  },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.js",
-    "./src/**/*.jsx"
-  ]
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./"
+  }
 }

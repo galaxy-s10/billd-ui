@@ -15,7 +15,7 @@ const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 const prodMinConfig = require('./webpack.prod.min.js');
 
-// import { _ERROR, _INFO, _SUCCESS } from "./build-tools/chalkTip";
+// import { chalkERROR, chalkINFO, chalkSUCCESS } from "./build-tools/chalkTip";
 const { resolveApp } = require('./utils/paths');
 
 const commonConfig = function (isProduction) {
@@ -334,7 +334,6 @@ const commonConfig = function (isProduction) {
 
 const smp = new SpeedMeasurePlugin();
 module.exports = function (env) {
-  console.log(env, 998888);
   return new Promise((resolve) => {
     const isProduction = env.production;
     const isProductionMin = env.productionMin;

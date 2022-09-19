@@ -59,7 +59,8 @@ const Modal = {
                 this.$scopedSlots.foot
                   ? this.$scopedSlots.foot({ ...props })
                   : undefined,
-            }}></h-foot>
+            }}
+          ></h-foot>
         </div>
       </div>
     );
