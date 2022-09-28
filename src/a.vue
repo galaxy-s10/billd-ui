@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import createElementCpt from './components/createElementCpt';
 import JsxCpt from './components/JsxCpt';
+import createElementCpt from './components/createElementCpt';
 import HTable from './components/table/index.tsx';
 
 // import Dashboard from '../lib/dashboard'

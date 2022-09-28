@@ -1,3 +1,5 @@
+const path = require('path');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 // const TerserPlugin = require('terser-webpack-plugin');
@@ -5,13 +7,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const PurgeCssPlugin = require('purgecss-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+
 // const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 // const AutoUploadServer = require('../webpack_plugins/AutoUploadServer')
 // const serverConfig = require('./server')
 // const glob = require('glob')
 // const webpack = require('webpack');
 // const path = require("path");
-const path = require('path');
 const { resolveApp } = require('./utils/paths');
 
 module.exports = {

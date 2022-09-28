@@ -1,6 +1,6 @@
 <script>
-import svgData from './svgdata';
 import successSvg from '../components/assets/svgdata/close';
+import svgData from './svgdata';
 
 export default {
   components: {},

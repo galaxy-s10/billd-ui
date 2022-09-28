@@ -1,4 +1,5 @@
 import { Fragment as HVueFragment } from 'vue-fragment';
+
 import HFoot from './foot';
 
 const Modal = {

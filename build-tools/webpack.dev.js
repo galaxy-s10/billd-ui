@@ -1,9 +1,11 @@
 // const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const portfinder = require('portfinder');
-// const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const path = require('path');
-const resolveApp = require('./utils/paths');
+
+const portfinder = require('portfinder');
+
+// const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 const { chalkINFO } = require('./utils/chalkTip');
+const resolveApp = require('./utils/paths');
 
 // portfinder.getPort(
 //   {

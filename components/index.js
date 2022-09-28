@@ -1,21 +1,17 @@
-// import Vue from 'vue';
-import Loading from './loading';
-import Switch from './switch';
-import Icon from './icon';
-import Table from './table';
-import Modal from './modal';
-import Message from './message';
+import * as components from './components';
 
-const allComponents = [Loading, Switch, Icon, Table, Modal];
+export * from './components';
 
 const install = function (Vue) {
-  allComponents.forEach((item) => {
-    Vue.use(item);
+  Object.keys(components).forEach((key) => {
+    const component = components[key];
+    if (component.install) {
+      Vue.use(components[key]);
+    }
   });
-  Vue.prototype.$Message = Message;
+  Vue.prototype.$Message = components.Message;
 };
+
 // export导出的不是一个对象！！！下面的是错误写法
 // export { install: install };
-
-export { Loading, Switch, Icon, Table, Modal, Message };
 export default { install };

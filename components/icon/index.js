@@ -1,5 +1,5 @@
-import Vue from 'vue';
 import * as allIcons from '@huangshuisheng/icons-vue';
+import Vue from 'vue';
 
 Object.keys(allIcons).forEach((name) => {
   Vue.component(name, allIcons[name]);

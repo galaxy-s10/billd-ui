@@ -7,6 +7,7 @@ console.log(
 );
 
 module.exports = {
+  root: true,
   env: {
     browser: true,
     commonjs: true,
@@ -77,6 +78,7 @@ module.exports = {
     // 'prettier',
     // 'plugin:prettier/recommended', // error！！！巨坑，这个写错位置了，应该是写在extends里面的！！！！
     // '@typescript-eslint/tslint',
+    'import',
   ],
   /**
    * overrides可共享配置中的配置不再覆盖.eslintrc文件中的用户设置
@@ -181,5 +183,27 @@ module.exports = {
     'no-redeclare': 2, // 此规则旨在消除在同一范围内具有多个声明的变量。
     'no-unused-expressions': [2, { allowShortCircuit: true }], // 期望一个赋值或函数调用，却看到了一个表达式，允许&&
     'array-callback-return': [2, { allowImplicit: false }], // expects a return value from arrow function.期望箭头函数的返回值。
+
+    // eslint-plugin-import插件
+    'import/order': [
+      2,
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['sibling', 'parent'],
+          'index',
+          'object',
+          'type',
+        ],
+        'newlines-between': 'always', // 强制或禁止导入组之间的新行：
+        // 根据导入路径按字母顺序对每个组内的顺序进行排序
+        alphabetize: {
+          order: 'asc' /* 按升序排序。选项：['ignore', 'asc', 'desc'] */,
+          caseInsensitive: false /* 忽略大小写。选项：[true, false] */,
+        },
+      },
+    ],
   },
 };

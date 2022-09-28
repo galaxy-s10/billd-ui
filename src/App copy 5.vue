@@ -7,6 +7,7 @@
 
 <script>
 import Vue from 'vue';
+
 import { Loading, Switch } from '../es';
 import '../dist/billd.css'; // 仍需导入全局样式
 

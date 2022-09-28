@@ -1,22 +1,25 @@
+const path = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { DefinePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const WebpackBar = require('webpackbar');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webpack4
 // const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webapck5对等依赖
 // const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
 // const ESLintPlugin = require('eslint-webpack-plugin');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 // const DashboardPlugin = require('webpack-dashboard/plugin');
-const path = require('path');
+
+const { resolveApp } = require('./utils/paths');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 const prodMinConfig = require('./webpack.prod.min.js');
 
 // import { chalkERROR, chalkINFO, chalkSUCCESS } from "./build-tools/chalkTip";
-const { resolveApp } = require('./utils/paths');
 
 const commonConfig = function (isProduction) {
   console.log(__dirname, '-----');

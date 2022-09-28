@@ -1,7 +1,12 @@
+const chalk = require('chalk');
 const postcssPresetEnv = require('postcss-preset-env');
-const { chalkINFO, emoji } = require('./build-tools/utils/chalkTip');
 
-console.log(chalkINFO('读取postcss.config.js'), emoji.get('hourglass'));
+console.log(
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
+
 module.exports = {
   plugins: [
     // 'autoprefixer',  // postcss-preset-env包含了autoprefixer的功能

@@ -16,8 +16,9 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import { LoadingOutlined } from '@huangshuisheng/icons-vue';
+import Vue from 'vue';
+
 import hicon from '../components/icon';
 import Hswitch from '../components/switch';
 import Hmodal from '../components/modal';
@@ -27,10 +28,10 @@ import '../components/switch/style/index';
 // import classCpt from './components/classCpt'; // 翻车
 import HssMessage from '../components/message/index';
 import './components/message/style/index';
-import prettier from './pretter';
-import { sayHello } from './hi';
 
 import appx from './Appx.jsx';
+import { sayHello } from './hi';
+import prettier from './pretter';
 
 // Vue.component('HLoading', hicon);
 

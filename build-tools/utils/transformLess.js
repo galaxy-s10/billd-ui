@@ -1,9 +1,11 @@
-const less = require('less');
 const { readFileSync } = require('fs');
 const path = require('path');
+
+const less = require('less');
 const postcss = require('postcss');
-const { resolveApp } = require('./paths');
+
 const postcssConfig = require('../getPostcssConfig');
+const { resolveApp } = require('./paths');
 // less3+默认就会搜索npm路径
 // const NpmImportPlugin = require("less-plugin-npm-import");
 

@@ -2,22 +2,24 @@
 
 // import SVGO from 'svgo';
 
+const path = require('path');
+const { chdir, cwd } = require('process');
+
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const clean = require('gulp-clean');
+const concat = require('gulp-concat');
+const ts = require('gulp-typescript');
+const through2 = require('through2');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const gulp = require('gulp');
-const ts = require('gulp-typescript');
-const clean = require('gulp-clean');
-const babel = require('gulp-babel');
-const concat = require('gulp-concat');
+
 // const postcss = require('gulp-postcss');
-const through2 = require('through2');
-const { chdir, cwd } = require('process');
-const path = require('path');
 const webpackConfig = require('./webpack.common');
-// const babelConfig = require("../babel.config.js");
-const babelConfig = require('./getBabelCommonConfig');
 const tsProject = require('../tsconfig.json');
+const babelConfig = require('./getBabelCommonConfig');
 const transformLess = require('./utils/transformLess.js');
+// const babelConfig = require("../babel.config.js");
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
 const { chalkSUCCESS, chalkINFO, emoji } = require('./utils/chalkTip');
@@ -255,7 +257,7 @@ gulp.task(
       done();
     },
     gulp.parallel('es', 'lib'),
-    'dist',
+    // 'dist',
     function allTasksDone(done) {
       console.log(
         chalkSUCCESS('所有任务执行完成！'),
