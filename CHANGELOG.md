@@ -1,3 +1,12 @@
+## [1.2.7](https://github.com/galaxy-s10/billd-ui/compare/v1.2.6...v1.2.7) (2022-09-29)
+
+
+### fix
+
+* 添加dts ([8b51aa2](https://github.com/galaxy-s10/billd-ui/commit/8b51aa26077165aa2d10209acdad942629ea61aa))
+
+
+
 ## 1.2.6 (2022-09-29)
 
 
