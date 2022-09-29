@@ -126,6 +126,7 @@ function compile(modules) {
       process.exit(1);
     }
   }
+  tsResult.dts.pipe(gulp.dest(modules === false ? '../es' : '../lib'));
   tsResult.on('finish', check);
   tsResult.on('end', check);
   const stream = tsResult.js.pipe(babel(babelConfig(modules)));

@@ -16,13 +16,14 @@
     "url": "https://github.com/galaxy-s10/billd-ui"
   },
   "license": "MIT",
-  "author": "galaxy-s10",
+  "author": "shuisheng <https://github.com/galaxy-s10>",
   "sideEffects": [
     "es/**/style/*",
     "lib/**/style/*"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
     "/lib",
     "/es",
