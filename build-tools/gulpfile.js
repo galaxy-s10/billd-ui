@@ -1,7 +1,3 @@
-// const SVGO = require('svgo');
-
-// import SVGO from 'svgo';
-
 const path = require('path');
 const { chdir, cwd } = require('process');
 
@@ -12,17 +8,17 @@ const concat = require('gulp-concat');
 const ts = require('gulp-typescript');
 const through2 = require('through2');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 
 // const postcss = require('gulp-postcss');
-const webpackConfig = require('./webpack.common');
+
 const tsProject = require('../tsconfig.json');
+const { distDir } = require('./constant');
 const babelConfig = require('./getBabelCommonConfig');
+const { chalkSUCCESS, chalkINFO } = require('./utils/chalkTip');
 const transformLess = require('./utils/transformLess.js');
-// const babelConfig = require("../babel.config.js");
+const webpackConfig = require('./webpack/webpack.common');
 
 const tsDefaultReporter = ts.reporter.defaultReporter();
-const { chalkSUCCESS, chalkINFO, emoji } = require('./utils/chalkTip');
 
 const componentsDir = path.resolve(__dirname, '../components');
 
@@ -33,7 +29,7 @@ const tsFiles = [
   `${componentsDir}/**/*.tsx`,
 ];
 
-// 删除目录目录
+// 删除目录
 function delDir(path) {
   // gulp-clean：确保返回流，以便gulp知道clean任务是异步的
   const res = gulp
@@ -43,10 +39,7 @@ function delDir(path) {
     .pipe(clean({ force: true })); // 不添加force:true属性不能删除上层目录，因此加上。
   return new Promise((resolve) => {
     res.on('finish', function () {
-      console.log(
-        chalkSUCCESS('清除旧构建文件成功！'),
-        emoji.get('heavy_check_mark')
-      );
+      console.log(chalkSUCCESS('清除旧构建文件成功！'));
       resolve();
     });
   });
@@ -59,10 +52,7 @@ function copyAssets(modules) {
       .src(`${componentsDir}/assets/**/*`, { allowEmpty: true })
       .pipe(gulp.dest(modules === false ? '../es/assets/' : '../lib/assets/'));
     assetsStream.on('finish', () => {
-      console.log(
-        chalkSUCCESS('复制静态资源目录成功！'),
-        emoji.get('heavy_check_mark')
-      );
+      console.log(chalkSUCCESS('复制静态资源目录成功！'));
       done();
     });
     return assetsStream;
@@ -111,10 +101,7 @@ function compileLess(modules) {
     //   .pipe(postcss())
     //   .pipe(gulp.dest("../lib"));
     lessStream.on('finish', () => {
-      console.log(
-        chalkSUCCESS('编译less成功！'),
-        emoji.get('heavy_check_mark')
-      );
+      console.log(chalkSUCCESS('编译less成功！'));
       done();
     });
     // console.log(lessStream, 98766);
@@ -163,10 +150,7 @@ gulp.task(
       function compileEs(done) {
         console.log(chalkINFO('开始编译es版本...'));
         compile(false).on('finish', () => {
-          console.log(
-            chalkSUCCESS('编译es版本完成！'),
-            emoji.get('heavy_check_mark')
-          );
+          console.log(chalkSUCCESS('编译es版本完成！'));
           done();
         });
       }
@@ -188,10 +172,7 @@ gulp.task(
       function compileLib(done) {
         console.log(chalkINFO('开始编译lib版本...'));
         compile(undefined).on('finish', () => {
-          console.log(
-            chalkSUCCESS('编译lib版本完成！'),
-            emoji.get('heavy_check_mark')
-          );
+          console.log(chalkSUCCESS('编译lib版本完成！'));
           done();
         });
       }
@@ -204,12 +185,12 @@ gulp.task(
   'dist',
   gulp.series(
     async function (done) {
-      await delDir(['../dist']);
+      await delDir([distDir]);
       done();
     },
     async (done) => {
       chdir(path.resolve(__dirname, '../'));
-      console.log(chalkINFO('开始编译dist版本...'));
+      console.log(chalkINFO('开始编译dist版本...'), cwd());
       // res1会删除dist，res不会删除dist，因此，得将res1放在res的前面
       const productionMinConfig = await webpackConfig({
         production: true,
@@ -257,12 +238,9 @@ gulp.task(
       done();
     },
     gulp.parallel('es', 'lib'),
-    // 'dist',
+    'dist',
     function allTasksDone(done) {
-      console.log(
-        chalkSUCCESS('所有任务执行完成！'),
-        emoji.get('white_check_mark')
-      );
+      console.log(chalkSUCCESS('所有任务执行完成！'));
       done();
     }
   )

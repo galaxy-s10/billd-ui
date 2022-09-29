@@ -1,8 +1,11 @@
+const chalk = require('chalk');
 const postcssPresetEnv = require('postcss-preset-env');
 
-const { chalkSUCCESS, emoji } = require('./utils/chalkTip');
-
-console.log(chalkSUCCESS('读取getPostcssConfig.js'), emoji.get('hourglass'));
+console.log(
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
 
 module.exports = {
   plugins: [

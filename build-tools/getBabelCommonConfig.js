@@ -1,8 +1,15 @@
-const { chalkSUCCESS, emoji } = require('./utils/chalkTip');
+const chalk = require('chalk');
+
+const pkg = require('../package.json');
 
 console.log(
-  chalkSUCCESS('读取getBabelCommonConfig.js'),
-  emoji.get('hourglass')
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
+const babelRuntimeVersion = pkg.dependencies['@babel/runtime'].replace(
+  /^[^0-9]*/,
+  ''
 );
 
 module.exports = function (modules) {
@@ -17,8 +24,7 @@ module.exports = function (modules) {
            * usage: 代码中需要哪些polyfill, 就引用相关的api
            * entry: 手动在入口文件中导入 core-js/regenerator-runtime, 根据目标浏览器引入所有对应的polyfill
            */
-          // useBuiltIns: 'entry',
-
+          useBuiltIns: false,
           // corejs: '3',
 
           // targets: '>0.25%, last 2 version, not dead', // targets会读取项目里面的.browserslistrc文件，也可以在这里直接设置
@@ -54,8 +60,7 @@ module.exports = function (modules) {
            * 2	npm install --save @babel/runtime-corejs2
            * 3	npm install --save @babel/runtime-corejs3
            */
-          // corejs: 3,
-
+          corejs: false,
           /**
            * helpers: boolean, 默认true。
            * 如果是true，就会把需要他runtime包给引进来，如：import _defineProperty from "@babel/runtime/helpers/defineProperty"
@@ -66,7 +71,7 @@ module.exports = function (modules) {
            */
           helpers: true,
           regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
-          // version: '7.0.0-beta.0',
+          version: babelRuntimeVersion, // 一定要设置版本，v7.5.0之前，扩展运算符...不会被提取，v7.5.0之后，才会提取成objectSpread2。而且貌似version:7.4.5和version:^7.4.5没区别
         },
       ],
       // billd-ui支持按需加载，安装babel-plugin-import，然后在babel配置文件添加如下内容即可

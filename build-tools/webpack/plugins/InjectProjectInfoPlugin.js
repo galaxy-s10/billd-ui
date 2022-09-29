@@ -1,8 +1,8 @@
-import { execSync } from 'child_process';
+const { execSync } = require('child_process');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-import pkg from '../package.json';
+const pkg = require('../../../package.json');
 
 let commitHash;
 let commitUserName;
@@ -66,10 +66,7 @@ const replaceKeyFromValue = (str, obj) => {
   });
   return res;
 };
-
 class InjectProjectInfoPlugin {
-  options;
-
   constructor(options) {
     this.options = options;
   }
@@ -105,4 +102,4 @@ class InjectProjectInfoPlugin {
   }
 }
 
-export default InjectProjectInfoPlugin;
+module.exports = InjectProjectInfoPlugin;

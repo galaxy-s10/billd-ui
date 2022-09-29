@@ -1,5 +1,6 @@
 <template>
   <div>
+    <b-icon></b-icon>
     <b-loading></b-loading>
     <b-switch openText="开" closeText="关" :defaultChecked="true">
       <template slot="openSlot">

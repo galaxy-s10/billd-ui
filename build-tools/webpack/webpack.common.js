@@ -1,28 +1,29 @@
 const path = require('path');
 
+const chalk = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { DefinePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const WebpackBar = require('webpackbar');
-// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webpack4
-// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // webapck5对等依赖
-// const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin'); // webapck5对等依赖
+
 // const ESLintPlugin = require('eslint-webpack-plugin');
 
 // const DashboardPlugin = require('webpack-dashboard/plugin');
-
-const { resolveApp } = require('./utils/paths');
+const InjectProjectInfoPlugin = require('./plugins/InjectProjectInfoPlugin');
+const demoConfig = require('./webpack.demo.js');
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod.js');
 const prodMinConfig = require('./webpack.prod.min.js');
 
-// import { chalkERROR, chalkINFO, chalkSUCCESS } from "./build-tools/chalkTip";
+console.log(
+  `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
+    `读取了: ${__filename.slice(__dirname.length + 1)}`
+  )}`
+);
 
 const commonConfig = function (isProduction) {
-  console.log(__dirname, '-----');
   return {
     /**
      * 暂时添加target属性以解决.browserlistrc文件的问题。https://github.com/webpack/webpack-dev-server/issues/2758
@@ -33,15 +34,6 @@ const commonConfig = function (isProduction) {
      */
     // target: "browserslist",//设置成browserslist的话，热更新会失效！
     target: isProduction ? 'browserslist' : 'web',
-    entry: {
-      main: {
-        import: isProduction
-          ? path.resolve(__dirname, '../index.js')
-          : resolveApp('./src/index.js'),
-        // filename: "output-[name]-bundle.js", //指定要输出的文件名称。
-      },
-    },
-
     externals: {
       // vue: {
       //   root: "Vue",
@@ -59,9 +51,9 @@ const commonConfig = function (isProduction) {
     },
     // output: {
     //   filename: 'js/[name]-bundle.js', // 入口文件打包生成后的文件的文件名
-    //   chunkFilename: 'js/[name]-[hash:6]-bundle-chunk.js',
+    //   chunkFilename: 'js/[name]-[contenthash:6]-bundle-chunk.js',
     //   path: resolveApp('./dist'),
-    //   assetModuleFilename: 'assets/[name]-[hash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
+    //   assetModuleFilename: 'assets/[name]-[contenthash:6].[ext]', // 静态资源生成目录（不管什么资源默认都统一生成到这里,除非单独设置了generator）
     //   publicPath: '/', // 打包成dist后，如果想直接打开index.html看效果，就将该路径改成:"./",上线后改回:"/"
     // },
     resolve: {
@@ -233,13 +225,13 @@ const commonConfig = function (isProduction) {
           test: /\.(jpg|jpeg|png|gif)$/,
           // type: 'asset/resource', // 约等于实现file-loader
           // generator:{
-          //     filename:'img/[name]-[hash:6].[ext]'
+          //     filename:'img/[name]-[contenthash:6].[ext]'
           // }
           // type: 'asset/inline', // 全部都使用url-loader
           // include: /node_modules/,
           type: 'asset',
           generator: {
-            filename: 'img/[name]-[hash:6][ext]',
+            filename: 'img/[name]-[contenthash:6][ext]',
           },
           parser: {
             dataUrlCondition: {
@@ -254,7 +246,7 @@ const commonConfig = function (isProduction) {
           // type: 'asset/resource',
           // type: 'javascript/auto',
           // generator: {
-          //   filename: 'font/[name]-[hash:6][ext]',
+          //   filename: 'font/[name]-[contenthash:6][ext]',
           // },
         },
       ],
@@ -272,11 +264,9 @@ const commonConfig = function (isProduction) {
       // }),
       // 构建进度条
       new WebpackBar({
-        name: 'billd-ui',
-        color: 'yellow',
+        name: 'Billd-UI',
       }),
       // new DashboardPlugin(),
-      // new FriendlyErrorsWebpackPlugin({}),
 
       /**
        * 默认webpack-dev-server会把devServer.contentBase目录做开发服务器，
@@ -291,7 +281,7 @@ const commonConfig = function (isProduction) {
             filename: 'index.html',
             title: 'billd-ui',
             template: './public/index.html',
-            hash: true,
+            contenthash: true,
             minify: isProduction
               ? {
                   collapseWhitespace: true, // 折叠空白
@@ -310,13 +300,17 @@ const commonConfig = function (isProduction) {
             chunks: ['main'], // 包含的入口块
           })
         : { apply() {} }, // plugins数组类似是对象，且要有apply方法。
+      // 注入项目信息
+      new InjectProjectInfoPlugin({
+        isProduction: false,
+      }),
       // 解析vue
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         // 将 CSS 提取到单独的文件中
         // Options similar to the same options in webpackOptions.output
         // all options are optional
-        // filename: "css/[name]-[hash:6].css",
+        // filename: "css/[name]-[contenthash:6].css",
         filename:
           process.env.isProductionMin === 'true'
             ? 'billd.min.css'
@@ -335,7 +329,6 @@ const commonConfig = function (isProduction) {
   };
 };
 
-const smp = new SpeedMeasurePlugin();
 module.exports = function (env) {
   return new Promise((resolve) => {
     const isProduction = env.production;
@@ -344,10 +337,19 @@ module.exports = function (env) {
     process.env.NODE_ENV = isProduction ? 'production' : 'development';
     process.env.isProductionMin = !!isProductionMin;
     // console.log(process.env);
-    // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
-    const configPromise = Promise.resolve(
-      isProduction ? (isProductionMin ? prodMinConfig : prodConfig) : devConfig
-    );
+    let configPromise;
+    if (process.env.BUILD_DEMO) {
+      configPromise = Promise.resolve(demoConfig);
+    } else {
+      // prodConfig返回的是普通对象，devConfig返回的是promise，使用Promise.resolve进行包装
+      configPromise = Promise.resolve(
+        isProduction
+          ? isProductionMin
+            ? prodMinConfig
+            : prodConfig
+          : devConfig
+      );
+    }
     configPromise.then((config) => {
       // 根据当前环境，合并配置文件
       // if (isProductionMin) {
