@@ -1,3 +1,16 @@
+## [1.2.8](https://github.com/galaxy-s10/billd-ui/compare/v1.2.7...v1.2.8) (2022-09-30)
+
+
+### feat
+
+* 添加version ([87b4c61](https://github.com/galaxy-s10/billd-ui/commit/87b4c6147273a47972af5b3571abee2ec8722927))
+
+### fix
+
+* 添加忽略文件 ([598c496](https://github.com/galaxy-s10/billd-ui/commit/598c496b8b78de09285da9956684396c36745bfd))
+
+
+
 ## [1.2.7](https://github.com/galaxy-s10/billd-ui/compare/v1.2.6...v1.2.7) (2022-09-29)
 
 
