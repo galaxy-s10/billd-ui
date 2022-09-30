@@ -19,7 +19,8 @@
   "author": "shuisheng <https://github.com/galaxy-s10>",
   "sideEffects": [
     "es/**/style/*",
-    "lib/**/style/*"
+    "lib/**/style/*",
+    "dist/*"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -53,6 +54,7 @@
     "@babel/runtime": "^7.18.9",
     "@huangshuisheng/icons-svg": "^1.1.1",
     "@huangshuisheng/icons-vue": "^1.1.1",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "vue": "^2.6.14",
     "vue-fragment": "^1.5.2"
   },
@@ -67,7 +69,6 @@
     "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
-    "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-preset-jsx": "^1.2.4",
     "@vue/preload-webpack-plugin": "^2.0.0",
     "babel-loader": "^8.2.2",

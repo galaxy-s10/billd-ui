@@ -71,6 +71,7 @@ module.exports = function (modules) {
            */
           helpers: true,
           regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
+          // https://babeljs.io/docs/en/babel-plugin-transform-runtime#version，没想到version会影响到包大小
           version: babelRuntimeVersion, // 一定要设置版本，v7.5.0之前，扩展运算符...不会被提取，v7.5.0之后，才会提取成objectSpread2。而且貌似version:7.4.5和version:^7.4.5没区别
         },
       ],
