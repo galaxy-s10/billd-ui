@@ -1,4 +1,4 @@
-import { version } from '../package.json';
+import pkg from '../package.json';
 import * as components from './components';
 
 export * from './components';
@@ -15,4 +15,4 @@ const install = function (Vue) {
 
 // export导出的不是一个对象！！！下面的是错误写法
 // export { install: install };
-export default { install, version };
+export default { install, version: pkg.version };

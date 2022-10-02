@@ -87,7 +87,7 @@ function gitIsClean() {
         reject(error || stderr);
       }
       if (stdout.length) {
-        reject('请确保git工作区干净！');
+        reject(new Error('请确保git工作区干净！'));
       } else {
         resolve('ok');
       }

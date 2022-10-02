@@ -87,7 +87,9 @@ new Vue({
 
 ## 局部引入组件
 
-> #### 注意，这种写法只是写一个就引入注册一个组件，仍需手动导入样式，而且最终打包的时候，和全局引入一样，都会整个 billd-ui 都进行打包，这个引入方式和全局引入对比只有一个区别：全局引入不用每次都手动注册 billd-ui 组件。
+> 注意，这种写法只是写一个就引入注册一个组件，仍需手动导入样式，
+>
+> 自 1.2.6 版本开始，支持原生的 esm tree shaking，即无需使用按需加载插件，也能对 js 代码进行 tree shaking！但是 1.2.6 版本以前，并不支持原生的 esm tree shaking，他会和全局引入一样，都会对整个 billd-ui 进行打包
 
 ```vue
 <template>
@@ -132,7 +134,7 @@ export default {};
 </script>
 ```
 
-第二种方式：如果你使用了 babel，可以使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 来进行按需加载，首先 npm i babel-plugin-import，然后再添加 babel 的 plugins 配置：
+第二种方式：如果你使用了 babel，可以使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 来进行按需加载，首先 `npm i babel-plugin-import -D`，然后再添加 babel 的 plugins 配置：
 
 > 注意：全局引入和这种方式的按需引入有冲突，这两者方式不能同时使用，否则会报错！
 
@@ -158,7 +160,7 @@ plugins: [
 ];
 ```
 
-插件会帮你转换成 `billd-ui/es/switch` ，而且，因为配置了 style 属性，会按需加载该组件的样式，即会引入：`billd-ui/es/switch/style/css`
+插件会帮你将 `import { Switch } from 'billd-ui'` 转换成 `import Switch from billd-ui/es/switch` ，而且，因为配置了 style 属性，会按需加载该组件的样式，即会引入：`billd-ui/es/switch/style/css`
 
 ```vue
 <template>
@@ -178,9 +180,20 @@ export default {};
 
 # 在浏览器使用
 
-在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `Billd`。
+我们构建了 umd 版本，在 `billd-ui/dist` 目录下提供了
 
-我们在 npm 发布包内的 `billd-ui/dist` 目录下提供了 `billd.js` `billd.css` 以及 `billd.min.js` `billd.min.css`
+1. 开发版本： `billd.js`、`billd.css`、`billd.js.map`、`billd.css.map`
+2. 生产版本： `billd.min.js`、`billd.min.css`、`billd.min.js.map`、`billd.min.css.map`
+
+在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `Billd`即可（注意：请提前引入 vue）。
+
+# 本地调试
+
+> 可以在 src 目录引入构建好的组件查看效果
+
+```sh
+npm run dev
+```
 
 # 本地编译
 
@@ -193,20 +206,52 @@ npm run compile
 编译 es 版本：
 
 ```sh
-npm run compile es
+npm run compile:es
 ```
 
 编译 lib 版本：
 
 ```sh
-npm run compile lib
+npm run compile:lib
 ```
 
 编译 dist 版本：
 
 ```sh
-npm run compile dist
+npm run compile:dist
 ```
+
+# 如何发版
+
+## 0.确保 git 工作区干净
+
+即确保本地的修改已全部提交（git status 的时候会显示：`nothing to commit, working tree clean` ），否则会导致执行 `release:local` 脚本失败
+
+## 1.执行本地发版脚本
+
+```sh
+npm run release:local
+```
+
+> 该脚本内部会做以下事情：
+
+1. 根据用户选择的版本，更新 package.json 的 version
+2. 构建 components 目录的组件
+3. 对比当前版本与上个版本的差异，生成 changelog
+4. 提交暂存区到本地仓库：git commit -m 'chore(release): v 当前版本'
+5. 生成当前版本 tag：git tag v 当前版本
+
+## 2.执行线上发版脚本
+
+```sh
+npm run release:online
+```
+
+> 该脚本内部会做以下事情：
+
+1. 提交当前版本：git push
+2. 提交当前版本 tag：git push origin v 当前版本
+3. 根据 meta/packages.ts，发布 packages 里对应的包到 npm
 
 # 感慨
 

@@ -1,9 +1,10 @@
-// import Billd from '../es';
+import Billd from '../es';
 
-// console.log(Billd);
+console.log(Billd);
 
-import { Switch } from '../es';
-console.log(Switch);
+// import { Switch } from '../es';
+
+// console.log(Switch);
 
 // import Vue from 'vue';
 

@@ -10,6 +10,16 @@
     "moduleResolution": "Node",
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./"
-  }
+    "baseUrl": "./",
+    "outDir": "./outDir"
+  },
+  "include": [
+    "src/**/*",
+    "build-tools/**/*",
+    "components/**/*.js",
+    "components/**/*.jsx",
+    "components/**/*.ts",
+    "components/**/*.tsx"
+  ],
+  "exclude": ["dist/**/*", "es/**/*", "lib/**/*", "demoDist/**/*"]
 }
